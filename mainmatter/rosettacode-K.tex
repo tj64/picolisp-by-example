@@ -1,0 +1,816 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+\chapter{Rosetta Code Tasks starting with K}
+
+\section*{Kaprekar numbers}
+
+A positive integer is a
+\href{http://en.wikipedia.org/wiki/Kaprekar\_number}{Kaprekar number}
+if:
+
+\begin{itemize}
+\item
+  It is 1
+\item
+  The decimal representation of its square may be split once into two
+  parts consisting of positive integers which sum to the original
+  number. Note that a split resulting in a part consisting purely of 0s
+  is not valid, as 0 is not considered positive.
+\end{itemize}
+
+\begin{description}
+\item[Example Kaprekar numbers]
+\end{description}
+
+\begin{itemize}
+\item
+  2223 is a Kaprekar number, as 2223 * 2223 = 4941729, 4941729 may be
+  split to 494 and 1729, and 494 + 1729 = 2223.
+\item
+  The series of Kaprekar numbers is known as
+  \href{http://oeis.org/A006886}{A006886}, and begins as
+  1,9,45,55,\ldots{}.
+\end{itemize}
+
+\begin{description}
+\item[Example process]
+\end{description}
+
+10000 (100\textsuperscript{2}) splitting from left to right:
+
+\begin{itemize}
+\item
+  The first split is {[}1, 0000{]}, and is invalid; the 0000 element
+  consists entirely of 0s, and 0 is not considered positive.
+\item
+  Slight optimization opportunity: When splitting from left to right,
+  once the right part consists entirely of 0s, no further testing is
+  needed; all further splits would also be invalid.
+\end{itemize}
+
+\pagebreak{}
+
+\begin{description}
+\item[Task description]
+\end{description}
+
+Generate and show all Kaprekar numbers less than 10,000.
+
+\begin{description}
+\item[Extra credit]
+\end{description}
+
+Optionally, count (and report the count of) how many Kaprekar numbers
+are less than 1,000,000.
+
+\begin{description}
+\item[Extra extra credit]
+\end{description}
+
+The concept of Kaprekar numbers is not limited to base 10 (i.e. decimal
+numbers); if you can, show that Kaprekar numbers exist in other bases
+too. For this purpose, do the following:
+
+\begin{itemize}
+\item
+  Find all Kaprekar numbers for base 17 between 1 and 1,000,000 (one
+  million);
+\item
+  Display each of them in base 10 representation;
+\item
+  Optionally, using base 17 representation (use letters `a' to `g' for
+  digits 10(10) to 16(10)), display each of the numbers, its square, and
+  where to split the square. For example, 225(10) is ``d4'' in base 17,
+  its square ``a52g'', and a5(17) + 2g(17) = d4(17), so the display
+  would be something like:
+
+\begin{verbatim}
+225   d4  a52g  a5 + 2g
+\end{verbatim}
+\end{itemize}
+
+\begin{description}
+\item[Reference]
+\end{description}
+
+\begin{itemize}
+\item
+  \href{http://www.cs.uwaterloo.ca/journals/JIS/VOL3/iann2a.html}{The
+  Kaprekar Numbers} by Douglas E. Iannucci (2000).
+  \href{http://pictor.math.uqam.ca/~plouffe/OEIS/jis/The\%20Kaprekar\%20Numbers.pdf}{PDF
+  version}
+\end{itemize}
+
+\begin{wideverbatim}
+
+(de kaprekar (N)
+   (let L (cons 0 (chop (* N N)))
+      (for ((I . R) (cdr L) R (cdr R))
+         (NIL (gt0 (format R)))
+         (T (= N (+ @ (format (head I L)))) N) ) ) )
+
+Output:
+
+: (filter kaprekar (range 1 10000))
+-> (1 9 45 55 99 297 703 999 2223 2728 4879 4950 5050 5292 7272 7777 9999)
+
+: (cnt kaprekar (range 1 1000000))
+-> 54
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Keyboard macros}
+
+Show how to link user defined methods to user defined keys. An example
+of this is the facility provided by emacs for
+\href{http://www.gnu.org/software/emacs/manual/html\_node/emacs/Key-Bindings.html}{key
+bindings}. These key bindings may be application-specific or
+system-wide; state which you have done.
+
+\begin{wideverbatim}
+
+The 'fkey' function associates a key with an executable body. Some common key
+codes are predefined in "lib/term.l". Here we use 'F1' to store the value 1 in
+a global variable, 'Up' and 'Down' arrows to increment or decrement that value,
+and 'Home' to print the current value to the console.
+
+(load "@lib/term.l")
+
+(fkey *XtF1
+   (prinl "Initialized value to " (setq *Number 1)) )
+
+(fkey *XtUp
+   (prinl "Incremented to " (inc '*Number)) )
+
+(fkey *XtDown
+   (prinl "Decremented to " (dec '*Number)) )
+
+(fkey *XtHome
+   (prinl "Current value is " *Number) )
+
+Output when hitting 'F1', 'Down', 'Up', 'Up' and 'Home':
+
+Initialized value to 1
+Decremented to 0
+Incremented to 1
+Incremented to 2
+Current value is 2
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Knapsack problem/0-1}
+
+A tourist wants to make a good trip at the weekend with his friends.
+They will go to the mountains to see the wonders of nature, so he needs
+to pack well for the trip. He has a good knapsack for carrying things,
+but knows that he can carry a maximum of only 4kg in it and it will have
+to last the whole day. He creates a list of what he wants to bring for
+the trip but the total weight of all items is too much. He then decides
+to add columns to his initial list detailing their weights and a
+numerical value representing how important the item is for the trip.
+
+The tourist can choose to take any combination of items from the list,
+but only one of each item is available. He may not cut or diminish the
+items, so he can only take whole units of any item.
+
+\textbf{Which items does the tourist carry in his knapsack so that their
+total weight does not exceed 400 dag {[}4 kg{]}, and their total value
+is maximised?} 
+
+Here is the list:
+
+\ctable[caption = { Table of potential knapsack items (dag = decagram
+  = 10 grams) },
+pos = H, center, botcap]{lll}
+{% notes
+}
+{% rows
+\FL
+item & weight (dag) & value
+\ML
+map & 9 & 150
+\\\noalign{\medskip}
+compass & 13 & 35
+\\\noalign{\medskip}
+water & 153 & 200
+\\\noalign{\medskip}
+sandwich & 50 & 160
+\\\noalign{\medskip}
+glucose & 15 & 60
+\\\noalign{\medskip}
+tin & 68 & 45
+\\\noalign{\medskip}
+banana & 27 & 60
+\\\noalign{\medskip}
+apple & 39 & 40
+\\\noalign{\medskip}
+cheese & 23 & 30
+\\\noalign{\medskip}
+beer & 52 & 10
+\\\noalign{\medskip}
+suntan cream & 11 & 70
+\\\noalign{\medskip}
+camera & 32 & 30
+\\\noalign{\medskip}
+T-shirt & 24 & 15
+\\\noalign{\medskip}
+trousers & 48 & 10
+\\\noalign{\medskip}
+umbrella & 73 & 40
+\\\noalign{\medskip}
+waterproof trousers & 42 & 70
+\\\noalign{\medskip}
+waterproof overclothes & 43 & 75
+\\\noalign{\medskip}
+note-case & 22 & 80
+\\\noalign{\medskip}
+sunglasses & 7 & 20
+\\\noalign{\medskip}
+towel & 18 & 12
+\\\noalign{\medskip}
+socks & 4 & 50
+\\\noalign{\medskip}
+book & 30 & 10
+\\\noalign{\medskip}
+knapsack & ≤400 dag & ~?
+\LL
+}
+
+
+\begin{wideverbatim}
+
+(de *Items
+   ("map" 9 150)                    ("compass" 13 35)
+   ("water" 153 200)                ("sandwich" 50 160)
+   ("glucose" 15 60)                ("tin" 68 45)
+   ("banana" 27 60)                 ("apple" 39 40)
+   ("cheese" 23 30)                 ("beer" 52 10)
+   ("suntan cream" 11 70)           ("camera" 32 30)
+   ("t-shirt" 24 15)                ("trousers" 48 10)
+   ("umbrella" 73 40)               ("waterproof trousers" 42 70)
+   ("waterproof overclothes" 43 75) ("note-case" 22 80)
+   ("sunglasses" 7 20)              ("towel" 18 12)
+   ("socks" 4 50)                   ("book" 30 10) )
+
+# Dynamic programming solution
+(de knapsack (Lst W)
+   (when Lst
+      (cache '*KnapCache (pack (length Lst) ":" W)
+         (let X (knapsack (cdr Lst) W)
+            (if (ge0 (- W (cadar Lst)))
+               (let Y (cons (car Lst) (knapsack (cdr Lst) @))
+                  (if (> (sum caddr X) (sum caddr Y)) X Y) )
+               X ) ) ) ) )
+
+(let K (knapsack *Items 400)
+   (for I K
+      (apply tab I (3 -24 6 6) NIL) )
+   (tab (27 6 6) NIL (sum cadr K) (sum caddr K)) )
+
+Output:
+
+   map                          9   150
+   compass                     13    35
+   water                      153   200
+   sandwich                    50   160
+   glucose                     15    60
+   banana                      27    60
+   suntan cream                11    70
+   waterproof trousers         42    70
+   waterproof overclothes      43    75
+   note-case                   22    80
+   sunglasses                   7    20
+   socks                        4    50
+                              396  1030
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Knapsack problem/Bounded}
+
+A tourist wants to make a good trip at the weekend with his friends.
+They will go to the mountains to see the wonders of nature. So he needs
+some items during the trip. Food, clothing, etc. He has a good knapsack
+for carrying the things, but he knows that he can carry only 4 kg weight
+in his knapsack, because they will make the trip from morning to
+evening. He creates a list of what he wants to bring for the trip, but
+the total weight of all items is too much. He adds a value to each item.
+The value represents how important the thing for the tourist. The list
+contains which items are the wanted things for the trip, what is the
+weight and value of an item, and how many units does he have from each
+items.
+
+The tourist can choose to take any combination of items from the list,
+and some number of each item is available (see the column ``Piece(s)''
+of the list!). He may not cut the items, so he can only take whole units
+of any item.
+
+\textbf{Which items does the tourist carry in his knapsack so that their
+total weight does not exceed 4 kg, and their total value is maximised?}
+
+See also: \emph{Knapsack problem/Unbounded}, \emph{Knapsack
+  problem/0-1}
+
+This is the list:
+
+\ctable[caption = { Table of potential knapsack items (dag = decagram
+  = 10 grams)},
+pos = H, center, botcap]{llll}
+{% notes
+}
+{% rows
+\FL
+item & weight (dag) (each) & value (each) & piece(s)
+\ML
+map & 9 & 150 & 1
+\\\noalign{\medskip}
+compass & 13 & 35 & 1
+\\\noalign{\medskip}
+water & 153 & 200 & 2
+\\\noalign{\medskip}
+sandwich & 50 & 60 & 2
+\\\noalign{\medskip}
+glucose & 15 & 60 & 2
+\\\noalign{\medskip}
+tin & 68 & 45 & 3
+\\\noalign{\medskip}
+banana & 27 & 60 & 3
+\\\noalign{\medskip}
+apple & 39 & 40 & 3
+\\\noalign{\medskip}
+cheese & 23 & 30 & 1
+\\\noalign{\medskip}
+beer & 52 & 10 & 3
+\\\noalign{\medskip}
+suntan cream & 11 & 70 & 1
+\\\noalign{\medskip}
+camera & 32 & 30 & 1
+\\\noalign{\medskip}
+T-shirt & 24 & 15 & 2
+\\\noalign{\medskip}
+trousers & 48 & 10 & 2
+\\\noalign{\medskip}
+umbrella & 73 & 40 & 1
+\\\noalign{\medskip}
+waterproof trousers & 42 & 70 & 1
+\\\noalign{\medskip}
+waterproof overclothes & 43 & 75 & 1
+\\\noalign{\medskip}
+note-case & 22 & 80 & 1
+\\\noalign{\medskip}
+sunglasses & 7 & 20 & 1
+\\\noalign{\medskip}
+towel & 18 & 12 & 2
+\\\noalign{\medskip}
+socks & 4 & 50 & 1
+\\\noalign{\medskip}
+book & 30 & 10 & 2
+\\\noalign{\medskip}
+knapsack & ≤400 dag & ~? & ~?
+\LL
+}
+
+
+\begin{wideverbatim}
+
+(de *Items
+   ("map" 9 150 1)                     ("compass" 13 35 1)
+   ("water" 153 200 3)                 ("sandwich" 50 60 2)
+   ("glucose" 15 60 2)                 ("tin" 68 45 3)
+   ("banana" 27 60 3)                  ("apple" 39 40 3)
+   ("cheese" 23 30 1)                  ("beer" 52 10 3)
+   ("suntan cream" 11 70 1)            ("camera" 32 30 1)
+   ("t-shirt" 24 15 2)                 ("trousers" 48 10 2)
+   ("umbrella" 73 40 1)                ("waterproof trousers" 42 70 1)
+   ("waterproof overclothes" 43 75 1)  ("note-case" 22 80 1)
+   ("sunglasses" 7 20 1)               ("towel" 18 12 2)
+   ("socks" 4 50 1)                    ("book" 30 10 2) )
+
+# Dynamic programming solution
+(de knapsack (Lst W)
+   (when Lst
+      (cache '*KnapCache (pack (length Lst) ":" W)
+         (let X (knapsack (cdr Lst) W)
+            (if (ge0 (- W (cadar Lst)))
+               (let Y (cons (car Lst) (knapsack (cdr Lst) @))
+                  (if (> (sum caddr X) (sum caddr Y)) X Y) )
+               X ) ) ) ) )
+
+(let K
+   (knapsack
+      (mapcan                                   # Expand multiple items
+         '((X) (need (cadddr X) NIL X))
+         *Items )
+      400 )
+   (for I K
+      (apply tab I (3 -24 6 6) NIL) )
+   (tab (27 6 6) NIL (sum cadr K) (sum caddr K)) )
+
+Output:
+
+   map                          9   150
+   compass                     13    35
+   water                      153   200
+   glucose                     15    60
+   glucose                     15    60
+   banana                      27    60
+   banana                      27    60
+   banana                      27    60
+   cheese                      23    30
+   suntan cream                11    70
+   waterproof overclothes      43    75
+   note-case                   22    80
+   sunglasses                   7    20
+   socks                        4    50
+                              396  1010
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Knapsack problem/Continuous}
+
+A robber burgles a butcher's shop, where he can select from some items.
+He knows the weights and prices of each items. Because he has a knapsack
+with 15 kg maximal capacity, he wants to select the items such that he
+would have his profit maximized. He may cut the items; the item has a
+reduced price after cutting that is proportional to the original price
+by the ratio of masses. That means: half of an item has half the price
+of the original.
+
+This is the item list in the butcher's:
+
+\ctable[caption = { Table of potential knapsack items },
+pos = H, center, botcap]{lll}
+{% notes
+}
+{% rows
+\FL
+Item & Weight (kg) & Price (Value)
+\ML
+beef & 3.8 & 36
+\\\noalign{\medskip}
+pork & 5.4 & 43
+\\\noalign{\medskip}
+ham & 3.6 & 90
+\\\noalign{\medskip}
+greaves & 2.4 & 45
+\\\noalign{\medskip}
+flitch & 4.0 & 30
+\\\noalign{\medskip}
+brawn & 2.5 & 56
+\\\noalign{\medskip}
+welt & 3.7 & 67
+\\\noalign{\medskip}
+salami & 3.0 & 95
+\\\noalign{\medskip}
+sausage & 5.9 & 98
+\\\noalign{\medskip}
+Knapsack & \textless{}=15 kg & ~?
+\LL
+}
+
+\textbf{Which items does the robber carry in his knapsack so that their
+total weight does not exceed 15 kg, and their total value is maximised?}
+
+
+See also: \emph{Knapsack problem} and
+\href{http://en.wikipedia.org/wiki/Continuous\_knapsack\_problem}{Wikipedia}.
+
+\begin{wideverbatim}
+
+(scl 2)
+
+(de *Items
+   ("beef" 3.8 36.0)
+   ("pork" 5.4 43.0)
+   ("ham" 3.6 90.0)
+   ("greaves" 2.4 45.0)
+   ("flitch" 4.0 30.0)
+   ("brawn" 2.5 56.0)
+   ("welt" 3.7 67.0)
+   ("salami" 3.0 95.0)
+   ("sausage" 5.9 98.0) )
+
+(let K
+   (make
+      (let Weight 0
+         (for I (by '((L) (*/ (caddr L) -1.0 (cadr L))) sort *Items)
+            (T (= Weight 15.0))
+            (inc 'Weight (cadr I))
+            (T (> Weight 15.0)
+               (let W (- (cadr I) Weight -15.0)
+                  (link (list (car I) W (*/ W (caddr I) (cadr I)))) ) )
+            (link I) ) ) )
+   (for I K
+      (tab (3 -9 8 8)
+         NIL
+         (car I)
+         (format (cadr I) *Scl)
+         (format (caddr I) *Scl) ) )
+   (tab (12 8 8)
+      NIL
+      (format (sum cadr K) *Scl)
+      (format (sum caddr K) *Scl) ) )
+
+Output:
+
+   salami       3.00   95.00
+   ham          3.60   90.00
+   brawn        2.50   56.00
+   greaves      2.40   45.00
+   welt         3.50   63.38
+               15.00  349.38
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Knapsack problem/Unbounded}
+
+A traveller gets diverted and has to make an unscheduled stop in what
+turns out to be Shangri La. Opting to leave, he is allowed to take as
+much as he likes of the following items, so long as it will fit in his
+knapsack, and he can carry it. He knows that he can carry no more than
+25 `weights' in total; and that the capacity of his knapsack is 0.25
+`cubic lengths'.
+
+Looking just above the bar codes on the items he finds their weights and
+volumes. He digs out his recent copy of a financial paper and gets the
+value of each item.
+
+\ctable[pos = H, center, botcap]{lllll}
+{% notes
+}
+{% rows
+\FL
+Item & Explanation & Value (each) & weight & Volume (each)
+\\\noalign{\medskip}
+panacea (vials of) & Incredible healing properties & 3000 & 0.3 & 0.025
+\\\noalign{\medskip}
+ichor (ampules of) & Vampires blood & 1800 & 0.2 & 0.015
+\\\noalign{\medskip}
+gold (bars) & Shiney shiney & 2500 & 2.0 & 0.002
+\\\noalign{\medskip}
+Knapsack & For the carrying of & - & \textless{}=25 & \textless{}=0.25~
+\LL
+}
+
+He can only take whole units of any item, but there is much more of any
+item than he could ever carry
+
+\textbf{How many of each item does he take to maximise the value of
+items he is carrying away with him?}
+
+Note:
+
+\begin{enumerate}
+\item
+  There are four solutions that maximise the value taken. Only one
+  \emph{need} be given.
+\end{enumerate}
+
+
+See also: \emph{Knapsack problem/Bounded}, \emph{Knapsack problem/0-1}
+
+
+
+\begin{wideverbatim}
+
+Brute force solution
+
+(de *Items
+   ("panacea"  3  25  3000)
+   ("ichor"    2  15  1800)
+   ("gold"    20   2  2500) )
+
+(de knapsack (Lst W V)
+   (when Lst
+      (let X (knapsack (cdr Lst) W V)
+         (if (and (ge0 (dec 'W (cadar Lst))) (ge0 (dec 'V (caddar Lst))))
+            (maxi
+               '((L) (sum cadddr L))
+               (list
+                  X
+                  (cons (car Lst) (knapsack (cdr Lst) W V))
+                  (cons (car Lst) (knapsack Lst W V)) ) )
+            X ) ) ) )
+
+(let K (knapsack *Items 250 250)
+   (for (L K  L)
+      (let (N 1  X)
+         (while (= (setq X (pop 'L)) (car L))
+            (inc 'N) )
+         (apply tab X (4 2 8 5 5 7) N "x") ) )
+   (tab (14 5 5 7) NIL (sum cadr K) (sum caddr K) (sum cadddr K)) )
+
+Output:
+
+  15 x   ichor    2   15   1800
+  11 x    gold   20    2   2500
+                250  247  54500
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Knight's tour}
+
+\href{http://en.wikipedia.org/wiki/Knight\%27s\_tour}{Problem}: you have
+a standard 8x8 chessboard, empty but for a single knight on some square.
+Your task is to emit a series of legal knight moves that result in the
+knight visiting every square on the chessboard exactly once. Note that
+it is \emph{not} a requirement that the tour be ``closed''; that is, the
+knight need not end within a single move of its start position.
+
+Input and output may be textual or graphical, according to the
+conventions of the programming environment. If textual, squares should
+be indicated in
+\href{http://en.wikipedia.org/wiki/Algebraic\_chess\_notation}{algebraic
+notation}. The output should indicate the order in which the knight
+visits the squares, starting with the initial position. The form of the
+output may be a diagram of the board with the squares numbered ordering
+to visitation sequence, or a textual list of algebraic coordinates in
+order, or even an actual animation of the knight moving around the
+chessboard.
+
+Input: starting square
+
+Output: move sequence
+
+Cf.
+
+\begin{itemize}
+\item \emph{N-queens problem}
+\end{itemize}
+
+
+
+\begin{wideverbatim}
+
+(load "@lib/simul.l")
+
+# Build board
+(grid 8 8)
+
+# Generate legal moves for a given position
+(de moves (Tour)
+   (extract
+      '((Jump)
+         (let? Pos (Jump (car Tour))
+            (unless (memq Pos Tour)
+               Pos ) ) )
+      (quote  # (taken from "games/chess.l")
+         ((This) (: 0 1  1  0 -1  1  0 -1  1))        # South Southwest
+         ((This) (: 0 1  1  0 -1  1  0  1  1))        # West Southwest
+         ((This) (: 0 1  1  0 -1 -1  0  1  1))        # West Northwest
+         ((This) (: 0 1  1  0 -1 -1  0 -1 -1))        # North Northwest
+         ((This) (: 0 1 -1  0 -1 -1  0 -1 -1))        # North Northeast
+         ((This) (: 0 1 -1  0 -1 -1  0  1 -1))        # East Northeast
+         ((This) (: 0 1 -1  0 -1  1  0  1 -1))        # East Southeast
+         ((This) (: 0 1 -1  0 -1  1  0 -1  1)) ) ) )  # South Southeast
+
+# Build a list of moves, using Warnsdorff’s algorithm
+(let Tour '(b1)  # Start at b1
+   (while
+      (mini
+         '((P) (length (moves (cons P Tour))))
+         (moves Tour) )
+      (push 'Tour @) )
+   (flip Tour) )
+
+Output:
+
+-> (b1 a3 b5 a7 c8 b6 a8 c7 a6 b8 d7 f8 h7 g5 h3 g1 e2 c1 a2 b4 c2 a1 b3 a5 b7
+d8 c6 d4 e6 c5 a4 c3 d1 b2 c4 d2 f1 h2 f3 e1 d3 e5 f7 h8 g6 h4 g2 f4 d5 e7 g8
+h6 g4 e3 f5 d6 e8 g7 h5 f6 e4 g3 h1 f2)
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Knuth's algorithm S}
+
+This is a method of randomly sampling n items from a set of M items,
+with equal probability; where M \textgreater{}= n and M, the number of
+items is unknown until the end. This means that the equal probability
+sampling should be maintained for all successive items \textgreater{} n
+as they become available (although the content of successive samples can
+change).
+
+\begin{description}
+\item[The algorithm]
+\end{description}
+
+\begin{enumerate}
+\item
+  Select the first n items as the sample as they become available;
+\item
+  For the i-th item where i \textgreater{} n, have a random chance of
+  n/i of keeping it. If failing this chance, the sample remains the
+  same. If not, have it randomly (1/n) replace one of the previously
+  selected n items of the sample.
+\item
+  Repeat \#2 for any subsequent items.
+\end{enumerate}
+
+\begin{description}
+\item[The Task]
+\end{description}
+
+\begin{enumerate}
+\item
+  Create a function \texttt{s\_of\_n\_creator} that given \emph{n} the
+  maximum sample size, returns a function \texttt{s\_of\_n} that takes
+  one parameter, \texttt{item}.
+\item
+  Function \texttt{s\_of\_n} when called with successive items returns
+  an equi-weighted random sample of up to n of its items so far, each
+  time it is called, calculated using Knuths Algorithm S.
+\item
+  Test your functions by printing and showing the frequency of
+  occurrences of the selected digits from 100,000 repetitions of:
+\end{enumerate}
+
+\begin{enumerate}
+\item
+  Use the s\_of\_n\_creator with n == 3 to generate an s\_of\_n.
+\item
+  call s\_of\_n with each of the digits 0 to 9 in order, keeping the
+  returned three digits of its random sampling from its last call with
+  argument item=9.
+\end{enumerate}
+
+Note: A class taking n and generating a callable instance/function might
+also be used.
+
+\begin{description}
+\item[Reference]
+\end{description}
+
+\begin{itemize}
+\item
+  The Art of Computer Programming, Vol 2, 3.4.2 p.142
+\end{itemize}
+
+Cf.
+
+\begin{itemize}
+\item
+  \emph{One of n lines in a file}
+\item
+  \emph{Accumulator factory}
+\end{itemize}
+
+
+
+\begin{wideverbatim}
+
+(de s_of_n_creator (@N)
+   (curry (@N (I . 0) (Res)) (Item)
+      (cond
+         ((>= @N (inc 'I)) (push 'Res Item))
+         ((>= @N (rand 1 I)) (set (nth Res (rand 1 @N)) Item)) )
+      Res ) )
+
+(let Freq (need 10 0)
+   (do 100000
+      (let S_of_n (s_of_n_creator 3)
+         (for I (mapc S_of_n (0 1 2 3 4 5 6 7 8 9))
+            (inc (nth Freq (inc I))) ) ) )
+   Freq )
+
+Output:
+
+-> (30003 29941 29918 30255 29848 29875 30056 29839 30174 30091)
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Knuth shuffle}
+
+Implement the \href{http://en.wikipedia.org/wiki/Knuth\_shuffle}{Knuth
+shuffle} (a.k.a. the Fisher-Yates shuffle) for an integer array (or, if
+possible, an array of any type). The Knuth shuffle is used to create a
+random permutation of an array.
+
+\begin{wideverbatim}
+
+(de shuffle (Lst)
+   (make
+      (for (N (length Lst) (gt0 N))
+         (setq Lst
+            (conc
+               (cut (rand 0 (dec 'N)) 'Lst)
+               (prog (link (car Lst)) (cdr Lst)) ) ) ) ) )
+
+\end{wideverbatim}
+
+
+
+% \input{referenc}

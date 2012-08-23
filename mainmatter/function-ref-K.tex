@@ -1,0 +1,66 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with K}
+\labe{cha:func-ref-K-functions-starting-with-K}
+
+
+ 
+\section*{\texttt{+Key}}
+\label{sec:func-ref-K-+Key}
+
+
+Prefix class for maintaining unique indexes to \texttt{+relation}s, a
+subclass of \texttt{+index}. Accepts an optional argument for a
+\texttt{+Hook} attribute. See also \texttt{Database}.
+
+
+\begin{wideverbatim}
+(rel nr (+Need +Key +Number))  # Mandatory, unique Customer/Supplier number
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(key ['cnt]) -> sym}}
+\label{sec:func-ref-K-(key ['cnt]) -> sym}
+
+
+Returns the next character from standard input as a single-character
+transient symbol. The console is set to raw mode. While waiting for a
+key press, a \texttt{select} system call is executed for all file descriptors
+and timers in the \texttt{VAL} of the global variable \texttt{*Run}. If \texttt{cnt} is
+non-\texttt{NIL}, that amount of milliseconds is waited maximally, and \texttt{NIL} is
+returned upon timeout. See also \texttt{raw} and \texttt{wait}.
+
+
+\begin{wideverbatim}
+: (key)           # Wait for a key
+-> "a"            # 'a' pressed
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(kill 'pid ['cnt]) -> flg}}
+\label{sec:func-ref-K-(kill 'pid ['cnt]) -> flg}
+
+
+Sends a signal with the signal number \texttt{cnt} (or SIGTERM if \texttt{cnt} is not
+given) to the process with the ID \texttt{pid}. Returns \texttt{T} if successful.
+
+
+\begin{wideverbatim}
+: (kill *Pid 20)                                # Stop current process
+
+[2]+  Stopped               pil +               # Unix shell
+$ fg                                            # Job control: Foreground
+pil +
+-> T                                            # 'kill' was successful
+\end{wideverbatim}
+
+

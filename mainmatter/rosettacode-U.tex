@@ -1,0 +1,547 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+\chapter{Rosetta Code Tasks starting with U}
+
+\section*{URL decoding}
+
+
+This task (the reverse of \emph{URL encoding}) is to provide a
+function or mechanism to convert a url-encoded string into its
+original unencoded form.
+
+\textbf{Example}
+
+The encoded string "\texttt{http\%3A\%2F\%2Ffoo\%20bar\%2F}" should be
+reverted to the unencoded form "\texttt{http://foo bar/}".
+
+
+\begin{wideverbatim}
+
+: (ht:Pack (chop "http\%3A\%2F\%2Ffoo\%20bar\%2F"))
+-> "http://foo bar/"
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{URL encoding}
+
+The task is to provide a function or mechanism to convert a provided
+string into URL encoding representation.
+
+In URL encoding, special characters, control characters and extended
+characters are converted into a percent symbol followed by a two digit
+hexadecimal code, So a space character encodes into~\%20 within the
+string.
+
+For the purposes of this task, every character except 0-9, A-Z and a-z
+requires conversion, so the following characters all require conversion
+by default:
+
+\begin{itemize}
+\item
+  ASCII control codes (Character ranges 00-1F hex (0-31 decimal) and 7F
+  (127 decimal).
+\item
+  ASCII symbols (Character ranges 32-47 decimal (20-2F hex))
+\item
+  ASCII symbols (Character ranges 58-64 decimal (3A-40 hex))
+\item
+  ASCII symbols (Character ranges 91-96 decimal (5B-60 hex))
+\item
+  ASCII symbols (Character ranges 123-126 decimal (7B-7E hex))
+\item
+  Extended characters with character codes of 128 decimal (80 hex) and
+  above.
+\end{itemize}
+
+\textbf{Example}
+
+The string "\texttt{http://foo bar/}" would be encoded as \\
+"\texttt{http\%3A\%2F\%2Ffoo\%20bar\%2F}".
+
+\textbf{Variations}
+
+\begin{itemize}
+\item
+  Lowercase escapes are legal, as in \\
+  "\texttt{http\%3a\%2f\%2ffoo\%20bar\%2f}".
+\item
+  Some standards give different rules:
+  \href{//tools.ietf.org/html/rfc3986}{RFC 3986}, \emph{Uniform Resource
+  Identifier (URI): Generic Syntax}, section 2.3, says that
+  ``-.\_\textasciitilde{}'' should not be encoded. HTML 5, section
+  \href{http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html\#url-encoded-form-data}{4.10.22.5
+  URL-encoded form data}, says to preserve ``-.\_*'', and to encode
+  space " " to ``+''. The options below provide for utilization of an
+  exception string, enabling preservation (non encoding) of particular
+  characters to meet specific standards.
+\end{itemize}
+
+\textbf{Options}
+
+It is permissible to use an exception string (containing a set of
+symbols that do not need to be converted). However, this is an optional
+feature and is not a requirement of this task.
+
+\textbf{See also}
+
+\emph{URL decoding}
+
+
+\begin{wideverbatim}
+
+(de urlEncodeTooMuch (Str)
+   (pack
+      (mapcar
+         '((C)
+            (if (or (>= "9" C "0") (>= "Z" (uppc C) "A"))
+               C
+               (list '\% (hex (char C))) ) )
+         (chop Str) ) ) )
+
+Test:
+
+: (urlEncodeTooMuch "http://foo bar/")
+-> "http\%3A\%2F\%2Ffoo\%20bar\%2F"
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Unbias a random generator}
+
+Given a weighted one bit generator of random numbers where the
+probability of a one occuring, \emph{P}\textsubscript{1}, is not the
+same as \emph{P}\textsubscript{0}, the probability of a zero occuring,
+the probability of the occurrence of a one followed by a zero is
+\emph{P}\textsubscript{1} × \emph{P}\textsubscript{0}. This is the same
+as the probability of a zero followed by a one:
+\emph{P}\textsubscript{0} × \emph{P}\textsubscript{1}.
+
+\textbf{Task Details}
+
+\begin{itemize}
+\item Use your language's random number generator to create a
+  \emph{function | method | subroutine | \ldots{}} \textbf{randN} that
+  returns a one or a zero, but with one occurring, on average, 1 out
+  of N times, where N is an integer from the range 3 to 6 inclusive.
+\item
+  Create a function \textbf{unbiased} that uses only randN as its source
+  of randomness to become an unbiased generator of random ones and
+  zeroes.
+\item
+  For N over its range, generate and show counts of the outputs of randN
+  and unbiased(randN).
+\end{itemize}
+
+The actual unbiasing should be done by generating two numbers at a time
+from randN and only returning a 1 or 0 if they are different. As long as
+you always return the first number or always return the second number,
+the probabilities discussed above should take over the biased
+probability of randN.
+
+
+
+\begin{wideverbatim}
+
+(de randN (N)
+   (if (= 1 (rand 1 N)) 1 0) )
+
+(de unbiased (N)
+   (use (A B)
+      (while
+         (=
+            (setq A (randN N))
+            (setq B (randN N)) ) )
+      A ) )
+
+(for N (range 3 6)
+   (tab (2 1 7 2 7 2)
+      N ":"
+      (format
+         (let S 0 (do 10000 (inc 'S (randN N))))
+         2 )
+      "\%"
+      (format
+         (let S 0 (do 10000 (inc 'S (unbiased N))))
+         2 )
+      "\%" ) )
+
+Output:
+
+ 3:  33.21 \%  50.48 \%
+ 4:  25.06 \%  49.79 \%
+ 5:  20.04 \%  49.75 \%
+ 6:  16.32 \%  49.02 \%
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Undefined values}
+
+
+For languages which have an explicit notion of an undefined value,
+identify and exercise those language's mechanisms for identifying and
+manipulating a variable's value's status as being undefined
+
+\begin{wideverbatim}
+
+An internal symbol is initialized to NIL. Depending on the context,
+this is interpreted as "undefined". When called as a function, an
+error is issued:
+
+: (myfoo 3 4)
+!? (myfoo 3 4)
+myfoo -- Undefined
+?
+
+The function 'default' can be used to initialize a variable if and
+only if its current value is NIL:
+
+: MyVar
+-> NIL
+
+: (default MyVar 7)
+-> 7
+
+: MyVar
+-> 7
+
+: (default MyVar 8)
+-> 7
+
+: MyVar
+-> 7
+
+\end{wideverbatim}
+
+% \pagebreak{}
+% \section*{Undefined values/Check if a variable is defined}
+
+% \begin{wideverbatim}
+
+% New internal symbols are initialized with the value NIL. NIL is also the value
+% for "false", so there is never really an "undefined value".
+% '[http://software-lab.de/doc/refN.html#not not]' is the predicate to check for
+% NIL, but many other (typically flow control) functions can be used.
+
+% (if (not MyNewVariable)
+%    (handle value-is-NIL) )
+
+% or
+
+% (unless MyNewVariable
+%    (handle value-is-NIL) )
+
+% \end{wideverbatim}
+
+\pagebreak{}
+\section*{Unicode strings}
+
+As the world gets smaller each day, internationalization becomes more
+and more important. For handling multiple languages,
+\emph{Unicode} is your best friend. It is a very capable
+tool, but also quite complex compared to older single- and double-byte
+character encodings. How well prepared is your programming language for
+Unicode? Discuss and demonstrate its unicode awareness and capabilities.
+Some suggested topics:
+
+\begin{itemize}
+\item
+  How easy is it to present Unicode strings in source code? Can Unicode
+  literals be written directly, or be part of identifiers/keywords/etc?
+\item
+  How well can the language communicate with the rest of the world? Is
+  it good at input/output with Unicode?
+\item
+  Is it convenient to manipulate Unicode strings in the language?
+\item
+  How broad/deep does the language support Unicode? What encodings (e.g.
+  UTF-8, UTF-16, etc) can be used? Normalization?
+\end{itemize}
+
+\textbf{Note} This task is a bit unusual in that it encourages general
+discussion rather than clever coding.
+
+See also:
+
+\begin{itemize}
+\item \emph{Unicode variable names}
+\item \emph{Terminal control/Display an extended character}
+\end{itemize}
+
+
+
+\begin{wideverbatim}
+
+PicoLisp can directly handle _only_ Unicode (UTF-8) strings. So the problem is
+rather how to handle non-Unicode strings: They must be pre- or post-processed by
+external tools, typically with pipes during I/O. For example, to read a line
+from a file in 8859 encoding:
+
+   (in '(iconv "-f" "ISO-8859-15" "file.txt") (line))
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Unicode variable names}
+
+\begin{enumerate}
+\item
+  Describe, and give a pointer to documentation on your languages use of
+  characters \emph{beyond} those of the ASCII character set in the
+  naming of variables.
+\item
+  Show how to:
+\end{enumerate}
+
+\begin{itemize}
+\item
+  Set a variable with a name including the `Δ', (delta
+  \emph{character}), to 1
+\item
+  Increment it
+\item
+  Print its value.
+\end{itemize}
+
+\begin{description}
+\item[Cf.]
+\end{description}
+
+\begin{itemize}
+\item
+  \emph{Case-sensitivity of
+  identifiers}
+\end{itemize}
+
+\begin{wideverbatim}
+
+Variables are usually
+[http://software-lab.de/doc/ref.html#internal-io Internal Symbols],
+and their names may contain any UTF-8 character except null-bytes.
+White space, and 11 special characters (see the reference) must be
+escaped with a backslash.
+[http://software-lab.de/doc/ref.html#transient-io Transient Symbols]
+are often used as variables too, they follow the syntax of strings
+in other languages.
+
+: (setq Δ 1)
+-> 1
+: Δ
+-> 1
+: (inc 'Δ)
+-> 2
+: Δ
+-> 2
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Update a configuration file}
+
+We have a configuration file as follows:
+
+\begin{wideverbatim}
+# This is a configuration file in standard configuration file format
+#
+# Lines begininning with a hash or a semicolon are ignored by the application
+# program. Blank lines are also ignored by the application program.
+
+# The first word on each non comment line is the configuration option.
+# Remaining words or numbers on the line are configuration parameter
+# data fields.
+
+# Note that configuration option names are not case sensitive. However,
+# configuration parameter data is case sensitive and the lettercase must
+# be preserved.
+
+# This is a favourite fruit
+FAVOURITEFRUIT banana
+
+# This is a boolean that should be set
+NEEDSPEELING
+
+# This boolean is commented out
+; SEEDSREMOVED
+
+# How many bananas we have
+NUMBEROFBANANAS 48
+\end{wideverbatim}
+
+The task is to manipulate the configuration file as follows:
+
+\begin{itemize}
+\item
+  Disable the needspeeling option (using a semicolon prefix)
+\item
+  Enable the seedsremoved option by removing the semicolon and any
+  leading whitespace
+\item
+  Change the numberofbananas parameter to 1024
+\item
+  Enable (or create if it does not exist in the file) a parameter for
+  numberofstrawberries with a value of 62000
+\end{itemize}
+
+Note that configuration option names are not case sensitive. This means
+that changes should be effected, regardless of the case.
+
+Options should always be disabled by prefixing them with a semicolon.
+
+Lines beginning with hash symbols should not be manipulated and left
+unchanged in the revised file.
+
+If a configuration option does not exist within the file (in either
+enabled or disabled form), it should be added during this update.
+Duplicate configuration option names in the file should be removed,
+leaving just the first entry.
+
+For the purpose of this task, the revised file should contain
+appropriate entries, whether enabled or not for
+needspeeling,seedsremoved,numberofbananas and numberofstrawberries.)
+
+The update should rewrite configuration option names in capital letters.
+However lines beginning with hashes and any parameter data must not be
+altered (eg the banana for favourite fruit must not become capitalized).
+The update process should also replace double semicolon prefixes with
+just a single semicolon (unless it is uncommenting the option, in which
+case it should remove all leading semicolons).
+
+Any lines beginning with a semicolon or groups of semicolons, but no
+following option should be removed, as should any leading or trailing
+whitespace on the lines. Whitespace between the option and paramters
+should consist only of a single space, and any non ascii extended
+characters, tabs characters, or control codes (other than end of line
+markers), should also be removed.
+
+\textbf{See also:}
+
+\begin{itemize}
+\item
+  \emph{Read a configuration file}
+\end{itemize}
+
+
+\begin{wideverbatim}
+
+(let Data  # Read all data
+   (in "config"
+      (make
+         (until (eof)
+            (link (trim (split (line) " "))) ) ) )
+   (setq Data  # Fix comments
+      (mapcar
+         '((L)
+            (while (head '(";" ";") (car L))
+               (pop L) )
+            (if (= '(";") (car L))
+               L
+               (cons NIL L) ) )
+         Data ) )
+   (let (Need NIL  Seed NIL  NBan NIL  NStr NIL  Favo NIL)
+      (map
+         '((L)
+            (let D (mapcar uppc (cadar L))
+               (cond
+                  ((= '`(chop "NEEDSPEELING") D)
+                     (if Need
+                        (set L)
+                        (on Need)
+                        (unless (caar L)
+                           (set (car L) '(";")) ) ) )
+                  ((= '`(chop "SEEDSREMOVED") D)
+                     (if Seed
+                        (set L)
+                        (on Seed)
+                        (when (caar L)
+                           (set (car L)) ) ) )
+                  ((= '`(chop "NUMBEROFBANANAS") D)
+                     (if NBan
+                        (set L)
+                        (on NBan)
+                        (set (cddar L) 1024) ) )
+                  ((= '`(chop "NUMBEROFSTRAWBERRIES") D)
+                     (if NStr
+                        (set L)
+                        (on NStr) ) )
+                  ((= '`(chop "FAVOURITEFRUIT") D)
+                     (if Favo
+                        (set L)
+                        (on Favo) ) ) ) ) )
+         Data )
+
+\end{wideverbatim}
+
+\begin{wideverbatim}
+
+      (unless Need
+         (conc Data (cons (list NIL "NEEDSPEELING"))) )
+      (unless Seed
+         (conc Data (cons (list NIL "SEEDSREMOVED"))) )
+      (unless NBan
+         (conc Data (cons (list NIL "NUMBEROFBANANAS" 1024))) )
+      (unless NStr
+         (conc Data (cons (list NIL "NUMBEROFSTRAWBERRIES" 62000))) ) )
+   (out "config"
+      (for L Data
+         (prinl (glue " " (if (car L) L (cdr L)))) ) ) )
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{User input/Graphical}
+
+In this task, the goal is to input a string and the integer 75000,
+from \emph{graphical user interface}.
+
+See also: \emph{User input/Text}
+
+\begin{wideverbatim}
+
+(and
+   (call 'sh "-c"
+      (pack
+         "dialog \
+            --inputbox 'Input a string' 8 60 \
+            --inputbox 'Input a number' 8 20 \
+            2>"
+         (tmp "dlg") ) )
+   (split (in (tmp "dlg") (line)) "^I")
+   (cons (pack (car @)) (format (cadr @))) )
+
+Output:
+
+-> ("Hello world" . 12345)
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{User input/Text}
+
+\textbf{User input/Text} is part of \emph{Short Circuit}'s
+\textbf{\emph{Console Program Basics}} selection.
+
+In this task, the goal is to input a string and the integer 75000, from
+the text console.
+
+See also: \emph{User input/Graphical}
+
+\begin{wideverbatim}
+
+(in NIL  # Guarantee reading from standard input
+   (let (Str (read)  Num (read))
+      (prinl "The string is: \"" Str "\"")
+      (prinl "The number is: " Num) ) )
+
+\end{wideverbatim}
+
+
+
+% \input{referenc}

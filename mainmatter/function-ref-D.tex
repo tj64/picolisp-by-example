@@ -1,0 +1,858 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with D}
+sec:func-ref-D-}
+
+
+ 
+\section*{\texttt{*DB}}
+\label{sec:func-ref-D-*DB}
+
+
+A global constant holding the external symbol \texttt{\{1\}}, the \texttt{database}
+root. All transient symbols in a database can be reached from that root.
+Except during debugging, any explicit literal access to symbols in the
+database should be avoided, because otherwise a memory leak might occur
+(The garbage collector temporarily sets \texttt{*DB} to \texttt{NIL} and restores its
+value after collection, thus disposing of all external symbols not
+currently used in the program).
+
+
+\begin{wideverbatim}
+: (show *DB)
+{1} NIL
+   +City {P}
+   +Person {3}
+-> {1}
+: (show '{P})
+{P} NIL
+   nm (566 . {AhDx})
+-> {P}
+: (show '{3})
+{3} NIL
+   tel (681376 . {Agyl})
+   nm (1461322 . {2gu7})
+-> {3}
+\end{wideverbatim}
+
+ 
+\section*{\texttt{*Dbg}}
+\label{sec:func-ref-D-*Dbg}
+
+
+A boolean variable indicating ``debug mode''. It can be conveniently
+switched on with a trailing \texttt{+} command line argument (see
+\emph{Invocation}). When non-\texttt{NIL}, the \texttt{\$} (tracing) and
+\texttt{!} (breakpoint) functions are enabled, and the current line number and
+file name will be stored in symbol properties by \texttt{de}, \texttt{def} and \texttt{dm}.
+See also \texttt{debug}, \texttt{trace} and \texttt{lint}.
+
+
+\begin{wideverbatim}
+: (de foo (A B) (* A B))
+-> foo
+: (trace 'foo)
+-> foo
+: (foo 3 4)
+ foo : 3 4
+ foo = 12
+-> 12
+: (let *Dbg NIL (foo 3 4))
+-> 12
+\end{wideverbatim}
+
+ 
+\section*{\texttt{*Dbs}}
+\label{sec:func-ref-D-*Dbs}
+
+
+A global variable holding a list of numbers (block size scale factors,
+as needed by \texttt{pool}). It is typically set by \texttt{dbs} and \texttt{dbs+}.
+
+
+\begin{wideverbatim}
+: *Dbs
+-> (1 2 1 0 2 3 3 3)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+Date}}
+\label{sec:func-ref-D-+Date}
+
+
+Class for calender dates (as calculated by \texttt{date}), a subclass of
+\texttt{+Number}. See also \texttt{Database}.
+
+
+\begin{wideverbatim}
+(rel dat (+Ref +Date))  # Indexed date
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+Dep}}
+\label{sec:func-ref-D-+Dep}
+
+
+Prefix class for maintaining depenencies between \texttt{+relation}s. Expects a
+list of (symbolic) attributes that depend on this relation. Whenever
+this relations is cleared (receives a value of \texttt{NIL}), the dependent
+relations will also be cleared, triggering all required side-effects.
+See also \texttt{Database}.
+
+In the following example, the index entry for the item pointing to the
+position (and, therefore, to the order) is cleared in case the order is
+deleted, or this position is deleted from the order:
+
+
+\begin{wideverbatim}
+(class +Pos +Entity)                # Position class
+(rel ord (+Dep +Joint)              # Order of that position
+   (itm)                               # 'itm' specifies the dependency
+   pos (+Ord) )                        # Arguments to '+Joint'
+(rel itm (+Ref +Link) NIL (+Item))  # Item depends on the order
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(d) -> T}}
+\label{sec:func-ref-D-(d) -> T}
+
+
+Inserts \texttt{!} breakpoints into all subexpressions of the current
+breakpoint. Typically used when single-stepping a function or method
+with \texttt{debug}. See also \texttt{u} and \texttt{unbug}.
+
+
+\begin{wideverbatim}
+! (d)                            # Debug subexpression(s) at breakpoint
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(daemon 'sym . prg) -> fun}}
+\label{sec:func-ref-D-(daemon 'sym . prg) -> fun}
+
+
+\texttt{(daemon '(sym . cls) . prg) -> fun}
+
+\texttt{(daemon '(sym sym2 [. cls]) . prg) -> fun}
+
+Inserts \texttt{prg} in the beginning of the function (first form),
+the method body of \texttt{sym} in \texttt{cls} (second form) or in
+the class obtained by \texttt{get}ing \texttt{sym2} from
+\texttt{*Class} (or \texttt{cls} if given) (third form). Built-in
+functions (C-function pointer) are automatically converted to Lisp
+expressions. See also \texttt{expr}, \texttt{patch} and
+\texttt{redef}.
+
+
+\begin{wideverbatim}
+: (de hello () (prinl "Hello world!"))
+-> hello
+
+: (daemon 'hello (prinl "# This is the hello world program"))
+-> (NIL (prinl "# This is the hello world program") (prinl "Hello world!"))
+: (hello)
+# This is the hello world program
+Hello world!
+-> "Hello world!"
+
+: (daemon '* (msg 'Multiplying))
+-> (@ (msg 'Multiplying) (pass $134532148))
+: *
+-> (@ (msg 'Multiplying) (pass $134532148))
+: (* 1 2 3)
+Multiplying
+-> 6
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(dat\$ 'dat ['sym]) -> sym}}
+\label{sec:func-ref-D-\texttt{(datdate} \texttt{dat} in ISO format, with an optional delimite
+character \texttt{sym}. See also \texttt{\$dat}, \texttt{tim\$}, \texttt{datStr} and \texttt{datSym}.
+
+
+\begin{wideverbatim}
+: (dat$ (date))
+-> "20070601"
+: (dat$ (date) "-")
+-> "2007-06-01"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(datStr 'dat ['flg]) -> sym}}
+\label{sec:func-ref-D-(datStr 'dat ['flg]) -> sym}
+
+
+Formats a \texttt{date} according to the current \texttt{locale}. If \texttt{flg} is
+non-\texttt{NIL}, the year will be formatted modulo 100. See also \texttt{dat\$},
+\texttt{datSym}, \texttt{strDat}, \texttt{expDat}, \texttt{expTel} and \texttt{day}.
+
+
+\begin{wideverbatim}
+: (datStr (date))
+-> "2007-06-01"
+: (locale "DE" "de")
+-> NIL
+: (datStr (date))
+-> "01.06.2007"
+: (datStr (date) T)
+-> "01.06.07"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(datSym 'dat) -> sym}}
+\label{sec:func-ref-D-(datSym 'dat) -> sym}
+
+
+Formats a \texttt{date} \texttt{dat} in in symbolic format (DDmmmYY). See also \texttt{dat\$}
+and \texttt{datStr}.
+
+
+\begin{wideverbatim}
+: (datSym (date))
+-> "01jun07"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(date ['T]) -> dat}}
+\label{sec:func-ref-D-(date ['T]) -> dat}
+
+
+\texttt{(date 'dat) -> (y m d)}
+
+\texttt{(date 'y 'm 'd) -> dat | NIL}
+
+\texttt{(date '(y m d)) -> dat | NIL}
+
+Calculates a (gregorian) calendar date. It is represented as a day
+number, starting first of March of the year 0 AD. When called without
+arguments, the current date is returned. When called with a \texttt{T}
+argument, the current Coordinated Universal Time (UTC) is returned. When
+called with a single number \texttt{dat}, it is taken as a date and a list with
+the corresponding year, month and day is returned. When called with
+three numbers (or a list of three numbers) for the year, month and day,
+the corresponding date is returned (or \texttt{NIL} if they do not represent a
+legal date). See also \texttt{time}, \texttt{stamp}, \texttt{\$dat}, \texttt{dat\$}, \texttt{datSym},
+\texttt{datStr}, \texttt{strDat}, \texttt{expDat}, \texttt{day}, \texttt{week} and \texttt{ultimo}.
+
+
+\begin{wideverbatim}
+: (date)                         # Today
+-> 730589
+: (date 2000 6 12)               # 12-06-2000
+-> 730589
+: (date 2000 22 5)               # Illegal date
+-> NIL
+: (date (date))                  # Today's year, month and day
+-> (2000 6 12)
+: (- (date) (date 2000 1 1))     # Number of days since first of January
+-> 163
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(day 'dat ['lst]) -> sym}}
+\label{sec:func-ref-D-(day 'dat ['lst]) -> sym}
+
+
+Returns the name of the day for a given \texttt{date} \texttt{dat}, in the language of
+the current \texttt{locale}. If \texttt{lst} is given, it should be a list of
+alternative weekday names. See also \texttt{week}, \texttt{datStr} and \texttt{strDat}.
+
+
+\begin{wideverbatim}
+: (day (date))
+-> "Friday"
+: (locale "DE" "de")
+-> NIL
+: (day (date))
+-> "Freitag"
+: (day (date) '("Mo" "Tu" "We" "Th" "Fr" "Sa" "Su"))
+-> "Fr"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(db 'var 'cls ['hook] 'any ['var 'any ..]) -> sym | NIL}}
+\label{sec:func-ref-D-(db 'var 'cls ['hook] 'any ['var 'any ..]) -> sym | NIL}
+
+
+Returns a database object of class \texttt{cls}, where the values for the \texttt{var}
+arguments correspond to the \texttt{any} arguments. If a matching object cannot
+be found, \texttt{NIL} is returned. \texttt{var}, \texttt{cls} and \texttt{hook} should specify a
+\texttt{tree} for \texttt{cls} or one of its superclasses. See also \texttt{aux}, \texttt{collect},
+\texttt{request}, \texttt{fetch}, \texttt{init} and \texttt{step}.
+
+
+\begin{wideverbatim}
+: (db 'nr '+Item 1)
+-> {3-1}
+: (db 'nm '+Item "Main Part")
+-> {3-1}
+\end{wideverbatim}
+
+ 
+\section*{\texttt{db/3}}
+\label{sec:func-ref-D-db/3}
+
+
+\texttt{db/4}
+
+\texttt{db/5}
+
+\emph{Pilog} database predicate that returns objects
+matching the given key/value (and optional hook) relation. The relation
+should be of type \texttt{+index}. For the key pattern applies:
+
+\begin{itemize}
+\item a symbol (string) returns all entries which start with that string
+\item other atoms (numbers, external symbols) match as they are
+\item cons pairs constitute a range, returning objects
+\begin{itemize}
+\item in increasing order if the CDR is greater than the CAR
+\item in decreasing order otherwise
+\end{itemize}
+\item other lists are matched for \texttt{+Aux} key combinations
+\end{itemize}
+
+The optional hook can be supplied as the third argument. See also
+\texttt{select/3} and \texttt{remote/2}.
+
+
+\begin{wideverbatim}
+: (? (db nr +Item @Item))              # No value given
+ @Item={3-1}
+ @Item={3-2}
+ @Item={3-3}
+ @Item={3-4}
+ @Item={3-5}
+ @Item={3-6}
+-> NIL
+
+: (? (db nr +Item 2 @Item))            # Get item no. 2
+ @Item={3-2}
+-> NIL
+
+: (? (db nm +Item Spare @Item) (show @Item))  # Search for "Spare.."
+{3-2} (+Item)
+   pr 1250
+   inv 100
+   sup {2-2}
+   nm "Spare Part"
+   nr 2
+ @Item={3-2}
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(db: cls ..) -> num}}
+\label{sec:func-ref-D-(db: cls ..) -> num}
+
+
+Returns the database file number for objects of the type given by the
+\texttt{cls} argument(s). Needed, for example, for the creation of \texttt{new}
+objects. See also \texttt{dbs}.
+
+
+\begin{wideverbatim}
+: (db: +Item)
+-> 3
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(dbSync) -> flg}}
+\label{sec:func-ref-D-(dbSync) -> flg}
+
+
+Starts a database transaction, by trying to obtain a \texttt{lock} on the
+database root object \texttt{*DB}, and then calling \texttt{sync} to synchronize with
+possible changes from other processes. When all desired modifications to
+external symbols are done, \texttt{(commit 'upd)} should be called. See also
+\texttt{Database}.
+
+
+\begin{wideverbatim}
+(let? Obj (rd)             # Get object?
+   (dbSync)                # Yes: Start transaction
+   (put> Obj 'nm (rd))     # Update
+   (put> Obj 'nr (rd))
+   (put> Obj 'val (rd))
+   (commit 'upd) )         # Close transaction
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(dbck ['cnt] 'flg) -> any}}
+\label{sec:func-ref-D-(dbck ['cnt] 'flg) -> any}
+
+
+Performs a low-level integrity check of the current (or \texttt{cnt}'th)
+database file, and returns \texttt{NIL} (or the number of blocks and symbols if
+\texttt{flg} is non-\texttt{NIL}) if everything seems correct. Otherwise, a string
+indicating an error is returned. As a side effect, possibly unused
+blocks (as there might be when a \texttt{rollback} is done before \texttt{commit}ing newly allocated (\texttt{new}) external symbols) are appended to the free list.
+
+
+\begin{wideverbatim}
+: (pool "db")
+-> T
+: (dbck)
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(dbs . lst)}}
+\label{sec:func-ref-D-(dbs . lst)}
+
+
+Initializes the global variable \texttt{*Dbs}. Each element in \texttt{lst} has a
+number in its CAR (the block size scale factor of a database file, to be
+stored in \texttt{*Dbs}). The CDR elements are either classes (so that objects
+of that class are later stored in the corresponding file), or lists with
+a class in the CARs and a list of relations in the CDRs (so that index
+trees for these relations go into that file). See also \texttt{dbs+} and
+\texttt{pool}.
+
+
+\begin{wideverbatim}
+(dbs
+   (1 +Role +User +Sal)                         # (1 . 128)
+   (2 +CuSu)                                    # (2 . 256)
+   (1 +Item +Ord)                               # (3 . 128)
+   (0 +Pos)                                     # (4 . 64)
+   (2 (+Role nm) (+User nm) (+Sal nm))          # (5 . 256)
+   (4 (+CuSu nr plz tel mob))                   # (6 . 1024)
+   (4 (+CuSu nm))                               # (7 . 1024)
+   (4 (+CuSu ort))                              # (8 . 1024)
+   (4 (+Item nr sup pr))                        # (9 . 1024)
+   (4 (+Item nm))                               # (10 . 1024)
+   (4 (+Ord nr dat cus))                        # (11 . 1024)
+   (4 (+Pos itm)) )                             # (12 . 1024)
+
+: *Dbs
+-> (1 2 1 0 2 4 4 4 4 4 4 4)
+: (get '+Item 'Dbf)
+-> (3 . 128)
+: (get '+Item 'nr 'dbf)
+-> (9 . 1024)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(dbs+ 'num . lst)}}
+\label{sec:func-ref-D-(dbs+ 'num . lst)}
+
+
+Extends the list of database sizes stored in \texttt{*Dbs}. \texttt{num} is the
+initial offset into the list. See also \texttt{dbs}.
+
+
+\begin{wideverbatim}
+(dbs+ 9
+   (1 +NewCls)                                  # (9 . 128)
+   (3 (+NewCls nr nm)) )                        # (10 . 512)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(de sym . any) -> sym}}
+\label{sec:func-ref-D-(de sym . any) -> sym}
+
+
+Assigns a definition to the \texttt{sym} argument, by setting its \texttt{VAL} to the
+\texttt{any} argument. If the symbol has already another value, a ``redefined''
+message is issued. When the value of the global variable
+\emph{*Dbg} is non-\texttt{NIL}, the current line number and file
+name (if any) are stored in the \texttt{*Dbg} property of \texttt{sym}. \texttt{de} is the
+standard way to define a function. See also \texttt{def}, \texttt{dm} and \texttt{undef}.
+
+
+\begin{wideverbatim}
+: (de foo (X Y) (* X (+ X Y)))  # Define a function
+-> foo
+: (foo 3 4)
+-> 21
+
+: (de *Var . 123)  # Define a variable value
+: *Var
+-> 123
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(debug 'sym) -> T}}
+\label{sec:func-ref-D-(debug 'sym) -> T}
+
+
+\texttt{(debug 'sym 'cls) -> T}
+
+\texttt{(debug '(sym . cls)) -> T}
+
+Inserts a \texttt{!} breakpoint function call at the beginning and all
+top-level expressions of the function or method body of \texttt{sym}, to allow
+a stepwise execution. Typing \texttt{(d)} at a breakpoint will also debug the
+current subexpression, and \texttt{(e)} will evaluate the current
+subexpression. The current subexpression is stored in the global
+variable \texttt{\textasciicircum{}}. See also \texttt{unbug}, \texttt{*Dbg}, \texttt{trace} and \texttt{lint}.
+
+
+\begin{wideverbatim}
+: (de tst (N)                    # Define tst
+   (println (+ 3 N)) )
+-> tst
+: (debug 'tst)                   # Set breakpoints
+-> T
+: (pp 'tst)
+(de tst (N)
+   (! println (+ 3 N)) )         # Breakpoint '!'
+-> tst
+: (tst 7)                        # Execute
+(println (+ 3 N))                # Stopped at beginning of 'tst'
+! (d)                            # Debug subexpression
+-> T
+!                                # Continue
+(+ 3 N)                          # Stopped in subexpression
+! N                              # Inspect variable 'N'
+-> 7
+!                                # Continue
+10                               # Output of print statement
+-> 10                            # Done
+: (unbug 'tst)
+-> T
+: (pp 'tst)                      # Restore to original
+(de tst (N)
+   (println (+ 3 N)) )
+-> tst
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(dec 'num) -> num}}
+\label{sec:func-ref-D-(dec 'num) -> num}
+
+
+\texttt{(dec 'var ['num]) -> num}
+
+The first form returns the value of \texttt{num} decremented by 1. The second
+form decrements the \texttt{VAL} of \texttt{var} by 1, or by \texttt{num}. If the first
+argument is \texttt{NIL}, it is returned immediately. \texttt{(dec 'num)} is
+equivalent to \texttt{(- 'num 1)} and \texttt{(dec 'var)} is equivalent to
+\texttt{(set 'var (- var 1))}. See also \texttt{inc} and \texttt{-}.
+
+
+\begin{wideverbatim}
+: (dec -1)
+-> -2
+: (dec 7)
+-> 6
+: (setq N 7)
+-> 7
+: (dec 'N)
+-> 6
+: (dec 'N 3)
+-> 3
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(def 'sym 'any) -> sym}}
+\label{sec:func-ref-D-(def 'sym 'any) -> sym}
+
+
+\texttt{(def 'sym1 'sym2 'any) -> sym1}
+
+The first form assigns a definition to the first \texttt{sym} argument, by
+setting its \texttt{VAL}'s to \texttt{any}. The second form defines a property value
+\texttt{any} for the first argument's \texttt{sym2} key. If any of these values
+existed and was changed in the process, a ``redefined'' message is issued.
+When the value of the global variable \emph{*Dbg} is
+non-\texttt{NIL}, the current line number and file name (if any) are stored in
+the \texttt{*Dbg} property of \texttt{sym}. See also \texttt{de} and \texttt{dm}.
+
+
+\begin{wideverbatim}
+: (def 'b '((X Y) (* X (+ X Y))))
+-> b
+: (def 'b 999)
+# b redefined
+-> b
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(default var 'any ..) -> any}}
+\label{sec:func-ref-D-(default var 'any ..) -> any}
+
+
+Stores new values \texttt{any} in the \texttt{var} arguments only if their current
+values are \texttt{NIL}. Otherwise, their values are left unchanged. In any
+case, the last \texttt{var}'s value is returned. \texttt{default} is used typically in
+functions to initialize optional arguments.
+
+
+\begin{wideverbatim}
+: (de foo (A B)               # Function with two optional arguments
+   (default  A 1  B 2)        # The default values are 1 and 2
+   (list A B) )
+-> foo
+: (foo 333 444)               # Called with two arguments
+-> (333 444)
+: (foo 333)                   # Called with one arguments
+-> (333 2)
+: (foo)                       # Called without arguments
+-> (1 2)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(del 'any 'var) -> lst}}
+\label{sec:func-ref-D-(del 'any 'var) -> lst}
+
+
+Deletes \texttt{any} from the list in the value of \texttt{var}, and returns the
+remaining list. \texttt{(del 'any 'var)} is equivalent to
+\texttt{(set 'var (delete 'any var))}. See also \texttt{delete}, \texttt{cut} and \texttt{pop}.
+
+
+\begin{wideverbatim}
+: (setq S '((a b c) (d e f)))
+-> ((a b c) (d e f))
+: (del '(d e f) 'S)
+-> ((a b c))
+: (del 'b S)
+-> (a c)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(delete 'any 'lst) -> lst}}
+\label{sec:func-ref-D-(delete 'any 'lst) -> lst}
+
+
+Deletes \texttt{any} from \texttt{lst}. If \texttt{any} is contained more than once in \texttt{lst},
+only the first occurrence is deleted. See also \texttt{delq}, \texttt{remove} and
+\texttt{insert}.
+
+
+\begin{wideverbatim}
+: (delete 2 (1 2 3))
+-> (1 3)
+: (delete (3 4) '((1 2) (3 4) (5 6) (3 4)))
+-> ((1 2) (5 6) (3 4))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{delete/3}}
+\label{sec:func-ref-D-delete/3}
+
+
+\emph{Pilog} predicate that succeeds if deleting the first
+argument from the list in the second argument is equal to the third
+argument. See also \texttt{delete} and \texttt{member/2}.
+
+
+\begin{wideverbatim}
+: (? (delete b (a b c) @X))
+ @X=(a c)
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(delq 'any 'lst) -> lst}}
+\label{sec:func-ref-D-(delq 'any 'lst) -> lst}
+
+
+Deletes \texttt{any} from \texttt{lst}. If \texttt{any} is contained more than once in \texttt{lst},
+only the first occurrence is deleted. \texttt{==} is used for comparison
+(pointer equality). See also \texttt{delete}, \texttt{asoq}, \texttt{memq}, \texttt{mmeq} and
+\emph{Comparing}.
+
+
+\begin{wideverbatim}
+: (delq 'b '(a b c))
+-> (a c)
+: (delq (2) (1 (2) 3))
+-> (1 (2) 3)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(dep 'cls) -> cls}}
+\label{sec:func-ref-D-(dep 'cls) -> cls}
+
+
+Displays the ``dependencies'' of \texttt{cls}, i.e. the tree of superclasses and
+the tree of subclasses. See also \texttt{OO Concepts}, \texttt{class} and \texttt{can}.
+
+
+\begin{wideverbatim}
+: (dep '+Number)           # Dependencies of '+Number'
+   +relation               # Single superclass is '+relation'
++Number
+   +Date                   # Subclasses are '+Date' and '+Time'
+   +Time
+-> +Number
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(depth 'lst) -> (cnt1 . cnt2)}}
+\label{sec:func-ref-D-(depth 'lst) -> (cnt1 . cnt2)}
+
+
+Returns the maximal (\texttt{cnt1}) and the average (\texttt{cnt2}) ``depth'' of a tree
+structure as maintained by \texttt{idx}. See also \texttt{length} and \texttt{size}.
+
+
+\begin{wideverbatim}
+: (off X)                                    # Clear variable
+-> NIL
+: (for N (1 2 3 4 5 6 7) (idx 'X N T))       # Build a degenerated tree
+-> NIL
+: X
+-> (1 NIL 2 NIL 3 NIL 4 NIL 5 NIL 6 NIL 7)   # Only right branches
+: (depth X)
+-> (7 . 4)                                   # Depth is 7, average 4
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(diff 'lst 'lst) -> lst}}
+\label{sec:func-ref-D-(diff 'lst 'lst) -> lst}
+
+
+Returns the difference of the \texttt{lst} arguments. See also \texttt{sect}.
+
+
+\begin{wideverbatim}
+: (diff (1 2 3 4 5) (2 4))
+-> (1 3 5)
+: (diff (1 2 3) (1 2 3))
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{different/2}}
+\label{sec:func-ref-D-different/2}
+
+
+\emph{Pilog} predicate that succeeds if the two arguments
+are different. See also \texttt{equal/2}.
+
+
+\begin{wideverbatim}
+: (? (different 3 4))
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(dir ['any] ['flg]) -> lst}}
+\label{sec:func-ref-D-(dir ['any] ['flg]) -> lst}
+
+
+Returns a list of all filenames in the directory \texttt{any}. Names
+starting with a dot `\texttt{.}' are ignored, unless \texttt{flg} is
+non-\texttt{NIL}. See also \texttt{cd} and \texttt{info}.
+
+
+\begin{wideverbatim}
+: (filter '((F) (tail '(. c) (chop F))) (dir "src/"))
+-> ("main.c" "subr.c" "gc.c" "io.c" "big.c" "sym.c" "tab.c" "flow.c" ..
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(dirname 'any) -> sym}}
+\label{sec:func-ref-D-(dirname 'any) -> sym}
+
+
+Returns the directory part of a path name \texttt{any}. See also \texttt{basename} and
+\texttt{path}.
+
+
+\begin{wideverbatim}
+: (dirname "a/b/c/d")
+-> "a/b/c/"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(dm sym . fun|cls2) -> sym}}
+\label{sec:func-ref-D-(dm sym . fun|cls2) -> sym}
+
+
+\texttt{(dm (sym . cls) . fun|cls2) -> sym}
+
+\texttt{(dm (sym sym2 [. cls]) . fun|cls2) -> sym}
+
+Defines a method for the message \texttt{sym} in the current class,
+implicitly given by the value of the global variable \texttt{*Class},
+or - in the second form - for the explicitly given class \texttt{cls}.
+In the third form, the class object is obtained by \texttt{get}ing
+\texttt{sym2} from \texttt{*Class} (or \texttt{cls} if given). If the
+method for that class existed and was changed in the process, a
+``redefined'' message is issued. If - instead of a method \texttt{fun}
+\begin{itemize}
+\item a symbol specifying another class \texttt{cls2} is given, the method from
+\end{itemize}
+that class is used (explicit inheritance). When the value of the global
+variable \emph{*Dbg} is non-\texttt{NIL}, the current line number
+and file name (if any) are stored in the \texttt{*Dbg} property of \texttt{sym}. See
+also \texttt{OO Concepts}, \texttt{de}, \texttt{undef}, \emph{class},
+\emph{rel}, \emph{var},
+\emph{method}, \emph{send} and
+\emph{try}.
+
+
+\begin{wideverbatim}
+: (dm start> ()
+   (super)
+   (mapc 'start> (: fields))
+   (mapc 'start> (: arrays)) )
+
+: (dm foo> . +OtherClass)  # Explicitly inherit 'foo>' from '+OtherClass'
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(do 'flg|num ['any | (NIL 'any . prg) | (T 'any . prg) ..]) -> any}}
+\label{sec:func-ref-D-(do 'flg|num ['any | (NIL 'any . prg) | (T 'any . prg) ..]) -> any}
+
+
+Counted loop with multiple conditional exits: The body is executed at
+most \texttt{num} times (or never (if the first argument is \texttt{NIL}), or an
+infinite number of times (if the first argument is \texttt{T})). If a clause
+has \texttt{NIL} or \texttt{T} as its CAR, the clause's second element is evaluated as
+a condition and - if the result is \texttt{NIL} or non-\texttt{NIL}, respectively -
+the \texttt{prg} is executed and the result returned. Otherwise (if count drops
+to zero), the result of the last expression is returned. See also \texttt{loop}
+and \texttt{for}.
+
+
+\begin{wideverbatim}
+: (do 4 (printsp 'OK))
+OK OK OK OK -> OK
+: (do 4 (printsp 'OK) (T (= 3 3) (printsp 'done)))
+OK done -> done
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(doc ['sym1] ['sym2])}}
+\label{sec:func-ref-D-(doc ['sym1] ['sym2])}
+
+
+Opens a browser, and tries to display the reference documentation for
+\texttt{sym1}. \texttt{sym2} may be the name of a browser. If not given, the value of
+the environment variable \texttt{BROWSER}, or the \texttt{w3m} browser is tried. If
+\texttt{sym1} is \texttt{NIL}, the \emph{PicoLisp Reference} manual is opened.
+See also \emph{Function Reference} and \texttt{vi}.
+
+
+\begin{wideverbatim}
+: (doc '+)  # Function reference
+-> T
+: (doc '+relation)  # Class reference
+-> T
+: (doc)  # Reference manual
+-> T
+:  (doc 'vi "firefox")  # Use alternative browser
+-> T
+\end{wideverbatim}
+
+
+
+
+% \input{referenc}
+   

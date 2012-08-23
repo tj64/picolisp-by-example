@@ -1,0 +1,83 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with J}
+\label{cha:func-ref-J-functions-starting-with-J}
+ 
+\section*{\texttt{+Joint}}
+\label{sec:func-ref-J-+Joint}
+
+
+Class for bidirectional object relations, a subclass of \texttt{+Link}. Expects
+a (symbolic) attribute, and list of classes as \texttt{type} of the referred
+database object (of class \texttt{+Entity}). A \texttt{+Joint} corresponds to two
+\texttt{+Link}s, where the attribute argument is the relation of the back-link in the referred object. See also \texttt{Database}.
+
+
+\begin{wideverbatim}
+(class +Ord +Entity)                   # Order class
+(rel pos (+List +Joint) ord (+Pos))    # List of positions in that order
+...
+(class +Pos +Entity)    # Position class
+(rel ord (+Joint)       # Back-link to the parent order
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(job 'lst . prg) -> any}}
+\label{sec:func-ref-J-(job 'lst . prg) -> any}
+
+
+Executes a job within its own environment (as specified by symbol-value
+pairs in \texttt{lst}). The current values of all symbols are saved, the
+symbols are bound to the values in \texttt{lst}, \texttt{prg} is executed, then the
+(possibly modified) symbol values are (destructively) stored in the
+environment list, and the symbols are restored to their original values.
+The return value is the result of \texttt{prg}. Typically used in \texttt{curried}
+functions and \texttt{*Run} tasks. See also \texttt{env}, \texttt{bind}, \texttt{let}, \texttt{use} and
+\texttt{state}.
+
+
+\begin{wideverbatim}
+: (de tst ()
+   (job '((A . 0) (B . 0))
+      (println (inc 'A) (inc 'B 2)) ) )
+-> tst
+: (tst)
+1 2
+-> 2
+: (tst)
+2 4
+-> 4
+: (tst)
+3 6
+-> 6
+: (pp 'tst)
+(de tst NIL
+   (job '((A . 3) (B . 6))
+      (println (inc 'A) (inc 'B 2)) ) )
+-> tst
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(journal 'any ..) -> T}}
+\label{sec:func-ref-J-(journal 'any ..) -> T}
+
+
+Reads journal data from the files with the names \texttt{any}, and writes all
+changes to the database. See also \texttt{pool}.
+
+
+\begin{wideverbatim}
+: (journal "db.log")
+-> T
+\end{wideverbatim}
+
+

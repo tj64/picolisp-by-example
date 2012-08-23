@@ -1,0 +1,321 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+\chapter{Symbols starting with O}
+\label{cha:func-ref-O-functions-starting-with-O}
+ 
+\section*{\texttt{*Once}}
+\label{sec:func-ref-O-*Once}
+
+
+Holds an \texttt{idx} tree of already \texttt{load}ed source locations (as returned by \texttt{file}) See also \texttt{once}.
+
+
+\begin{wideverbatim}
+: *Once
+-> (("lib/" "misc.l" . 11) (("lib/" "http.l" . 9) (("lib/" "form.l" . 11))))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{*OS}}
+\label{sec:func-ref-O-*OS}
+
+
+A global constant holding the name of the operating system. Possible
+values include \texttt{''Linux''}, \texttt{''FreeBSD''},
+\texttt{''Darwin''} or \texttt{''Cygwin''}.
+
+
+\begin{wideverbatim}
+: *OS
+-> "Linux"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(obj (typ var [hook] val ..) var2 val2 ..) -> obj}}
+\label{sec:func-ref-O-(obj (typ var [hook] val ..) var2 val2 ..) -> obj}
+
+
+Finds or creates a database object (using \texttt{request}) corresponding to
+\texttt{(typ var [hook] val ..)}, and initializes additional properties using
+the \texttt{varN} and \texttt{valN} arguments.
+
+
+\begin{wideverbatim}
+: (obj ((+Item) nr 2) nm "Spare Part" sup `(db 'nr '+CuSu 2) inv 100 pr 1250)
+-> {3-2}
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(object 'sym 'any ['sym2 'any2 ..]) -> obj}}
+\label{sec:func-ref-O-(object 'sym 'any ['sym2 'any2 ..]) -> obj}
+
+
+Defines \texttt{sym} to be an object with the value (or type) \texttt{any}. The
+property list is initialized with all optionally supplied key-value
+pairs. See also \texttt{OO Concepts}, \texttt{new}, \texttt{type} and \texttt{isa}.
+
+
+\begin{wideverbatim}
+: (object 'Obj '(+A +B +C) 'a 1 'b 2 'c 3)
+-> Obj
+: (show 'Obj)
+Obj (+A +B +C)
+   c 3
+   b 2
+   a 1
+-> Obj
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(oct 'num ['num]) -> sym}}
+\label{sec:func-ref-O-(oct 'num ['num]) -> sym}
+
+
+\texttt{(oct 'sym) -> num}
+
+Converts a number \texttt{num} to an octal string, or an octal string \texttt{sym} to
+a number. In the first case, if the second argument is given, the result
+is separated by spaces into groups of such many digits. See also \texttt{bin},
+\texttt{hex}, \texttt{fmt64}, \texttt{hax} and \texttt{format}.
+
+
+\begin{wideverbatim}
+: (oct 73)
+-> "111"
+: (oct "111")
+-> 73
+: (oct 1234567 3)
+-> "4 553 207"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(off var ..) -> NIL}}
+\label{sec:func-ref-O-(off var ..) -> NIL}
+
+
+Stores \texttt{NIL} in all \texttt{var} arguments. See also \texttt{on}, \texttt{onOff}, \texttt{zero} and
+\texttt{one}.
+
+
+\begin{wideverbatim}
+: (off A B)
+-> NIL
+: A
+-> NIL
+: B
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(offset 'lst1 'lst2) -> cnt | NIL}}
+\label{sec:func-ref-O-(offset 'lst1 'lst2) -> cnt | NIL}
+
+
+Returns the \texttt{cnt} position of the tail list \texttt{lst1} in \texttt{lst2}, or \texttt{NIL}
+if it is not found. See also \texttt{index} and \texttt{tail}.
+
+
+\begin{wideverbatim}
+: (offset '(c d e f) '(a b c d e f))
+-> 3
+: (offset '(c d e) '(a b c d e f))
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(on var ..) -> T}}
+\label{sec:func-ref-O-(on var ..) -> T}
+
+
+Stores \texttt{T} in all \texttt{var} arguments. See also \texttt{off}, \texttt{onOff}, \texttt{zero} and
+\texttt{one}.
+
+
+\begin{wideverbatim}
+: (on A B)
+-> T
+: A
+-> T
+: B
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(once . prg) -> any}}
+\label{sec:func-ref-O-(once . prg) -> any}
+
+
+Executes \texttt{prg} once, when the current file is \texttt{load}ed the first time. Subsequent loads at a later time will not execute \texttt{prg}, and \texttt{once}
+returns \texttt{NIL}. See also \texttt{*Once}.
+
+
+\begin{wideverbatim}
+(once
+   (zero *Cnt1 *Cnt2)  # Init counters
+   (load "file1.l" "file2.l") )  # Load other files
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(one var ..) -> 1}}
+\label{sec:func-ref-O-(one var ..) -> 1}
+
+
+Stores \texttt{1} in all \texttt{var} arguments. See also \texttt{zero}, \texttt{on}, \texttt{off} and
+\texttt{onOff}.
+
+
+\begin{wideverbatim}
+: (one A B)
+-> 1
+: A
+-> 1
+: B
+-> 1
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(onOff var ..) -> flg}}
+\label{sec:func-ref-O-(onOff var ..) -> flg}
+
+
+Logically negates the values of all \texttt{var} arguments. Returns the new
+value of the last symbol. See also \texttt{on}, \texttt{off}, \texttt{zero} and \texttt{one}.
+
+
+\begin{wideverbatim}
+: (onOff A B)
+-> T
+: A
+-> T
+: B
+-> T
+: (onOff A B)
+-> NIL
+: A
+-> NIL
+: B
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(open 'any ['flg]) -> cnt | NIL}}
+\label{sec:func-ref-O-(open 'any ['flg]) -> cnt | NIL}
+
+
+Opens the file with the name \texttt{any} in read/write mode (or read-only if
+\texttt{flg} is non-\texttt{NIL}), and returns a file descriptor \texttt{cnt} (or \texttt{NIL} on
+error). A leading ``\texttt{@}'' character in \texttt{any} is substituted with the
+PicoLisp Home Directory, as it was remembered during interpreter
+startup. If \texttt{flg} is \texttt{NIL} and the file does not exist, it is created.
+The file descriptor can be used in subsequent calls to \texttt{in} and \texttt{out}.
+See also \texttt{close} and \texttt{poll}.
+
+
+\begin{wideverbatim}
+: (open "x")
+-> 3
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(opid) -> pid | NIL}}
+\label{sec:func-ref-O-(opid) -> pid | NIL}
+
+
+Returns the corresponding process ID when the current output channel is
+writing to a pipe, otherwise \texttt{NIL}. See also \texttt{ipid} and \texttt{out}.
+
+
+\begin{wideverbatim}
+: (out '(cat) (call 'ps "-p" (opid)))
+  PID TTY          TIME CMD
+ 7127 pts/3    00:00:00 cat
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(opt) -> sym}}
+\label{sec:func-ref-O-(opt) -> sym}
+
+
+Return the next command line argument (``option'', as would be processed
+by \texttt{load}) as a string, and remove it from the remaining command line
+arguments. See also \emph{Invocation} and \texttt{argv}.
+
+
+\begin{wideverbatim}
+$ pil  -"de f () (println 'opt (opt))"  -f abc  -bye
+opt "abc"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(or 'any ..) -> any}}
+\label{sec:func-ref-O-(or 'any ..) -> any}
+
+
+Logical OR. The expressions \texttt{any} are evaluated from left to right. If a
+non-\texttt{NIL} value is encountered, it is returned immediately. Else the
+result of the last expression is returned.
+
+
+\begin{wideverbatim}
+: (or (= 3 3) (read))
+-> T
+: (or (= 3 4) (read))
+abc
+-> abc
+\end{wideverbatim}
+
+ 
+\section*{\texttt{or/2}}
+\label{sec:func-ref-O-or/2}
+
+
+\emph{Pilog} predicate that takes an arbitrary number of
+clauses, and succeeds if one of them can be proven. See also \texttt{not/1}.
+
+
+\begin{wideverbatim}
+: (?
+   (or
+      ((equal 3 @X) (equal @X 4))
+      ((equal 7 @X) (equal @X 7)) ) )
+ @X=7
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(out 'any . prg) -> any}}
+\label{sec:func-ref-O-(out 'any . prg) -> any}
+
+
+Opens \texttt{any} as output channel during the execution of
+\texttt{prg}. The current output channel will be saved and restored
+appropriately. If the argument is \texttt{NIL}, standard output is
+used. If the argument is a symbol, it is used as a file name (opened
+in ``append'' mode if the first character is ``\texttt{+}''). If it is
+a positve number, it is used as the descriptor of an open file. If it
+is a negative number, the saved output channel such many levels above
+the current one is used. Otherwise (if it is a list), it is taken as a
+command with arguments, and a pipe is opened for output. See also
+\texttt{opid}, \texttt{ call}, \texttt{in}, \texttt{err},
+\texttt{ctl}, \texttt{pipe}, \texttt{ poll}, \texttt{close} and
+\texttt{load}.
+
+
+\begin{wideverbatim}
+: (out "a" (println 123 '(a b c) 'def))  # Write one line to file "a"
+-> def
+\end{wideverbatim}
+
+
+
+
+% \input{referenc}

@@ -1,0 +1,1016 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with P}
+\label{cha:func-ref-P-functions-starting-with-P}
+ 
+\section*{\texttt{*PPid}}
+\label{sec:func-ref-P-*PPid}
+
+
+A global constant holding the process-id of the parent picolisp process,
+or \texttt{NIL} if the current process is a top level process.
+
+
+\begin{wideverbatim}
+: (println *PPid *Pid)
+NIL 5286
+
+: (unless (fork) (println *PPid *Pid) (bye))
+5286 5522
+\end{wideverbatim}
+
+ 
+\section*{\texttt{*Pid}}
+\label{sec:func-ref-P-*Pid}
+
+
+A global constant holding the current process-id.
+
+
+\begin{wideverbatim}
+: *Pid
+-> 6386
+: (call "ps")  # Show processes
+  PID TTY          TIME CMD
+ .... ...      ........ .....
+ 6386 pts/1    00:00:00 pil   # <- current process
+ 6388 pts/1    00:00:00 ps
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{*Prompt}}
+\label{sec:func-ref-P-*Prompt}
+
+
+Global variable holding a (possibly empty) \texttt{prg} body, which is executed
+\begin{itemize}
+\item and the result \texttt{prin}ted - every time before a prompt is output to the
+\end{itemize}
+console in the ``read-eval-print-loop'' (REPL).
+
+
+\begin{wideverbatim}
+: (de *Prompt (pack "[" (stamp) "]"))
+# *Prompt redefined
+-> *Prompt
+[2011-10-11 16:50:05]: (+ 1 2 3)
+-> 6
+[2011-10-11 16:50:11]:
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pack 'any ..) -> sym}}
+\label{sec:func-ref-P-(pack 'any ..) -> sym}
+
+
+Returns a transient symbol whose name is concatenated from all arguments
+\texttt{any}. A \texttt{NIL} arguments contributes nothing to the result string, a
+number is converted to a digit string, a symbol supplies the characters
+of its name, and for a list its elements are taken. See also \texttt{text} and
+\texttt{glue}.
+
+
+\begin{wideverbatim}
+: (pack 'car " is " 1 '(" symbol " name))
+-> "car is 1 symbol name"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pad 'cnt 'any) -> sym}}
+\label{sec:func-ref-P-(pad 'cnt 'any) -> sym}
+
+
+Returns a transient symbol with \texttt{any} \texttt{pack}ed with
+leading '0' characters, up to a field width of \texttt{cnt}. See also
+\texttt{format} and \texttt{align}.
+
+
+\begin{wideverbatim}
+: (pad 5 1)
+-> "00001"
+: (pad 5 123456789)
+-> "123456789"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pair 'any) -> any}}
+\label{sec:func-ref-P-(pair 'any) -> any}
+
+
+Returns \texttt{any} when the argument a cons pair cell. See also \texttt{atom}.
+
+
+\begin{wideverbatim}
+: (pair NIL)
+-> NIL
+: (pair (1 . 2))
+-> (1 . 2)
+: (pair (1 2 3))
+-> (1 2 3)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{part/3}}
+\label{sec:func-ref-P-part/3}
+
+
+\emph{Pilog} predicate that succeeds if the first argument,
+after \texttt{fold}ing it to a canonical form, is a /substring/ of the folded string representation of the result of applying the \texttt{get} algorithm to
+the following arguments. Typically used as filter predicate in
+\texttt{select/3} database queries. See also \texttt{sub?}, \texttt{isa/2}, \texttt{same/3},
+\texttt{bool/3}, \texttt{range/3}, \texttt{head/3}, \texttt{fold/3} and \texttt{tolr/3}.
+
+
+\begin{wideverbatim}
+: (?
+   @Nr (1 . 5)
+   @Nm "part"
+   (select (@Item)
+      ((nr +Item @Nr) (nm +Item @Nm))
+      (range @Nr @Item nr)
+      (part @Nm @Item nm) ) )
+ @Nr=(1 . 5) @Nm="part" @Item={3-1}                                              @Nr=(1 . 5) @Nm="part" @Item={3-2}
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pass 'fun ['any ..]) -> any}}
+\label{sec:func-ref-P-(pass 'fun ['any ..]) -> any}
+
+
+Passes to \texttt{fun} all arguments \texttt{any}, and all remaining variable
+arguments (\texttt{@}) as they would be returned by \texttt{rest}. \texttt{(pass 'fun 'any)}
+is equivalent to \texttt{(apply 'fun (rest) 'any)}. See also \texttt{apply}.
+
+
+\begin{wideverbatim}
+: (de bar (A B . @)
+   (println 'bar A B (rest)) )
+-> bar
+: (de foo (A B . @)
+   (println 'foo A B)
+   (pass bar 1)
+   (pass bar 2) )
+-> foo
+: (foo 'a 'b 'c 'd 'e 'f)
+foo a b
+bar 1 c (d e f)
+bar 2 c (d e f)
+-> (d e f)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pat? 'any) -> pat | NIL}}
+\label{sec:func-ref-P-(pat? 'any) -> pat | NIL}
+
+
+Returns \texttt{any} when the argument \texttt{any} is a symbol whose name starts with
+an at-mark ``\texttt{@}'', otherwise \texttt{NIL}.
+
+
+\begin{wideverbatim}
+: (pat? '@)
+-> @
+: (pat? "@Abc")
+-> "@Abc"
+: (pat? "ABC")
+-> NIL
+: (pat? 123)
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(patch 'lst 'any . prg) -> any}}
+\label{sec:func-ref-P-(patch 'lst 'any . prg) -> any}
+
+
+Destructively replaces all sub-expressions of \texttt{lst}, that \texttt{match} the
+pattern \texttt{any}, by the result of the execution of \texttt{prg}. See also
+\texttt{daemon} and \texttt{redef}.
+
+
+\begin{wideverbatim}
+: (pp 'hello)
+(de hello NIL
+   (prinl "Hello world!") )
+-> hello
+
+: (patch hello 'prinl 'println)
+-> NIL
+: (pp 'hello)
+(de hello NIL
+   (println "Hello world!") )
+-> hello
+
+: (patch hello '(prinl @S) (fill '(println "We said: " . @S)))
+-> NIL
+: (hello)
+We said: Hello world!
+-> "Hello world!"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(path 'any) -> sym}}
+\label{sec:func-ref-P-(path 'any) -> sym}
+
+
+Substitutes any leading ``\texttt{@}'' character in the \texttt{any}
+argument with the PicoLisp Home Directory, as it was remembered during
+interpreter startup. Optionally, the name may be preceded by a
+``\texttt{+}'' character (as used by \texttt{in} and \texttt{out}).
+This mechanism is used internally by all I/O functions. See also
+\emph{Invocation}, \texttt{basename} and \texttt{dirname}.
+
+
+\begin{wideverbatim}
+$ /usr/bin/picolisp /usr/lib/picolisp/lib.l
+: (path "a/b/c")
+-> "a/b/c"
+: (path "@a/b/c")
+-> "/usr/lib/picolisp/a/b/c"
+: (path "+@a/b/c")
+-> "+/usr/lib/picolisp/a/b/c"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(peek) -> sym}}
+\label{sec:func-ref-P-(peek) -> sym}
+
+
+Single character look-ahead: Returns the same character as the next call
+to \texttt{char} would return. See also \texttt{skip}.
+
+
+\begin{wideverbatim}
+$ cat a
+# Comment
+abcd
+$ pil +
+: (in "a" (list (peek) (char)))
+-> ("#" "#")
+\end{wideverbatim}
+
+ 
+\section*{\texttt{permute/2}}
+\label{sec:func-ref-P-permute/2}
+
+
+\emph{Pilog} predicate that succeeds if the second argument
+is a permutation of the list in the second argument. See also
+\texttt{append/3}.
+
+
+\begin{wideverbatim}
+: (? (permute (a b c) @X))
+ @X=(a b c)
+ @X=(a c b)
+ @X=(b a c)
+ @X=(b c a)
+ @X=(c a b)
+ @X=(c b a)
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pick 'fun 'lst ..) -> any}}
+\label{sec:func-ref-P-(pick 'fun 'lst ..) -> any}
+
+
+Applies \texttt{fun} to successive elements of \texttt{lst} until non-\texttt{NIL} is
+returned. Returns that value, or \texttt{NIL} if \texttt{fun} did not return non-\texttt{NIL}
+for any element of \texttt{lst}. When additional \texttt{lst} arguments are given,
+their elements are also passed to \texttt{fun}. \texttt{(pick 'fun 'lst)} is
+equivalent to \texttt{(fun (find 'fun 'lst))}. See also \texttt{seek}, \texttt{find} and
+\texttt{extract}.
+
+
+\begin{wideverbatim}
+: (setq A NIL  B 1  C NIL  D 2  E NIL  F 3)
+-> 3
+: (find val '(A B C D E))
+-> B
+: (pick val '(A B C D E))
+-> 1
+\end{wideverbatim}
+
+ 
+\section*{\texttt{pico}}
+\label{sec:func-ref-P-pico}
+
+
+(64-bit version only) A global constant holding the initial (default)
+namespace of internal symbols. Its value is a cons pair of two `\texttt{idx}'
+trees, one for symbols with short names and one for symbols with long
+names (more than 7 bytes in the name). See also \texttt{symbols}, \texttt{import} and
+\texttt{intern}.
+
+
+\begin{wideverbatim}
+: (symbols)
+-> pico
+: (cdr pico)
+-> (rollback (*NoTrace (ledSearch (expandTab (********)) *CtryCode ...
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pil ['any ..]) -> sym}}
+\label{sec:func-ref-P-(pil ['any ..]) -> sym}
+
+
+Returns the path name to the \texttt{pack}ed \texttt{any} arguments in the directory
+``.pil/'' in the user's home directory. See also \texttt{tmp}.
+
+
+\begin{wideverbatim}
+: (pil "history")  # Path to the line editor's history file
+-> "/home/app/.pil/history"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pilog 'lst . prg) -> any}}
+\label{sec:func-ref-P-(pilog 'lst . prg) -> any}
+
+
+Evaluates a \emph{Pilog} query, and executes \texttt{prg} for each
+result set with all Pilog variables bound to their matching values. See
+also \texttt{solve}, \texttt{?}, \texttt{goal} and \texttt{prove}.
+
+
+\begin{wideverbatim}
+: (pilog '((append @X @Y (a b c))) (println @X '- @Y))
+NIL - (a b c)
+(a) - (b c)
+(a b) - (c)
+(a b c) - NIL
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pipe exe) -> cnt}}
+\label{sec:func-ref-P-(pipe exe) -> cnt}
+
+
+\texttt{(pipe exe . prg) -> any}
+
+Executes \texttt{exe} in a \texttt{fork}'ed child process (which terminates
+thereafter). In the first form, \texttt{pipe} just returns a file descriptor to
+read from the standard output of that process. In the second form, it
+opens the standard output of that process as input channel during the
+execution of \texttt{prg}. The current input channel will be saved and restored
+appropriately. See also \texttt{later}, \texttt{ipid}, \texttt{in} and \texttt{out}.
+
+
+\begin{wideverbatim}
+: (pipe                                # equivalent to 'any'
+   (prinl "(a b # Comment^Jc d)")         # (child process)
+   (read) )                               # (parent process)
+-> (a b c d)
+: (pipe                                # pipe through an external program
+   (out '(tr "[a-z]" "[A-Z]")             # (child process)
+      (prinl "abc def ghi") )
+   (line T) )                             # (parent process)
+-> "ABC DEF GHI"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(place 'cnt 'lst 'any) -> lst}}
+\label{sec:func-ref-P-(place 'cnt 'lst 'any) -> lst}
+
+
+Places \texttt{any} into \texttt{lst} at position \texttt{cnt}. This is a non-destructive
+operation. See also \texttt{insert}, \texttt{remove}, \texttt{append}, \texttt{delete} and
+\texttt{replace}.
+
+
+\begin{wideverbatim}
+: (place 3 '(a b c d e) 777)
+-> (a b 777 d e)
+: (place 1 '(a b c d e) 777)
+-> (777 b c d e)
+: (place 9 '(a b c d e) 777)
+-> (a b c d e 777)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(poll 'cnt) -> cnt | NIL}}
+\label{sec:func-ref-P-(poll 'cnt) -> cnt | NIL}
+
+
+Checks for the availability of data for reading on the file descriptor
+\texttt{cnt}. See also \texttt{open}, \texttt{in} and \texttt{close}.
+
+
+\begin{wideverbatim}
+: (and (poll *Fd) (in @ (read)))  # Prevent blocking
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pool ['sym1 ['lst] ['sym2] ['sym3]]) -> T}}
+\label{sec:func-ref-P-(pool ['sym1 ['lst] ['sym2] ['sym3]]) -> T}
+
+
+Opens the file \texttt{sym1} as a database file in read/write mode. If the file
+does not exist, it is created. A currently open database is closed.
+\texttt{lst} is a list of block size scale factors (i.e. numbers), defaulting
+to (2) (for a single file with a 256 byte block size). If \texttt{lst} is
+given, an individual database file is opened for each item. If \texttt{sym2} is
+non-\texttt{NIL}, it is opened in append-mode as an asynchronous replication
+journal. If \texttt{sym3} is non-\texttt{NIL}, it is opened for reading and appending,
+to be used as a synchronous transaction log during \texttt{commit}s. See also \texttt{dbs}, \texttt{*Dbs} and \texttt{journal}.
+
+
+\begin{wideverbatim}
+: (pool "/dev/hda2")
+-> T
+
+: *Dbs
+-> (1 2 2 4)
+: (pool "dbFile" *Dbs)
+-> T
+:
+abu:~/pico  ls -l dbFile*
+-rw-r--r-- 1 abu abu 256 2007-06-11 07:57 dbFile1
+-rw-r--r-- 1 abu abu  13 2007-06-11 07:57 dbFile2
+-rw-r--r-- 1 abu abu  13 2007-06-11 07:57 dbFile3
+-rw-r--r-- 1 abu abu  13 2007-06-11 07:57 dbFile4
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pop 'var) -> any}}
+\label{sec:func-ref-P-(pop 'var) -> any}
+
+
+Pops the first element (CAR) from the stack in \texttt{var}. See also \texttt{push},
+\texttt{queue}, \texttt{cut}, \texttt{del} and \texttt{fifo}.
+
+
+\begin{wideverbatim}
+: (setq S '((a b c) (1 2 3)))
+-> ((a b c) (1 2 3))
+: (pop S)
+-> a
+: (pop (cdr S))
+-> 1
+: (pop 'S)
+-> (b c)
+: S
+-> ((2 3))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(port ['T] 'cnt|(cnt . cnt) ['var]) -> cnt}}
+\label{sec:func-ref-P-(port ['T] 'cnt|(cnt . cnt) ['var]) -> cnt}
+
+
+Opens a TCP-Port \texttt{cnt} (or a UDP-Port if the first argument is \texttt{T}), and
+returns a socket descriptor suitable as an argument for \texttt{listen} or
+\texttt{accept} (or \texttt{udp}, respectively). If \texttt{cnt} is zero, some free port
+number is allocated. If a pair of \texttt{cnt}s is given instead, it should be a range of numbers which are tried in turn. When \texttt{var} is given, it is
+bound to the port number.
+
+
+\begin{wideverbatim}
+: (port 0 'A)                       # Allocate free port
+-> 4
+: A
+-> 1034                             # Got 1034
+: (port (4000 . 4008) 'A)           # Try one of these ports
+-> 5
+: A
+-> 4002
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pp 'sym) -> sym}}
+\label{sec:func-ref-P-(pp 'sym) -> sym}
+
+
+\texttt{(pp 'sym 'cls) -> sym}
+
+\texttt{(pp '(sym . cls)) -> sym}
+
+Pretty-prints the function or method definition of \texttt{sym}. The output
+format would regenerate that same definition when read and executed. See
+also \texttt{pretty}, \texttt{debug} and \texttt{vi}.
+
+
+\begin{wideverbatim}
+: (pp 'tab)
+(de tab (Lst . @)
+   (for N Lst
+      (let V (next)
+         (and (gt0 N) (space (- N (length V))))
+         (prin V)
+         (and
+            (lt0 N)
+            (space (- 0 N (length V))) ) ) )
+   (prinl) )
+-> tab
+
+: (pp 'has> '+Entity)
+(dm has> (Var Val)
+   (or
+      (nor Val (get This Var))
+      (has> (meta This Var) Val (get This Var)) ) )
+-> has>
+
+: (more (can 'has>) pp)
+(dm (has> . +relation) (Val X)
+   (and (= Val X) X) )
+
+(dm (has> . +Fold) (Val X)
+   (extra
+      Val
+      (if (= Val (fold Val)) (fold X) X) ) )
+
+(dm (has> . +Entity) (Var Val)
+   (or
+      (nor Val (get This Var))
+      (has> (meta This Var) Val (get This Var)) ) )
+
+(dm (has> . +List) (Val X)
+   (and
+      Val
+      (or
+         (extra Val X)
+         (find '((X) (extra Val X)) X) ) ) )
+
+(dm (has> . +Bag) (Val X)
+   (and
+      Val
+      (or (super Val X) (car (member Val X))) ) )
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pr 'any ..) -> any}}
+\label{sec:func-ref-P-(pr 'any ..) -> any}
+
+
+Binary print: Prints all \texttt{any} arguments to the current output channel
+in encoded binary format. See also \texttt{rd}, \texttt{tell}, \texttt{hear} and \texttt{wr}.
+
+
+\begin{wideverbatim}
+: (out "x" (pr 7 "abc" (1 2 3) 'a))  # Print to "x"
+-> a
+: (hd "x")
+00000000  04 0E 0E 61 62 63 01 04 02 04 04 04 06 03 05 61  ...abc.........a
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(prEval 'prg ['cnt]) -> any}}
+\label{sec:func-ref-P-(prEval 'prg ['cnt]) -> any}
+
+
+Executes \texttt{prg}, similar to \texttt{run}, by evaluating all expressions in \texttt{prg}
+(within the binding environment given by \texttt{cnt-1}). As a side effect, all
+atomic expressions will be printed with \texttt{prinl}. See also \texttt{eval}.
+
+
+\begin{wideverbatim}
+: (let Prg 567
+   (prEval
+      '("abc" (prinl (+ 1 2 3)) Prg 987) ) )
+abc
+6
+567
+987
+-> 987
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pre? 'any1 'any2) -> any2 | NIL}}
+\label{sec:func-ref-P-(pre? 'any1 'any2) -> any2 | NIL}
+
+
+Returns \texttt{any2} when the string representation of \texttt{any1} is a prefix of
+the string representation of \texttt{any2}. See also \texttt{sub?}.
+
+
+\begin{wideverbatim}
+: (pre? "abc" "abcdef")
+-> "abcdef"
+: (pre? "def" "abcdef")
+-> NIL
+: (pre? (+ 3 4) "7fach")
+-> "7fach"
+: (pre? NIL "abcdef")
+-> "abcdef"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pretty 'any 'cnt)}}
+\label{sec:func-ref-P-(pretty 'any 'cnt)}
+
+
+Pretty-prints \texttt{any}. If \texttt{any} is an atom, or a list with a \texttt{size} not
+greater than 12, it is \texttt{print}ed as is. Otherwise, only the opening
+parenthesis and the CAR of the list is printed, all other elementes are
+pretty-printed recursively indented by three spaces, followed by a space
+and the corresponding closing parenthesis. The initial indentation level
+\texttt{cnt} defaults to zero. See also \texttt{pp}.
+
+
+\begin{wideverbatim}
+: (pretty '(a (b c d) (e (f (g) (h) (i)) (j (k) (l) (m))) (n o p) q))
+(a
+   (b c d)
+   (e
+      (f (g) (h) (i))
+      (j (k) (l) (m)) )
+   (n o p)
+   q )-> ")"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(prin 'any ..) -> any}}
+\label{sec:func-ref-P-(prin 'any ..) -> any}
+
+
+Prints the string representation of all \texttt{any} arguments to the current
+output channel. No space or newline is printed between individual items,
+or after the last item. For lists, all elements are \texttt{prin}'ted
+recursively. See also \texttt{prinl}.
+
+
+\begin{wideverbatim}
+: (prin 'abc 123 '(a 1 b 2))
+abc123a1b2-> (a 1 b 2)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(prinl 'any ..) -> any}}
+\label{sec:func-ref-P-(prinl 'any ..) -> any}
+
+
+Prints the string representation of all \texttt{any} arguments to the current
+output channel, followed by a newline. No space or newline is printed
+between individual items. For lists, all elements are \texttt{prin}'ted
+recursively. See also \texttt{prin}.
+
+
+\begin{wideverbatim}
+: (prinl 'abc 123 '(a 1 b 2))
+abc123a1b2
+-> (a 1 b 2)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(print 'any ..) -> any}}
+\label{sec:func-ref-P-(print 'any ..) -> any}
+
+
+Prints all \texttt{any} arguments to the current output channel. If there is
+more than one argument, a space is printed between successive arguments.
+No space or newline is printed after the last item. See also \texttt{println},
+\texttt{printsp}, \texttt{sym} and \texttt{str}
+
+
+\begin{wideverbatim}
+: (print 123)
+123-> 123
+: (print 1 2 3)
+1 2 3-> 3
+: (print '(a b c) 'def)
+(a b c) def-> def
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(println 'any ..) -> any}}
+\label{sec:func-ref-P-(println 'any ..) -> any}
+
+
+Prints all \texttt{any} arguments to the current output channel, followed by a
+newline. If there is more than one argument, a space is printed between
+successive arguments. See also \texttt{print}, \texttt{printsp}.
+
+
+\begin{wideverbatim}
+: (println '(a b c) 'def)
+(a b c) def
+-> def
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(printsp 'any ..) -> any}}
+\label{sec:func-ref-P-(printsp 'any ..) -> any}
+
+
+Prints all \texttt{any} arguments to the current output channel, followed by a
+space. If there is more than one argument, a space is printed between
+successive arguments. See also \texttt{print}, \texttt{println}.
+
+
+\begin{wideverbatim}
+: (printsp '(a b c) 'def)
+(a b c) def -> def
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(prior 'lst1 'lst2) -> lst | NIL}}
+\label{sec:func-ref-P-(prior 'lst1 'lst2) -> lst | NIL}
+
+
+Returns the cell in \texttt{lst2} which immediately precedes the cell \texttt{lst1},
+or \texttt{NIL} if \texttt{lst1} is not found in \texttt{lst2} or is the very first cell.
+\texttt{==} is used for comparison (pointer equality). See also \texttt{offset} and
+\texttt{memq}.
+
+
+\begin{wideverbatim}
+: (setq L (1 2 3 4 5 6))
+-> (1 2 3 4 5 6)
+: (setq X (cdddr L))
+-> (4 5 6)
+: (prior X L)
+-> (3 4 5 6)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(proc 'sym ..) -> T}}
+\label{sec:func-ref-P-(proc 'sym ..) -> T}
+
+
+Shows a list of processes with command names given by the \texttt{sym}
+arguments, using the system \texttt{ps} utility. See also \texttt{hd}.
+
+
+\begin{wideverbatim}
+: (proc 'pil)
+  PID  PPID  STARTED  SIZE %CPU WCHAN  CMD
+16993  3267 12:38:21  1516  0.5 -      /usr/bin/picolisp /usr/lib/picolisp/lib.l /usr/bin/pil +
+15731  1834 12:36:35  2544  0.1 -      /usr/bin/picolisp /usr/lib/picolisp/lib.l /usr/bin/pil app/main.l -main -go +
+15823 15731 12:36:44  2548  0.0 -        /usr/bin/picolisp /usr/lib/picolisp/lib.l /usr/bin/pil app/main.l -main -go +
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(prog . prg) -> any}}
+\label{sec:func-ref-P-(prog . prg) -> any}
+
+
+Executes \texttt{prg}, and returns the result of the last expression. See also
+\texttt{nil}, \texttt{t}, \texttt{prog1} and \texttt{prog2}.
+
+
+\begin{wideverbatim}
+: (prog (print 1) (print 2) (print 3))
+123-> 3
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(prog1 'any1 . prg) -> any1}}
+\label{sec:func-ref-P-(prog1 'any1 . prg) -> any1}
+
+
+Executes all arguments, and returns the result of the first expression
+\texttt{any1}. See also \texttt{nil}, \texttt{t}, \texttt{prog} and \texttt{prog2}.
+
+
+\begin{wideverbatim}
+: (prog1 (print 1) (print 2) (print 3))
+123-> 1
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(prog2 'any1 'any2 . prg) -> any2}}
+\label{sec:func-ref-P-(prog2 'any1 'any2 . prg) -> any2}
+
+
+Executes all arguments, and returns the result of the second expression
+\texttt{any2}. See also \texttt{nil}, \texttt{t}, \texttt{prog} and \texttt{prog1}.
+
+
+\begin{wideverbatim}
+: (prog2 (print 1) (print 2) (print 3))
+123-> 2
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(prop 'sym1|lst ['sym2|cnt ..] 'sym) -> var}}
+\label{sec:func-ref-P-(prop 'sym1|lst ['sym2|cnt ..] 'sym) -> var}
+
+
+Fetches a property for a property key \texttt{sym} from a symbol. That symbol
+is \texttt{sym1} (if no other arguments are given), or a symbol found by
+applying the \texttt{get} algorithm to \texttt{sym1|lst} and the following arguments.
+The property (the cell, not just its value) is returned, suitable for
+direct (destructive) manipulations with functions expecting a \texttt{var}
+argument. See also \texttt{::}.
+
+
+\begin{wideverbatim}
+: (put 'X 'cnt 0)
+-> 0
+: (prop 'X 'cnt)
+-> (0 . cnt)
+: (inc (prop 'X 'cnt))        # Directly manipulate the property value
+-> 1
+: (get 'X 'cnt)
+-> 1
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(protect . prg) -> any}}
+\label{sec:func-ref-P-(protect . prg) -> any}
+
+
+Executes \texttt{prg}, and returns the result of the last expression. If a
+signal is received during that time, its handling will be delayed until
+the execution of \texttt{prg} is completed. See also \texttt{alarm},
+\emph{*Hup}, \emph{*Sig\footnote{DEFINITION NOT FOUND: 12 } and \texttt{kill}.
+
+
+\begin{wideverbatim}
+: (protect (journal "db1.log" "db2.log"))
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(prove 'lst ['lst]) -> lst}}
+\label{sec:func-ref-P-(prove 'lst ['lst]) -> lst}
+
+
+The \emph{Pilog} interpreter. Tries to prove the query list
+in the first argument, and returns an association list of symbol-value
+pairs, or \texttt{NIL} if not successful. The query list is modified as a side
+effect, allowing subsequent calls to \texttt{prove} for further results. The
+optional second argument may contain a list of symbols; in that case the
+successful matches of rules defined for these symbols will be traced.
+See also \texttt{goal}, \texttt{->} and \texttt{unify}.
+
+
+\begin{wideverbatim}
+: (prove (goal '((equal 3 3))))
+-> T
+: (prove (goal '((equal 3 @X))))
+-> ((@X . 3))
+: (prove (goal '((equal 3 4))))
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(prune ['flg])}}
+\label{sec:func-ref-P-(prune ['flg])}
+
+
+Optimizes memory usage by pruning in-memory leaf nodes of database
+trees. Typically called repeatedly during heavy data imports. If \texttt{flg}
+is non-\texttt{NIL}, further pruning will be disabled. See also \texttt{lieu}.
+
+
+\begin{wideverbatim}
+(in File1
+   (while (someData)
+      (new T '(+Cls1) ..)
+      (at (0 . 10000) (commit) (prune)) ) )
+(in File2
+   (while (moreData)
+      (new T '(+Cls2) ..)
+      (at (0 . 10000) (commit) (prune)) ) )
+(commit)
+(prune T)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(push 'var 'any ..) -> any}}
+\label{sec:func-ref-P-(push 'var 'any ..) -> any}
+
+
+Implements a stack using a list in \texttt{var}. The \texttt{any} arguments are
+cons'ed in front of the value list. See also \texttt{push1}, \texttt{pop}, \texttt{queue} and
+\texttt{fifo}.
+
+
+\begin{wideverbatim}
+: (push 'S 3)              # Use the VAL of 'S' as a stack
+-> 3
+: S
+-> (3)
+: (push 'S 2)
+-> 2
+: (push 'S 1)
+-> 1
+: S
+-> (1 2 3)
+: (push S 999)             # Now use the CAR of the list in 'S'
+-> 999
+: (push S 888 777)
+-> 777
+: S
+-> ((777 888 999 . 1) 2 3)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(push1 'var 'any ..) -> any}}
+\label{sec:func-ref-P-(push1 'var 'any ..) -> any}
+
+
+Maintains a unique list in \texttt{var}. Each \texttt{any} argument is cons'ed in
+front of the value list only if it is not already a \texttt{member} of that
+list. See also \texttt{push}, \texttt{pop} and \texttt{queue}.
+
+
+\begin{wideverbatim}
+: (push1 'S 1 2 3)
+-> 3
+: S
+-> (3 2 1)
+: (push1 'S 2 4)
+-> 4
+: S
+-> (4 3 2 1)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(put 'sym1|lst ['sym2|cnt ..] 'sym|0 'any) -> any}}
+\label{sec:func-ref-P-(put 'sym1|lst ['sym2|cnt ..] 'sym|0 'any) -> any}
+
+
+Stores a new value \texttt{any} for a property key \texttt{sym} (or in the value cell
+for zero) in a symbol. That symbol is \texttt{sym1} (if no other arguments are
+given), or a symbol found by applying the \texttt{get} algorithm to \texttt{sym1|lst}
+and the following arguments. See also \texttt{=:}.
+
+
+\begin{wideverbatim}
+: (put 'X 'a 1)
+-> 1
+: (get 'X 'a)
+-> 1
+: (prop 'X 'a)
+-> (1 . a)
+
+: (setq L '(A B C))
+-> (A B C)
+: (setq B 'D)
+-> D
+: (put L 2 0 'p 5)  # Store '5' under the 'p' propery of the value of 'B'
+-> 5
+: (getl 'D)
+-> ((5 . p))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(put! 'obj 'sym 'any) -> any}}
+\label{sec:func-ref-P-(put! 'obj 'sym 'any) -> any}
+
+
+\emph{Transaction} wrapper function for \texttt{put}. Note that
+for setting property values of entities typically the \texttt{put!>} message is
+used. See also \texttt{new!}, \texttt{set!} and \texttt{inc!}.
+
+
+\begin{wideverbatim}
+(put! Obj 'cnt 0)  # Setting a property of a non-entity object
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(putl 'sym1|lst1 ['sym2|cnt ..] 'lst) -> lst}}
+\label{sec:func-ref-P-(putl 'sym1|lst1 ['sym2|cnt ..] 'lst) -> lst}
+
+
+Stores a complete new property list \texttt{lst} in a symbol. That symbol is
+\texttt{sym1} (if no other arguments are given), or a symbol found by applying
+the \texttt{get} algorithm to \texttt{sym1|lst1} and the following arguments. All
+previously defined properties for that symbol are lost. See also \texttt{getl}
+and \texttt{maps}.
+
+
+\begin{wideverbatim}
+: (putl 'X '((123 . a) flg ("Hello" . b)))
+-> ((123 . a) flg ("Hello" . b))
+: (get 'X 'a)
+-> 123
+: (get 'X 'b)
+-> "Hello"
+: (get 'X 'flg)
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(pwd) -> sym}}
+\label{sec:func-ref-P-(pwd) -> sym}
+
+
+Returns the path to the current working directory. See also \texttt{dir} and
+\texttt{cd}.
+
+
+\begin{wideverbatim}
+: (pwd)
+-> "/home/app/"
+\end{wideverbatim}
+
+

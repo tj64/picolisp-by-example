@@ -1,0 +1,613 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with F}
+\label{sec:func-ref-F-functions-starting-with-F}
+
+
+ 
+\section*{\texttt{*Fork}}
+\label{sec:func-ref-F-*Fork}
+
+
+A global variable holding a (possibly empty) \texttt{prg} body, to be executed
+after a call to \texttt{fork} in the child process.
+
+
+\begin{wideverbatim}
+: (push '*Fork '(off *Tmp))   # Clear '*Tmp' in child process
+-> (off *Tmp)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+Fold}}
+\label{sec:func-ref-F-+Fold}
+
+
+Prefix class for maintaining \texttt{fold}ed indexes to
+\texttt{+String} relations. Typically used in combination with the
+\texttt{+Ref} or \texttt{+Idx} prefix classes. See also
+\texttt{Database}.
+
+
+\begin{wideverbatim}
+(rel nm (+Fold +Idx +String))   # Item Description
+...
+(rel tel (+Fold +Ref +String))  # Phone number
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(fail) -> lst}}
+\label{sec:func-ref-F-(fail) -> lst}
+
+
+Constructs an empty \emph{Pilog} query, i.e. a query that
+will aways fail. See also \texttt{goal}.
+
+
+\begin{wideverbatim}
+(dm clr> ()                # Clear query chart in search dialogs
+   (query> This (fail)) )
+\end{wideverbatim}
+
+ 
+\section*{\texttt{fail/0}}
+\label{sec:func-ref-F-fail/0}
+
+
+\emph{Pilog} predicate that always fails. See also
+\texttt{true/0}.
+
+
+\begin{wideverbatim}
+:  (? (fail))
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(fetch 'tree 'any) -> any}}
+\label{sec:func-ref-F-(fetch 'tree 'any) -> any}
+
+
+Fetches a value for the key \texttt{any} from a database tree. See also \texttt{tree}
+and \texttt{store}.
+
+
+\begin{wideverbatim}
+: (fetch (tree 'nr '+Item) 2)
+-> {3-2}
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(fifo 'var ['any ..]) -> any}}
+\label{sec:func-ref-F-(fifo 'var ['any ..]) -> any}
+
+
+Implements a first-in-first-out structure using a circular list. When
+called with \texttt{any} arguments, they will be concatenated to end of the
+structure. Otherwise, the first element is removed from the structure
+and returned. See also \texttt{queue}, \texttt{push}, \texttt{pop}, \texttt{rot} and \texttt{circ}.
+
+
+\begin{wideverbatim}
+: (fifo 'X 1)
+-> 1
+: (fifo 'X 2 3)
+-> 3
+: X
+-> (3 1 2 .)
+: (fifo 'X)
+-> 1
+: (fifo 'X)
+-> 2
+: X
+-> (3 .)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(file) -> (sym1 sym2 . num) | NIL}}
+\label{sec:func-ref-F-(file) -> (sym1 sym2 . num) | NIL}
+
+
+Returns for the current input channel the path name \texttt{sym1}, the file
+name \texttt{sym2}, and the current line number \texttt{num}. If the current input
+channel is not a file, \texttt{NIL} is returned. See also \texttt{info}, \texttt{in} and
+\texttt{load}.
+
+
+\begin{wideverbatim}
+: (load (pack (car (file)) "localFile.l"))  # Load a file in same directory
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(fill 'any ['sym|lst]) -> any}}
+\label{sec:func-ref-F-(fill 'any ['sym|lst]) -> any}
+
+
+Fills a pattern \texttt{any}, by substituting \texttt{sym}, or all symbols in \texttt{lst},
+or - if no second argument is given - each pattern symbol in \texttt{any} (see
+\texttt{pat?}), with its current value. \texttt{@} itself is not considered a pattern
+symbol here. In any case, expressions following the symbol \texttt{\textasciicircum{}} should
+evaluate to lists which are then (destructively) spliced into the
+result. See also \texttt{match}.
+
+
+\begin{wideverbatim}
+: (setq  @X 1234  @Y (1 2 3 4))
+-> (1 2 3 4)
+: (fill '@X)
+-> 1234
+: (fill '(a b (c @X) ((@Y . d) e)))
+-> (a b (c 1234) (((1 2 3 4) . d) e))
+: (let X 2 (fill (1 X 3) 'X))
+-> (1 2 3)
+
+: (fill (1 ^ (list 'a 'b 'c) 9))
+-> (1 a b c 9)
+
+: (match '(This is @X) '(This is a pen))
+-> T
+: (fill '(Got ^ @X))
+-> (Got a pen)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(filter 'fun 'lst ..) -> lst}}
+\label{sec:func-ref-F-(filter 'fun 'lst ..) -> lst}
+
+
+Applies \texttt{fun} to each element of \texttt{lst}. When additional \texttt{lst} arguments
+are given, their elements are also passed to \texttt{fun}. Returns a list of
+all elements of \texttt{lst} where \texttt{fun} returned non-\texttt{NIL}. See also \texttt{fish},
+\texttt{find}, \texttt{pick} and \texttt{extract}.
+
+
+\begin{wideverbatim}
+: (filter num? (1 A 2 (B) 3 CDE))
+-> (1 2 3)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(fin 'any) -> num|sym}}
+\label{sec:func-ref-F-(fin 'any) -> num|sym}
+
+
+Returns \texttt{any} if it is an atom, otherwise the CDR of its last cell. See
+also \texttt{last} and \texttt{tail}.
+
+
+\begin{wideverbatim}
+: (fin 'a)
+-> a
+: (fin '(a . b))
+-> b
+: (fin '(a b . c))
+-> c
+: (fin '(a b c))
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(finally exe . prg) -> any}}
+\label{sec:func-ref-F-(finally exe . prg) -> any}
+
+
+\texttt{prg} is executed, then \texttt{exe} is evaluated, and the result of \texttt{prg} is
+returned. \texttt{exe} will also be evaluated if \texttt{prg} does not terminate
+normally due to a runtime error or a call to \texttt{throw}. See also \texttt{bye},
+\texttt{catch}, \texttt{quit} and \texttt{Error Handling}.
+
+
+\begin{wideverbatim}
+: (finally (prinl "Done!")
+   (println 123)
+   (quit)
+   (println 456) )
+123
+Done!
+: (catch 'A
+   (finally (prinl "Done!")
+      (println 1)
+      (throw 'A 123)
+      (println 2) ) )
+1
+Done!
+-> 123
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(find 'fun 'lst ..) -> any}}
+\label{sec:func-ref-F-(find 'fun 'lst ..) -> any}
+
+
+Applies \texttt{fun} to successive elements of \texttt{lst} until non-\texttt{NIL} is
+returned. Returns that element, or \texttt{NIL} if \texttt{fun} did not return
+non-\texttt{NIL} for any element of \texttt{lst}. When additional \texttt{lst} arguments are
+given, their elements are also passed to \texttt{fun}. See also \texttt{seek}, \texttt{pick}
+and \texttt{filter}.
+
+
+\begin{wideverbatim}
+: (find pair (1 A 2 (B) 3 CDE))
+-> (B)
+: (find '((A B) (> A B)) (1 2 3 4 5 6) (6 5 4 3 2 1))
+-> 4
+: (find > (1 2 3 4 5 6) (6 5 4 3 2 1))  # shorter
+-> 4
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(fish 'fun 'any) -> lst}}
+\label{sec:func-ref-F-(fish 'fun 'any) -> lst}
+
+
+Applies \texttt{fun} to each element - and recursively to all sublists - of
+\texttt{any}. Returns a list of all items where \texttt{fun} returned non-\texttt{NIL}. See
+also \texttt{filter}.
+
+
+\begin{wideverbatim}
+: (fish gt0 '(a -2 (1 b (-3 c 2)) 3 d -1))
+-> (1 2 3)
+: (fish sym? '(a -2 (1 b (-3 c 2)) 3 d -1))
+-> (a b c d)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(flg? 'any) -> flg}}
+\label{sec:func-ref-F-(flg? 'any) -> flg}
+
+
+Returns \texttt{T} when the argument \texttt{any} is either \texttt{NIL} or \texttt{T}. See also
+\texttt{bool}. \texttt{(flg? X)} is equivalent to \texttt{(or (not X) (=T X))}.
+
+
+\begin{wideverbatim}
+: (flg? (= 3 3))
+-> T
+: (flg? (= 3 4))
+-> T
+: (flg? (+ 3 4))
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(flip 'lst ['cnt]) -> lst}}
+\label{sec:func-ref-F-(flip 'lst ['cnt]) -> lst}
+
+
+Returns \texttt{lst} (destructively) reversed. Without the optional \texttt{cnt}
+argument, the whole list is flipped, otherwise only the first \texttt{cnt}
+elements. See also \texttt{reverse} and \texttt{rot}.
+
+
+\begin{wideverbatim}
+: (flip (1 2 3 4))         # Flip all  four elements
+-> (4 3 2 1)
+: (flip (1 2 3 4 5 6) 3)   # Flip only the first three elements
+-> (3 2 1 4 5 6)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(flush) -> flg}}
+\label{sec:func-ref-F-(flush) -> flg}
+
+
+Flushes the current output stream by writing all buffered data. A call
+to \texttt{flush} for standard output is done automatically before a call to
+\texttt{key}. Returns \texttt{T} when successful. See also \texttt{rewind}.
+
+
+\begin{wideverbatim}
+: (flush)
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(fmt64 'num) -> sym}}
+\label{sec:func-ref-F-(fmt64 'num) -> sym}
+
+
+\texttt{(fmt64 'sym) -> num}
+
+Converts a number \texttt{num} to a string in base--64 notation, or a base--64
+formatted string to a number. The digits are represented with the
+characters \texttt{0} - \texttt{9}, \texttt{:}, \texttt{;}, \texttt{A} - \texttt{Z} and \texttt{a} - \texttt{z}. This format is
+used internally for the names of \texttt{external symbols} in the 32-bit
+version. See also \texttt{hax}, \texttt{hex}, \texttt{bin} and \texttt{oct}.
+
+
+\begin{wideverbatim}
+: (fmt64 9)
+-> "9"
+: (fmt64 10)
+-> ":"
+: (fmt64 11)
+-> ";"
+: (fmt64 12)
+-> "A"
+: (fmt64 "100")
+-> 4096
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(fold 'any ['cnt]) -> sym}}
+\label{sec:func-ref-F-(fold 'any ['cnt]) -> sym}
+
+
+Folding to a canonical form: If \texttt{any} is not a symbol, \texttt{NIL} is
+returned. Otherwise, a new transient symbol with all digits and all
+letters of \texttt{any}, converted to lower case, is returned. If the \texttt{cnt}
+argument is given, the result is truncated to that length (or not
+truncated if \texttt{cnt} is zero). Otherwise \texttt{cnt} defaults to 24. See also
+\texttt{lowc}.
+
+
+\begin{wideverbatim}
+: (fold " 1A 2-b/3")
+-> "1a2b3"
+: (fold " 1A 2-B/3" 3)
+-> "1a2"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{fold/3}}
+\label{sec:func-ref-F-fold/3}
+
+
+\emph{Pilog} predicate that succeeds if the first
+argument, after \texttt{fold}ing it to a canonical form, is a /prefix/
+of the folded string representation of the result of applying the
+\texttt{get} algorithm to the following arguments. Typically used as
+filter predicate in \texttt{select/3} database queries. See also
+\texttt{pre?}, \texttt{isa/2}, \texttt{same/3}, \texttt{bool/3},
+\texttt{range/3}, \texttt{head/3}, \texttt{part/3} and
+\texttt{tolr/3}.
+
+
+\begin{wideverbatim}
+: (?
+   @Nr (1 . 5)
+   @Nm "main"
+   (select (@Item)
+      ((nr +Item @Nr) (nm +Item @Nm))
+      (range @Nr @Item nr)
+      (fold @Nm @Item nm) ) )
+ @Nr=(1 . 5) @Nm="main" @Item={3-1}
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(for sym 'num ['any | (NIL 'any . prg) | (T 'any . prg) ..]) -> any}}
+\label{sec:func-ref-F-(for sym 'num ['any | (NIL 'any . prg) | (T 'any . prg) ..]) -> any}
+
+
+\texttt{(for sym|(sym2 . sym) 'lst ['any | (NIL 'any . prg) | (T 'any . prg) ..]) -> any}
+
+\texttt{(for (sym|(sym2 . sym) 'any1 'any2 [. prg]) ['any | (NIL 'any . prg) | (T 'any . prg) ..]) -> any}
+
+Conditional loop with local variable(s) and multiple conditional exits:
+In the first form, the value of \texttt{sym} is saved, \texttt{sym} is bound to \texttt{1},
+and the body is executed with increasing values up to (and including)
+\texttt{num}. In the second form, the value of \texttt{sym} is saved, \texttt{sym} is
+subsequently bound to the elements of \texttt{lst}, and the body is executed
+each time. In the third form, the value of \texttt{sym} is saved, and \texttt{sym} is
+bound to \texttt{any1}. If \texttt{sym2} is given, it is treated as a counter
+variable, first bound to 1 and then incremented for each execution of
+the body. While the condition \texttt{any2} evaluates to non-\texttt{NIL}, the body is
+repeatedly executed and, if \texttt{prg} is given, \texttt{sym} is re-bound to the
+result of its evaluation. If a clause has \texttt{NIL} or \texttt{T} as its CAR, the
+clause's second element is evaluated as a condition and - if the result
+is \texttt{NIL} or non-\texttt{NIL}, respectively - the \texttt{prg} is executed and the
+result returned. If the body is never executed, \texttt{NIL} is returned. See
+also \texttt{do} and \texttt{loop}.
+
+
+\begin{wideverbatim}
+: (for (N 1 (>= 8 N) (inc N)) (printsp N))
+1 2 3 4 5 6 7 8 -> 8
+: (for (L (1 2 3 4 5 6 7 8) L) (printsp (pop 'L)))
+1 2 3 4 5 6 7 8 -> 8
+: (for X (1 a 2 b) (printsp X))
+1 a 2 b -> b
+: (for ((I . L) '(a b c d e f) L (cddr L)) (println I L))
+1 (a b c d e f)
+2 (c d e f)
+3 (e f)
+-> (e f)
+: (for (I . X) '(a b c d e f) (println I X))
+1 a
+2 b
+3 c
+4 d
+5 e
+6 f
+-> f
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(fork) -> pid | NIL}}
+\label{sec:func-ref-F-(fork) -> pid | NIL}
+
+
+Forks a child process. Returns \texttt{NIL} in the child, and the child's
+process ID \texttt{pid} in the parent. In the child, the \texttt{VAL} of the global
+variable \texttt{*Fork} (should be a \texttt{prg}) is executed. See also \texttt{pipe} and
+\texttt{tell}.
+
+
+\begin{wideverbatim}
+: (unless (fork) (do 5 (println 'OK) (wait 1000)) (bye))
+-> NIL
+OK                                              # Child's output
+: OK
+OK
+OK
+OK
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(forked)}}
+\label{sec:func-ref-F-(forked)}
+
+
+Installs maintenance code in \texttt{*Fork} to close server sockets and clean
+up \texttt{*Run} code in child processes. Should only be called immediately
+after \texttt{task}.
+
+
+\begin{wideverbatim}
+: (task -60000 60000 (msg 'OK))     # Install timer task
+-> (-60000 60000 (msg 'OK))
+: (forked)                          # No timer in child processes
+-> (task -60000)
+: *Run
+-> ((-60000 56432 (msg 'OK)))
+: *Fork
+-> ((task -60000) (del '(saveHistory) '*Bye))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(format 'num ['cnt ['sym1 ['sym2]]]) -> sym}}
+\label{sec:func-ref-F-(format 'num ['cnt ['sym1 ['sym2]]]) -> sym}
+
+
+\texttt{(format 'sym|lst ['cnt ['sym1 ['sym2]]]) -> num}
+
+Converts a number \texttt{num} to a string, or a string \texttt{sym|lst} to a number.
+In both cases, optionally a precision \texttt{cnt}, a decimal-separator \texttt{sym1}
+and a thousands-separator \texttt{sym2} can be supplied. Returns \texttt{NIL} if the
+conversion is unsuccessful. See also \emph{Numbers} and
+\texttt{round}.
+
+
+\begin{wideverbatim}
+: (format 123456789)                   # Integer conversion
+-> "123456789"
+: (format 123456789 2)                 # Fixed point
+-> "1234567.89"
+: (format 123456789 2 ",")             # Comma as decimal-separator
+-> "1234567,89"
+: (format 123456789 2 "," ".")         # and period as thousands-separator
+-> "1.234.567,89"
+
+: (format "123456789")                 # String to number
+-> 123456789
+: (format (1 "23" (4 5 6)))
+-> 123456
+: (format "1234567.89" 4)              # scaled to four digits
+-> 12345678900
+: (format "1.234.567,89")              # separators not recognized
+-> NIL
+: (format "1234567,89" 4 ",")
+-> 12345678900
+: (format "1.234.567,89" 4 ",")        # thousands-separator not recognized
+-> NIL
+: (format "1.234.567,89" 4 "," ".")
+-> 12345678900
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(free 'cnt) -> (sym . lst)}}
+\label{sec:func-ref-F-(free 'cnt) -> (sym . lst)}
+
+
+Returns, for the \texttt{cnt}'th database file, the next available symbol \texttt{sym}
+(i.e. the first symbol greater than any symbol in the database), and the
+list \texttt{lst} of free symbols. See also \texttt{seq}, \texttt{zap} and \texttt{dbck}.
+
+
+\begin{wideverbatim}
+: (pool "x")      # A new database
+-> T
+: (new T)         # Create a new symbol
+-> {2}
+: (new T)         # Create another symbol
+-> {3}
+: (commit)        # Commit changes
+-> T
+: (zap '{2})      # Delete the first symbol
+-> {2}
+: (free 1)        # Show free list
+-> ({4})          # {3} was the last symbol allocated
+: (commit)        # Commit the deletion of {2}
+-> T
+: (free 1)        # Now {2} is in the free list
+-> ({4} {2})
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(from 'any ..) -> sym}}
+\label{sec:func-ref-F-(from 'any ..) -> sym}
+
+
+Skips the current input channel until one of the strings \texttt{any} is found,
+and starts subsequent reading from that point. The found \texttt{any} argument,
+or \texttt{NIL} (if none is found) is returned. See also \texttt{till} and \texttt{echo}.
+
+
+\begin{wideverbatim}
+: (and (from "val='") (till "'" T))
+test val='abc'
+-> "abc"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(full 'any) -> bool}}
+\label{sec:func-ref-F-(full 'any) -> bool}
+
+
+Returns \texttt{NIL} if \texttt{any} is a non-empty list with at least one \texttt{NIL}
+element, otherwise \texttt{T}. \texttt{(full X)} is equivalent to
+\texttt{(not (memq NIL X))}.
+
+
+\begin{wideverbatim}
+: (full (1 2 3))
+-> T
+: (full (1 NIL 3))
+-> NIL
+: (full 123)
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(fun? 'any) -> any}}
+\label{sec:func-ref-F-(fun? 'any) -> any}
+
+
+Returns \texttt{NIL} when the argument \texttt{any} is neither a number suitable for a
+code-pointer, nor a list suitable for a lambda expression (function).
+Otherwise a number is returned for a code-pointer, \texttt{T} for a function
+without arguments, and a single formal parameter or a list of formal
+parameters for a function. See also \texttt{getd}.
+
+
+\begin{wideverbatim}
+: (fun? 1000000000)              # Might be a code pointer
+-> 1000000000
+: (fun? 100000000000000)         # Too big for a code pointer
+-> NIL
+: (fun? 1000000001)              # Cannot be a code pointer (odd)
+-> NIL
+: (fun? '((A B) (* A B)))        # Lambda expression
+-> (A B)
+: (fun? '((A B) (* A B) . C))    # Not a lambda expression
+-> NIL
+: (fun? '(1 2 3 4))              # Not a lambda expression
+-> NIL
+: (fun? '((A 2 B) (* A B)))      # Not a lambda expression
+-> NIL
+\end{wideverbatim}
+
+
+
+% \input{referenc}

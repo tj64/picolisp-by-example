@@ -1,0 +1,478 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+\chapter{Symbols starting with U}
+\label{cha:func-ref-U-functions-starting-with-U}
+
+\section*{\texttt{*Uni}}
+\label{sec:func-ref-U-*Uni}
+
+
+A global variable holding an \texttt{idx} tree, with all unique data that were
+collected with the comma (\texttt{,}) read-macro. Typically used for
+localization. See also \texttt{Read-Macros} and \texttt{locale}.
+
+
+\begin{wideverbatim}
+: (off *Uni)            # Clear
+-> NIL
+: ,"abc"                # Collect a transient symbol
+-> "abc"
+: ,(1 2 3)              # Collect a list
+-> (1 2 3)
+: *Uni
+-> ("abc" NIL (1 2 3))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+UB}}
+\label{sec:func-ref-U-+UB}
+
+
+Prefix class for \texttt{+Aux} to maintain an UB-Tree index instead of the
+direct values. This allows efficient range access to multidimensional
+data. Only numeric keys are supported. See also \texttt{Database}.
+
+
+\begin{wideverbatim}
+(class +Pos +Entity)
+(rel x (+UB +Aux +Ref +Number) (y z))
+(rel y (+Number))
+(rel z (+Number))
+
+: (scan (tree 'x '+Pos))
+...
+(664594005183881683 . {B}) {B}
+(899018453307525604 . {C}) {C}  # UBKEY of (516516 690628 706223)
+(943014863198293414 . {2}) {2}
+(988682500781514058 . {A}) {A}
+(994667870851824704 . {8}) {8}
+(1016631364991047263 . {:}) {:}
+...
+
+: (show '{C})
+{C} (+Pos)
+   z 706223
+   y 690628
+   x 516516
+-> {C}
+
+# Discrete queries work the same way as without the +UB prefix
+: (db 'x '+Pos 516516 'y 690628 'z 706223)
+-> {C}
+: (aux 'x '+Pos 516516 690628 706223)
+-> {C}
+: (? (db x +Pos (516516 690628 706223) @Pos))
+ @Pos={C}
+-> NIL
+
+# Efficient range queries are are possible now
+: (?
+   @X (416511 . 616519)
+   @Y (590621 . 890629)
+   @Z (606221 . 906229)
+   (select (@@)
+      ((x +Pos (@X @Y @Z)))   # Range query
+      (range @X @@ x)         # Filter
+      (range @Y @@ y)
+      (range @Z @@ z) ) )
+ @X=(416511 . 616519) @Y=(590621 . 890629) @Z=(606221 . 906229) @@={C}
+ @X=(416511 . 616519) @Y=(590621 . 890629) @Z=(606221 . 906229) @@={8}
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(u) -> T}}
+\label{sec:func-ref-U-(u) -> T}
+
+
+Removes \texttt{!} all breakpoints in all subexpressions of the current
+breakpoint. Typically used when single-stepping a function or method
+with \texttt{debug}. See also \texttt{d} and \texttt{unbug}.
+
+
+\begin{wideverbatim}
+! (u)                         # Unbug subexpression(s) at breakpoint
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(udp 'any1 'any2 'any3) -> any}}
+\label{sec:func-ref-U-(udp 'any1 'any2 'any3) -> any}
+
+
+\texttt{(udp 'cnt) -> any}
+
+Simple unidirectional sending/receiving of UDP packets. In the first
+form, \texttt{any3} is sent to a UDP server listening at host \texttt{any1}, port
+\texttt{any2}. In the second form, one item is received from a UDP socket
+\texttt{cnt}, established with \texttt{port}. See also \texttt{listen} and \texttt{connect}.
+
+
+\begin{wideverbatim}
+# First session
+: (port T 6666)
+-> 3
+: (udp 3)  # Receive a datagram
+
+# Second session (on the same machine)
+: (udp "localhost" 6666 '(a b c))
+-> (a b c)
+
+# First session
+-> (a b c)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(ultimo 'y 'm) -> cnt}}
+\label{sec:func-ref-U-(ultimo 'y 'm) -> cnt}
+
+
+Returns the \texttt{date} of the last day of the month \texttt{m} in the year \texttt{y}. See
+also \texttt{day} and \texttt{week}.
+
+
+\begin{wideverbatim}
+: (date (ultimo 2007 1))
+-> (2007 1 31)
+: (date (ultimo 2007 2))
+-> (2007 2 28)
+: (date (ultimo 2004 2))
+-> (2004 2 29)
+: (date (ultimo 2000 2))
+-> (2000 2 29)
+: (date (ultimo 1900 2))
+-> (1900 2 28)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(unbug 'sym) -> T}}
+\label{sec:func-ref-U-(unbug 'sym) -> T}
+
+
+\texttt{(unbug 'sym 'cls) -> T}
+
+\texttt{(unbug '(sym . cls)) -> T}
+
+Removes all \texttt{!} breakpoints in the function or method body of sym, as
+inserted with \texttt{debug} or \texttt{d}, or directly with \texttt{edit}. See also \texttt{u}.
+
+
+\begin{wideverbatim}
+: (pp 'tst)
+(de tst (N)
+   (! println (+ 3 N)) )         # 'tst' has a breakpoint '!'
+-> tst
+: (unbug 'tst)                   # Unbug it
+-> T
+: (pp 'tst)                      # Restore
+(de tst (N)
+   (println (+ 3 N)) )
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(undef 'sym) -> fun}}
+\label{sec:func-ref-U-(undef 'sym) -> fun}
+
+
+\texttt{(undef 'sym 'cls) -> fun}
+
+\texttt{(undef '(sym . cls)) -> fun}
+
+Undefines the function or method \texttt{sym}. Returns the previous definition.
+See also \texttt{de}, \texttt{dm}, \texttt{def} and \texttt{redef}.
+
+
+\begin{wideverbatim}
+: (de hello () "Hello world!")
+-> hello
+: hello
+-> (NIL "Hello world!")
+: (undef 'hello)
+-> (NIL "Hello world!")
+: hello
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(unify 'any) -> lst}}
+\label{sec:func-ref-U-(unify 'any) -> lst}
+
+
+Unifies \texttt{any} with the current \emph{Pilog} environment at
+the current level and with a value of \texttt{NIL}, and returns the new
+environment or \texttt{NIL} if not successful. See also \texttt{prove} and \texttt{->}.
+
+
+\begin{wideverbatim}
+: (? (@A unify '(@B @C)))
+ @A=(((NIL . @C) 0 . @C) ((NIL . @B) 0 . @B) T)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(uniq 'lst) -> lst}}
+\label{sec:func-ref-U-(uniq 'lst) -> lst}
+
+
+Returns a unique list, by eleminating all duplicate elements from \texttt{lst}.
+See also \emph{Comparing}, \texttt{sort} and \texttt{group}.
+
+
+\begin{wideverbatim}
+: (uniq (2 4 6 1 2 3 4 5 6 1 3 5))
+-> (2 4 6 1 3 5)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{uniq/2}}
+\label{sec:func-ref-U-uniq/2}
+
+
+\emph{Pilog} predicate that succeeds if the first argument
+is not yet stored in the second argument's index structure. \texttt{idx} is
+used internally storing for the values and checking for uniqueness. See
+also \texttt{member/2}.
+
+
+\begin{wideverbatim}
+: (? (uniq a @Z))       # Remember 'a'
+ @Z=NIL                 # Succeeded
+
+: (? (uniq b @Z))       # Remember 'b'
+ @Z=NIL                 # Succeeded
+
+: (? (uniq a @Z))       # Remembered 'a'?
+-> NIL                  # Yes: Not unique
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(unless 'any . prg) -> any}}
+\label{sec:func-ref-U-(unless 'any . prg) -> any}
+
+
+Conditional execution: When the condition \texttt{any} evaluates to non-\texttt{NIL},
+\texttt{NIL} is returned. Otherwise \texttt{prg} is executed and the result returned.
+See also \texttt{when}.
+
+
+\begin{wideverbatim}
+: (unless (= 3 3) (println 'Strange 'result))
+-> NIL
+: (unless (= 3 4) (println 'Strange 'result))
+Strange result
+-> result
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(until 'any . prg) -> any}}
+\label{sec:func-ref-U-(until 'any . prg) -> any}
+
+
+Conditional loop: While the condition \texttt{any} evaluates to \texttt{NIL}, \texttt{prg} is
+repeatedly executed. If \texttt{prg} is never executed, \texttt{NIL} is returned.
+Otherwise the result of \texttt{prg} is returned. See also \texttt{while}.
+
+
+\begin{wideverbatim}
+: (until (=T (setq N (read)))
+   (println 'square (* N N)) )
+4
+square 16
+9
+square 81
+T
+-> 81
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(untrace 'sym) -> sym}}
+\label{sec:func-ref-U-(untrace 'sym) -> sym}
+
+
+\texttt{(untrace 'sym 'cls) -> sym}
+
+\texttt{(untrace '(sym . cls)) -> sym}
+
+Removes the \texttt{\$} trace function call at the beginning of the function or
+method body of \texttt{sym}, so that no more trace information will be printed
+before and after execution. Built-in functions (C-function pointer) are
+automatically converted to their original form (see \texttt{subr}). See also
+\texttt{trace} and \texttt{traceAll}.
+
+
+\begin{wideverbatim}
+: (trace '+)                           # Trace the '+' function
+-> +
+: +
+-> (@ ($ + @ (pass $385455126)))       # Modified for tracing
+: (untrace '+)                         # Untrace '+'
+-> +
+: +
+-> 67319120                            # Back to original form
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(up [cnt] sym ['val]) -> any}}
+\label{sec:func-ref-U-(up [cnt] sym ['val]) -> any}
+
+
+Looks up (or modifies) the \texttt{cnt}'th previously saved value of \texttt{sym} in
+the corresponding enclosing environment. If \texttt{cnt} is not given, 1 is
+used. See also \texttt{eval}, \texttt{run} and \texttt{env}.
+
+
+\begin{wideverbatim}
+: (let N 1 ((quote (N) (println N (up N))) 2))
+2 1
+-> 1
+: (let N 1 ((quote (N) (println N (up N) (up N 7))) 2) N)
+2 1 7
+-> 7
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(upd sym ..) -> lst}}
+\label{sec:func-ref-U-(upd sym ..) -> lst}
+
+
+Synchronizes the internal state of all passed (external) symbols by
+passing them to \texttt{wipe}. \texttt{upd} is the standard function passed to
+\texttt{commit} during database \texttt{transactions}.
+
+
+\begin{wideverbatim}
+(commit 'upd)  # Commit changes, informing all sister processes
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(update 'obj ['var]) -> obj}}
+\label{sec:func-ref-U-(update 'obj ['var]) -> obj}
+
+
+Interactive database function for modifying external symbols. When
+called only with an \texttt{obj} argument, \texttt{update} steps through the value and
+all properties of that object (and recursively also through
+substructures) and allows to edit them with the console line editor.
+When the \texttt{var} argument is given, only that single property is handed to
+the editor. To delete a propery, \texttt{NIL} must be explicitly entered.
+\texttt{update} will correctly handle all \emph{entity/relation}
+mechanisms. See also \texttt{select}, \texttt{edit} and \texttt{Database}.
+
+
+\begin{wideverbatim}
+: (show '{3-1})            # Show item 1
+{3-1} (+Item)
+   nr 1
+   pr 29900
+   inv 100
+   sup {2-1}
+   nm "Main Part"
+-> {3-1}
+
+: (update '{3-1} 'pr)      # Update the prices of that item
+{3-1} pr 299.00            # The cursor is right behind "299.00"
+-> {3-1}
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(upp? 'any) -> sym | NIL}}
+\label{sec:func-ref-U-(upp? 'any) -> sym | NIL}
+
+
+Returns \texttt{any} when the argument is a string (symbol) that starts with an
+uppercase character. See also \texttt{uppc} and \texttt{low?}
+
+
+\begin{wideverbatim}
+: (upp? "A")
+-> T
+: (upp? "a")
+-> NIL
+: (upp? 123)
+-> NIL
+: (upp? ".")
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(uppc 'any) -> any}}
+\label{sec:func-ref-U-(uppc 'any) -> any}
+
+
+Upper case conversion: If \texttt{any} is not a symbol, it is returned as it
+is. Otherwise, a new transient symbol with all characters of \texttt{any},
+converted to upper case, is returned. See also \texttt{lowc}, \texttt{fold} and
+\texttt{upp?}.
+
+
+\begin{wideverbatim}
+: (uppc 123)
+-> 123
+: (uppc "abc")
+-> "ABC"
+: (uppc 'car)
+-> "CAR"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(use sym . prg) -> any}}
+\label{sec:func-ref-U-(use sym . prg) -> any}
+
+
+\texttt{(use (sym ..) . prg) -> any}
+
+Defines local variables. The value of the symbol \texttt{sym} - or the values
+of the symbols \texttt{sym} in the list of the second form - are saved, \texttt{prg}
+is executed, then the symbols are restored to their original values.
+During execution of \texttt{prg}, the values of the symbols can be temporarily
+modified. The return value is the result of \texttt{prg}. See also \texttt{bind},
+\texttt{job} and \texttt{let}.
+
+
+\begin{wideverbatim}
+: (setq  X 123  Y 456)
+-> 456
+: (use (X Y) (setq  X 3  Y 4) (* X Y))
+-> 12
+: X
+-> 123
+: Y
+-> 456
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(useKey 'var 'cls ['hook]) -> num}}
+\label{sec:func-ref-U-(useKey 'var 'cls ['hook]) -> num}
+
+
+Generates or reuses a key for a database tree, by randomly trying to
+locate a free number. See also \texttt{genKey}.
+
+
+\begin{wideverbatim}
+: (maxKey (tree 'nr '+Item))
+-> 8
+: (useKey 'nr '+Item)
+-> 12
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(usec) -> num}}
+\label{sec:func-ref-U-(usec) -> num}
+
+
+Returns the number the microseconds since interpreter startup. See also
+\texttt{time} and \texttt{tick}.
+
+
+\begin{wideverbatim}
+: (usec)
+-> 1154702479219050
+\end{wideverbatim}
+

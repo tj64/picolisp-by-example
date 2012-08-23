@@ -1,0 +1,513 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with N}
+\label{cha:func-ref-N-functions-starting-with-N}
+
+\section*{\texttt{+Need}}
+\label{sec:func-ref-N-+Need}
+
+
+Prefix class for mandatory \texttt{+relation}s. Note that this does not enforce
+any requirements by itself, it only returns an error message if the
+\texttt{mis>} message is explicitly called, e.g. by GUI functions. See also
+\texttt{Database}.
+
+
+\begin{wideverbatim}
+(rel nr (+Need +Key +Number))  # Item number is mandatory
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+Number}}
+\label{sec:func-ref-N-+Number}
+
+
+Class for numeric relations, a subclass of \texttt{+relation}. Accepts an
+optional argument for the fixpoint scale (currently not used). See also
+\texttt{Database}.
+
+
+\begin{wideverbatim}
+(rel pr (+Number) 2)  # Price, with two decimal places
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(n== `any ..) -> flg}}
+\label{sec:func-ref-N-(n== `any ..) -> flg}
+
+
+Returns \texttt{T} when not all \texttt{any} arguments are the same (pointer
+equality). \texttt{(n== `any ..)} is equivalent to \texttt{(not (== `any ..))}. See
+also \texttt{==} and \emph{Comparing}.
+
+
+\begin{wideverbatim}
+: (n== 'a 'a)
+-> NIL
+: (n== (1) (1))
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(n0 'any) -> flg}}
+\label{sec:func-ref-N-(n0 'any) -> flg}
+
+
+Returns \texttt{T} when \texttt{any} is not a number with value zero.
+See also \texttt{=0}, \texttt{lt0}, \texttt{le0}, \texttt{ge0} and
+\texttt{gt0}.
+
+
+\begin{wideverbatim}
+: (n0 (- 6 3 2 1))
+-> NIL
+: (n0 'a)
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(nT 'any) -> flg}}
+\label{sec:func-ref-N-(nT 'any) -> flg}
+
+
+Returns \texttt{T} when \texttt{any} is not the symbol \texttt{T}. See also
+\emph{=T}.
+
+\begin{wideverbatim}
+: (nT 0)
+-> T
+: (nT "T")
+-> T
+: (nT T)
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(name 'sym ['sym2]) -> sym}}
+\label{sec:func-ref-N-(name 'sym ['sym2]) -> sym}
+
+
+Returns, if \texttt{sym2} is not given, a new transient symbol with the name of
+\texttt{sym}. Otherwise \texttt{sym} must be a transient symbol, and its name is
+changed to that of \texttt{sym2} (note that this may give inconsistencies if
+the symbol is still referred to from other namespaces). See also \texttt{str},
+\texttt{sym}, \texttt{symbols}, \texttt{zap} and \texttt{intern}.
+
+
+\begin{wideverbatim}
+: (name 'abc)
+-> "abc"
+: (name "abc")
+-> "abc"
+: (name '{abc})
+-> "abc"
+: (name (new))
+-> NIL
+: (de foo (Lst) (car Lst))  # 'foo' calls 'car'
+-> foo
+: (intern (name (zap 'car) "xxx"))  # Globally change the name of 'car'
+-> xxx
+: (xxx (1 2 3))
+-> 1
+: (pp 'foo)
+(de foo (Lst)
+   (xxx Lst) )                      # Name changed
+-> foo
+: (foo (1 2 3))                     # 'foo' still works
+-> 1
+: (car (1 2 3))                     # Reader returns a new 'car' symbol
+!? (car (1 2 3))
+car -- Undefined
+?
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(nand 'any ..) -> flg}}
+\label{sec:func-ref-N-(nand 'any ..) -> flg}
+
+
+Logical NAND. The expressions \texttt{any} are evaluated from left to right. If
+\texttt{NIL} is encountered, \texttt{T} is returned immediately. Else \texttt{NIL} is
+returned. \texttt{(nand ..)} is equivalent to \texttt{(not (and ..))}.
+
+
+\begin{wideverbatim}
+: (nand (lt0 7) (read))
+-> T
+: (nand (lt0 -7) (read))
+abc
+-> NIL
+: (nand (lt0 -7) (read))
+NIL
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(native 'cnt1|sym1 'cnt2|sym2 'sym|lst 'any ..) -> any}}
+\label{sec:func-ref-N-(native 'cnt1|sym1 'cnt2|sym2 'sym|lst 'any ..) -> any}
+
+
+(64-bit version only) Calls a native C function. The first argument
+should specify a shared object library, either \texttt{''@''} (the current main
+program), \texttt{sym1} (a library path name), or \texttt{cnt1} (a library handle
+obtained by a previous call). The second argument should be a symbol
+name \texttt{sym2}, or a function pointer \texttt{cnt2} obtained by a previous call).
+Practically, the first two arguments will be always passed as transient
+symbols, which will get the library handle and function pointer assigned
+as values to be cached and used in subsequent calls. The third \texttt{sym|lst}
+argument is a return value specification, while all following arguments
+are the arguments to the native function.
+
+The return value specification may either be one of the atoms
+
+
+\begin{wideverbatim}
+ NIL   void
+ B     byte     # Byte (unsigned 8 bit)
+ C     char     # Character (UTF-8, 1-3 bytes)
+ I     int      # Integer (signed 32 bit)
+ N     long     # Long or pointer (signed 64 bit)
+ S     string   # String (UTF-8)
+-1.0   float    # Scaled fixpoint number
++1.0   double   # Scaled fixpoint number
+\end{wideverbatim}
+
+or nested lists of these atoms with size specifications to denote arrays
+and structures, e.g.
+
+
+\begin{wideverbatim}
+(N . 4)        # long[4];           -> (1 2 3 4)
+(N (C . 4))    # {long; char[4];}   -> (1234 ("a" "b" "c" NIL))
+(N (B . 7))    # {long; byte[7];}   -> (1234 (1 2 3 4 5 6 7))
+\end{wideverbatim}
+
+Arguments can be
+
+\begin{itemize}
+\item integers (up to 64-bit) or pointers, passed as numbers
+\item fixpoint numbers, passed as cons pairs consisting of a the value and
+   the scale. If the scale is positive, the number is passed as a
+   \texttt{double}, otherwise as a \texttt{float}.
+\item strings, passed as symbols, or
+\item structures, passed as lists with
+\begin{itemize}
+\item a variable in the CAR (to recieve the returned structure data,
+      ignored when the CAR is \texttt{NIL})
+\item a cons pair for the size and value specification in the CADR (see
+      above), and
+\item an optional sequence of initialization items in the CDDR, where
+      each may be
+\begin{itemize}
+\item a positive number, stored as an unsigned byte value
+\item a negative number, whose absolute value is stored as an
+         unsigned integer
+\item a pair \texttt{(num . cnt)} where `\texttt{num}' is stored in a field of
+         `\texttt{cnt}' bytes
+\item a pair \texttt{(sym . cnt)} where `\texttt{sym}' is stored as a
+         null-terminated string in a field of `\texttt{cnt}' bytes
+\end{itemize}
+If the last CDR of the initialization sequence is a number, it is
+      used as a fill-byte value for the remaining space in the
+      structure.
+\end{itemize}
+\end{itemize}
+
+\texttt{native} takes care of allocating memory for strings, arrays or
+structures, and frees that memory when done.
+
+The number of fixpoint arguments is limited to six. For NaN or negative
+infinity \texttt{NIL}, and for positive infinity \texttt{T} is returned.
+
+
+\begin{wideverbatim}
+: (native "@" "getenv" 'S "TERM")  # Same as (sys "TERM")
+-> "xterm"
+
+: (native "@" "printf" 'I "abc%d%s^J" (+ 3 4) (pack "X" "Y" "Z"))
+abc7XYZ
+-> 8
+
+: (native "@" "printf" 'I "This is %.3f^J" (123456 . 1000))
+This is 123.456
+-> 16
+
+: (use Tim
+   (native "@" "time" NIL '(Tim (8 B . 8)))  # time_t 8   # Get time_t structure
+   (native "@" "localtime" '(I . 9) (cons NIL (8) Tim)) ) # Read local time
+-> (32 18 13 31 11 109 4 364 0)  # 13:18:32, Dec. 31st, 2009
+\end{wideverbatim}
+
+The C function may in turn call a function
+
+
+\begin{wideverbatim}
+long lisp(char*, long, long, long, long, long);
+\end{wideverbatim}
+
+which accepts a symbol name as the first argument, and up to 5 numbers.
+\texttt{lisp()} calls that symbol with the five numbers, and expects a numeric
+return value. ``Numbers'' in this context are 64-bit scalars, and may not
+only represent integers, but also pointers or other encoded data. See
+also \texttt{errno} and \texttt{lisp}.
+
+ 
+\section*{\texttt{(need 'cnt ['lst ['any]]) -> lst}}
+\label{sec:func-ref-N-(need 'cnt ['lst ['any]]) -> lst}
+
+
+\texttt{(need 'cnt ['num|sym]) -> lst}
+
+Produces a list of at least \texttt{cnt} elements. When called without optional
+arguments, a list of \texttt{cnt} \texttt{NIL}'s is returned. When \texttt{lst} is given, it
+is extended to the left (if \texttt{cnt} is positive) or (destructively) to the
+right (if \texttt{cnt} is negative) with \texttt{any} elements. In the second form, a
+list of \texttt{cnt} atomic values is returned. See also \texttt{range}.
+
+
+\begin{wideverbatim}
+: (need 5)
+-> (NIL NIL NIL NIL NIL)  # Allocate 5 cells
+: (need 5 '(a b c))
+-> (NIL NIL a b c)
+: (need -5 '(a b c))
+-> (a b c NIL NIL)
+: (need 5 '(a b c) " ")  # String alignment
+-> (" " " " a b c)
+: (need 7 0)
+-> (0 0 0 0 0 0 0)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(new ['flg|num] ['typ ['any ..]]) -> obj}}
+\label{sec:func-ref-N-(new ['flg|num] ['typ ['any ..]]) -> obj}
+
+
+Creates and returns a new object. If \texttt{flg} is given and non-\texttt{NIL}, the
+new object will be an external symbol (created in database file 1 if
+\texttt{T}, or in the corresponding database file if \texttt{num} is given). \texttt{typ}
+(typically a list of classes) is assigned to the \texttt{VAL}, and the initial
+\texttt{T} message is sent with the arguments \texttt{any} to the new object. If no
+\texttt{T} message is defined for the classes in \texttt{typ} or their superclasses,
+the \texttt{any} arguments should evaluate to alternating keys and values for
+the initialization of the new object. See also \texttt{box}, \texttt{object}, \texttt{class},
+\texttt{type}, \texttt{isa}, \texttt{send} and \texttt{Database}.
+
+
+\begin{wideverbatim}
+: (new)
+-> $134426427
+: (new T '(+Address))
+-> {1A;3}
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(new! 'typ ['any ..]) -> obj}}
+\label{sec:func-ref-N-(new! 'typ ['any ..]) -> obj}
+
+
+\emph{Transaction} wrapper function for \texttt{new}.
+\texttt{(new! '(+Cls) 'key 'val ...)} is equivalent to
+\texttt{(dbSync) (new (db: +Cls) '(+Cls) 'key 'val ...) (commit 'upd)}. See
+also \texttt{set!}, \texttt{put!} and \texttt{inc!}.
+
+
+\begin{wideverbatim}
+: (new! '(+Item)  # Create a new item
+   'nr 2                      # Item number
+   'nm "Spare Part"           # Description
+   'sup (db 'nr '+CuSu 2)     # Supplier
+   'inv 100                   # Inventory
+   pr 12.50 )                 # Price
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(next) -> any}}
+\label{sec:func-ref-N-(next) -> any}
+
+
+Can only be used inside functions with a variable number of arguments
+(with \texttt{@}). Returns the next argument from the internal list. See also
+\texttt{args}, \texttt{arg}, \texttt{rest}, and \texttt{pass}.
+
+
+\begin{wideverbatim}
+: (de foo @ (println (next)))          # Print next argument
+-> foo
+: (foo)
+NIL
+-> NIL
+: (foo 123)
+123
+-> 123
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(nil . prg) -> NIL}}
+\label{sec:func-ref-N-(nil . prg) -> NIL}
+
+
+Executes \texttt{prg}, and returns \texttt{NIL}. See also \texttt{t}, \texttt{prog}, \texttt{prog1} and
+\texttt{prog2}.
+
+
+\begin{wideverbatim}
+: (nil (println 'OK))
+OK
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{nil/1}}
+\label{sec:func-ref-N-nil/1}
+
+
+\emph{Pilog} predicate expects an argument variable, and
+succeeds if that variable is bound to \texttt{NIL}. See also \texttt{not/1}.
+
+
+\begin{wideverbatim}
+: (? @X NIL (nil @X))
+ @X=NIL
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(noLint 'sym)}}
+\label{sec:func-ref-N-(noLint 'sym)}
+
+
+\texttt{(noLint 'sym|(sym . cls) 'sym2)}
+
+Excludes the check for a function definition of \texttt{sym} (in the first
+form), or for variable binding and usage of \texttt{sym2} in the function
+definition, file contents or method body of \texttt{sym} (second form), during
+calls to \texttt{lint}. See also \texttt{lintAll}.
+
+
+\begin{wideverbatim}
+: (de foo ()
+   (bar FreeVariable) )
+-> foo
+: (lint 'foo)
+-> ((def bar) (bnd FreeVariable))
+: (noLint 'bar)
+-> bar
+: (noLint 'foo 'FreeVariable)
+-> (foo . FreeVariable)
+: (lint 'foo)
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(nond ('any1 . prg1) ('any2 . prg2) ..) -> any}}
+\label{sec:func-ref-N-(nond ('any1 . prg1) ('any2 . prg2) ..) -> any}
+
+
+Negated (``non-cond'') multi-way conditional: If any of the \texttt{anyN}
+conditions evaluates to \texttt{NIL}, \texttt{prgN} is executed and the result
+returned. Otherwise (all conditions evaluate to non-\texttt{NIL}), \texttt{NIL} is
+returned. See also \texttt{cond}, \texttt{ifn} and \texttt{unless}.
+
+
+\begin{wideverbatim}
+: (nond
+   ((= 3 3) (println 1))
+   ((= 3 4) (println 2))
+   (NIL (println 3)) )
+2
+-> 2
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(nor 'any ..) -> flg}}
+\label{sec:func-ref-N-(nor 'any ..) -> flg}
+
+
+Logical NOR. The expressions \texttt{any} are evaluated from left to right. If
+a non-\texttt{NIL} value is encountered, \texttt{NIL} is returned immediately. Else
+\texttt{T} is returned. \texttt{(nor ..)} is equivalent to \texttt{(not (or ..))}.
+
+
+\begin{wideverbatim}
+: (nor (lt0 7) (= 3 4))
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(not 'any) -> flg}}
+\label{sec:func-ref-N-(not 'any) -> flg}
+
+
+Logical negation. Returns \texttt{T} if \texttt{any} evaluates to \texttt{NIL}.
+
+
+\begin{wideverbatim}
+: (not (== 'a 'a))
+-> NIL
+: (not (get 'a 'a))
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{not/1}}
+\label{sec:func-ref-N-not/1}
+
+
+\emph{Pilog} predicate that succeeds if and only if the
+goal cannot be proven. See also \texttt{nil/1}, \texttt{true/0} and \texttt{fail/0}.
+
+
+\begin{wideverbatim}
+: (? (equal 3 4))
+-> NIL
+: (? (not (equal 3 4)))
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(nth 'lst 'cnt ..) -> lst}}
+\label{sec:func-ref-N-(nth 'lst 'cnt ..) -> lst}
+
+
+Returns the tail of \texttt{lst} starting from the \texttt{cnt}'th element of \texttt{lst}.
+Successive \texttt{cnt} arguments operate on the results in the same way.
+\texttt{(nth 'lst 2)} is equivalent to \texttt{(cdr 'lst)}. See also \texttt{get}.
+
+
+\begin{wideverbatim}
+: (nth '(a b c d) 2)
+-> (b c d)
+: (nth '(a (b c) d) 2 2)
+-> (c)
+: (cdadr '(a (b c) d))
+-> (c)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(num? 'any) -> num | NIL}}
+\label{sec:func-ref-N-(num? 'any) -> num | NIL}
+
+
+Returns \texttt{any} when the argument \texttt{any} is a number, otherwise \texttt{NIL}.
+
+
+\begin{wideverbatim}
+: (num? 123)
+-> 123
+: (num? (1 2 3))
+-> NIL
+\end{wideverbatim}
+
+
+
+% \input{referenc}

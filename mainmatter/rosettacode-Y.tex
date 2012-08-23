@@ -1,0 +1,222 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+\chapter{Rosetta Code Tasks starting with Y}
+
+\section*{Y combinator}
+
+In strict
+\href{http://en.wikipedia.org/wiki/Functional\_programming}{functional
+  programming} and the
+\href{http://en.wikipedia.org/wiki/lambda\_calculus}{lambda calculus},
+functions (lambda expressions) don't have state and are only allowed
+to refer to arguments of enclosing functions. This rules out the usual
+definition of a recursive function wherein a function is associated
+with the state of a variable and this variable's state is used in the
+body of the function.
+
+The \href{http://mvanier.livejournal.com/2897.html}{Y combinator} is
+itself a stateless function that, when applied to another stateless
+function, returns a recursive version of the function. The Y combinator
+is the simplest of the class of such functions, called
+\href{http://en.wikipedia.org/wiki/Fixed-point\_combinator}{fixed-point
+combinators}.
+
+The task is to define the stateless Y combinator and use it to compute
+\href{http://en.wikipedia.org/wiki/Factorial}{factorials} and
+\href{http://en.wikipedia.org/wiki/Fibonacci\_number}{Fibonacci numbers}
+from other stateless functions or lambda expressions.
+
+\begin{description}
+\item[Cf]
+\end{description}
+
+\begin{itemize}
+\item
+  \href{http://vimeo.com/45140590}{Jim Weirich: Adventures in Functional
+  Programming}
+\end{itemize}
+
+
+
+\begin{wideverbatim}
+
+(de Y (F)
+   (let X (curry (F) (Y) (F (curry (Y) @ (pass (Y Y)))))
+      (X X) ) )
+
+# Factorial
+(de fact (F)
+   (curry (F) (N)
+      (if (=0 N)
+         1
+         (* N (F (dec N))) ) ) )
+
+: ((Y fact) 6)
+-> 720
+
+# Fibonacci
+(de fibo (F)
+   (curry (F) (N)
+      (if (> 2 N)
+         1
+         (+ (F (dec N)) (F (- N 2))) ) ) )
+
+: ((Y fibo) 22)
+-> 28657
+
+# Ackermann
+(de ack (F)
+   (curry (F) (X Y)
+      (cond
+         ((=0 X) (inc Y))
+         ((=0 Y) (F (dec X) 1))
+         (T (F (dec X) (F X (dec Y)))) ) ) )
+
+: ((Y ack) 3 4)
+-> 125
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Yahoo! Search}
+
+Create a class for searching Yahoo! results. It must implement a
+\textbf{Next Page} method, and read URL, Title and Content from results.
+
+\begin{wideverbatim}
+
+(load "@lib/http.l")
+
+(de yahoo (Query Page)
+   (default Page 1)
+   (client "search.yahoo.com" 80
+      (pack
+         "search?p=" (ht:Fmt Query)
+         "\&b=" (inc (* 10 (dec Page))) )
+      (make
+         (while (from "<a class=\"yschttl spt\" href=\"")
+            (link
+               (make
+                  (link (till "\"" T))       # Url
+                  (from "<b>")
+                  (link (till "<" T))        # Title
+                  (from "class=\"abstr\"")
+                  (from ">")
+                  (link                      # Content
+                     (pack
+                        (make
+                           (loop
+                              (link (till "<" T))
+                              (T (eof))
+                              (T (= "</div" (till ">" T)))
+                              (char) ) ) ) ) ) ) ) ) ) )
+
+Output:
+
+: (more (yahoo "test"))
+("http://www.test.com/" "Test" "Offers practice online tests for many ...
+("http://www.test.com/aboutus.htm" "Test" "Test.com has a successful ...
+("http://en.wikipedia.org/wiki/Test" "Test" "YUI Test is a testing ...
+("http://en.wikipedia.org/wiki/F-test" "test " "test n. A procedure for ...
+...
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Yin and yang}
+
+Create a function that given a variable representing size, generates a
+\href{http://en.wikipedia.org/wiki/File:Yin\_and\_Yang.svg}{Yin and
+yang} also known as a
+\href{http://en.wikipedia.org/wiki/Taijitu}{Taijitu} symbol scaled to
+that size.
+
+Generate and display the symbol generated for two different (small)
+sizes.
+
+
+\begin{wideverbatim}
+
+(de circle (X Y C R)
+   (>=
+      (* R R)
+      (+
+         (* (setq X (/ X 2)) X)
+         (* (dec 'Y C) Y) ) ) )
+
+(de yinYang (R)
+   (for Y (range (- R) R)
+      (for X (range (- 0 R R) (+ R R))
+         (prin
+            (cond
+               ((circle X Y (- (/ R 2)) (/ R 6))
+                  "#" )
+               ((circle X Y (/ R 2) (/ R 6))
+                  "." )
+               ((circle X Y (- (/ R 2)) (/ R 2))
+                  "." )
+               ((circle X Y (/ R 2) (/ R 2))
+                  "#" )
+               ((circle X Y 0 R)
+                  (if (lt0 X) "." "#") )
+               (T " ") ) ) )
+      (prinl) ) )
+
+\end{wideverbatim}
+
+\begin{wideverbatim}
+
+
+Test:
+
+: (yinYang 18)
+                                   ...
+                         .....................##
+                   .............................######
+                 .................................######
+             .......................................########
+           ...........................................########
+         ..........................###................##########
+       ........................###########............############
+       ........................###########............############
+     ........................###############............############
+   ............................###########............################
+   ............................###########............################
+   ................................###................################
+ .....................................................##################
+ ...................................................####################
+ .................................................######################
+ ...............................................########################
+ .............................................##########################
+......................................###################################
+ ..........................#############################################
+ ........................###############################################
+ ......................#################################################
+ ....................###################################################
+ ..................#####################################################
+   ................################...################################
+   ................############...........############################
+   ................############...........############################
+     ............############...............########################
+       ............############...........########################
+       ............############...........########################
+         ..........################...##########################
+           ........###########################################
+             ........#######################################
+                 ......#################################
+                   ......#############################
+                         ..#####################
+                                   ###
+
+\end{wideverbatim}
+
+
+
+% \input{referenc}

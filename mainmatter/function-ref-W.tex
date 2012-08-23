@@ -1,0 +1,225 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with W}
+\label{cha:func-ref-W-functions-starting-with-W}
+
+ 
+\section*{\texttt{(wait ['cnt] . prg) -> any}}
+\label{sec:func-ref-W-(wait ['cnt] . prg) -> any}
+
+
+Waits for a condition. While the result of the execution of \texttt{prg} is
+\texttt{NIL}, a \texttt{select} system call is executed for all file descriptors and
+timers in the \texttt{VAL} of the global variable \texttt{*Run}. When \texttt{cnt} is
+non-\texttt{NIL}, the waiting time is limited to \texttt{cnt} milliseconds. Returns
+the result of \texttt{prg}. See also \texttt{key} and \texttt{sync}.
+
+
+\begin{wideverbatim}
+: (wait 2000)                                # Wait 2 seconds
+-> NIL
+: (prog
+   (zero *Cnt)
+   (setq *Run                                # Install background loop
+      '((-2000 0 (println (inc '*Cnt)))) )   # Increment '*Cnt' every 2 sec
+   (wait NIL (> *Cnt 6))                     # Wait until > 6
+   (off *Run) )
+1                                            # Waiting ..
+2
+3
+4
+5
+6
+7
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(week 'dat) -> num}}
+\label{sec:func-ref-W-(week 'dat) -> num}
+
+
+Returns the number of the week for a given \texttt{date} \texttt{dat}. See also \texttt{day},
+\texttt{ultimo}, \texttt{datStr} and \texttt{strDat}.
+
+
+\begin{wideverbatim}
+: (datStr (date))
+-> "2007-06-01"
+: (week (date))
+-> 22
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(when 'any . prg) -> any}}
+\label{sec:func-ref-W-(when 'any . prg) -> any}
+
+
+Conditional execution: When the condition \texttt{any} evaluates to non-\texttt{NIL},
+\texttt{prg} is executed and the result is returned. Otherwise \texttt{NIL} is
+returned. See also \texttt{unless}.
+
+
+\begin{wideverbatim}
+: (when (> 4 3) (println 'OK) (println 'Good))
+OK
+Good
+-> Good
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(while 'any . prg) -> any}}
+\label{sec:func-ref-W-(while 'any . prg) -> any}
+
+
+Conditional loop: While the condition \texttt{any} evaluates to non-\texttt{NIL},
+\texttt{prg} is repeatedly executed. If \texttt{prg} is never executed, \texttt{NIL} is
+returned. Otherwise the result of \texttt{prg} is returned. See also \texttt{until}.
+
+
+\begin{wideverbatim}
+: (while (read)
+   (println 'got: @) )
+abc
+got: abc
+1234
+got: 1234
+NIL
+-> 1234
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(what 'sym) -> lst}}
+\label{sec:func-ref-W-(what 'sym) -> lst}
+
+
+Returns a list of all internal symbols that match the pattern string
+\texttt{sym}. See also \texttt{match}, \texttt{who} and \texttt{can}.
+
+
+\begin{wideverbatim}
+: (what "cd@dr")
+-> (cdaddr cdaadr cddr cddddr cdddr cddadr cdadr)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(who 'any) -> lst}}
+\label{sec:func-ref-W-(who 'any) -> lst}
+
+
+Returns a list of all functions or method definitions that contain the
+atom or pattern \texttt{any}. See also \texttt{match}, \texttt{what} and \texttt{can}.
+
+
+\begin{wideverbatim}
+: (who 'caddr)                         # Who is using 'caddr'?
+-> ($dat lint1 expDat datStr $tim tim$ mail _gen dat$ datSym)
+
+: (who "Type error")
+-> ((mis> . +Link) *Uni (mis> . +Joint))
+
+: (more (who "Type error") pp)         # Pretty print all results
+(dm (mis> . +Link) (Val Obj)
+   (and
+      Val
+      (nor (isa (: type) Val) (canQuery Val))
+      "Type error" ) )
+.                                      # Stop
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(wipe 'sym|lst) -> sym|lst}}
+\label{sec:func-ref-W-(wipe 'sym|lst) -> sym|lst}
+
+
+Clears the \texttt{VAL} and the property list of \texttt{sym}, or of all symbols in
+the list \texttt{lst}. When a symbol is an external symbol, its state is also
+set to ``not loaded''. Does nothing when \texttt{sym} is an external symbol that
+has been modified or deleted (``dirty'').
+
+
+\begin{wideverbatim}
+: (setq A (1 2 3 4))
+-> (1 2 3 4)
+: (put 'A 'a 1)
+-> 1
+: (put 'A 'b 2)
+-> 2
+: (show 'A)
+A (1 2 3 4)
+   b 2
+   a 1
+-> A
+: (wipe 'A)
+-> A
+: (show 'A)
+A NIL
+-> A
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(with 'sym . prg) -> any}}
+\label{sec:func-ref-W-(with 'sym . prg) -> any}
+
+
+Saves the current object \texttt{This} and sets it to the new value \texttt{sym}. Then
+\texttt{prg} is executed, and \texttt{This} is restored to its previous value. The
+return value is the result of \texttt{prg}. Used typically to access the local
+data of \texttt{sym} in the same manner as inside a method body. \texttt{prg} is not
+executed (and \texttt{NIL} is returned) when \texttt{sym} is \texttt{NIL}. \texttt{(with 'X . prg)}
+is equivalent to \texttt{(let? This 'X . prg)}.
+
+
+\begin{wideverbatim}
+: (put 'X 'a 1)
+-> 1
+: (put 'X 'b 2)
+-> 2
+: (with 'X (list (: a) (: b)))
+-> (1 2)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(wr 'cnt ..) -> cnt}}
+\label{sec:func-ref-W-(wr 'cnt ..) -> cnt}
+
+
+Writes all \texttt{cnt} arguments as raw bytes to the current output channel.
+See also \texttt{rd} and \texttt{pr}.
+
+
+\begin{wideverbatim}
+: (out "x" (wr 1 255 257))  # Write to "x"
+-> 257
+: (hd "x")
+00000000  01 FF 01                                         ...
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(wrap 'cnt 'lst) -> sym}}
+\label{sec:func-ref-W-(wrap 'cnt 'lst) -> sym}
+
+
+Returns a transient symbol with all characters in \texttt{lst} \texttt{pack}ed in lines with a maximal length of \texttt{cnt}. See also \texttt{tab}, \texttt{align} and
+\texttt{center}.
+
+
+\begin{wideverbatim}
+: (wrap 20 (chop "The quick brown fox jumps over the lazy dog"))
+-> "The quick brown fox^Jjumps over the lazy^Jdog"
+: (wrap 8 (chop "The quick brown fox jumps over the lazy dog"))
+-> "The^Jquick^Jbrown^Jfox^Jjumps^Jover the^Jlazy dog"
+\end{wideverbatim}
+
+

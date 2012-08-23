@@ -1,0 +1,795 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with R}
+\label{cha:func-ref-R-functions-starting-with-R}
+
+ 
+\section*{\texttt{*Run}}
+\label{sec:func-ref-R-*Run}
+
+
+This global variable can hold a list of \texttt{prg} expressions which are used
+during \texttt{key}, \texttt{sync}, \texttt{wait} and \texttt{listen}. The first element of each
+expression must either be a positive number (thus denoting a file
+descriptor to wait for) or a negative number (denoting a timeout value
+in milliseconds (in that case another number must follow to hold the
+remaining time)). A \texttt{select} system call is performed with these values,
+and the corresponding \texttt{prg} body is executed when input data are
+available or when a timeout occurred. See also \texttt{task}.
+
+
+\begin{wideverbatim}
+: (de *Run (-2000 0 (println '2sec)))     # Install 2-sec-timer
+-> *Run
+: 2sec                                    # Prints "2sec" every 2 seconds
+2sec
+2sec
+                                          # (Ctrl-D) Exit
+$
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+Ref}}
+\label{sec:func-ref-R-+Ref}
+
+
+Prefix class for maintaining non-unique indexes to \texttt{+relation}s, a subclass of \texttt{+index}. Accepts an optional argument for a \texttt{+Hook}
+attribute. See also \texttt{Database}.
+
+
+\begin{wideverbatim}
+(rel tel (+Fold +Ref +String))  # Phone number with folded, non-unique index
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+Ref2}}
+\label{sec:func-ref-R-+Ref2}
+
+
+Prefix class for maintaining a secondary (``backing'') index to
+\texttt{+relation}s. Can only be used as a prefix class to
+\texttt{+Key} or \texttt{+Ref}. It maintains an index in the current
+(sub)class, in addition to that in one of the superclasses, to allow
+(sub)class-specific queries. See also \texttt{Database}.
+
+
+\begin{wideverbatim}
+(class +Ord +Entity)             # Order class
+(rel nr (+Need +Key +Number))    # Order number
+...
+(class +EuOrd +Ord)              # EU-specific order subclass
+(rel nr (+Ref2 +Key +Number))    # Order number with backing index
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+relation}}
+\label{sec:func-ref-R-+relation}
+
+
+Abstract base class of all database releations. Relation objects are
+usually defined with \texttt{rel}. The class hierarchy includes the classes
+\texttt{+Any}, \texttt{+Bag}, \texttt{+Bool}, \texttt{+Number}, \texttt{+Date}, \texttt{+Time}, \texttt{+Symbol},
+\texttt{+String}, \texttt{+Link}, \texttt{+Joint} and \texttt{+Blob}, and the prefix classes
+\texttt{+Hook}, \texttt{+index}, \texttt{+Key}, \texttt{+Ref}, \texttt{+Ref2}, \texttt{+Idx}, \texttt{+Sn}, \texttt{+Fold},
+\texttt{+Aux}, \texttt{+UB}, \texttt{+Dep}, \texttt{+List}, \texttt{+Need}, \texttt{+Mis} and \texttt{+Alt}. See also
+\texttt{Database} and \texttt{+Entity}.
+
+Messages to relation objects include
+
+
+\begin{wideverbatim}
+mis> (Val Obj)       # Return error if mismatching type or value
+has> (Val X)         # Check if the value is present
+put> (Obj Old New)   # Put new value
+rel> (Obj Old New)   # Maintain relational strutures
+lose> (Obj Val)      # Delete relational structures
+keep> (Obj Val)      # Restore deleted relational structures
+zap> (Obj Val)       # Clean up relational structures
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(rand ['cnt1 'cnt2] | ['T]) -> cnt | flg}}
+\label{sec:func-ref-R-(rand ['cnt1 'cnt2] | ['T]) -> cnt | flg}
+
+
+Returns a pseudo random number in the range cnt1 .. cnt2 (or
+--2147483648 .. +2147483647 if no arguments are given). If the argument
+is \texttt{T}, a boolean value \texttt{flg} is returned. See also \texttt{seed}.
+
+
+\begin{wideverbatim}
+: (rand 3 9)
+-> 3
+: (rand 3 9)
+-> 7
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(range 'num1 'num2 ['num3]) -> lst}}
+\label{sec:func-ref-R-(range 'num1 'num2 ['num3]) -> lst}
+
+
+Produces a list of numbers in the range \texttt{num1} through \texttt{num2}. When
+\texttt{num3} is non-\texttt{NIL}), it is used to increment \texttt{num1} (if it is smaller
+than \texttt{num2}) or to decrement \texttt{num1} (if it is greater than \texttt{num2}). See
+also \texttt{need}.
+
+
+\begin{wideverbatim}
+: (range 1 6)
+-> (1 2 3 4 5 6)
+: (range 6 1)
+-> (6 5 4 3 2 1)
+: (range -3 3)
+-> (-3 -2 -1 0 1 2 3)
+: (range 3 -3 2)
+-> (3 1 -1 -3)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{range/3}}
+\label{sec:func-ref-R-range/3}
+
+
+\emph{Pilog} predicate that succeeds if the first argument
+is in the range of the result of applying the \texttt{get} algorithm to the
+following arguments. Typically used as filter predicate in \texttt{select/3}
+database queries. See also \texttt{Comparing}, \texttt{isa/2}, \texttt{same/3}, \texttt{bool/3},
+\texttt{head/3}, \texttt{fold/3}, \texttt{part/3} and \texttt{tolr/3}.
+
+
+\begin{wideverbatim}
+: (?
+   @Nr (1 . 5)  # Numbers between 1 and 5
+   @Nm "part"
+   (select (@Item)
+      ((nr +Item @Nr) (nm +Item @Nm))
+      (range @Nr @Item nr)
+      (part @Nm @Item nm) ) )
+ @Nr=(1 . 5) @Nm="part" @Item={3-1}                                              @Nr=(1 . 5) @Nm="part" @Item={3-2}
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(rank 'any 'lst ['flg]) -> lst}}
+\label{sec:func-ref-R-(rank 'any 'lst ['flg]) -> lst}
+
+
+Searches a ranking list. \texttt{lst} should be sorted. Returns the element
+from \texttt{lst} with a maximal CAR less or equal to \texttt{any} (if \texttt{flg} is
+\texttt{NIL}), or with a minimal CAR greater or equal to \texttt{any} (if \texttt{flg} is
+non-\texttt{NIL}), or \texttt{NIL} if no match is found. See also \texttt{assoc} and
+\emph{Comparing}.
+
+
+\begin{wideverbatim}
+: (rank 0 '((1 . a) (100 . b) (1000 . c)))
+-> NIL
+: (rank 50 '((1 . a) (100 . b) (1000 . c)))
+-> (1 . a)
+: (rank 100 '((1 . a) (100 . b) (1000 . c)))
+-> (100 . b)
+: (rank 300 '((1 . a) (100 . b) (1000 . c)))
+-> (100 . b)
+: (rank 9999 '((1 . a) (100 . b) (1000 . c)))
+-> (1000 . c)
+: (rank 50 '((1000 . a) (100 . b) (1 . c)) T)
+-> (100 . b)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(raw ['flg]) -> flg}}
+\label{sec:func-ref-R-(raw ['flg]) -> flg}
+
+
+Console mode control function. When called without arguments, it returns
+the current console mode (\texttt{NIL} for ``cooked mode''). Otherwise, the
+console is set to the new state. See also \texttt{key}.
+
+
+\begin{wideverbatim}
+$ pil
+: (raw)
+-> NIL
+$ pil +
+: (raw)
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(rc 'sym 'any1 ['any2]) -> any}}
+\label{sec:func-ref-R-(rc 'sym 'any1 ['any2]) -> any}
+
+
+Fetches a value from a resource file \texttt{sym}, or stores a value \texttt{any2} in
+that file, using a key \texttt{any1}. All values are stored in a list in the
+file, using \texttt{assoc}. During the whole operation, the file is exclusively
+locked with \texttt{ctl}.
+
+
+\begin{wideverbatim}
+: (info "a.rc")               # File exists?
+-> NIL                        # No
+: (rc "a.rc" 'a 1)            # Store 1 for 'a'
+-> 1
+: (rc "a.rc" 'b (2 3 4))      # Store (2 3 4) for 'b'
+-> (2 3 4)
+: (rc "a.rc" 'c 'b)           # Store 'b' for 'c'
+-> b
+: (info "a.rc")               # Check file
+-> (28 733124 . 61673)
+: (in "a.rc" (echo))          # Display it
+((c . b) (b 2 3 4) (a . 1))
+-> T
+: (rc "a.rc" 'c)              # Fetch value for 'c'
+-> b
+: (rc "a.rc" @)               # Fetch value for 'b'
+-> (2 3 4)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(rd ['sym]) -> any}}
+\label{sec:func-ref-R-(rd ['sym]) -> any}
+
+
+\texttt{(rd 'cnt) -> num | NIL}
+
+Binary read: Reads one item from the current input channel in encoded
+binary format. When called with a \texttt{cnt} argument (second form), that
+number of raw bytes (in big endian format if \texttt{cnt} is positive,
+otherwise little endian) is read as a single number. Upon end of file,
+if the \texttt{sym} argument is given, it is returned, otherwise \texttt{NIL}. See
+also \texttt{pr}, \texttt{tell}, \texttt{hear} and \texttt{wr}.
+
+
+\begin{wideverbatim}
+: (out "x" (pr 'abc "EOF" 123 "def"))
+-> "def"
+: (in "x" (rd))
+-> abc
+: (in "x"
+   (make
+      (use X
+         (until (== "EOF" (setq X (rd "EOF")))  # '==' detects end of file
+            (link X) ) ) ) )
+-> (abc "EOF" 123 "def")  # as opposed to reading a symbol "EOF"
+
+: (in "/dev/urandom" (rd 20))
+-> 396737673456823753584720194864200246115286686486
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(read ['sym1 ['sym2]]) -> any}}
+\label{sec:func-ref-R-(read ['sym1 ['sym2]]) -> any}
+
+
+Reads one item from the current input channel. \texttt{NIL} is returned upon
+end of file. When called without arguments, an arbitrary Lisp expression
+is read. Otherwise, a token (a number, or an internal or transient
+symbol) is read. In that case, \texttt{sym1} specifies which set of characters
+to accept for continuous symbol names (in addition to the standard
+alphanumerical characters), and \texttt{sym2} an optional comment character.
+See also \texttt{any}, \texttt{str}, \texttt{skip} and \texttt{eof}.
+
+
+\begin{wideverbatim}
+: (list (read) (read) (read))    # Read three things from console
+123                              # a number
+abcd                             # a symbol
+(def                             # and a list
+ghi
+jkl
+)
+-> (123 abcd (def ghi jkl))
+: (make (while (read "_" "#") (link @)))
+abc = def_ghi("xyz"+-123) # Comment
+NIL
+-> (abc "=" def_ghi "(" "xyz" "+" "-" 123 ")")
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(recur fun) -> any}}
+\label{sec:func-ref-R-(recur fun) -> any}
+
+
+\texttt{(recurse ..) -> any}
+
+Implements anonymous recursion, by defining the function \texttt{recurse} on
+the fly. During the execution of \texttt{fun}, the symbol \texttt{recurse} is bound to
+the function definition \texttt{fun}. See also \texttt{let} and \texttt{lambda}.
+
+
+\begin{wideverbatim}
+: (de fibonacci (N)
+   (when (lt0 N)
+      (quit "Bad fibonacci" N) )
+   (recur (N)
+      (if (> 2 N)
+         1
+         (+
+            (recurse (dec N))
+            (recurse (- N 2)) ) ) ) )
+-> fibonacci
+: (fibonacci 22)
+-> 28657
+: (fibonacci -7)
+-7 -- Bad fibonacci
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(redef sym . fun) -> sym}}
+\label{sec:func-ref-R-(redef sym . fun) -> sym}
+
+
+Redefines \texttt{sym} in terms of itself. The current definition is saved in a
+new symbol, which is substituted for each occurrence of \texttt{sym} in \texttt{fun},
+and which is also returned. See also \texttt{de}, \texttt{undef}, \texttt{daemon} and
+\texttt{patch}.
+
+
+\begin{wideverbatim}
+: (de hello () (prinl "Hello world!"))
+-> hello
+: (pp 'hello)
+(de hello NIL
+   (prinl "Hello world!") )
+-> hello
+
+: (redef hello (A B)
+   (println 'Before A)
+   (prog1 (hello) (println 'After B)) )
+-> "hello"
+: (pp 'hello)
+(de hello (A B)
+   (println 'Before A)
+   (prog1 ("hello") (println 'After B)) )
+-> hello
+: (hello 1 2)
+Before 1
+Hello world!
+After 2
+-> "Hello world!"
+
+: (redef * @
+   (msg (rest))
+   (pass *) )
+-> "*"
+: (* 1 2 3)
+(1 2 3)
+-> 6
+
+: (redef + @
+   (pass (ifn (num? (next)) pack +) (arg)) )
+-> "+"
+: (+ 1 2 3)
+-> 6
+: (+ "a" 'b '(c d e))
+-> "abcde"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(rel var lst [any ..]) -> any}}
+\label{sec:func-ref-R-(rel var lst [any ..]) -> any}
+
+
+Defines a relation for \texttt{var} in the current class \texttt{*Class}, using \texttt{lst}
+as the list of classes for that relation, and possibly additional
+arguments \texttt{any} for its initialization. See also
+\emph{Database}, \emph{class},
+\emph{extend}, \emph{dm} and
+\emph{var}.
+
+
+\begin{wideverbatim}
+(class +Person +Entity)
+(rel nm  (+List +Ref +String))            # Names
+(rel tel (+Ref +String))                  # Telephone
+(rel adr (+Joint) prs (+Address))         # Address
+
+(class +Address +Entity)
+(rel cit (+Need +Hook +Link) (+City))     # City
+(rel str (+List +Ref +String) cit)        # Street
+(rel prs (+List +Joint) adr (+Person))    # Inhabitants
+
+(class +City +Entity)
+(rel nm  (+List +Ref +String))            # Zip / Names
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(release 'sym) -> NIL}}
+\label{sec:func-ref-R-(release 'sym) -> NIL}
+
+
+Releases the mutex represented by the file `sym'. This is the reverse
+operation of \texttt{acquire}.
+
+
+\begin{wideverbatim}
+: (release "sema1")
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{remote/2}}
+\label{sec:func-ref-R-remote/2}
+
+
+\emph{Pilog} predicate for remote database queries. It
+takes a list and an arbitrary number of clauses. The list should contain
+a Pilog variable for the result in the CAR, and a list of resources in
+the CDR. The clauses will be evaluated on remote machines according to
+these resources. Each resource must be a cons pair of two functions, an
+``out'' function in the CAR, and an ``in'' function in the CDR. See also
+\texttt{*Ext}, \texttt{select/3} and \texttt{db/3}.
+
+
+\begin{wideverbatim}
+(setq *Ext           # Set up external offsets
+   (mapcar
+      '((@Host @Ext)
+         (cons @Ext
+            (curry (@Host @Ext (Sock)) (Obj)
+               (when (or Sock (setq Sock (connect @Host 4040)))
+                  (ext @Ext
+                     (out Sock (pr (cons 'qsym Obj)))
+                     (prog1 (in Sock (rd))
+                        (unless @
+                           (close Sock)
+                           (off Sock) ) ) ) ) ) ) )
+      '("localhost")
+      '(20) ) )
+
+(de rsrc ()  # Simple resource handler, ignoring errors or EOFs
+   (extract
+      '((@Ext Host)
+         (let? @Sock (connect Host 4040)
+            (cons
+               (curry (@Ext @Sock) (X)  # out
+                  (ext @Ext (out @Sock (pr X))) )
+               (curry (@Ext @Sock) ()  # in
+                  (ext @Ext (in @Sock (rd))) ) ) ) )
+      '(20)
+      '("localhost") ) )
+
+: (?
+   @Nr (1 . 3)
+   @Sup 2
+   @Rsrc (rsrc)
+   (remote (@Item . @Rsrc)
+      (db nr +Item @Nr @Item)
+      (val @Sup @Item sup nr) )
+   (show @Item) )
+{L-2} (+Item)
+   pr 1250
+   inv 100
+   sup {K-2}
+   nm Spare Part
+   nr 2
+ @Nr=(1 . 3) @Sup=2 @Rsrc=((((X) (ext 20 (out 16 (pr X)))) NIL (ext 20 (in 16 (rd))))) @Item={L-2}
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(remove 'cnt 'lst) -> lst}}
+\label{sec:func-ref-R-(remove 'cnt 'lst) -> lst}
+
+
+Removes the element at position \texttt{cnt} from \texttt{lst}. This is a
+non-destructive operation. See also \texttt{insert}, \texttt{place}, \texttt{append},
+\texttt{delete} and \texttt{replace}.
+
+
+\begin{wideverbatim}
+: (remove 3 '(a b c d e))
+-> (a b d e)
+: (remove 1 '(a b c d e))
+-> (b c d e)
+: (remove 9 '(a b c d e))
+-> (a b c d e)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(repeat) -> lst}}
+\label{sec:func-ref-R-(repeat) -> lst}
+
+
+Makes the current \emph{Pilog} definition ``tail recursive'',
+by closing the previously defined clauses in the T property to a
+circular list. See also \texttt{be}.
+
+
+\begin{wideverbatim}
+(be a (1))     # Define three facts
+(be a (2))
+(be a (3))
+(repeat)       # Unlimited supply
+
+: (? (a @N))
+ @N=1
+ @N=2
+ @N=3
+ @N=1
+ @N=2
+ @N=3.         # Stop
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{repeat/0}}
+\label{sec:func-ref-R-repeat/0}
+
+
+\emph{Pilog} predicate that always succeeds, also on
+backtracking. See also \texttt{repeat} and \texttt{true/0}.
+
+
+\begin{wideverbatim}
+: (be int (@N)       # Generate unlimited supply of integers
+   (@ zero *N)
+   (repeat)          # Repeat from here
+   (@N inc '*N) )
+-> int
+
+:  (? (int @X))
+ @X=1
+ @X=2
+ @X=3
+ @X=4.               # Stop
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(replace 'lst 'any1 'any2 ..) -> lst}}
+\label{sec:func-ref-R-(replace 'lst 'any1 'any2 ..) -> lst}
+
+
+Replaces in \texttt{lst} all occurrences of \texttt{any1} with \texttt{any2}. For optional
+additional argument pairs, this process is repeated. This is a
+non-destructive operation. See also \texttt{append}, \texttt{delete}, \texttt{insert},
+\texttt{remove} and \texttt{place}.
+
+
+\begin{wideverbatim}
+: (replace '(a b b a) 'a 'A)
+-> (A b b A)
+: (replace '(a b b a) 'b 'B)
+-> (a B B a)
+: (replace '(a b b a) 'a 'B 'b 'A)
+-> (B A A B)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(request 'typ 'var ['hook] 'val ..) -> obj}}
+\label{sec:func-ref-R-(request 'typ 'var ['hook] 'val ..) -> obj}
+
+
+Returns a database object. If a matching object cannot be found (using
+\texttt{db}), a new object of the given type is created (using \texttt{new}). See also
+\texttt{obj}.
+
+
+\begin{wideverbatim}
+: (request '(+Item) 'nr 2)
+-> {3-2}
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(rest) -> lst}}
+\label{sec:func-ref-R-(rest) -> lst}
+
+
+Can only be used inside functions with a variable number of arguments
+(with \texttt{@}). Returns the list of all remaining arguments from the
+internal list. See also \texttt{args}, \texttt{next}, \texttt{arg} and \texttt{pass}.
+
+
+\begin{wideverbatim}
+: (de foo @ (println (rest)))
+-> foo
+: (foo 1 2 3)
+(1 2 3)
+-> (1 2 3)
+\end{wideverbatim}
+
+
+\section*{\texttt{(retract) -> lst}}
+
+Removes a \emph{Pilog} fact or rule. See also \texttt{be},
+\texttt{clause}, \texttt{asserta} and \texttt{assertz}.
+
+\begin{wideverbatim}
+: (be a (1))
+-> a
+: (be a (2))
+-> a
+: (be a (3))
+-> a
+
+: (retract '(a (2)))
+-> (((1)) ((3)))
+
+:  (? (a @N))
+ @N=1
+ @N=3
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{retract/1}}
+\label{sec:func-ref-R-(retract) -> lst}
+
+
+\emph{Pilog} predicate that removes a fact or rule. See
+also \texttt{retract}, \texttt{asserta/1} and \texttt{assertz/1}.
+
+
+\begin{wideverbatim}
+: (be a (1))
+-> a
+: (be a (2))
+-> a
+: (be a (3))
+-> a
+
+: (? (retract (a 2)))
+-> T
+: (rules 'a)
+1 (be a (1))
+2 (be a (3))
+-> a
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(reverse 'lst) -> lst}}
+\label{sec:func-ref-R-(reverse 'lst) -> lst}
+
+
+Returns a reversed copy of \texttt{lst}. See also \texttt{flip}.
+
+
+\begin{wideverbatim}
+: (reverse (1 2 3 4))
+-> (4 3 2 1)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(rewind) -> flg}}
+\label{sec:func-ref-R-(rewind) -> flg}
+
+
+Sets the file position indicator for the current output stream to the
+beginning of the file, and truncates the file length to zero. Returns
+\texttt{T} when successful. See also \texttt{flush}.
+
+
+\begin{wideverbatim}
+: (out "a" (prinl "Hello world"))
+-> "Hello world"
+: (in "a" (echo))
+Hello world
+-> T
+: (info "a")
+-> (12 733216 . 53888)
+: (out "a" (rewind))
+-> T
+: (info "a")
+-> (0 733216 . 53922)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(rollback) -> T}}
+\label{sec:func-ref-R-(rollback) -> T}
+
+
+Cancels a transaction, by discarding all modifications of external
+symbols. See also \texttt{commit}.
+
+
+\begin{wideverbatim}
+: (pool "db")
+-> T
+# .. Modify external objects ..
+: (rollback)            # Rollback
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(root 'tree) -> (num . sym)}}
+\label{sec:func-ref-R-(root 'tree) -> (num . sym)}
+
+
+Returns the root of a database index tree, with the number of entries in
+\texttt{num}, and the base node in \texttt{sym}. See also \texttt{tree}.
+
+
+\begin{wideverbatim}
+: (root (tree 'nr '+Item))
+-> (7 . {7-1})
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(rot 'lst ['cnt]) -> lst}}
+\label{sec:func-ref-R-(rot 'lst ['cnt]) -> lst}
+
+
+Rotate: The contents of the cells of \texttt{lst} are (destructively) shifted
+right, and the value from the last cell is stored in the first cell.
+Without the optional \texttt{cnt} argument, the whole list is rotated,
+otherwise only the first \texttt{cnt} elements. See also \texttt{flip} .
+
+
+\begin{wideverbatim}
+: (rot (1 2 3 4))             # Rotate all four elements
+-> (4 1 2 3)
+: (rot (1 2 3 4 5 6) 3)       # Rotate only the first three elements
+-> (3 1 2 4 5 6)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(round 'num1 'num2) -> sym}}
+\label{sec:func-ref-R-(round 'num1 'num2) -> sym}
+
+
+Formats a number \texttt{num1} with \texttt{num2} decimal places, according to the
+current scale \texttt{*Scl}. \texttt{num2} defaults to 3. See also
+\emph{Numbers} and \texttt{format}.
+
+
+\begin{wideverbatim}
+: (scl 4)               # Set scale to 4
+-> 4
+: (round 123456)        # Format with three decimal places
+-> "12.346"
+: (round 123456 2)      # Format with two decimal places
+-> "12.35"
+: (format 123456 *Scl)  # Format with full precision
+-> "12.3456"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(rules 'sym ..) -> sym}}
+\label{sec:func-ref-R-(rules 'sym ..) -> sym}
+
+
+Prints all rules defined for the \texttt{sym} arguments. See also
+\emph{Pilog} and \texttt{be}.
+
+
+\begin{wideverbatim}
+: (rules 'member 'append)
+1 (be member (@X (@X . @)))
+2 (be member (@X (@ . @Y)) (member @X @Y))
+1 (be append (NIL @X @X))
+2 (be append ((@A . @X) @Y (@A . @Z)) (append @X @Y @Z))
+-> append
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(run 'any ['cnt ['lst]]) -> any}}
+\label{sec:func-ref-R-(run 'any ['cnt ['lst]]) -> any}
+
+
+If \texttt{any} is an atom, \texttt{run} behaves like \texttt{eval}. Otherwise \texttt{any} is a
+list, which is evaluated in sequence. The last result is returned. If a
+binding environment offset \texttt{cnt} is given, that evaluation takes place
+in the corresponding environment, and an optional \texttt{lst} of excluded
+symbols can be supplied. See also \texttt{up}.
+
+
+\begin{wideverbatim}
+: (run '((println (+ 1 2 3)) (println 'OK)))
+6
+OK
+-> OK
+\end{wideverbatim}
+
+

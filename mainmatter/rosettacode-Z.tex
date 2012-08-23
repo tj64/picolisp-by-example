@@ -1,0 +1,192 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+\chapter{Rosetta Code Tasks starting with Z}
+
+\section*{Zebra puzzle}
+
+The \href{http://en.wikipedia.org/wiki/Zebra\_puzzle}{Zebra puzzle},
+a.k.a. Einstein's Riddle, is a logic puzzle which is to be solved
+programmatically. It has several variants, one of them this:
+
+\begin{enumerate}
+\item
+  There are five houses.
+\item
+  The English man lives in the red house.
+\item
+  The Swede has a dog.
+\item
+  The Dane drinks tea.
+\item
+  The green house is immediately to the left of the white house.
+\item
+  They drink coffee in the green house.
+\item
+  The man who smokes Pall Mall has birds.
+\item
+  In the yellow house they smoke Dunhill.
+\item
+  In the middle house they drink milk.
+\item
+  The Norwegian lives in the first house.
+\item
+  The man who smokes Blend lives in the house next to the house with
+  cats.
+\item
+  In a house next to the house where they have a horse, they smoke
+  Dunhill.
+\item
+  The man who smokes Blue Master drinks beer.
+\item
+  The German smokes Prince.
+\item
+  The Norwegian lives next to the blue house.
+\item
+  They drink water in a house next to the house where they smoke Blend.
+\end{enumerate}
+
+The question is, who owns the zebra?
+
+Additionally, list the solution for all the houses. Optionally, show the
+solution is unique.
+
+cf. \emph{Dinesman's multiple-dwelling problem}
+
+
+
+\begin{wideverbatim}
+
+(be match (@House @Person @Drink @Pet @Cigarettes)
+   (permute (red blue green yellow white) @House)
+   (left-of @House white  @House green)
+
+   (permute (Norwegian English Swede German Dane) @Person)
+   (has @Person English  @House red)
+   (equal @Person (Norwegian . @))
+   (next-to @Person Norwegian  @House blue)
+
+   (permute (tea coffee milk beer water) @Drink)
+   (has @Drink tea  @Person Dane)
+   (has @Drink coffee  @House green)
+   (equal @Drink (@ @ milk . @))
+
+   (permute (dog birds cats horse zebra) @Pet)
+   (has @Pet dog  @Person Swede)
+
+   (permute (Pall-Mall Dunhill Blend Blue-Master Prince) @Cigarettes)
+   (has @Cigarettes Pall-Mall  @Pet birds)
+   (has @Cigarettes Dunhill  @House yellow)
+   (next-to @Cigarettes Blend  @Pet cats)
+   (next-to @Cigarettes Dunhill  @Pet horse)
+   (has @Cigarettes Blue-Master  @Drink beer)
+   (has @Cigarettes Prince  @Person German)
+
+   (next-to @Drink water  @Cigarettes Blend) )
+
+\end{wideverbatim}
+
+\begin{wideverbatim}
+
+
+(be has ((@A . @X) @A (@B . @Y) @B))
+(be has ((@ . @X) @A (@ . @Y) @B)
+   (has @X @A @Y @B) )
+
+(be right-of ((@A . @X) @A (@ @B . @Y) @B))
+(be right-of ((@ . @X) @A (@ . @Y) @B)
+   (right-of @X @A @Y @B) )
+
+(be left-of ((@ @A . @X) @A (@B . @Y) @B))
+(be left-of ((@ . @X) @A (@ . @Y) @B)
+   (left-of @X @A @Y @B) )
+
+(be next-to (@X @A @Y @B) (right-of @X @A @Y @B))
+(be next-to (@X @A @Y @B) (left-of @X @A @Y @B))
+
+Test:
+
+(pilog '((match @House @Person @Drink @Pet @Cigarettes))
+   (let Fmt (-8 -11 -8 -7 -11)
+      (tab Fmt "HOUSE" "PERSON" "DRINKS" "HAS" "SMOKES")
+      (mapc '(@ (pass tab Fmt))
+         @House @Person @Drink @Pet @Cigarettes ) ) )
+
+Output:
+
+HOUSE   PERSON     DRINKS  HAS    SMOKES
+yellow  Norwegian  water   cats   Dunhill
+blue    Dane       tea     horse  Blend
+red     English    milk    birds  Pall-Mall
+green   German     coffee  zebra  Prince
+white   Swede      beer    dog    Blue-Master
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Zig-zag matrix}
+
+
+Produce a zig-zag array. A zig-zag array is a square arrangement of the
+first \texttt{N2} integers, where the numbers increase sequentially as
+you zig-zag along the anti-diagonals of the array. For a graphical
+representation, see
+\href{http://en.wikipedia.org/wiki/Image:JPEG\_ZigZag.svg}{JPG zigzag}
+(JPG uses such arrays to encode images).
+
+For example, given \texttt{5}, produce this array:
+
+\begin{verbatim}
+ 0  1  5  6 14
+ 2  4  7 13 15
+ 3  8 12 16 21
+ 9 11 17 20 22
+10 18 19 23 24
+\end{verbatim}
+
+
+\begin{wideverbatim}
+
+This example uses 'grid' from "lib/simul.l", which maintains a two-dimensional
+structure and is normally used for simulations and board games.
+
+(load "@lib/simul.l")
+
+(de zigzag (N)
+   (prog1 (grid N N)
+      (let (D '(north west  south east  .)  E '(north east .)  This 'a1)
+         (for Val (* N N)
+            (=: val Val)
+            (setq This
+               (or
+                  ((cadr D) ((car D) This))
+                  (prog
+                     (setq D (cddr D))
+                     ((pop 'E) This) )
+                  ((pop 'E) This) ) ) ) ) ) )
+
+(mapc
+   '((L)
+      (for This L (prin (align 3 (: val))))
+      (prinl) )
+   (zigzag 5) )
+
+Output:
+
+  1  2  6  7 15
+  3  5  8 14 16
+  4  9 13 17 22
+ 10 12 18 21 23
+ 11 19 20 24 25
+
+
+\end{wideverbatim}                 
+
+
+% \input{referenc}

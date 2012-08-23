@@ -1,0 +1,67 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with X}
+\label{cha:func-ref-X-functions-starting-with-X}
+ 
+\section*{\texttt{(xchg 'var 'var ..) -> any}}
+\label{sec:func-ref-X-(xchg 'var 'var ..) -> any}
+
+
+Exchange the values of successive \texttt{var} argument pairs.
+
+
+\begin{wideverbatim}
+: (setq  A 1  B 2  C '(a b c))
+-> (a b c)
+: (xchg  'A C  'B (cdr C))
+-> 2
+: A
+-> a
+: B
+-> b
+: C
+-> (1 2 c)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(xor 'any 'any) -> flg}}
+\label{sec:func-ref-X-(xor 'any 'any) -> flg}
+
+
+Returns T if exactly one of the arguments evaluates to non-\texttt{NIL}.
+
+
+\begin{wideverbatim}
+: (xor T NIL)
+-> T
+: (xor T T)
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(x| 'num ..) -> num}}
+\label{sec:func-ref-X-(x| 'num ..) -> num}
+
+
+Returns the bitwise \texttt{XOR} of all \texttt{num} arguments. When one of the
+arguments evaluates to \texttt{NIL}, it is returned immediately. See also \texttt{\&},
+\texttt{|} and \texttt{bit?}.
+
+
+\begin{wideverbatim}
+: (x| 2 7)
+-> 5
+: (x| 2 7 1)
+-> 4
+\end{wideverbatim}
+
+

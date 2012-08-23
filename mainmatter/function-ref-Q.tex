@@ -1,0 +1,120 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with Q}
+\label{cha:func-ref-Q-functions-starting-with-Q}
+ 
+\section*{\texttt{(qsym . sym) -> lst}}
+\label{sec:func-ref-Q-(qsym . sym) -> lst}
+
+
+Returns a cons pair of the value and property list of \texttt{sym}. See also
+\texttt{quote}, \texttt{val} and \texttt{getl}.
+
+
+\begin{wideverbatim}
+: (setq A 1234)
+-> 1234
+: (put 'A 'a 1)
+-> 1
+: (put 'A 'b 2)
+-> 2
+: (put 'A 'f T)
+-> T
+: (qsym . A)
+-> (1234 f (2 . b) (1 . a))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(quote . any) -> any}}
+\label{sec:func-ref-Q-(quote . any) -> any}
+
+
+Returns \texttt{any} unevaluated. The reader recognizes the single quote char
+\texttt{'} as a macro for this function. See also \texttt{lit}.
+
+
+\begin{wideverbatim}
+: 'a
+-> a
+: '(foo a b c)
+-> (foo a b c)
+: (quote (quote (quote a)))
+-> ('('(a)))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(query 'lst ['lst]) -> flg}}
+\label{sec:func-ref-Q-(query 'lst ['lst]) -> flg}
+
+
+Handles an interactive \emph{Pilog} query. The two \texttt{lst}
+arguments are passed to \texttt{prove}. \texttt{query} displays each result, waits for
+console input, and terminates when a non-empty line is entered. See also
+\texttt{?}, \texttt{pilog} and \texttt{solve}.
+
+
+\begin{wideverbatim}
+: (query (goal '((append @X @Y (a b c)))))
+ @X=NIL @Y=(a b c)
+ @X=(a) @Y=(b c).   # Stop
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(queue 'var 'any) -> any}}
+\label{sec:func-ref-Q-(queue 'var 'any) -> any}
+
+
+Implements a queue using a list in \texttt{var}. The \texttt{any} argument is
+(destructively) concatenated to the end of the value list. See also
+\texttt{push}, \texttt{pop} and \texttt{fifo}.
+
+
+\begin{wideverbatim}
+: (queue 'A 1)
+-> 1
+: (queue 'A 2)
+-> 2
+: (queue 'A 3)
+-> 3
+: A
+-> (1 2 3)
+: (pop 'A)
+-> 1
+: A
+-> (2 3)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(quit ['any ['any]])}}
+\label{sec:func-ref-Q-(quit ['any ['any]])}
+
+
+Stops current execution. If no arguments are given, all pending
+\texttt{finally} expressions are executed and control is returned to the top
+level read-eval-print loop. Otherwise, an error handler is entered. The
+first argument can be some error message, and the second might be the
+reason for the error. See also \texttt{Error Handling}.
+
+
+\begin{wideverbatim}
+: (de foo (X) (quit "Sorry, my error" X))
+-> foo
+: (foo 123)                                  # 'X' is bound to '123'
+123 -- Sorry, my error                       # Error entered
+? X                                          # Inspect 'X'
+-> 123
+?                                            # Empty line: Exit
+:
+\end{wideverbatim}
+
+

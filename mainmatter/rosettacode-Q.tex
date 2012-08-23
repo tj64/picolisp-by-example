@@ -1,0 +1,237 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+\chapter{Rosetta Code Tasks starting with Q}
+
+\section*{Queue/Definition}
+
+\textbf{Data Structure}\\ This illustrates a data structure, a means of
+storing data within a program.
+
+You may see other such structures in the
+\emph{Data Structures} category.
+
+% % animated graphic, no way to print
+% \begin{figure}[H]
+% \centering
+% \includegraphics[scale=.6]{graphics/Fifo.gif}
+% \end{figure}
+
+\textbf{Task}
+
+Implement a FIFO queue. Elements are added at one side and popped from
+the other in the order of insertion.
+
+Operations:
+
+\begin{itemize}
+\item
+  push (aka \emph{enqueue}) - add element
+\item
+  pop (aka \emph{dequeue}) - pop first element
+\item
+  empty - return truth value when empty
+\end{itemize}
+
+Errors:
+
+\begin{itemize}
+\item
+  handle the error of trying to pop from an empty queue (behavior
+  depends on the language and platform)
+\end{itemize}
+
+See \emph{FIFO (usage)} for the built-in FIFO or
+queue of your language or standard library.
+
+
+\begin{wideverbatim}
+
+The built-in function 'fifo' maintains a queue in a circular list, with direct
+access to the first and the last cell
+
+(off Queue)                # Clear Queue
+(fifo 'Queue 1)            # Store number '1'
+(fifo 'Queue 'abc)         # an internal symbol 'abc'
+(fifo 'Queue "abc")        # a transient symbol "abc"
+(fifo 'Queue '(a b c))     # and a list (a b c)
+Queue                      # Show the queue
+
+Output:
+
+->((a b c) 1 abc "abc" .)
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Queue/Usage}
+
+
+\textbf{Data Structure}\\ This illustrates a data structure, a means of
+storing data within a program.
+
+You may see other such structures in the \emph{Data Structures}
+category.
+
+% % animated graphic, no way to print
+% \begin{figure}[H]
+% \centering
+% \includegraphics[scale=.6]{graphics/Fifo.gif}
+% \end{figure}
+
+\textbf{Task}
+
+Create a queue data structure and demonstrate its operations. (For
+implementations of queues, see the \emph{FIFO} task.)
+
+Operations:
+
+\begin{itemize}
+\item
+  push (aka \emph{enqueue}) - add element
+\item
+  pop (aka \emph{dequeue}) - pop first element
+\item
+  empty - return truth value when empty
+\end{itemize}
+
+
+\begin{wideverbatim}
+
+Using the implementation from [[FIFO]]:
+(println (fifo 'Queue))    # Retrieve the number '1'
+(println (fifo 'Queue))    # Retrieve an internal symbol 'abc'
+(println (fifo 'Queue))    # Retrieve a transient symbol "abc"
+(println (fifo 'Queue))    # and a list (abc)
+(println (fifo 'Queue))    # Queue is empty -> NIL
+
+Output:
+
+1
+abc
+"abc"
+(a b c)
+NIL
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Quine}
+
+
+A \href{http://en.wikipedia.org/wiki/Quine\_(computing)}{Quine} is a
+self-referential program that can, without any external access, output
+its own source. It is named after the
+\href{http://en.wikipedia.org/wiki/Willard\_Van\_Orman\_Quine}{philosopher
+and logician} who studied self-reference and quoting in natural
+language, as for example in the paradox ``\,`Yields falsehood when
+preceded by its quotation' yields falsehood when preceded by its
+quotation.''
+
+``Source'' has one of two meanings. It can refer to the text-based
+program source. For languages in which program source is represented as
+a data structure, ``source'' may refer to the data structure: quines in
+these languages fall into two categories: programs which print a textual
+representation of themselves, or expressions which evaluate to a data
+structure which is equivalent to that expression.
+
+The usual way to code a Quine works similarly to this paradox: The
+program consists of two identical parts, once as plain code and once
+\emph{quoted} in some way (for example, as a character string, or a
+literal data structure). The plain code then accesses the quoted code
+and prints it out twice, once unquoted and once with the proper
+quotation marks added. Often, the plain code and the quoted code have to
+be nested.
+
+Write a program that outputs its own source code in this way. If the
+language allows it, you may add a variant that accesses the code
+directly. You are not allowed to read any external files with the source
+code. The program should also contain some sort of self-reference, so
+constant expressions which return their own value which some top-level
+interpreter will print out. Empty programs producing no output are not
+allowed.
+
+There are several difficulties that one runs into when writing a quine,
+mostly dealing with quoting:
+
+\begin{itemize}
+\item
+  Part of the code usually needs to be stored as a string or structural
+  literal in the language, which needs to be quoted somehow. However,
+  including quotation marks in the string literal itself would be
+  troublesome because it requires them to be escaped, which then
+  necessitates the escaping character (e.g. a backslash) in the string,
+  which itself usually needs to be escaped, and so on.
+
+  \begin{itemize}
+  \item
+    Some languages have a function for getting the ``source code
+    representation'' of a string (i.e. adds quotation marks, etc.); in
+    these languages, this can be used to circumvent the quoting problem.
+  \item
+    Another solution is to construct the quote character from its
+    \emph{character code}, without having to
+    write the quote character itself. Then the character is inserted
+    into the string at the appropriate places. The ASCII code for
+    double-quote is 34, and for single-quote is 39.
+  \end{itemize}
+\item
+  Newlines in the program may have to be reproduced as newlines in the
+  string, which usually requires some kind of escape sequence (e.g.
+  ``\textbackslash{}n''). This causes the same problem as above, where
+  the escaping character needs to itself be escaped, etc.
+
+  \begin{itemize}
+  \item
+    If the language has a way of getting the ``source code
+    representation'', it usually handles the escaping of characters, so
+    this is not a problem.
+  \item
+    Some languages allow you to have a string literal that spans
+    multiple lines, which embeds the newlines into the string without
+    escaping.
+  \item
+    Write the entire program on one line, for free-form languages (as
+    you can see for some of the solutions here, they run off the edge of
+    the screen), thus removing the need for newlines. However, this may
+    be unacceptable as some languages require a newline at the end of
+    the file; and otherwise it is still generally good style to have a
+    newline at the end of a file. (The task is not clear on whether a
+    newline is required at the end of the file.) Some languages have a
+    print statement that appends a newline; which solves the
+    newline-at-the-end issue; but others do not.
+  \end{itemize}
+\end{itemize}
+
+See the nostalgia note under Fortran.
+
+
+\begin{wideverbatim}
+
+Using 'quote' (= 'lambda' in PicoLisp)
+
+('((X) (list (lit X) (lit X))) '((X) (list (lit X) (lit X))))
+
+Output:
+
+-> ('((X) (list (lit X) (lit X))) '((X) (list (lit X) (lit X))))
+
+Using 'let'
+
+(let X '(list 'let 'X (lit X) X) (list 'let 'X (lit X) X))
+
+Output:
+
+-> (let X '(list 'let 'X (lit X) X) (list 'let 'X (lit X) X))
+
+\end{wideverbatim}
+
+
+
+% \input{referenc}

@@ -1,0 +1,110 @@
+%%%%%%%%%%%%%%%%%%%%%%preface.tex%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% sample preface
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\preface
+
+%% Please write your preface here
+% Use the template \emph{preface.tex} together with the Springer document class SVMono (monograph-type books) or SVMult (edited books) to style your preface in the Springer layout.
+
+% A preface\index{preface} is a book's preliminary statement, usually written by the \textit{author or editor} of a work, which states its origin, scope, purpose, plan, and intended audience, and which sometimes includes afterthoughts and acknowledgments of assistance. 
+
+% When written by a person other than the author, it is called a foreword. The preface or foreword is distinct from the introduction, which deals with the subject of the work.
+
+% Customarily \textit{acknowledgments} are included as last part of the preface.
+
+
+\emph{Why PicoLisp?} Short answer: PicoLisp as a language is
+maximizing expressive power while minimizing complexity
+
+PicoLisp is a very simple and succinct, yet expressive language -- and
+it is free (MIT/X11 License). Furthermore, PicoLisp has two
+characteristic features which are not found to that extent in other
+languages:
+
+\begin{enumerate}
+\item
+  An integrated database
+\item
+  Equivalence of code and data
+\end{enumerate}
+
+These two features alone, and how they are used in combination, make
+it worth to take a closer look at PicoLisp.
+
+\begin{description}
+\item[\emph{Integrated Database}]
+  \href{http://software-lab.de/doc/ref.html\#dbase}{Database}
+functionality is built into the core of the language. PicoLisp
+\textbf{is} a database query and manipulation language.
+
+Database entities are first class objects. They are called ``external
+symbols'', because they are automatically fetched from database files
+when accessed, but otherwise behave like normal symbols.
+
+This fetching from external files is completely transparent, the
+symbols ``are just there'', and there is no need (or even a function)
+to read or write them explicitly.
+\href{http://software-lab.de/doc/ref.html\#pilog}{Pilog} (a built-in
+Prolog engine) is used as a query language.
+
+It is possible with PicoLisp to build large multi-user databases,
+distributed across many machines or in a cloud. Such a database system
+can be optimally fine-tuned, because all its levels are under the
+developer's control.
+
+\item[\emph{Equivalence of Code and Data}]
+
+  This is actually a feature of Lisp in general. However, PicoLisp
+  really \emph{lives} it. It makes it easy to write things like the
+  HTML, PostScript or TeX libraries, exploring a syntax of nested
+  function calls. This results in very succinct and precisely
+  expressed programs.
+
+For a closer explanation, see the article
+\href{!wiki?EquivalenceCodeData}{The Equivalence of Code and Data}.
+
+\item[\emph{Expressiveness}] PicoLisp is a very expressive language. Programs
+are often much shorter and concise than equivalent programs written in
+other languages.
+
+Examples of various programming tasks and their solutions, originally
+published at
+\href{http://rosettacode.org/wiki/Category:PicoLisp}{rosettacode.org},
+can be found in this book.
+
+\item[\emph{Efficiency}] 
+
+PicoLisp uses (at least when compared to other
+Lisps) very little memory, on disk as well as in memory (heap space).
+
+For example, the installation size in the OpenWRT distribution is only
+575 kB (uncompressed), where the statically linked interpreter with
+296 kB takes the largest part. Yet, it includes the full runtime
+system with interpreter, database, HTTP server, XHTML and JavaScript
+application framework, watchdog, and the debugger, PostScript and XML
+libraries.
+
+PicoLisp has no compiler, everything starts up very quickly, and code
+dynamically loaded at runtime (e.g. GUI pages) is immediately ready.
+Yet, the interpreter is quite fast, usually three times a fast as
+Python, for example. See also the article
+\href{!wiki?NeedForSpeed}{Need For Speed}.
+\end{description}
+
+
+\vspace{1cm}
+\begin{flushright}\noindent
+Langweid, August 2012\hfill {\it Alexander Burger}\\
+Berlin, August 2012\hfill {\it Thorsten Jolitz}\\\end{flushright}
+
+
+% \vspace{\baselineskip}
+% \begin{flushright}\noindent
+% Langweid, September 2012 \hfill {\it Alexander Burger}
+% \end{flushright}
+
+

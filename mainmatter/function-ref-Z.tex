@@ -1,0 +1,117 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with Z}
+\label{cha:func-ref-Z-functions-starting-with-Z}
+
+ 
+\section*{\texttt{*Zap}}
+\label{sec:func-ref-Z-*Zap}
+
+
+A global variable holding a list and a pathname. If given, and the value
+of \texttt{*Solo} is \texttt{NIL}, external symbols which are no longer accessible can
+be collected in the CAR, e.g. during DB tree processing, and written to
+the file in the CDR at the next \texttt{commit}. A (typically periodic) call to
+\texttt{zap\_} will clean them up later.
+
+
+\begin{wideverbatim}
+: (setq *Zap '(NIL . "db/app/_zap"))
+-> "db/app/_zap"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(zap 'sym) -> sym}}
+\label{sec:func-ref-Z-(zap 'sym) -> sym}
+
+
+``Delete'' the symbol \texttt{sym}. For internal symbols, that means to remove it
+from the internal index, effectively transforming it to a transient
+symbol. For external symbols, it means to mark it as ``deleted'', so that
+upon a later \texttt{commit} it will be removed from the database file. See
+also \texttt{intern}.
+
+
+\begin{wideverbatim}
+: (de foo (Lst) (car Lst))          # 'foo' calls 'car'
+-> foo
+: (zap 'car)                        # Delete the symbol 'car'
+-> "car"
+: (pp 'foo)
+(de foo (Lst)
+   ("car" Lst) )                    # 'car' is now a transient symbol
+-> foo
+: (foo (1 2 3))                     # 'foo' still works
+-> 1
+: (car (1 2 3))                     # Reader returns a new 'car' symbol
+!? (car (1 2 3))
+car -- Undefined
+?
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(zapTree 'sym)}}
+\label{sec:func-ref-Z-(zapTree 'sym)}
+
+
+Recursively deletes a tree structure from the database. See also \texttt{tree},
+\texttt{chkTree} and \texttt{prune}.
+
+
+\begin{wideverbatim}
+: (zapTree (cdr (root (tree 'nm '+Item))))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(zap\_)}}
+\label{sec:func-ref-Z-(zap)} 
+
+Delayed deletion (with zap) of external symbols which were collected
+e.g. during DB tree processing. An auxiliary file (with the name taken
+from the CDR of the value of \texttt{*Zap}, concatenated with a
+``\texttt{\_}'' character) is used as an intermediary file.
+
+
+\begin{wideverbatim}
+: *Zap
+-> (NIL . "db/app/Z")
+: (call 'ls "-l" "db/app")
+...
+-rw-r--r-- 1 abu abu     1536 2007-06-23 12:34 Z
+-rw-r--r-- 1 abu abu     1280 2007-05-23 12:15 Z_
+...
+: (zap_)
+...
+: (call 'ls "-l" "db/app")
+...
+-rw-r--r-- 1 abu abu     1536 2007-06-23 12:34 Z_
+...
+\end{wideverbatim}
+
+              
+\section*{\texttt{(zero var ..) -> 0} }
+\label{sec:(zero var ..) -> 0}
+
+Stores \texttt{0} in all \texttt{var} arguments. See also \texttt{one}, \texttt{on}, \texttt{off} and
+\texttt{onOff}.
+
+
+\begin{wideverbatim}
+: (zero A B)
+-> 0
+: A
+-> 0
+: B
+-> 0
+\end{wideverbatim}
+
+

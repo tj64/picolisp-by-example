@@ -1,0 +1,550 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with E}
+\label{cha:func-ref-E-functions-starting-with-E}
+
+ 
+\section*{\texttt{*Err}}
+\label{sec:func-ref-E-*Err}
+
+
+A global variable holding a (possibly empty) \texttt{prg} body, which will be
+executed during error processing. See also \texttt{Error Handling}, \texttt{*Msg} and
+\texttt{\textasciicircum{}}.
+
+
+\begin{wideverbatim}
+: (de *Err (prinl "Fatal error!"))
+-> ((prinl "Fatal error!"))
+: (/ 3 0)
+!? (/ 3 0)
+Div/0
+Fatal error!
+$
+\end{wideverbatim}
+
+ 
+\section*{\texttt{*Ext}}
+\label{sec:func-ref-E-*Ext}
+
+
+A global variable holding a sorted list of cons pairs. The CAR of each
+pair specifies an external symbol offset (suitable for \texttt{ext}), and the
+CDR should be a function taking a single external symbol as an argument.
+This function should return a list, with the value for that symbol in
+its CAR, and the property list (in the format used by \texttt{getl} and \texttt{putl})
+in its CDR. The symbol will be set to this value and property list upon
+access. Typically this function will access the corresponding symbol in
+a remote database process. See also \texttt{qsym} and \texttt{external symbols}.
+
+
+\begin{wideverbatim}
+### On the local machine ###
+: (setq *Ext  # Define extension functions
+   (mapcar
+      '((@Host @Ext)
+         (cons @Ext
+            (curry (@Host @Ext (Sock)) (Obj)
+               (when (or Sock (setq Sock (connect @Host 4040)))
+                  (ext @Ext
+                     (out Sock (pr (cons 'qsym Obj)))
+                     (prog1 (in Sock (rd))
+                        (unless @
+                           (close Sock)
+                           (off Sock) ) ) ) ) ) ) )
+      '("10.10.12.1" "10.10.12.2" "10.10.12.3" "10.10.12.4")
+      (20 40 60 80) ) )
+
+### On the remote machines ###
+(de go ()
+   ...
+   (task (port 4040)                      # Set up background query server
+      (let? Sock (accept @)               # Accept a connection
+         (unless (fork)                   # In child process
+            (in Sock
+               (while (rd)                # Handle requests
+                  (sync)
+                  (out Sock
+                     (pr (eval @)) ) ) )
+            (bye) )                       # Exit child process
+         (close Sock) ) )
+   (forked)                               # Close task in children
+   ...
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+Entity}}
+\label{sec:func-ref-E-+Entity}
+
+
+Base class of all database objects. See also \texttt{+relation} and \texttt{Database}.
+
+Messages to entity objects include
+
+
+\begin{wideverbatim}
+zap> ()              # Clean up relational structures, for removal from the DB
+url> (Tab)           # Call the GUI on that object (in optional Tab)
+upd> (X Old)         # Callback method when object is created/modified/deleted
+has> (Var Val)       # Check if value is present
+put> (Var Val)       # Put a new value
+put!> (Var Val)      # Put a new value, single transaction
+del> (Var Val)       # Delete value (also partial)
+del!> (Var Val)      # Delete value (also partial), single transaction
+inc> (Var Val)       # Increment numeric value
+inc!> (Var Val)      # Increment numeric value, single transaction
+dec> (Var Val)       # Decrement numeric value
+dec!> (Var Val)      # Decrement numeric value, single transaction
+mis> (Var Val)       # Return error message if value or type mismatch
+lose1> (Var)         # Delete relational structures for a single attribute
+lose> (Lst)          # Delete relational structures (excluding 'Lst')
+lose!> ()            # Delete relational structures, single transaction
+keep1> (Var)         # Restore relational structures for single attribute
+keep> (Lst)          # Restore relational structures (excluding 'Lst')
+keep?> (Lst)         # Test for restauration (excluding 'Lst')
+keep!> ()            # Restore relational structures, single transaction
+set> (Val)           # Set the value (type, i.e. class list)
+set!> (Val)          # Set the value, single transaction
+clone> ()            # Object copy
+clone!> ()           # Object copy, single transaction
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(e . prg) -> any}}
+\label{sec:func-ref-E-(e . prg) -> any}
+
+
+Used in a breakpoint. Evaluates \texttt{prg} in the execution environment, or
+the currently executed expression if \texttt{prg} is not given. See also
+\texttt{debug}, \texttt{!}, \texttt{\textasciicircum{}} and \texttt{*Dbg}.
+
+
+\begin{wideverbatim}
+: (! + 3 4)
+(+ 3 4)
+! (e)
+-> 7
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(echo ['cnt ['cnt]] | ['sym ..]) -> sym}}
+\label{sec:func-ref-E-(echo ['cnt ['cnt]] | ['sym ..]) -> sym}
+
+
+Reads the current input channel, and writes to the current output
+channel. If \texttt{cnt} is given, only that many bytes are actually echoed. In
+case of two \texttt{cnt} arguments, the first one specifies the number of bytes
+to skip in the input stream. Otherwise, if one or more \texttt{sym} arguments
+are given, the echo process stops as soon as one of the symbol's names
+is encountered in the input stream. In this case the name will be read
+and returned, but not written. Returns non-\texttt{NIL} if the operation was
+successfully completed. See also \texttt{from}.
+
+
+\begin{wideverbatim}
+: (in "x.l" (echo))  # Display file on console
+ ..
+
+: (out "x2.l" (in "x.l" (echo)))  # Copy file "x.l" to "x2.l"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(edit 'sym ..) -> NIL}}
+\label{sec:func-ref-E-(edit 'sym ..) -> NIL}
+
+
+Edits the value and property list of the argument symbol(s) by calling
+the \texttt{vim} editor on a temporary file with these data. When closing the
+editor, the modified data are read and stored into the symbol(s). During
+the edit session, individual symbols are separated by the pattern
+\texttt{(********)}. These separators should not be modified. When moving the
+cursor to the beginning of a symbol (no matter if internal, transient or
+external), and hitting `\texttt{K}', that symbol is added to the currently
+edited symbols. Hitting `\texttt{Q}' will go back one step and return to the
+previously edited list of symbols.
+
+\texttt{edit} is especially useful for browsing through the database (with
+`\texttt{K}' and `\texttt{Q}'), inspecting external symbols, but care must be taken
+when modifying any data as then the \emph{entity/relation}
+mechanisms are circumvented, and \texttt{commit} has to be called manually if
+the changes should be persistent.
+
+Another typical use case is inserting or removing \texttt{!} breakpoints at
+arbitrary code locations, or doing other temporary changes to the code
+for debugging purposes.
+
+See also \texttt{update}, \texttt{show} and \texttt{vi}.
+
+
+\begin{wideverbatim}
+: (edit (db 'nr '+Item 1))  # Edit a database symbol
+### 'vim' shows this ###
+{3-1} (+Item)
+   nr 1
+   inv 100
+   pr 29900
+   sup {2-1}  # (+CuSu)
+   nm "Main Part"
+
+(********)
+### Hitting 'K' on the '{' of '{2-1} ###
+{2-1} (+CuSu)
+   nr 1
+   plz "3425"
+   mob "37 176 86303"
+   tel "37 4967 6846-0"
+   fax "37 4967 68462"
+   nm "Active Parts Inc."
+   nm2 "East Division"
+   ort "Freetown"
+   str "Wildcat Lane"
+   em "info@api.tld"
+
+(********)
+
+{3-1} (+Item)
+   nr 1
+   inv 100
+   pr 29900
+   sup {2-1}  # (+CuSu)
+   nm "Main Part"
+
+(********)
+### Entering ':q' in vim ###
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(env ['lst] | ['sym 'val] ..) -> lst}}
+\label{sec:func-ref-E-(env ['lst] | ['sym 'val] ..) -> lst}
+
+
+Return a list of symbol-value pairs of all dynamically bound symbols
+if called without arguments, or of the symbols or symbol-value pairs
+in \texttt{lst}, or the explicitly given \texttt{sym}-\texttt{val}
+arguments. See also \texttt{bind} and \texttt{job}.
+
+
+\begin{wideverbatim}
+: (env)
+-> NIL
+: (let (A 1 B 2) (env))
+-> ((A . 1) (B . 2))
+: (let (A 1 B 2) (env '(A B)))
+-> ((B . 2) (A . 1))
+: (let (A 1 B 2) (env 'X 7 '(A B (C . 3)) 'Y 8))
+-> ((Y . 8) (C . 3) (B . 2) (A . 1) (X . 7))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(eof ['flg]) -> flg}}
+\label{sec:func-ref-E-(eof ['flg]) -> flg}
+
+
+Returns the end-of-file status of the current input channel. If \texttt{flg} is
+non-\texttt{NIL}, the channel's status is forced to end-of-file, so that the
+next call to \texttt{eof} will return \texttt{T}, and calls to \texttt{char}, \texttt{peek}, \texttt{line},
+\texttt{from}, \texttt{till}, \texttt{read} or \texttt{skip} will return \texttt{NIL}. Note that \texttt{eof}
+cannot be used with the binary \texttt{rd} function. See also \texttt{eol}.
+
+
+\begin{wideverbatim}
+: (in "file" (until (eof) (println (line T))))
+...
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(eol) -> flg}}
+\label{sec:func-ref-E-(eol) -> flg}
+
+
+Returns the end-of-line status of the current input channel. See also
+\texttt{eof}.
+
+
+\begin{wideverbatim}
+: (make (until (prog (link (read)) (eol))))  # Read line into a list
+a b c (d e f) 123
+-> (a b c (d e f) 123)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{equal/2}}
+\label{sec:func-ref-E-equal/2}
+
+
+\emph{Pilog} predicate that succeeds if the two
+arguments are equal. See also \texttt{=}, \texttt{different/2} and
+\texttt{member/2}.
+
+
+\begin{wideverbatim}
+: (? (equal 3 4))
+-> NIL
+: (? (equal @N 7))
+ @N=7
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(err 'sym . prg) -> any}}
+\label{sec:func-ref-E-(err 'sym . prg) -> any}
+
+
+Redirects the standard error stream to \texttt{sym} during the execution of
+\texttt{prg}. The current standard error stream will be saved and restored
+appropriately. If the argument is \texttt{NIL}, the current output stream will
+be used. Otherwise, \texttt{sym} is taken as a file name (opened in ``append''
+mode if the first character is ``+''), where standard error is to be
+written to. See also \texttt{in}, \texttt{out} and \texttt{ctl}.
+
+
+\begin{wideverbatim}
+: (err "/dev/null"             # Suppress error messages
+   (call 'ls 'noSuchFile) )
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(errno) -> cnt}}
+\label{sec:func-ref-E-(errno) -> cnt}
+
+
+(64-bit version only) Returns the value of the standard I/O `errno'
+variable. See also \texttt{native}.
+
+
+\begin{wideverbatim}
+: (in "foo")                           # Produce an error
+!? (in "foo")
+"foo" -- Open error: No such file or directory
+? (errno)
+-> 2                                   # Returned 'ENOENT'
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(eval 'any ['cnt ['lst]]) -> any}}
+\label{sec:func-ref-E-(eval 'any ['cnt ['lst]]) -> any}
+
+
+Evaluates \texttt{any}. Note that because of the standard argument evaluation,
+\texttt{any} is actually evaluated twice. If a binding environment offset \texttt{cnt}
+is given, the second evaluation takes place in the corresponding
+environment, and an optional \texttt{lst} of excluded symbols can be supplied.
+See also \texttt{run} and \texttt{up}.
+
+
+\begin{wideverbatim}
+: (eval (list '+ 1 2 3))
+-> 6
+: (setq X 'Y  Y 7)
+-> 7
+: X
+-> Y
+: Y
+-> 7
+: (eval X)
+-> 7
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(expDat 'sym) -> dat}}
+\label{sec:func-ref-E-(expDat 'sym) -> dat}
+
+
+Expands a \texttt{date} string according to the current \texttt{locale} (delimiter,
+and order of year, month and day). Accepts abbreviated input, without
+delimiter and with only the day, or the day and month, or the day, month
+and year of current century. See also \texttt{datStr}, \texttt{day}, \texttt{expTel}.
+
+
+\begin{wideverbatim}
+: (date)
+-> 733133
+: (date (date))
+-> (2007 5 31)
+: (expDat "31")
+-> 733133
+: (expDat "315")
+-> 733133
+: (expDat "3105")
+-> 733133
+: (expDat "31057")
+-> 733133
+: (expDat "310507")
+-> 733133
+: (expDat "2007-05-31")
+-> 733133
+: (expDat "7-5-31")
+-> 733133
+
+: (locale "DE" "de")
+-> NIL
+: (expDat "31.5")
+-> 733133
+: (expDat "31.5.7")
+-> 733133
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(expTel 'sym) -> sym}}
+\label{sec:func-ref-E-(expTel 'sym) -> sym}
+
+
+Expands a telephone number string. Multiple spaces or hyphens are
+coalesced. A leading \texttt{+} or \texttt{00} is removed, a leading \texttt{0} is replaced
+with the current country code. Otherwise, \texttt{NIL} is returned. See also
+\texttt{telStr}, \texttt{expDat} and \texttt{locale}.
+
+
+\begin{wideverbatim}
+: (expTel "+49 1234 5678-0")
+-> "49 1234 5678-0"
+: (expTel "0049 1234 5678-0")
+-> "49 1234 5678-0"
+: (expTel "01234 5678-0")
+-> NIL
+: (locale "DE" "de")
+-> NIL
+: (expTel "01234 5678-0")
+-> "49 1234 5678-0"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(expr 'sym) -> fun}}
+\label{sec:func-ref-E-(expr 'sym) -> fun}
+
+
+Converts a C-function (``subr'') to a Lisp-function. Useful only for
+normal functions (i.e. functions that evaluate all arguments). See also
+\texttt{subr}.
+
+
+\begin{wideverbatim}
+: car
+-> 67313448
+: (expr 'car)
+-> (@ (pass $385260187))
+: (car (1 2 3))
+-> 1
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(ext 'cnt . prg) -> any}}
+\label{sec:func-ref-E-(ext 'cnt . prg) -> any}
+
+
+During the execution of \texttt{prg}, all \texttt{external symbols} processed by \texttt{rd},
+\texttt{pr} or \texttt{udp} are modified by an offset \texttt{cnt} suitable for mapping via
+the \texttt{*Ext} mechanism. All external symbol's file numbers are decremented
+by \texttt{cnt} during output, and incremented by \texttt{cnt} during input.
+
+
+\begin{wideverbatim}
+: (out 'a (ext 5 (pr '({6-2} ({8-9} . a) ({7-7} . b)))))
+-> ({6-2} ({8-9} . a) ({7-7} . b))
+
+: (in 'a (rd))
+-> ({2} ({3-9} . a) ({2-7} . b))
+
+: (in 'a (ext 5 (rd)))
+-> ({6-2} ({8-9} . a) ({7-7} . b))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(ext? 'any) -> sym | NIL}}
+\label{sec:func-ref-E-(ext? 'any) -> sym | NIL}
+
+
+Returns the argument \texttt{any} when it is an existing external symbol,
+otherwise \texttt{NIL}. See also \texttt{sym?}, \texttt{box?}, \texttt{str?}, \texttt{extern} and \texttt{lieu}.
+
+
+\begin{wideverbatim}
+: (ext? *DB)
+-> {1}
+: (ext? 'abc)
+-> NIL
+: (ext? "abc")
+-> NIL
+: (ext? 123)
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(extend cls) -> cls}}
+\label{sec:func-ref-E-(extend cls) -> cls}
+
+
+Extends the class \texttt{cls}, by storing it in the global variable \texttt{*Class}.
+As a consequence, all following method, relation and class variable
+definitions are applied to that class. See also \texttt{OO Concepts}, \texttt{class},
+\texttt{dm}, \texttt{var}, \texttt{rel}, \texttt{type} and \texttt{isa}.
+
+ 
+\section*{\texttt{(extern 'sym) -> sym | NIL}}
+\label{sec:func-ref-E-(extern 'sym) -> sym | NIL}
+
+Creates or finds an external symbol. If a symbol with the name \texttt{sym} is
+already extern, it is returned. Otherwise, a new external symbol is
+returned. \texttt{NIL} is returned if \texttt{sym} does not exist in the database. See
+also \texttt{intern} and \texttt{ext?}.
+
+\begin{wideverbatim}
+    : (extern "A1b")
+    -> {A1b}
+    : (extern "{A1b}")
+    -> {A1b}
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(extra ['any ..]) -> any}}
+\label{sec:func-ref-E-(extra ['any ..]) -> any}
+
+
+Can only be used inside methods. Sends the current message to the
+current object \texttt{This}, this time starting the search for a method at the
+remaining branches of the inheritance tree of the class where the
+current method was found. See also \texttt{OO Concepts}, \texttt{super}, \texttt{method},
+\texttt{meth}, \texttt{send} and \texttt{try}.
+
+
+\begin{wideverbatim}
+(dm key> (C)            # 'key>' method of the '+Uppc' class
+   (uppc (extra C)) )   # Convert 'key>' of extra classes to upper case
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(extract 'fun 'lst ..) -> lst}}
+\label{sec:func-ref-E-(extract 'fun 'lst ..) -> lst}
+
+Applies \texttt{fun} to each element of \texttt{lst}. When additional \texttt{lst} arguments
+are given, their elements are also passed to \texttt{fun}. Returns a list of
+all non-\texttt{NIL} values returned by \texttt{fun}. \texttt{(extract 'fun 'lst)} is
+equivalent to \texttt{(mapcar 'fun (filter 'fun 'lst))} or, for non-NIL
+results, to \texttt{(mapcan '((X) (and (fun X) (cons @))) 'lst)}. See also
+\texttt{filter}, \texttt{find}, \texttt{pick} and \texttt{mapcan}.
+
+
+\begin{wideverbatim}
+: (setq A NIL  B 1  C NIL  D 2  E NIL  F 3)
+-> 3
+: (filter val '(A B C D E F))
+-> (B D F)
+: (extract val '(A B C D E F))
+-> (1 2 3)
+\end{wideverbatim}
+
+
+
+
+% \input{referenc}

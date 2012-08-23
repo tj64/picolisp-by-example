@@ -1,0 +1,733 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+\chapter{Symbols starting with A}
+\label{cha:func-ref-A-symbols-starting-with-A}
+
+ 
+\section*{\texttt{*Adr}}
+\label{sec:func-ref-A-*Adr}
+
+
+A global variable holding the IP address of last recently accepted
+client. See also \texttt{listen} and \texttt{accept}.
+
+
+\begin{wideverbatim}
+: *Adr
+-> "127.0.0.1"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(adr 'var) -> num}}
+\label{sec:func-ref-A-(adr 'var) -> num}
+
+
+\texttt{(adr 'num) -> var}
+
+Converts, in the first form, a variable \texttt{var} (a symbol or a cell) into
+\texttt{num} (actually an encoded pointer). A symbol will result in a negative
+number, and a cell in a positive number. The second form converts a
+pointer back into the original \texttt{var}.
+
+
+\begin{wideverbatim}
+: (setq X (box 7))
+-> $53063416137450
+: (adr X)
+-> -2961853431592
+: (adr @)
+-> $53063416137450
+: (val @)
+-> 7
+\end{wideverbatim}
+
+ 
+\section*{\texttt{*Allow}}
+\label{sec:func-ref-A-*Allow}
+
+
+A global variable holding allowed access patterns. If its value is
+non-\texttt{NIL}, it should contain a list where the CAR is an \texttt{idx} tree of
+allowed items, and the CDR a list of prefix strings. See also \texttt{allow},
+\texttt{allowed} and \texttt{pre?}.
+
+
+\begin{wideverbatim}
+: (allowed ("app/")  # Initialize
+   "!start" "!stop" "lib.css" "!psh" )
+-> NIL
+: (allow "!myFoo")  # additional item
+-> "!myFoo"
+: (allow "myDir/" T)  # additional prefix
+-> "myDir/"
+
+: *Allow
+-> (("!start" ("!psh" ("!myFoo")) "!stop" NIL "lib.css") "app/" "myDir/")
+
+: (idx *Allow)  # items
+-> ("!myFoo" "!psh" "!start" "!stop" "lib.css")
+: (cdr *Allow)  # prefixes
+-> ("app/" "myDir/")
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+Alt}}
+\label{sec:func-ref-A-+Alt}
+
+
+Prefix class specifying an alternative class for a \texttt{+relation}. This
+allows indexes or other side effects to be maintained in a class
+different from the current one. See also \texttt{Database}.
+
+
+\begin{wideverbatim}
+(class +EuOrd +Ord)                    # EU-specific order subclass
+(rel nr (+Alt +Key +Number) +XyOrd)    # Maintain the key in the +XyOrd index
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+Any}}
+\label{sec:func-ref-A-+Any}
+
+
+Class for unspecified relations, a subclass of \texttt{+relation}. Objects of
+that class accept and maintain any type of Lisp data. Used often when
+there is no other suitable relation class available. See also
+\texttt{Database}.
+
+In the following example \texttt{+Any} is used simply for the reason that there
+is no direct way to specify dotted pairs:
+
+
+\begin{wideverbatim}
+(rel loc (+Any))  # Locale, e.g. ("DE" . "de")
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+Aux}}
+\label{sec:func-ref-A-+Aux}
+
+
+Prefix class maintaining auxiliary keys for \texttt{+relation}s, in addition to \texttt{+Ref} or \texttt{+Idx} indexes. Expects a list of auxiliary attributes of the
+same object, and combines all keys in that order into a single index
+key. See also \texttt{+UB}, \texttt{aux} and \texttt{Database}.
+
+
+\begin{wideverbatim}
+(rel nr (+Ref +Number))                # Normal, non-unique index
+(rel nm (+Aux +Ref +String) (nr txt))  # Combined name/number/text index
+(rel txt (+Aux +Sn +Idx +String) (nr)) # Text/number plus tolerant text index
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(abort 'cnt . prg) -> any}}
+\label{sec:func-ref-A-(abort 'cnt . prg) -> any}
+
+
+Aborts the execution of \texttt{prg} if it takes longer than \texttt{cnt} seconds, and
+returns \texttt{NIL}. Otherwise, the result of \texttt{prg} is returned. \texttt{alarm} is
+used internally, so care must be taken not to interfer with other calls
+to \texttt{alarm}.
+
+
+\begin{wideverbatim}
+: (abort 20 (in Sock (rd)))  # Wait maximally 20 seconds for socket data
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(abs 'num) -> num}}
+\label{sec:func-ref-A-(abs 'num) -> num}
+
+
+Returns the absolute value of the \texttt{num} argument.
+
+
+\begin{wideverbatim}
+: (abs -7)
+-> 7
+: (abs 7)
+-> 7
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(accept 'cnt) -> cnt | NIL}}
+\label{sec:func-ref-A-(accept 'cnt) -> cnt | NIL}
+
+
+Accepts a connection on descriptor \texttt{cnt} (as received by \texttt{port}), and
+returns the new socket descriptor \texttt{cnt}. The global variable \texttt{*Adr} is
+set to the IP address of the client. See also \texttt{listen}, \texttt{connect} and
+\texttt{*Adr}.
+
+
+\begin{wideverbatim}
+: (setq *Socket
+   (accept (port 6789)) )  # Accept connection at port 6789
+-> 4
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(accu 'var 'any 'num)}}
+\label{sec:func-ref-A-(accu 'var 'any 'num)}
+
+
+Accumulates \texttt{num} into a sum, using the key \texttt{any} in an association list
+stored in \texttt{var}. See also \texttt{assoc}.
+
+
+\begin{wideverbatim}
+: (off Sum)
+-> NIL
+: (accu 'Sum 'a 1)
+-> (a . 1)
+: (accu 'Sum 'a 5)
+-> 6
+: (accu 'Sum 22 100)
+-> (22 . 100)
+: Sum
+-> ((22 . 100) (a . 6))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(acquire 'sym) -> flg}}
+\label{sec:func-ref-A-(acquire 'sym) -> flg}
+
+
+Tries to acquire the mutex represented by the file \texttt{sym}, by obtaining
+an exclusive lock on that file with \texttt{ctl}, and then trying to write the
+PID of the current process into that file. It fails if the file already
+holds the PID of some other existing process. See also \texttt{release}, \texttt{*Pid}
+and \texttt{rc}.
+
+
+\begin{wideverbatim}
+: (acquire "sema1")
+-> 28255
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(alarm 'cnt . prg) -> cnt}}
+\label{sec:func-ref-A-(alarm 'cnt . prg) -> cnt}
+
+
+Sets an alarm timer scheduling \texttt{prg} to be executed after \texttt{cnt} seconds,
+and returns the number of seconds remaining until any previously
+scheduled alarm was due to be delivered. Calling \texttt{(alarm 0)} will cancel
+an alarm. See also \texttt{abort}, \texttt{sigio}, \texttt{*Hup} and \texttt{*Sig[12]}.
+
+
+\begin{wideverbatim}
+: (prinl (tim$ (time) T)) (alarm 10 (prinl (tim$ (time) T)))
+16:36:14
+-> 0
+: 16:36:24
+
+: (alarm 10 (bye 0))
+-> 0
+$
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(align 'cnt 'any) -> sym}}
+\label{sec:func-ref-A-(align 'cnt 'any) -> sym}
+
+
+\texttt{(align 'lst 'any ..) -> sym}
+
+Returns a transient symbol with all \texttt{any} arguments \texttt{pack}ed in an aligned format. In the first form, \texttt{any} will be left-aligned if \texttt{cnt}
+ist negative, otherwise right-aligned. In the second form, all \texttt{any}
+arguments are packed according to the numbers in \texttt{lst}. See also \texttt{tab},
+\texttt{center} and \texttt{wrap}.
+
+
+\begin{wideverbatim}
+: (align 4 "a")
+-> "   a"
+: (align -4 12)
+-> "12  "
+: (align (4 4 4) "a" 12 "b")
+-> "   a  12   b"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(all ['T | '0]) -> lst}}
+\label{sec:func-ref-A-(all ['T | '0]) -> lst}
+
+
+Returns a new list of all \emph{internal} symbols in the
+system (if called without arguments, or with \texttt{NIL}). Otherwise (if the
+argument is \texttt{T}), all current \emph{transient} symbols
+are returned. Else all current \emph{external} symbols
+are returned.
+
+
+\begin{wideverbatim}
+: (all)  # All internal symbols
+-> (inc> leaf nil inc! accept ...
+
+# Find all symbols starting with an underscore character
+: (filter '((X) (= "_" (car (chop X)))) (all))
+-> (_put _nacs _oct _lintq _lst _map _iter _dbg2 _getLine _led ...
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(allow 'sym ['flg]) -> sym}}
+\label{sec:func-ref-A-(allow 'sym ['flg]) -> sym}
+
+
+Maintains an index structure of allowed access patterns in the global
+variable \texttt{*Allow}. If the value of \texttt{*Allow} is non-\texttt{NIL}, \texttt{sym} is added
+to the \texttt{idx} tree in the CAR of \texttt{*Allow} (if \texttt{flg} is \texttt{NIL}), or to the
+list of prefix strings (if \texttt{flg} is non-\texttt{NIL}). See also \texttt{allowed}.
+
+
+\begin{wideverbatim}
+: *Allow
+-> (("!start" ("!psh") "!stop" NIL "lib.css") "app/")
+: (allow "!myFoo")  # additionally allowed item
+-> "!myFoo"
+: (allow "myDir/" T)  # additionally allowed prefix
+-> "myDir/"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(allowed lst [sym ..])}}
+\label{sec:func-ref-A-(allowed lst [sym ..])}
+
+
+Creates an index structure of allowed access patterns in the global
+variable \texttt{*Allow}. \texttt{lst} should consist of prefix strings (to be checked
+at runtime with \texttt{pre?}), and the \texttt{sym} arguments should specify the
+initially allowed items. See also \texttt{allow}.
+
+
+\begin{wideverbatim}
+: (allowed ("app/")  # allowed prefixes
+   "!start" "!stop" "lib.css" "!psh" )  # allowed items
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(and 'any ..) -> any}}
+\label{sec:func-ref-A-(and 'any ..) -> any}
+
+
+Logical AND. The expressions \texttt{any} are evaluated from left to right. If
+\texttt{NIL} is encountered, \texttt{NIL} is returned immediately. Else the result of
+the last expression is returned.
+
+
+\begin{wideverbatim}
+: (and (= 3 3) (read))
+abc  # User input
+-> abc
+: (and (= 3 4) (read))
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(any 'sym) -> any}}
+\label{sec:func-ref-A-(any 'sym) -> any}
+
+
+Parses \texttt{any} from the name of \texttt{sym}. This is the reverse operation of
+\texttt{sym}. See also \texttt{str}.
+
+
+\begin{wideverbatim}
+: (any "(a b # Comment^Jc d)")
+-> (a b c d)
+: (any "\"A String\"")
+-> "A String"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(append 'lst ..) -> lst}}
+\label{sec:func-ref-A-(append 'lst ..) -> lst}
+
+
+Appends all argument lists. See also \texttt{conc}, \texttt{insert}, \texttt{delete} and
+\texttt{remove}.
+
+
+\begin{wideverbatim}
+: (append '(a b c) (1 2 3))
+-> (a b c 1 2 3)
+: (append (1) (2) (3) 4)
+-> (1 2 3 . 4)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{append/3}}
+\label{sec:func-ref-A-append/3}
+
+
+\emph{Pilog} predicate that succeeds if appending the first
+two list arguments is equal to the third argument. See also \texttt{append} and
+\texttt{member/2}.
+
+
+\begin{wideverbatim}
+: (? (append @X @Y (a b c)))
+ @X=NIL @Y=(a b c)
+ @X=(a) @Y=(b c)
+ @X=(a b) @Y=(c)
+ @X=(a b c) @Y=NIL
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(apply 'fun 'lst ['any ..]) -> any}}
+\label{sec:func-ref-A-(apply 'fun 'lst ['any ..]) -> any}
+
+
+Applies \texttt{fun} to \texttt{lst}. If additional \texttt{any} arguments are given, they
+are applied as leading elements of \texttt{lst}.
+\texttt{(apply 'fun 'lst 'any1 'any2)} is equivalent to
+\texttt{(apply 'fun (cons 'any1 'any2 'lst))}.
+
+
+\begin{wideverbatim}
+: (apply + (1 2 3))
+-> 6
+: (apply * (5 6) 3 4)
+-> 360
+: (apply '((X Y Z) (* X (+ Y Z))) (3 4 5))
+-> 27
+: (apply println (3 4) 1 2)
+1 2 3 4
+-> 4
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(arg ['cnt]) -> any}}
+\label{sec:func-ref-A-(arg ['cnt]) -> any}
+
+
+Can only be used inside functions with a variable number of arguments
+(with \texttt{@}). If \texttt{cnt} is not given, the value that was returned from the
+last call to \texttt{next}) is returned. Otherwise, the \texttt{cnt}'th remaining
+argument is returned. See also \texttt{args}, \texttt{next}, \texttt{rest} and \texttt{pass}.
+
+
+\begin{wideverbatim}
+: (de foo @ (println (next) (arg)))    # Print argument twice
+-> foo
+: (foo 123)
+123 123
+-> 123
+: (de foo @
+   (println (arg 1) (arg 2))
+   (println (next))
+   (println (arg 1) (arg 2)) )
+-> foo
+: (foo 'a 'b 'c)
+a b
+a
+b c
+-> c
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(args) -> flg}}
+\label{sec:func-ref-A-(args) -> flg}
+
+
+Can only be used inside functions with a variable number of arguments
+(with \texttt{@}). Returns \texttt{T} when there are more arguments to be fetched from
+the internal list. See also \texttt{next}, \texttt{arg}, \texttt{rest} and \texttt{pass}.
+
+
+\begin{wideverbatim}
+: (de foo @ (println (args)))       # Test for arguments
+-> foo
+: (foo)                             # No arguments
+NIL
+-> NIL
+: (foo NIL)                         # One argument
+T
+-> T
+: (foo 123)                         # One argument
+T
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(argv [var ..] [. sym]) -> lst|sym}}
+\label{sec:func-ref-A-(argv [var ..] [. sym]) -> lst|sym}
+
+
+If called without arguments, \texttt{argv} returns a list of strings
+containing all remaining command line arguments. Otherwise, the
+\texttt{var/sym} arguments are subsequently bound to the command line
+arguments. A hyphen ``\texttt{-}'' can be used to inhibit the
+automatic \texttt{load}ing further arguments. See also \texttt{cmd},
+\emph{Invocation} and \texttt{opt}.
+
+
+\begin{wideverbatim}
+$ pil -"println 'OK" - abc 123 +
+OK
+: (argv)
+-> ("abc" "123")
+: (argv A B)
+-> "123"
+: A
+-> "abc"
+: B
+-> "123"
+: (argv . Lst)
+-> ("abc" "123")
+: Lst
+-> ("abc" "123")
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(as 'any1 . any2) -> any2 | NIL}}
+\label{sec:func-ref-A-(as 'any1 . any2) -> any2 | NIL}
+
+
+Returns \texttt{any2} unevaluated when \texttt{any1} evaluates to non-\texttt{NIL}. Otherwise
+\texttt{NIL} is returned. \texttt{(as Flg A B C)} is equivalent to
+\texttt{(and Flg '(A B C))}. See also \texttt{quote}.
+
+
+\begin{wideverbatim}
+: (as (= 3 3) A B C)
+-> (A B C)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(asoq 'any 'lst) -> lst}}
+\label{sec:func-ref-A-(asoq 'any 'lst) -> lst}
+
+
+Searches an association list. Returns the first element from \texttt{lst} with
+\texttt{any} as its CAR, or \texttt{NIL} if no match is found. \texttt{==} is used for
+comparison (pointer equality). See also \texttt{assoc}, \texttt{delq}, \texttt{memq}, \texttt{mmeq}
+and \emph{Comparing}.
+
+
+\begin{wideverbatim}
+: (asoq 999 '((999 1 2 3) (b . 7) ("ok" "Hello")))
+-> NIL
+: (asoq 'b '((999 1 2 3) (b . 7) ("ok" "Hello")))
+-> (b . 7)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(assert exe ..) -> prg | NIL}}
+\label{sec:func-ref-A-(assert exe ..) -> prg | NIL}
+
+
+When in debug mode (\texttt{*Dbg} is non-\texttt{NIL}), \texttt{assert} returns a \texttt{prg} list
+which tests all \texttt{exe} conditions, and issues an error via \texttt{quit} if one
+of the results evaluates to \texttt{NIL}. Otherwise, \texttt{NIL} is returned. Used
+typically in combination with the \texttt{\textasciitilde{}} tilde \texttt{read-macro} to insert the
+test code only when in debug mode. See also \texttt{test}.
+
+
+\begin{wideverbatim}
+# Start in debug mode
+$ pil +
+: (de foo (N)
+   ~(assert (>= 90 N 10))
+   (bar N) )
+-> foo
+: (pp 'foo)                      # Pretty-print 'foo'
+(de foo (N)
+   (unless (>= 90 N 10)          # Assertion code exists
+      (quit "'assert' failed" '(>= 90 N 10)) )
+   (bar N) )
+-> foo
+: (foo 7)                        # Try it
+(>= 90 N 10) -- Assertion failed
+?
+
+# Start in non-debug mode
+$ pil
+: (de foo (N)
+   ~(assert (>= 90 N 10))
+   (bar N) )
+-> foo
+: (pp 'foo)                      # Pretty-print 'foo'
+(de foo (N)
+   (bar N) )                     # Assertion code does not exist
+-> foo
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(asserta 'lst) -> lst}}
+\label{sec:func-ref-A-(asserta 'lst) -> lst}
+
+
+Inserts a new \emph{Pilog} fact or rule before all other
+rules. See also \texttt{be}, \texttt{clause}, \texttt{assertz} and \texttt{retract}.
+
+
+\begin{wideverbatim}
+: (be a (2))            # Define two facts
+-> a
+: (be a (3))
+-> a
+
+: (asserta '(a (1)))    # Insert new fact in front
+-> (((1)) ((2)) ((3)))
+
+: (? (a @N))            # Query
+ @N=1
+ @N=2
+ @N=3
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{asserta/1}}
+\label{sec:func-ref-A-asserta/1}
+
+
+\emph{Pilog} predicate that inserts a new fact or rule
+before all other rules. See also \texttt{asserta}, \texttt{assertz/1} and \texttt{retract/1}.
+
+
+\begin{wideverbatim}
+: (? (asserta (a (2))))
+-> T
+: (? (asserta (a (1))))
+-> T
+: (rules 'a)
+1 (be a (1))
+2 (be a (2))
+-> a
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(assertz 'lst) -> lst}}
+\label{sec:func-ref-A-(assertz 'lst) -> lst}
+
+
+Appends a new \emph{Pilog} fact or rule behind all other
+rules. See also \texttt{be}, \texttt{clause}, \texttt{asserta} and \texttt{retract}.
+
+
+\begin{wideverbatim}
+: (be a (1))            # Define two facts
+-> a
+: (be a (2))
+-> a
+
+: (assertz '(a (3)))    # Append new fact at the end
+-> (((1)) ((2)) ((3)))
+
+: (? (a @N))            # Query
+ @N=1
+ @N=2
+ @N=3
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{assertz/1}}
+\label{sec:func-ref-A-assertz/1}
+
+
+\emph{Pilog} predicate that appends a new fact or rule
+behind all other rules. See also \texttt{assertz}, \texttt{asserta/1} and \texttt{retract/1}.
+
+
+\begin{wideverbatim}
+: (? (assertz (a (1))))
+-> T
+: (? (assertz (a (2))))
+-> T
+: (rules 'a)
+1 (be a (1))
+2 (be a (2))
+-> a
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(assoc 'any 'lst) -> lst}}
+\label{sec:func-ref-A-(assoc 'any 'lst) -> lst}
+
+
+Searches an association list. Returns the first element from \texttt{lst} with
+its CAR equal to \texttt{any}, or \texttt{NIL} if no match is found. See also \texttt{asoq}.
+
+
+\begin{wideverbatim}
+: (assoc "b" '((999 1 2 3) ("b" . 7) ("ok" "Hello")))
+-> ("b" . 7)
+: (assoc 999 '((999 1 2 3) ("b" . 7) ("ok" "Hello")))
+-> (999 1 2 3)
+: (assoc 'u '((999 1 2 3) ("b" . 7) ("ok" "Hello")))
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(at '(cnt1 . cnt2|NIL) . prg) -> any}}
+\label{sec:func-ref-A-(at '(cnt1 . cnt2|NIL) . prg) -> any}
+
+
+Increments \texttt{cnt1} (destructively), and returns \texttt{NIL} when it is less
+than \texttt{cnt2}. Otherwise, \texttt{cnt1} is reset to zero and \texttt{prg} is executed.
+Returns the result of \texttt{prg}. If \texttt{cnt2} is \texttt{NIL}, nothing is done, and
+\texttt{NIL} is returned immediately.
+
+
+\begin{wideverbatim}
+: (do 11 (prin ".") (at (0 . 3) (prin "!")))
+...!...!...!..-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(atom 'any) -> flg}}
+\label{sec:func-ref-A-(atom 'any) -> flg}
+
+
+Returns \texttt{T} when the argument \texttt{any} is an atom (a number or a symbol).
+See also \texttt{pair}.
+
+
+\begin{wideverbatim}
+: (atom 123)
+-> T
+: (atom 'a)
+-> T
+: (atom NIL)
+-> T
+: (atom (123))
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(aux 'var 'cls ['hook] 'any ..) -> sym}}
+\label{sec:func-ref-A-(aux 'var 'cls ['hook] 'any ..) -> sym}
+
+
+Returns a database object of class \texttt{cls}, where the value for \texttt{var}
+corresponds to \texttt{any} and the following arguments. \texttt{var}, \texttt{cls} and
+\texttt{hook} should specify a \texttt{tree} for \texttt{cls} or one of its superclasses, for
+a relation with auxiliary keys. For multi-key accesses, \texttt{aux} is simlar
+to - but faster than - \texttt{db}, because it can use a single tree access.
+See also \texttt{db}, \texttt{collect}, \texttt{fetch}, \texttt{init}, \texttt{step} and \texttt{+Aux}.
+
+
+\begin{wideverbatim}
+(class +PS +Entity)
+(rel par (+Dep +Joint) (sup) ps (+Part))        # Part
+(rel sup (+Aux +Ref +Link) (par) NIL (+Supp))   # Supplier
+...
+   (aux 'sup '+PS                               # Access PS object
+      (db 'nr '+Supp 1234)
+      (db 'nr '+Part 5678) )
+\end{wideverbatim}
+
+

@@ -1,0 +1,440 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+\chapter{Symbols starting with I}
+\label{cha:func-ref-I-functions-starting-with-I}
+
+ 
+\section*{\texttt{+Idx}}
+\label{sec:func-ref-I-+Idx}
+
+Prefix class for maintaining non-unique full-text indexes to \texttt{+String}
+relations, a subclass of \texttt{+Ref}. Accepts optional arguments for the
+minimally indexed substring length (defaults to 3), and a \texttt{+Hook}
+attribute. Often used in combination with the \texttt{+Sn} soundex index, or
+the \texttt{+Fold} index prefix classes. See also \texttt{Database}.
+
+
+\begin{wideverbatim}
+(rel nm (+Sn +Idx +String))  # Name
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+index}}
+\label{sec:func-ref-I-+index}
+
+
+Abstract base class of all database B-Tree index relations (prefix
+classes for \texttt{+relation}s). The class hierarchy includes
+\texttt{+Key}, \texttt{+Ref} and \texttt{+Idx}. See also
+\texttt{Database}.
+
+
+\begin{wideverbatim}
+(isa '+index Rel)  # Check for an index relation
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(id 'num ['num]) -> sym}}
+\label{sec:func-ref-I-(id 'num ['num]) -> sym}
+
+
+\texttt{(id 'sym [NIL]) -> num}
+
+\texttt{(id 'sym T) -> (num . num)}
+
+Converts one or two numbers to an external symbol, or an external symbol
+to a number or a pair of numbers.
+
+
+\begin{wideverbatim}
+: (id 7)
+-> {7}
+: (id 1 2)
+-> {2}
+: (id '{1-2})
+-> 2
+: (id '{1-2} T)
+-> (1 . 2)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(idx 'var 'any 'flg) -> lst (idx 'var 'any) -> lst (idx 'var) -> lst}}
+\label{sec:func-ref-I-(idx 'var 'any 'flg) -> lst (idx 'var 'any) -> lst (idx 'var) -> lst}
+
+
+Maintains an index tree in \texttt{var}, and checks for the existence of \texttt{any}.
+If \texttt{any} is contained in \texttt{var}, the corresponding subtree is returned,
+otherwise \texttt{NIL}. In the first form, \texttt{any} is destructively inserted into
+the tree if \texttt{flg} is non-\texttt{NIL} (and \texttt{any} was not already there), or
+deleted from the tree if \texttt{flg} is \texttt{NIL}. The second form only checks for
+existence, but does not change the index tree. In the third form (when
+called with a single \texttt{var} argument) the contents of the tree are
+returned as a sorted list. If all elements are inserted in sorted order,
+the tree degenerates into a linear list. See also \texttt{lup}, \texttt{hash},
+\texttt{depth}, \texttt{sort}, \texttt{balance} and \texttt{member}.
+
+
+\begin{wideverbatim}
+: (idx 'X 'd T)                              # Insert data
+-> NIL
+: (idx 'X 2 T)
+-> NIL
+: (idx 'X '(a b c) T)
+-> NIL
+: (idx 'X 17 T)
+-> NIL
+: (idx 'X 'A T)
+-> NIL
+: (idx 'X 'd T)
+-> (d (2 NIL 17 NIL A) (a b c))              # 'd' already existed
+: (idx 'X T T)
+-> NIL
+: X                                          # View the index tree
+-> (d (2 NIL 17 NIL A) (a b c) NIL T)
+: (idx 'X 'A)                                # Check for 'A'
+-> (A)
+: (idx 'X 'B)                                # Check for 'B'
+-> NIL
+: (idx 'X)
+-> (2 17 A d (a b c) T)                      # Get list
+: (idx 'X 17 NIL)                            # Delete '17'
+-> (17 NIL A)
+: X
+-> (d (2 NIL A) (a b c) NIL T)               # View it again
+: (idx 'X)
+-> (2 A d (a b c) T)                         # '17' is deleted
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(if 'any1 'any2 . prg) -> any}}
+\label{sec:func-ref-I-(if 'any1 'any2 . prg) -> any}
+
+
+Conditional execution: If the condition \texttt{any1} evaluates to non-\texttt{NIL},
+\texttt{any2} is evaluated and returned. Otherwise, \texttt{prg} is executed and the
+result returned. See also \texttt{cond}, \texttt{when} and \texttt{if2}.
+
+
+\begin{wideverbatim}
+: (if (> 4 3) (println 'OK) (println 'Bad))
+OK
+-> OK
+: (if (> 3 4) (println 'OK) (println 'Bad))
+Bad
+-> Bad
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(if2 'any1 'any2 'any3 'any4 'any5 . prg) -> any}}
+\label{sec:func-ref-I-(if2 'any1 'any2 'any3 'any4 'any5 . prg) -> any}
+
+
+Four-way conditional execution for two conditions: If both conditions
+\texttt{any1} and \texttt{any2} evaluate to non-\texttt{NIL}, \texttt{any3} is evaluated and
+returned. Otherwise, \texttt{any4} or \texttt{any5} is evaluated and returned if
+\texttt{any1} or \texttt{any2} evaluate to non-\texttt{NIL}, respectively. If none of the
+conditions evaluate to non-\texttt{NIL}, \texttt{prg} is executed and the result
+returned. See also \texttt{if} and \texttt{cond}.
+
+
+\begin{wideverbatim}
+: (if2 T T 'both 'first 'second 'none)
+-> both
+: (if2 T NIL 'both 'first 'second 'none)
+-> first
+: (if2 NIL T 'both 'first 'second 'none)
+-> second
+: (if2 NIL NIL 'both 'first 'second 'none)
+-> none
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(ifn 'any1 'any2 . prg) -> any}}
+\label{sec:func-ref-I-(ifn 'any1 'any2 . prg) -> any}
+
+
+Conditional execution (``If not''): If the condition \texttt{any1} evaluates to
+\texttt{NIL}, \texttt{any2} is evaluated and returned. Otherwise, \texttt{prg} is executed
+and the result returned.
+
+
+\begin{wideverbatim}
+: (ifn (= 3 4) (println 'OK) (println 'Bad))
+OK
+-> OK
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(import lst) -> NIL}}
+\label{sec:func-ref-I-(import lst) -> NIL}
+
+
+Wrapper function for \texttt{intern}. Typically used to import symbols from
+other namespaces, as created by \texttt{symbols}. \texttt{lst} should be a list of
+symbols. An import conflict error is issued when a symbol with the same
+name already exists in the current namespace. See also \texttt{pico} and
+\texttt{local}.
+
+
+\begin{wideverbatim}
+: (import libA~foo libB~bar)
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(in 'any . prg) -> any}}
+\label{sec:func-ref-I-(in 'any . prg) -> any}
+
+
+Opens \texttt{any} as input channel during the execution of \texttt{prg}. The current
+input channel will be saved and restored appropriately. If the argument
+is \texttt{NIL}, standard input is used. If the argument is a symbol, it is
+used as a file name (opened for reading \emph{and} writing if the first
+character is ``\texttt{+}''). If it is a positive number, it is used as the
+descriptor of an open file. If it is a negative number, the saved input
+channel such many levels above the current one is used. Otherwise (if it
+is a list), it is taken as a command with arguments, and a pipe is
+opened for input. See also \texttt{ipid}, \texttt{call}, \texttt{load}, \texttt{file}, \texttt{out}, \texttt{err},
+\texttt{poll}, \texttt{pipe} and \texttt{ctl}.
+
+
+\begin{wideverbatim}
+: (in "a" (list (read) (read) (read)))  # Read three items from file "a"
+-> (123 (a b c) def)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(inc 'num) -> num (inc 'var ['num]) -> num}}
+\label{sec:func-ref-I-(inc 'num) -> num (inc 'var ['num]) -> num}
+
+
+The first form returns the value of \texttt{num} incremented by 1. The second
+form increments the \texttt{VAL} of \texttt{var} by 1, or by \texttt{num}. If the first
+argument is \texttt{NIL}, it is returned immediately. \texttt{(inc 'num)} is
+equivalent to \texttt{(+ 'num 1)} and \texttt{(inc 'var)} is equivalent to
+\texttt{(set 'var (+ var 1))}. See also \texttt{dec} and \texttt{+}.
+
+
+\begin{wideverbatim}
+: (inc 7)
+-> 8
+: (inc -1)
+-> 0
+: (zero N)
+-> 0
+: (inc 'N)
+-> 1
+: (inc 'N 7)
+-> 8
+: N
+-> 8
+
+: (setq L (1 2 3 4))
+-> (1 2 3 4)
+: (inc (cdr L))
+-> 3
+: L
+-> (1 3 3 4)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(inc! 'obj 'sym ['num]) -> num}}
+\label{sec:func-ref-I-(inc! 'obj 'sym ['num]) -> num}
+
+
+\emph{Transaction} wrapper function for \texttt{inc}. \texttt{num}
+defaults to 1. Note that for incrementing a property value of an entity
+typically the \texttt{inc!>} message is used. See also \texttt{new!}, \texttt{set!} and
+\texttt{put!}.
+
+
+\begin{wideverbatim}
+(inc! Obj 'cnt 0)  # Incrementing a property of a non-entity object
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(index 'any 'lst) -> cnt | NIL}}
+\label{sec:func-ref-I-(index 'any 'lst) -> cnt | NIL}
+
+
+Returns the \texttt{cnt} position of \texttt{any} in \texttt{lst}, or \texttt{NIL} if it is not
+found. See also \texttt{offset}.
+
+
+\begin{wideverbatim}
+: (index 'c '(a b c d e f))
+-> 3
+: (index '(5 6) '((1 2) (3 4) (5 6) (7 8)))
+-> 3
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(info 'any) -> (cnt|T dat . tim)}}
+\label{sec:func-ref-I-(info 'any) -> (cnt|T dat . tim)}
+
+
+Returns information about a file with the name \texttt{any}: The current size
+\texttt{cnt} in bytes, and the modification date and time (UTC). For
+directories, \texttt{T} is returned instead of the a size. See also \texttt{dir},
+\texttt{date}, \texttt{time} and \texttt{lines}.
+
+
+\begin{wideverbatim}
+$ ls -l x.l
+-rw-r--r--   1 abu      users         208 Jun 17 08:58 x.l
+$ pil +
+: (info "x.l")
+-> (208 730594 . 32315)
+: (stamp 730594 32315)
+-> "2000-06-17 08:58:35"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(init 'tree ['any1] ['any2]) -> lst}}
+\label{sec:func-ref-I-(init 'tree ['any1] ['any2]) -> lst}
+
+
+Initializes a structure for stepping iteratively through a database
+tree. \texttt{any1} and \texttt{any2} may specify a range of keys. If \texttt{any2} is
+greater than \texttt{any1}, the traversal will be in opposite direction. See
+also \texttt{tree}, \texttt{step}, \texttt{iter} and \texttt{scan}.
+
+
+\begin{wideverbatim}
+: (init (tree 'nr '+Item) 3 5)
+-> (((3 . 5) ((3 NIL . {3-3}) (4 NIL . {3-4}) (5 NIL . {3-5}) (6 NIL . {3-6}) (7 NIL . {3-8}))))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(insert 'cnt 'lst 'any) -> lst}}
+\label{sec:func-ref-I-(insert 'cnt 'lst 'any) -> lst}
+
+
+Inserts \texttt{any} into \texttt{lst} at position \texttt{cnt}. This is a non-destructive
+operation. See also \texttt{remove}, \texttt{place}, \texttt{append}, \texttt{delete} and \texttt{replace}.
+
+
+\begin{wideverbatim}
+: (insert 3 '(a b c d e) 777)
+-> (a b 777 c d e)
+: (insert 1 '(a b c d e) 777)
+-> (777 a b c d e)
+: (insert 9 '(a b c d e) 777)
+-> (a b c d e 777)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(intern 'sym) -> sym}}
+\label{sec:func-ref-I-(intern 'sym) -> sym}
+
+
+Creates or finds an internal symbol. If a symbol with the name \texttt{sym} is
+already intern, it is returned. Otherwise, \texttt{sym} is interned and
+returned. See also \texttt{symbols}, \texttt{zap}, \texttt{extern} and \texttt{====}.
+
+
+\begin{wideverbatim}
+: (intern "abc")
+-> abc
+: (intern 'car)
+-> car
+: ((intern (pack "c" "a" "r")) (1 2 3))
+-> 1
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(ipid) -> pid | NIL}}
+\label{sec:func-ref-I-(ipid) -> pid | NIL}
+
+
+Returns the corresponding process ID when the current input channel is
+reading from a pipe, otherwise \texttt{NIL}. See also \texttt{opid}, \texttt{in}, \texttt{pipe} and
+\texttt{load}.
+
+
+\begin{wideverbatim}
+: (in '(ls "-l") (println (line T)) (kill (ipid)))
+"total 7364"
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(isa 'cls|typ 'obj) -> obj | NIL}}
+\label{sec:func-ref-I-(isa 'cls|typ 'obj) -> obj | NIL}
+
+
+Returns \texttt{obj} when it is an object that inherits from \texttt{cls} or \texttt{type}.
+See also \texttt{OO Concepts}, \texttt{class}, \texttt{type}, \texttt{new} and \texttt{object}.
+
+
+\begin{wideverbatim}
+: (isa '+Address Obj)
+-> {1-17}
+: (isa '(+Male +Person) Obj)
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{isa/2}}
+\label{sec:func-ref-I-isa/2}
+
+
+\emph{Pilog} predicate that succeeds if the second argument
+is of the type or class given by the first argument, according to the
+\texttt{isa} function. Typically used in \texttt{db/3} or \texttt{select/3} database queries.
+See also \texttt{same/3}, \texttt{bool/3}, \texttt{range/3}, \texttt{head/3}, \texttt{fold/3}, \texttt{part/3} and
+\texttt{tolr/3}.
+
+
+\begin{wideverbatim}
+: (? (db nm +Person @Prs) (isa +Woman @Prs) (val @Nm @Prs nm))
+ @Prs={2-Y} @Nm="Alexandra of Denmark"
+ @Prs={2-1I} @Nm="Alice Maud Mary"
+ @Prs={2-F} @Nm="Anne"
+ @Prs={2-j} @Nm="Augusta Victoria".   # Stop
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(iter 'tree ['fun] ['any1] ['any2] ['flg])}}
+\label{sec:func-ref-I-(iter 'tree ['fun] ['any1] ['any2] ['flg])}
+
+
+Iterates through a database tree by applying \texttt{fun} to all values. \texttt{fun}
+defaults to \texttt{println}. \texttt{any1} and \texttt{any2} may specify a range of keys. If
+\texttt{any2} is greater than \texttt{any1}, the traversal will be in opposite
+direction. Note that the keys need not to be atomic, depending on the
+application's index structure. If \texttt{flg} is non-\texttt{NIL}, partial keys are
+skipped. See also \texttt{tree}, \texttt{scan}, \texttt{init} and \texttt{step}.
+
+
+\begin{wideverbatim}
+: (iter (tree 'nr '+Item))
+{3-1}
+{3-2}
+{3-3}
+{3-4}
+{3-5}
+{3-6}
+{3-8}
+-> {7-1}
+: (iter (tree 'nr '+Item) '((This) (println (: nm))))
+"Main Part"
+"Spare Part"
+"Auxiliary Construction"
+"Enhancement Additive"
+"Metal Fittings"
+"Gadget Appliance"
+"Testartikel"
+-> {7-1}
+\end{wideverbatim}
+
+
+% \input{referenc}

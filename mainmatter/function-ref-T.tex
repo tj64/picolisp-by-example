@@ -1,0 +1,627 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with T}
+\label{cha:func-ref-T-functions-starting-with-T}
+ 
+\section*{\texttt{*Tmp}}
+\label{sec:func-ref-T-*Tmp}
+
+
+A global variable holding the temporary directory name created with
+\texttt{tmp}. See also \texttt{*Bye}.
+
+
+\begin{wideverbatim}
+: *Bye
+-> ((saveHistory) (and *Tmp (call 'rm "-r" *Tmp)))
+: (tmp "foo" 123)
+-> "/home/app/.pil/tmp/27140/foo123"
+: *Tmp
+-> "/home/app/.pil/tmp/27140/"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{*Tsm}}
+\label{sec:func-ref-T-*Tsm}
+
+
+A global variable which may hold a cons pair of two strings with escape
+sequences, to switch on and off an alternative transient symbol markup.
+If set, \texttt{print} will output these sequences to the console instead of
+the standard double quote markup characters.
+
+
+\begin{wideverbatim}
+: (de *Tsm "^[[4m" . "^[[24m")   # vt100 escape sequences for underline
+-> *Tsm
+: Hello world
+-> Hello world
+: (off *Tsm)
+-> NIL
+: "Hello world"                  # No underlining
+-> "Hello world"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+Time}}
+\label{sec:func-ref-T-+Time}
+
+
+Class for clock time values (as calculated by \texttt{time}), a subclass of
+\texttt{+Number}. See also \texttt{Database}.
+
+
+\begin{wideverbatim}
+(rel tim (+Time))  # Time of the day
+\end{wideverbatim}
+
+ 
+\section*{\texttt{T}}
+\label{sec:func-ref-T-T}
+
+
+A global constant, evaluating to itself. \texttt{T} is commonly returned as the
+boolean value ``true'' (though any non-\texttt{NIL} values could be used). It
+represents the absolute maximum, as it is larger than any other object.
+As a property key, it is used to store \emph{Pilog}
+clauses, and inside Pilog clauses it is the \emph{cut} operator. See also
+\texttt{NIL} and and \emph{Comparing}.
+
+
+\begin{wideverbatim}
+: T
+-> T
+: (= 123 123)
+-> T
+: (get 'not T)
+-> ((@P (1 -> @P) T (fail)) (@P))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{This}}
+\label{sec:func-ref-T-This}
+
+
+Holds the current object during method execution (see \emph{OO Concepts}), or inside the body of a \texttt{with} statement. As it is a normal
+symbol, however, it can be used in normal bindings anywhere. See also
+\texttt{isa}, \texttt{:}, \texttt{=:}, \texttt{::} and \texttt{var:}.
+
+
+\begin{wideverbatim}
+: (with 'X (println 'This 'is This))
+This is X
+-> X
+: (put 'X 'a 1)
+-> 1
+: (put 'X 'b 2)
+-> 2
+: (put 'Y 'a 111)
+-> 111
+: (put 'Y 'b 222)
+-> 222
+: (mapcar '((This) (cons (: a) (: b))) '(X Y))
+-> ((1 . 2) (111 . 222))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(t . prg) -> T}}
+\label{sec:func-ref-T-(t . prg) -> T}
+
+
+Executes \texttt{prg}, and returns \texttt{T}. See also \texttt{nil}, \texttt{prog}, \texttt{prog1} and
+\texttt{prog2}.
+
+
+\begin{wideverbatim}
+: (t (println 'OK))
+OK
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(tab 'lst 'any ..) -> NIL}}
+\label{sec:func-ref-T-(tab 'lst 'any ..) -> NIL}
+
+
+Print all \texttt{any} arguments in a tabular format. \texttt{lst} should be a list of
+numbers, specifying the field width for each argument. All items in a
+column will be left-aligned for negative numbers, otherwise
+right-aligned. See also \texttt{align}, \texttt{center} and \texttt{wrap}.
+
+
+\begin{wideverbatim}
+: (let Fmt (-3 14 14)
+   (tab Fmt "Key" "Rand 1" "Rand 2")
+   (tab Fmt "---" "------" "------")
+   (for C '(A B C D E F)
+      (tab Fmt C (rand) (rand)) ) )
+Key        Rand 1        Rand 2
+---        ------        ------
+A               0    1481765933
+B     -1062105905    -877267386
+C      -956092119     812669700
+D       553475508   -1702133896
+E      1344887256   -1417066392
+F      1812158119   -1999783937
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(tail 'cnt|lst 'lst) -> lst}}
+\label{sec:func-ref-T-(tail 'cnt|lst 'lst) -> lst}
+
+
+Returns the last \texttt{cnt} elements of \texttt{lst}. If \texttt{cnt} is negative, it is
+added to the length of \texttt{lst}. If the first argument is a \texttt{lst}, \texttt{tail}
+is a predicate function returning that argument list if it is \texttt{equal} to
+the tail of the second argument, and \texttt{NIL} otherwise. \texttt{(tail -2 Lst)} is
+equivalent to \texttt{(nth Lst 3)}. See also \texttt{offset}, \texttt{head}, \texttt{last} and
+\texttt{stem}.
+
+
+\begin{wideverbatim}
+: (tail 3 '(a b c d e f))
+-> (d e f)
+: (tail -2 '(a b c d e f))
+-> (c d e f)
+: (tail 0 '(a b c d e f))
+-> NIL
+: (tail 10 '(a b c d e f))
+-> (a b c d e f)
+: (tail '(d e f) '(a b c d e f))
+-> (d e f)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(task 'num ['num] [sym 'any ..] [. prg]) -> lst}}
+\label{sec:func-ref-T-(task 'num ['num] [sym 'any ..] [. prg]) -> lst}
+
+
+A front-end to the \texttt{*Run} global. If called with only a single
+\texttt{num} argument, the corresponding entry is removed from the
+value of \texttt{*Run}. Otherwise, a new entry is created. If an entry
+with that key already exists, an error is issued. For negative
+numbers, a second number must be supplied. If
+\texttt{sym}/\texttt{any} arguments are given, a \texttt{job}
+environment is built for thie \texttt{*Run} entry. See also
+\texttt{forked} and \texttt{timeout}.
+
+
+\begin{wideverbatim}
+: (task -10000 5000 N 0 (msg (inc 'N)))            # Install task
+-> (-10000 5000 (job '((N . 0)) (msg (inc 'N))))   # for every 10 seconds
+: 1                                                # ... after 5 seconds
+2                                                  # ... after 10 seconds
+3                                                  # ... after 10 seconds
+(task -10000)                                      # remove again
+-> NIL
+
+: (task (port T 4444) (eval (udp @)))              # Receive RPC via UDP
+-> (3 (eval (udp @)))
+
+# Another session (on the same machine)
+: (udp "localhost" 4444 '(println *Pid))  # Send RPC message
+-> (println *Pid)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(telStr 'sym) -> sym}}
+\label{sec:func-ref-T-(telStr 'sym) -> sym}
+
+
+Formats a telephone number according to the current \texttt{locale}. If the
+string head matches the local country code, it is replaced with \texttt{0},
+otherwise \texttt{+} is prepended. See also \texttt{expTel}, \texttt{datStr}, \texttt{money} and
+\texttt{format}.
+
+
+\begin{wideverbatim}
+: (telStr "49 1234 5678-0")
+-> "+49 1234 5678-0"
+: (locale "DE" "de")
+-> NIL
+: (telStr "49 1234 5678-0")
+-> "01234 5678-0"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(tell ['cnt] 'sym ['any ..]) -> any}}
+\label{sec:func-ref-T-(tell ['cnt] 'sym ['any ..]) -> any}
+
+
+Family IPC: Send an executable list \texttt{(sym any ..)} to all family members
+(i.e. all children of the current process, and all other children of the
+parent process, see \texttt{fork}) for automatic execution. When the \texttt{cnt}
+argument is given and non-zero, it should be the PID of such a process,
+and the list will be sent only to that process. \texttt{tell} is also used
+internally by \texttt{commit} to notify about database changes. When called
+without arguments, no message is actually sent, and the parent process
+may grant \texttt{sync} to the next waiting process. See also \texttt{hear}.
+
+
+\begin{wideverbatim}
+: (call 'ps "x")                          # Show processes
+  PID TTY      STAT   TIME COMMAND
+  ..
+ 1321 pts/0    S      0:00 /usr/bin/picolisp ..  # Parent process
+ 1324 pts/0    S      0:01 /usr/bin/picolisp ..  # First child
+ 1325 pts/0    S      0:01 /usr/bin/picolisp ..  # Second child
+ 1326 pts/0    R      0:00 ps x
+-> T
+: *Pid                                    # We are the second child
+-> 1325
+: (tell 'println '*Pid)                   # Ask all others to print their Pid's
+1324
+-> *Pid
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(test 'any . prg)}}
+\label{sec:func-ref-T-(test 'any . prg)}
+
+
+Executes \texttt{prg}, and issues an \texttt{error} if the result does not \texttt{match} the
+\texttt{any} argument. See also \texttt{assert}.
+
+
+\begin{wideverbatim}
+: (test 12 (* 3 4))
+-> NIL
+: (test 12 (+ 3 4))
+((+ 3 4))
+12 -- 'test' failed
+?
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(text 'any1 'any ..) -> sym}}
+\label{sec:func-ref-T-(text 'any1 'any ..) -> sym}
+
+
+Builds a new transient symbol (string) from the string representation of
+\texttt{any1}, by replacing all occurrences of an at-mark ``\texttt{@}'', followed by
+one of the letters''\texttt{1}'' through ``\texttt{9}'', and''\texttt{A}'' through ``\texttt{Z}'', with the
+corresponding \texttt{any} argument. In this context ``\texttt{@A}'' refers to the 10th
+argument. A literal at-mark in the text can be represented by two
+successive at-marks. See also \texttt{pack} and \texttt{glue}.
+
+
+\begin{wideverbatim}
+: (text "abc @1 def @2" 'XYZ 123)
+-> "abc XYZ def 123"
+: (text "a@@bc.@1" "de")
+-> "a@bc.de"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(tim\$ 'tim ['flg]) -> sym}}
+\label{sec:func-ref-T-\texttt{(timtime} \texttt{tim}. If \texttt{flg} is \texttt{NIL}, the format is HH:MM
+otherwise it is HH:MM:SS. See also \texttt{\$tim} and \texttt{dat\$}.
+
+
+\begin{wideverbatim}
+: (tim$ (time))
+-> "10:57"
+: (tim$ (time) T)
+-> "10:57:56"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(timeout ['num])}}
+\label{sec:func-ref-T-(timeout ['num])}
+
+
+Sets or refreshes a timeout value in the \texttt{*Run} global, so that the
+current process executes \texttt{bye} after the given period. If called without
+arguments, the timeout is removed. See also \texttt{task}.
+
+
+\begin{wideverbatim}
+: (timeout 3600000)           # Timeout after one hour
+-> (-1 3600000 (bye))
+: *Run                        # Look after a few seconds
+-> ((-1 3574516 (bye)))
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(throw 'sym 'any)}}
+\label{sec:func-ref-T-(throw 'sym 'any)}
+
+
+Non-local jump into a previous \texttt{catch} environment with the jump labe
+\texttt{sym} (or \texttt{T} as a catch-all). Any pending \texttt{finally} expressions are
+executed, local symbol bindings are restored, open files are closed and
+internal data structures are reset appropriately, as the environment was
+at the time when the corresponding \texttt{catch} was called. Then \texttt{any} is
+returned from that \texttt{catch}. See also \texttt{quit}.
+
+
+\begin{wideverbatim}
+: (de foo (N)
+   (println N)
+   (throw 'OK) )
+-> foo
+: (let N 1  (catch 'OK (foo 7))  (println N))
+7
+1
+-> 1
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(tick (cnt1 . cnt2) . prg) -> any}}
+\label{sec:func-ref-T-(tick (cnt1 . cnt2) . prg) -> any}
+
+
+Executes \texttt{prg}, then (destructively) adds the number of elapsed user
+ticks to the \texttt{cnt1} parameter, and the number of elapsed system ticks to
+the \texttt{cnt2} parameter. Thus, \texttt{cnt1} and \texttt{cnt2} will finally contain the
+total number of user and system time ticks spent in \texttt{prg} and all
+functions called (this works also for recursive functions). For
+execution profiling, \texttt{tick} is usually inserted into words with \texttt{prof},
+and removed with \texttt{unprof}. See also \texttt{usec}.
+
+
+\begin{wideverbatim}
+: (de foo ()                        # Define function with empty loop
+   (tick (0 . 0) (do 100000000)) )
+-> foo
+: (foo)                             # Execute it
+-> NIL
+: (pp 'foo)
+(de foo NIL
+   (tick (97 . 0) (do 100000000)) ) # 'tick' incremented 'cnt1' by 97
+-> foo
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(till 'any ['flg]) -> lst|sym}}
+\label{sec:func-ref-T-(till 'any ['flg]) -> lst|sym}
+
+
+Reads from the current input channel till a character contained in \texttt{any}
+is found (or until end of file if \texttt{any} is \texttt{NIL}). If \texttt{flg} is \texttt{NIL}, a
+list of single-character transient symbols is returned. Otherwise, a
+single string is returned. See also \texttt{from} and \texttt{line}.
+
+
+\begin{wideverbatim}
+: (till ":")
+abc:def
+-> ("a" "b" "c")
+: (till ":" T)
+abc:def
+-> "abc"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(time ['T]) -> tim}}
+\label{sec:func-ref-T-(time ['T]) -> tim}
+
+
+\texttt{(time 'tim) -> (h m s)}
+
+\texttt{(time 'h 'm ['s]) -> tim | NIL}
+
+\texttt{(time '(h m [s])) -> tim | NIL}
+
+Calculates the time of day, represented as the number of seconds since
+midnight. When called without arguments, the current local time is
+returned. When called with a \texttt{T} argument, the time of the last call to
+\texttt{date} is returned. When called with a single number \texttt{tim}, it is taken
+as a time value and a list with the corresponding hour, minute and
+second is returned. When called with two or three numbers (or a list of
+two or three numbers) for the hour, minute (and optionally the second),
+the corresponding time value is returned (or \texttt{NIL} if they do not
+represent a legal time). See also \texttt{date}, \texttt{stamp}, \texttt{usec}, \texttt{tim\$} and
+\texttt{\$tim}.
+
+
+\begin{wideverbatim}
+: (time)                         # Now
+-> 32334
+: (time 32334)                   # Now
+-> (8 58 54)
+: (time 25 30)                   # Illegal time
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(tmp ['any ..]) -> sym}}
+\label{sec:func-ref-T-(tmp ['any ..]) -> sym}
+
+
+Returns the path name to the \texttt{pack}ed \texttt{any} arguments in a process-local
+temporary directory. The directory name consists of the path to
+``.pil/tmp/'' in the user's home directory, followed by the current
+process ID \texttt{*Pid}. This directory is automatically created if necessary,
+and removed upon termination of the process (\texttt{bye}). See also \texttt{pil},
+\texttt{*Tmp} and \texttt{*Bye} .
+
+
+\begin{wideverbatim}
+: *Pid
+-> 27140
+: (tmp "foo" 123)
+-> "/home/app/.pil/tmp/27140/foo123"
+: (out (tmp "foo" 123) (println 'OK))
+-> OK
+: (dir (tmp))
+-> ("foo123")
+: (in (tmp "foo" 123) (read))
+-> OK
+\end{wideverbatim}
+
+ 
+\section*{\texttt{tolr/3}}
+\label{sec:func-ref-T-tolr/3}
+
+
+\emph{Pilog} predicate that succeeds if the first argument
+is either a \emph{substring} or a \texttt{+Sn} \emph{soundex} match of the result of
+applying the \texttt{get} algorithm to the following arguments. Typically used
+as filter predicate in \texttt{select/3} database queries. See also \texttt{isa/2},
+\texttt{same/3}, \texttt{bool/3}, \texttt{range/3}, \texttt{head/3}, \texttt{fold/3} and \texttt{part/3}.
+
+
+\begin{wideverbatim}
+: (?
+   @Nr (1 . 5)
+   @Nm "Sven"
+   (select (@CuSu)
+      ((nr +CuSu @Nr) (nm +CuSu @Nm))
+      (range @Nr @CuSu nr)
+      (tolr @Nm @CuSu nm) )
+   (val @Name @CuSu nm) )
+ @Nr=(1 . 5) @Nm="Sven" @CuSu={2-2} @Name="Seven Oaks Ltd."
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(touch 'sym) -> sym}}
+\label{sec:func-ref-T-(touch 'sym) -> sym}
+
+
+When \texttt{sym} is an external symbol, it is marked as ``modified'' so that
+upon a later \texttt{commit} it will be written to the database file. An
+explicit call of \texttt{touch} is only necessary when the value or properties
+of \texttt{sym} are indirectly modified.
+
+
+\begin{wideverbatim}
+: (get '{2} 'lst)
+-> (1 2 3 4 5)
+: (set (cdr (get (touch '{2}) 'lst)) 999)    # Only read-access, need 'touch'
+-> 999
+: (get '{2} 'lst)                            # Modified second list element
+-> (1 999 3 4 5)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(trace 'sym) -> sym}}
+\label{sec:func-ref-T-(trace 'sym) -> sym}
+
+
+\texttt{(trace 'sym 'cls) -> sym}
+
+\texttt{(trace '(sym . cls)) -> sym}
+
+Inserts a \texttt{\$} trace function call at the beginning of the function or
+method body of \texttt{sym}, so that trace information will be printed before
+and after execution. Built-in functions (C-function pointer) are
+automatically converted to Lisp expressions (see \texttt{expr}). See also
+\texttt{*Dbg}, \texttt{traceAll} and \texttt{untrace}, \texttt{debug} and \texttt{lint}.
+
+
+\begin{wideverbatim}
+: (trace '+)
+-> +
+: (+ 3 4)
+ + : 3 4
+ + = 7
+-> 7
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(traceAll ['lst]) -> sym}}
+\label{sec:func-ref-T-(traceAll ['lst]) -> sym}
+
+
+Traces all Lisp level functions by inserting a \texttt{\$} function call at the
+beginning. \texttt{lst} may contain symbols which are to be excluded from that
+process. In addition, all symbols in the global variable \texttt{*NoTrace} are
+excluded. See also \texttt{trace}, \texttt{untrace} and \texttt{*Dbg}.
+
+
+\begin{wideverbatim}
+: (traceAll)      # Trace all Lisp level functions
+-> balance
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(tree 'var 'cls ['hook]) -> tree}}
+\label{sec:func-ref-T-(tree 'var 'cls ['hook]) -> tree}
+
+
+Returns a data structure specifying a database index tree. \texttt{var} and
+\texttt{cls} determine the relation, with an optional \texttt{hook} object. See also
+\texttt{root}, \texttt{fetch}, \texttt{store}, \texttt{count}, \texttt{leaf}, \texttt{minKey}, \texttt{maxKey}, \texttt{init},
+\texttt{step}, \texttt{scan}, \texttt{iter}, \texttt{prune}, \texttt{zapTree} and \texttt{chkTree}.
+
+
+\begin{wideverbatim}
+: (tree 'nm '+Item)
+-> (nm . +Item)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(trim 'lst) -> lst}}
+\label{sec:func-ref-T-(trim 'lst) -> lst}
+
+
+Returns a copy of \texttt{lst} with all trailing whitespace characters or \texttt{NIL}
+elements removed. See also \texttt{clip}.
+
+
+\begin{wideverbatim}
+: (trim (1 NIL 2 NIL NIL))
+-> (1 NIL 2)
+: (trim '(a b " " " "))
+-> (a b)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{true/0}}
+\label{sec:func-ref-T-true/0}
+
+
+\emph{Pilog} predicate that always succeeds. See also
+\texttt{fail/0} and \texttt{repeat/0}.
+
+
+\begin{wideverbatim}
+:  (? (true))
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(try 'msg 'obj ['any ..]) -> any}}
+\label{sec:func-ref-T-(try 'msg 'obj ['any ..]) -> any}
+
+
+Tries to send the message \texttt{msg} to the object \texttt{obj}, optionally with
+arguments \texttt{any}. If \texttt{obj} is not an object, or if the message cannot be
+located in \texttt{obj}, in its classes or superclasses, \texttt{NIL} is returned. See
+also \texttt{OO Concepts}, \texttt{send}, \texttt{method}, \texttt{meth}, \texttt{super} and \texttt{extra}.
+
+
+\begin{wideverbatim}
+: (try 'msg> 123)
+-> NIL
+: (try 'html> 'a)
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(type 'any) -> lst}}
+\label{sec:func-ref-T-(type 'any) -> lst}
+
+
+Return the type (list of classes) of the object \texttt{sym}. See also
+\texttt{OO Concepts}, \texttt{isa}, \texttt{class}, \texttt{new} and \texttt{object}.
+
+
+\begin{wideverbatim}
+: (type '{1A;3})
+(+Address)
+: (type '+DnButton)
+-> (+Tiny +Rid +JS +Able +Button)
+\end{wideverbatim}
+

@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with Y}
+\label{cha:func-ref-Y-functions-starting-with-Y}
+ 
+\section*{\texttt{(yield 'any ['sym]) -> any}}
+\label{sec:func-ref-Y-(yield 'any ['sym]) -> any}
+
+
+(64-bit version only) Transfers control from the current
+\emph{coroutine} back to the caller (when the \texttt{sym}
+tag is not given), or to some other coroutine (specified by \texttt{sym}) to
+continue execution at the point where that coroutine had called \texttt{yield}
+before. In the first case, the value \texttt{any} will be returned from the
+corresponding \texttt{co} call, in the second case it will be the return value
+of that \texttt{yield} call. See also \texttt{stack}, \texttt{catch} and \texttt{throw}.
+
+
+\begin{wideverbatim}
+: (co "rt1"                            # Start first routine
+   (msg (yield 1) " in rt1 from rt2")  # Return '1', wait for value from "rt2"
+   7 )                                 # Then return '7'
+-> 1
+
+: (co "rt2"                            # Start second routine
+   (yield 2 "rt1") )                   # Send '2' to "rt1"
+2 in rt1 from rt2
+-> 7
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(yoke 'any ..) -> any}}
+\label{sec:func-ref-Y-(yoke 'any ..) -> any}
+
+
+Inserts one or several new elements \texttt{any} in front of the list in the
+current \texttt{make} environment. \texttt{yoke} returns the last inserted argument.
+See also \texttt{link}, \texttt{chain} and \texttt{made}.
+
+
+\begin{wideverbatim}
+: (make (link 2 3) (yoke 1) (link 4))
+-> (1 2 3 4)
+\end{wideverbatim}
+
+

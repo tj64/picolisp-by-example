@@ -1,0 +1,404 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+\chapter{Symbols starting with B}
+\label{cha:funct-ref-B-symbols-starting-B}
+ 
+\section*{\texttt{*Blob}}
+\label{sec:funct-ref-B-*blob}
+
+
+A global variable holding the pathname of the database blob directory.
+See also \texttt{blob}.
+
+
+\begin{wideverbatim}
+: *Blob
+-> "blob/app/"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{*Bye}}
+\label{sec:funct-ref-B-*bye}
+
+
+A global variable holding a (possibly empty) \texttt{prg} body, to be executed
+just before the termination of the PicoLisp interpreter. See also \texttt{bye}
+and \texttt{tmp}.
+
+
+\begin{wideverbatim}
+: (push1 '*Bye '(call 'rm "myfile.tmp"))  # Remove a temporary file
+-> (call 'rm "myfile.tmp")
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+Bag}}
+\label{sec:funct-ref-B-+bag}
+
+
+Class for a list of arbitrary relations, a subclass of \texttt{+relation}.
+Objects of that class maintain a list of heterogeneous relations.
+Typically used in combination with the \texttt{+List} prefix class, to maintain
+small two-dimensional tables within oubjects. See also \texttt{Database}.
+
+
+\begin{wideverbatim}
+(rel pos (+List +Bag)         # Positions
+   ((+Ref +Link) NIL (+Item))    # Item
+   ((+Number) 2)                 # Price
+   ((+Number))                   # Quantity
+   ((+String))                   # Memo text
+   ((+Number) 2) )               # Total amount
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+Blob}}
+\label{sec:funct-ref-B-+blob}
+
+
+Class for blob relations, a subclass of \texttt{+relation}. Objects of that
+class maintain blobs, as stubs in database objects pointing to actual
+files for arbitrary (often binary) data. The files themselves reside
+below the path specified by the \texttt{*Blob} variable. See also \texttt{Database}.
+
+
+\begin{wideverbatim}
+(rel jpg (+Blob))  # Picture
+\end{wideverbatim}
+
+
+\section*{\texttt{+Bool}}
+\label{sec:funct-ref-B-+bool}
+
+Class for boolean relations, a subclass of \texttt{+relation}. Objects of that
+class expect either \texttt{T} or \texttt{NIL} as value (though, as always, only
+non-\texttt{NIL} will be physically stored in objects). See also \texttt{Database}.
+
+
+\begin{wideverbatim}
+(rel ok (+Ref +Bool))  # Indexed flag
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(balance 'var 'lst ['flg])}}
+\label{sec:funct-ref-B-(balance-'var-'lst-['flg])}
+
+
+Builds a balanced binary \texttt{idx} tree in \texttt{var}, from the sorted list in
+\texttt{lst}. Normally (if random or, in the worst case, ordered data) are
+inserted with \texttt{idx}, the tree will not be balanced. But if \texttt{lst} is
+properly sorted, its contents will be inserted in an optimally balanced
+way. If \texttt{flg} is non-\texttt{NIL}, the index tree will be augmented instead of
+being overwritten. See also \texttt{Comparing} and \texttt{sort}.
+
+
+\begin{wideverbatim}
+# Normal idx insert
+: (off I)
+-> NIL
+: (for X (1 4 2 5 3 6 7 9 8) (idx 'I X T))
+-> NIL
+: (depth I)
+-> 7
+
+# Balanced insert
+: (balance 'I (sort (1 4 2 5 3 6 7 9 8)))
+-> NIL
+: (depth I)
+-> 4
+
+# Augment
+: (balance 'I (sort (10 40 20 50 30 60 70 90 80)) T)
+-> NIL
+: (idx 'I)
+-> (1 2 3 4 5 6 7 8 9 10 20 30 40 50 60 70 80 90)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(basename 'any) -> sym}}
+\label{sec:funct-ref-B-(basename-'any)-->-sym}
+
+
+Returns the filename part of a path name \texttt{any}. See also \texttt{dirname} and
+\texttt{path}.
+
+
+\begin{wideverbatim}
+: (basename "a/b/c/d")
+-> "d"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(be sym . any) -> sym}}
+\label{sec:funct-ref-B-(be-sym-.-any)-->-sym}
+
+
+Declares a \hyperref[ref.html-pilog]{Pilog} fact or rule for the \texttt{sym}
+argument, by concatenating the \texttt{any} argument to the \texttt{T} property of
+\texttt{sym}. See also \texttt{clause}, \texttt{asserta}, \texttt{assertz}, \texttt{retract}, \texttt{goal} and
+\texttt{prove}.
+
+
+\begin{wideverbatim}
+: (be likes (John Mary))
+-> likes
+: (be likes (John @X) (likes @X wine) (likes @X food))
+-> likes
+: (get 'likes T)
+-> (((John Mary)) ((John @X) (likes @X wine) (likes @X food)))
+: (? (likes John @X))
+ @X=Mary
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(beep) -> any}}
+\label{sec:funct-ref-B-(beep)-->-any}
+
+
+Send the bell character to the console. See also \texttt{prin} and \texttt{char}.
+
+
+\begin{wideverbatim}
+: (beep)
+-> "^G"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(bench . prg) -> any}}
+\label{sec:funct-ref-B-(bench-.-prg)-->-any}
+
+
+Benchmarks \texttt{prg}, by printing the time it took to execute, and returns
+the result. See also \texttt{usec}.
+
+
+\begin{wideverbatim}
+: (bench (wait 2000))
+1.996 sec
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(bin 'num ['num]) -> sym}}
+\label{sec:funct-ref-B-(bin-'num-['num])-->-sym}
+
+
+\texttt{(bin 'sym) -> num}
+
+Converts a number \texttt{num} to a binary string, or a binary string \texttt{sym} to
+a number. In the first case, if the second argument is given, the result
+is separated by spaces into groups of such many digits. See also \texttt{oct},
+\texttt{hex}, \texttt{fmt64}, \texttt{hax} and \texttt{format}.
+
+
+\begin{wideverbatim}
+: (bin 73)
+-> "1001001"
+: (bin "1001001")
+-> 73
+: (bin 1234567 4)
+-> "100 1011 0101 1010 0001 11"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(bind 'sym|lst . prg) -> any}}
+\label{sec:funct-ref-B-(bind-'sym|lst-.-prg)-->-any}
+
+
+Binds value(s) to symbol(s). The first argument must evaluate to a
+symbol, or a list of symbols or symbol-value pairs. The values of these
+symbols are saved (and the symbols bound to the values in the case of
+pairs), \texttt{prg} is executed, then the symbols are restored to their
+original values. During execution of \texttt{prg}, the values of the symbols
+can be temporarily modified. The return value is the result of \texttt{prg}.
+See also \texttt{let}, \texttt{job} and \texttt{use}.
+
+
+\begin{wideverbatim}
+: (setq X 123)                               # X is 123
+-> 123
+: (bind 'X (setq X "Hello") (println X))  # Set X to "Hello", print it
+"Hello"
+-> "Hello"
+: (bind '((X . 3) (Y . 4)) (println X Y) (* X Y))
+3 4
+-> 12
+: X
+-> 123                                       # X is restored to 123
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(bit? 'num ..) -> num | NIL}}
+\label{sec:funct-ref-B-(bit?-'num-..)-->-num-|-nil}
+
+
+Returns the first \texttt{num} argument when all bits which are 1 in the first
+argument are also 1 in all following arguments, otherwise \texttt{NIL}. When
+one of those arguments evaluates to \texttt{NIL}, it is returned immediately.
+See also \texttt{\&}, \texttt{|} and \texttt{x|}.
+
+
+\begin{wideverbatim}
+: (bit? 7 15 255)
+-> 7
+: (bit? 1 3)
+-> 1
+: (bit? 1 2)
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(blob 'obj 'sym) -> sym}}
+\label{sec:funct-ref-B-(blob-'obj-'sym)-->-sym}
+
+
+Returns the blob file name for \texttt{var} in \texttt{obj}. See also \texttt{*Blob}, \texttt{blob!}
+and \texttt{pack}.
+
+
+\begin{wideverbatim}
+: (show (db 'nr '+Item 1))
+{3-1} (+Item)
+   jpg
+   pr 29900
+   inv 100
+   sup {2-1}
+   nm "Main Part"
+   nr 1
+-> {3-1}
+: (blob '{3-1} 'jpg)
+-> "blob/app/3/-/1.jpg"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(blob! 'obj 'sym 'file)}}
+\label{sec:funct-ref-B-(blob!-'obj-'sym-'file)}
+
+
+Stores the contents of \texttt{file} in a \texttt{blob}. See also \texttt{put!>}.
+
+
+\begin{wideverbatim}
+(blob! *ID 'jpg "picture.jpg")
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(bool 'any) -> flg}}
+\label{sec:funct-ref-B-(bool-'any)-->-flg}
+
+
+Returns \texttt{T} when the argument \texttt{any} is non-\texttt{NIL}. This function is only
+needed when \texttt{T} is strictly required for a ``true'' condition (Usually,
+any non-\texttt{NIL} value is considered to be ``true''). See also \texttt{flg?}.
+
+
+\begin{wideverbatim}
+: (and 3 4)
+-> 4
+: (bool (and 3 4))
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{bool/3}}
+\label{sec:funct-ref-B-bool/3}
+
+
+\hyperref[ref.html-pilog]{Pilog} predicate that succeeds if the first argument
+has the same truth value as the result of applying the \texttt{get} algorithm
+to the following arguments. Typically used as filter predicate in
+\texttt{select/3} database queries. See also \texttt{bool}, \texttt{isa/2}, \texttt{same/3},
+\texttt{range/3}, \texttt{head/3}, \texttt{fold/3}, \texttt{part/3} and \texttt{tolr/3}.
+
+
+\begin{wideverbatim}
+: (? @OK NIL         # Find orders where the 'ok' flag is not set
+   (db nr +Ord @Ord)
+   (bool @OK @Ord ok) )
+ @OK=NIL @Ord={3-7}
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(box 'any) -> sym}}
+\label{sec:funct-ref-B-(box-'any)-->-sym}
+
+
+Creates and returns a new anonymous symbol. The initial value is set to
+the \texttt{any} argument. See also \texttt{new} and \texttt{box?}.
+
+
+\begin{wideverbatim}
+: (show (box '(A B C)))
+$134425627 (A B C)
+-> $134425627
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(box? 'any) -> sym | NIL}}
+\label{sec:funct-ref-B-(box?-'any)-->-sym-|-nil}
+
+
+Returns the argument \texttt{any} when it is an anonymous symbol, otherwise
+\texttt{NIL}. See also \texttt{box}, \texttt{str?} and \texttt{ext?}.
+
+
+\begin{wideverbatim}
+: (box? (new))
+-> $134563468
+: (box? 123)
+-> NIL
+: (box? 'a)
+-> NIL
+: (box? NIL)
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(by 'fun1 'fun2 'lst ..) -> lst}}
+\label{sec:funct-ref-B-(by-'fun1-'fun2-'lst-..)-->-lst}
+
+
+Applies \texttt{fun1} to each element of \texttt{lst}. When additional \texttt{lst} arguments
+are given, their elements are also passed to \texttt{fun1}. Each result of
+\texttt{fun1} is CONSed with its corresponding argument form the original
+\texttt{lst}, and collected into a list which is passed to \texttt{fun2}. For the list
+returned from \texttt{fun2}, the CAR elements returned by \texttt{fun1} are
+(destructively) removed from each element.
+
+
+\begin{wideverbatim}
+: (let (A 1 B 2 C 3) (by val sort '(C A B)))
+-> (A B C)
+: (by '((N) (bit? 1 N)) group (3 11 6 2 9 5 4 10 12 7 8 1))
+-> ((3 11 9 5 7 1) (6 2 4 10 12 8))
+\end{wideverbatim}
+
+ 
+\section*{(bye 'cnt|NIL)}}
+\label{sec:funct-ref-B-(bye-'cnt|nil)}
+
+
+Executes all pending \texttt{finally} expressions, closes all open files,
+executes the \texttt{VAL} of the global variable \texttt{*Bye} (should be a \texttt{prg}),
+flushes standard output, and then exits the PicoLisp interpreter. The
+process return value is \texttt{cnt}, or 0 if the argument is missing or \texttt{NIL}.
+
+
+\begin{wideverbatim}
+: (setq *Bye '((println 'OK) (println 'bye)))
+-> ((println 'OK) (println 'bye))
+: (bye)
+OK
+bye
+$
+\end{wideverbatim}
+

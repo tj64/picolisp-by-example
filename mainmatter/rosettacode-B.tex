@@ -1,0 +1,1643 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+\chapter{Rosetta Code Tasks starting with B}
+
+\section*{Balanced brackets}
+
+
+\textbf{Task}:
+
+\begin{itemize}
+\item
+  Generate a string with N opening brackets (``\texttt{{[}}'') and N
+  closing brackets (``\texttt{{]}}''), in some arbitrary order.
+\item
+  Determine whether the generated string is \emph{balanced}; that is,
+  whether it consists entirely of pairs of opening/closing brackets (in
+  that order), none of which mis-nest.
+\end{itemize}
+
+\textbf{Examples}:
+
+\begin{verbatim}
+   (empty)   OK
+   []        OK   ][        NOT OK
+   [][]      OK   ][][      NOT OK
+   [[][]]    OK   []][[]    NOT OK
+\end{verbatim}
+
+
+
+\begin{wideverbatim}
+
+(load "@lib/simul.l")  # For 'shuffle'
+
+(de generateBrackets (N)
+   (shuffle (make (do N (link "[" "]")))) )
+
+(de checkBrackets (S)
+   (let N 0
+      (for C S
+         (if (= C "[")
+            (inc 'N)
+            (if2 (= C "]") (=0 N)
+               (off N)
+               (dec 'N) ) ) )
+      (=0 N) ) )
+
+(for N 10
+   (prinl (if (checkBrackets (prin (generateBrackets N))) " OK" "not OK")) )
+
+Output:
+
+[] OK
+[[]] OK
+]]][[[not OK
+[[[][]]] OK
+[][][[[]]] OK
+[]][[[][[]]]not OK
+[[[]]][][][][] OK
+]][][[[[]][]]][[not OK
+[]][][[[][[]]][]][not OK
+[[[][]]]]][][[]]][[[not OK
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Best shuffle}
+
+
+Shuffle the characters of a string in such a way that as many of the
+character values are in a different position as possible. Print the
+result as follows: original string, shuffled string, (score). The score
+gives the number of positions whose character value did \emph{not}
+change.
+
+For example: \texttt{tree, eetr, (0)}
+
+A shuffle that produces a randomized result among the best choices is to
+be preferred. A deterministic approach that produces the same sequence
+every time is acceptable as an alternative.
+
+The words to test with are: \texttt{abracadabra}, \texttt{seesaw},
+\texttt{elk}, \texttt{grrrrrr}, \texttt{up}, \texttt{a}
+
+Cf.
+
+\begin{itemize}
+\item
+  \emph{Anagrams/Deranged anagrams}
+\item
+  \emph{Permutations/Derangements}
+\end{itemize}
+
+
+\begin{wideverbatim}
+
+(de bestShuffle (Str)
+   (let Lst NIL
+      (for C (setq Str (chop Str))
+         (if (assoc C Lst)
+            (con @ (cons C (cdr @)))
+            (push 'Lst (cons C)) ) )
+      (setq Lst (apply conc (flip (by length sort Lst))))
+      (let Res
+         (mapcar
+            '((C)
+               (prog1 (or (find <> Lst (circ C)) C)
+                  (setq Lst (delete @ Lst)) ) )
+            Str )
+         (prinl Str " " Res " (" (cnt = Str Res) ")") ) ) )
+
+Output:
+
+: (bestShuffle "abracadabra")
+abracadabra raarababadc (0)
+
+: (bestShuffle "seesaw")
+seesaw essewa (0)
+
+: (bestShuffle "elk")
+elk lke (0)
+
+: (bestShuffle "grrrrrr")
+grrrrrr rgrrrrr (5)
+
+: (bestShuffle "up")
+up pu (0)
+
+: (bestShuffle "a")
+a a (1)
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Binary digits}
+
+
+The task is to output the sequence of binary digits for a given
+\href{http://en.wikipedia.org/wiki/Natural\_number}{non-negative
+integer}.
+
+The decimal value \texttt{5}, should produce an output of \texttt{101}
+The decimal value \texttt{50} should produce an output of
+\texttt{110010} The decimal value \texttt{9000} should produce an output
+of \texttt{10001100101000}
+
+The results can be achieved using builtin radix functions within the
+language, if these are available, or alternatively a user defined
+function can be used. The output produced should consist just of the
+binary digits of each number followed by a newline. There should be no
+other whitespace, radix or sign markers in the produced output, and
+\href{http://en.wikipedia.org/wiki/Leading\_zero}{leading zeros} should
+not appear in the results.
+
+
+
+\begin{wideverbatim}
+
+: (bin 5)
+-> "101"
+
+: (bin 50)
+-> "110010"
+
+: (bin 9000)
+-> "10001100101000"
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Binary search}
+
+
+A binary search divides a range of values into halves, and continues to
+narrow down the field of search until the unknown value is found. It is
+the classic example of a ``divide and conquer'' algorithm.
+
+As an analogy, consider the children's game "\emph{guess a number}."
+The scorer has a secret number, and will only tell the player if their
+guessed number is higher than, lower than, or equal to the secret
+number. The player then uses this information to guess a new number.
+
+As the player, an optimal strategy for the general case is to start by
+choosing the range's midpoint as the guess, and then asking whether the
+guess was higher, lower, or equal to the secret number. If the guess was
+too high, one would select the point exactly between the range midpoint
+and the beginning of the range. If the original guess was too low, one
+would ask about the point exactly between the range midpoint and the end
+of the range. This process repeats until one has reached the secret
+number.
+
+\textbf{The Task}
+
+Given the starting point of a range, the ending point of a range, and
+the ``secret value'', implement a binary search through a sorted integer
+array for a certain number. Implementations can be recursive or
+iterative (both if you can). Print out whether or not the number was in
+the array afterwards. If it was, print the index also.
+
+There are several binary search algorithms commonly seen. They differ by
+how they treat multiple values equal to the given value, and whether
+they indicate whether the element was found or not. For completeness we
+will present pseudocode for all of them.
+
+All of the following code examples use an ``inclusive'' upper bound
+(i.e. \texttt{high = N-1} initially). Any of the examples can be
+converted into an equivalent example using ``exclusive'' upper bound
+(i.e. \texttt{high = N} initially) by making the following simple
+changes (which simply increase \texttt{high} by 1):
+
+\begin{itemize}
+\item
+  change \texttt{high = N-1} to \texttt{high = N}
+\item
+  change \texttt{high = mid-1} to \texttt{high = mid}
+\item
+  (for recursive algorithm) change \texttt{if (high \textless{} low)} to
+  \texttt{if (high \textless{}= low)}
+\item
+  (for iterative algorithm) change
+  \texttt{while (low \textless{}= high)} to
+  \texttt{while (low \textless{} high)}
+\end{itemize}
+
+Traditional algorithm
+
+The algorithms are as follows (from
+\href{http://en.wikipedia.org/wiki/Binary\_search}{Wikipedia}). The
+algorithms return the index of some element that equals the given value
+(if there are multiple such elements, it returns some arbitrary one). It
+is also possible, when the element is not found, to return the
+``insertion point'' for it (the index that the value would have if it
+were inserted into the array).
+
+\textbf{Recursive Pseudocode}:
+
+\begin{wideverbatim}
+  // initially called with low = 0, high = N-1
+  BinarySearch(A[0..N-1], value, low, high) {
+      // invariants: value > A[i] for all i < low
+                     value < A[i] for all i > high
+      if (high < low)
+          return not_found // value would be inserted at index "low"
+      mid = (low + high) / 2
+      if (A[mid] > value)
+          return BinarySearch(A, value, low, mid-1)
+      else if (A[mid] < value)
+          return BinarySearch(A, value, mid+1, high)
+      else
+          return mid
+  }
+\end{wideverbatim}
+
+\textbf{Iterative Pseudocode}:
+
+\begin{wideverbatim}
+  BinarySearch(A[0..N-1], value) {
+      low = 0
+      high = N - 1
+      while (low <= high) {
+          // invariants: value > A[i] for all i < low
+                         value < A[i] for all i > high
+          mid = (low + high) / 2
+          if (A[mid] > value)
+              high = mid - 1
+          else if (A[mid] < value)
+              low = mid + 1
+          else
+              return mid
+      }
+      return not_found // value would be inserted at index "low"
+  }
+\end{wideverbatim}
+
+Leftmost insertion point
+
+The following algorithms return the leftmost place where the given
+element can be correctly inserted (and still maintain the sorted order).
+This is the lower (inclusive) bound of the range of elements that are
+equal to the given value (if any). Equivalently, this is the lowest
+index where the element is greater than or equal to the given value
+(since if it were any lower, it would violate the ordering), or 1 past
+the last index if such an element does not exist. This algorithm does
+not determine if the element is actually found. This algorithm only
+requires one comparison per level.
+
+\textbf{Recursive Pseudocode}:
+
+\begin{wideverbatim}
+  // initially called with low = 0, high = N - 1
+  BinarySearch_Left(A[0..N-1], value, low, high) {
+      // invariants: value > A[i] for all i < low
+                     value <= A[i] for all i > high
+      if (high < low)
+          return low
+      mid = (low + high) / 2
+      if (A[mid] >= value)
+          return BinarySearch_Left(A, value, low, mid-1)
+      else
+          return BinarySearch_Left(A, value, mid+1, high)
+  }
+\end{wideverbatim}
+
+\textbf{Iterative Pseudocode}:
+
+\begin{wideverbatim}
+  BinarySearch_Left(A[0..N-1], value) {
+      low = 0
+      high = N - 1
+      while (low <= high) {
+          // invariants: value > A[i] for all i < low
+                         value <= A[i] for all i > high
+          mid = (low + high) / 2
+          if (A[mid] >= value)
+              high = mid - 1
+          else
+              low = mid + 1
+      }
+      return low
+  }
+\end{wideverbatim}
+
+Rightmost insertion point
+
+The following algorithms return the rightmost place where the given
+element can be correctly inserted (and still maintain the sorted order).
+This is the upper (exclusive) bound of the range of elements that are
+equal to the given value (if any). Equivalently, this is the lowest
+index where the element is greater than the given value, or 1 past the
+last index if such an element does not exist. This algorithm does not
+determine if the element is actually found. This algorithm only requires
+one comparison per level. Note that these algorithms are almost exactly
+the same as the leftmost-insertion-point algorithms, except for how the
+inequality treats equal values.
+
+\textbf{Recursive Pseudocode}:
+
+\begin{wideverbatim}
+  // initially called with low = 0, high = N - 1
+  BinarySearch_Right(A[0..N-1], value, low, high) {
+      // invariants: value >= A[i] for all i < low
+                     value < A[i] for all i > high
+      if (high < low)
+          return low
+      mid = (low + high) / 2
+      if (A[mid] > value)
+          return BinarySearch_Right(A, value, low, mid-1)
+      else
+          return BinarySearch_Right(A, value, mid+1, high)
+  }
+\end{wideverbatim}
+
+\textbf{Iterative Pseudocode}:
+
+\begin{wideverbatim}
+  BinarySearch_Right(A[0..N-1], value) {
+      low = 0
+      high = N - 1
+      while (low <= high) {
+          // invariants: value >= A[i] for all i < low
+                         value < A[i] for all i > high
+          mid = (low + high) / 2
+          if (A[mid] > value)
+              high = mid - 1
+          else
+              low = mid + 1
+      }
+      return low
+  }
+\end{wideverbatim}
+
+Extra credit
+
+Make sure it does not have overflow bugs.
+
+The line in the pseudocode above to calculate the mean of two integers:
+
+\begin{wideverbatim}
+mid = (low + high) / 2
+\end{wideverbatim}
+
+could produce the wrong result in some programming languages when used
+with a bounded integer type, if the addition causes an overflow. (This
+can occur if the array size is greater than half the maximum integer
+value.) If signed integers are used, and \texttt{low + high} overflows,
+it becomes a negative number, and dividing by 2 will still result in a
+negative number. Indexing an array with a negative number could produce
+an out-of-bounds exception, or other undefined behavior. If unsigned
+integers are used, an overflow will result in losing the largest bit,
+which will produce the wrong result.
+
+One way to fix it is to manually add half the range to the low number:
+
+\begin{wideverbatim}
+mid = low + (high - low) / 2
+\end{wideverbatim}
+
+Even though this is mathematically equivalent to the above, it is not
+susceptible to overflow.
+
+Another way for signed integers, possibly faster, is the following:
+
+\begin{wideverbatim}
+mid = (low + high) >>> 1
+\end{wideverbatim}
+
+where \texttt{ \textgreater{}\textgreater{}\textgreater{} } is the
+logical right shift operator. The reason why this works is that, for
+signed integers, even though it overflows, when viewed as an unsigned
+number, the value is still the correct sum. To divide an unsigned number
+by 2, simply do a logical right shift.
+
+\textbf{References:}\\
+
+\begin{itemize}
+\item
+  C.f: \emph{Guess the number/With Feedback (Player)}
+\item
+  \href{http://en.wikipedia.org/wiki/Binary\_search\_algorithm}{wp:Binary
+  search algorithm}
+\item
+  \href{http://googleresearch.blogspot.com/2006/06/extra-extra-read-all-about-it-nearly.html}{Extra,
+  Extra - Read All About It: Nearly All Binary Searches and Mergesorts
+  are Broken}.
+\end{itemize}
+
+
+
+\begin{wideverbatim}
+
+(de recursiveSearch (Val Lst Len)
+   (unless (=0 Len)
+      (let (N (inc (/ Len 2))  L (nth Lst N))
+         (cond
+            ((= Val (car L)) Val)
+            ((> Val (car L))
+               (recursiveSearch Val (cdr L) (- Len N)) )
+            (T (recursiveSearch Val Lst (dec N))) ) ) ) )
+
+Output:
+
+: (recursiveSearch 5 (2 3 5 8 "abc" "klm" "xyz" (7) (a b)) 9)
+-> 5
+: (recursiveSearch '(a b) (2 3 5 8 "abc" "klm" "xyz" (7) (a b)) 9)
+-> (a b)
+: (recursiveSearch (9) (2 3 5 8 "abc" "klm" "xyz" (7) (a b)) 9)
+-> NIL
+
+(de iterativeSearch (Val Lst Len)
+   (use (N L)
+      (loop
+         (T (=0 Len))
+         (setq
+            N (inc (/ Len 2))
+            L (nth Lst N) )
+         (T (= Val (car L)) Val)
+         (if (> Val (car L))
+            (setq Lst (cdr L)  Len (- Len N))
+            (setq Len (dec N)) ) ) ) )
+
+Output:
+
+: (iterativeSearch 5 (2 3 5 8 "abc" "klm" "xyz" (7) (a b)) 9)
+-> 5
+: (iterativeSearch '(a b) (2 3 5 8 "abc" "klm" "xyz" (7) (a b)) 9)
+-> (a b)
+: (iterativeSearch (9) (2 3 5 8 "abc" "klm" "xyz" (7) (a b)) 9)
+-> NIL
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Binary strings}
+
+
+Many languages have powerful and useful (\textbf{binary safe})
+\href{http://en.wikipedia.org/wiki/String\_(computer\_science)}{string}
+\href{http://en.wikipedia.org/wiki/Comparison\_of\_programming\_languages\_(string\_functions)}{manipulation
+functions}, while others don't, making it harder for these languages to
+accomplish some tasks. This task is about creating functions to handle
+\emph{binary} strings (strings made of arbitrary bytes, i.e. \emph{byte
+strings} according to Wikipedia) for those languages that don't have
+built-in support for them. If your language of choice does have this
+built-in support, show a possible alternative implementation for the
+\emph{functions} or \emph{abilities} already provided by the language.
+In particular the functions you need to create are:
+
+\begin{itemize}
+\item
+  String creation and destruction (when needed and if there's no
+  \emph{garbage collection} or similar
+  mechanism)
+\item
+  String assignment
+\item
+  String comparison
+\item
+  String cloning and copying
+\item
+  Check if a string is empty
+\item
+  Append a byte to a string
+\item
+  Extract a substring from a string
+\item
+  Replace every occurrence of a byte (or a string) in a string with
+  another string
+\item
+  Join strings
+\end{itemize}
+
+Possible contexts of use: compression algorithms (like \emph{LZW
+  compression}), L-systems (manipulation of symbols), many more.
+
+
+\begin{wideverbatim}
+
+Byte strings are represented in PicoLisp as lists of numbers. They can be
+maniplated easily with the built-in list functionality.
+
+I/O of raw bytes is done via the 'wr' (write) and 'rd' (read) functions. The
+following creates a file consisting of 256 bytes, with values from 0 to 255:
+
+: (out "rawfile"
+   (mapc wr (range 0 255)) )
+
+Looking at a hex dump of that file:
+
+: (hd "rawfile")
+00000000  00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F  ................
+00000010  10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F  ................
+00000020  20 21 22 23 24 25 26 27 28 29 2A 2B 2C 2D 2E 2F   !"#\$\%\&'()*+,-./
+00000030  30 31 32 33 34 35 36 37 38 39 3A 3B 3C 3D 3E 3F  0123456789:;<=>?
+...
+
+
+To read part of that file, an external tool like 'dd' might be used:
+
+: (in '(dd "skip=32" "bs=1" "count=16" "if=rawfile")
+   (make
+      (while (rd 1)
+         (link @) ) ) )
+-> (32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47)
+
+Now such byte lists can be assigned the normal way ('let', 'setq' etc.), they
+can be compared with '=', '>', '>=' etc, and manipulated with all internal map-,
+filter-, concatenation-, reversal-, pattern matching, and other functions.
+
+If desired, a string containing meaningful values can also be converted to
+a transient symbol, e.g. the example above
+
+: (pack (mapcar char (32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47)))
+-> " !\"#\$\%\&'()*+,-./"
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Bitmap}
+
+
+Show a basic storage type to handle a simple RGB raster graphics image,
+and some primitive associated functions.
+
+If possible provide a function to allocate an uninitialised image, given
+its width and height, and provide 3 additional functions:
+
+\begin{itemize}
+\item
+  one to fill an image with a plain RGB color,
+\item
+  one to set a given pixel with a color,
+\item
+  one to get the color of a pixel.
+\end{itemize}
+
+(If there are specificities about the storage or the allocation, explain
+those.)
+
+\emph{These functions are used as a base for the articles in the
+  category \emph{raster graphics operations}, and a basic output
+  function to check the results is available in the article
+  \emph{write ppm file}.}
+
+\begin{wideverbatim}
+
+For time critical applications this would be done with inline-C in PicoLisp,
+but especially for small bitmaps the following makes sense.
+
+# Create an empty image of 120 x 90 pixels
+(setq *Ppm (make (do 90 (link (need 120)))))
+
+# Fill an image with a given color
+(de ppmFill (Ppm R G B)
+   (for Y Ppm
+      (map
+         '((X) (set X (list R G B)))
+         Y ) ) )
+
+# Set pixel with a color
+(de ppmSetPixel (Ppm X Y R G B)
+   (set (nth Ppm Y X) (list R G B)) )
+
+# Get the color of a pixel
+(de ppmGetPixel (Ppm X Y)
+   (get Ppm Y X) )
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Bitmap/B\'{e}zier curves/Cubic}
+
+
+Using the data storage type defined in \emph{Basic bitmap storage}
+for raster images, and the \texttt{draw\_line} function defined in
+\emph{Bresenham's line algorithm}, draw a \textbf{cubic bezier
+  curve}
+(\href{http://en.wikipedia.org/wiki/Bezier\_curves\#Cubic\_B.C3.A9zier\_curves}{definition
+  on Wikipedia}).
+
+\begin{wideverbatim}
+
+This uses the 'brez' line drawing function from
+[[Bitmap/Bresenham's line algorithm#PicoLisp]].
+
+(scl 6)
+
+(de cubicBezier (Img N X1 Y1 X2 Y2 X3 Y3 X4 Y4)
+   (let (R (* N N N)  X X1  Y Y1  DX 0  DY 0)
+      (for I N
+         (let
+            (J (- N I)
+               A (*/ 1.0 J J J R)
+               B (*/ 3.0 I J J R)
+               C (*/ 3.0 I I J R)
+               D (*/ 1.0 I I I R) )
+            (brez Img
+               X
+               Y
+               (setq DX
+                  (-
+                     (+ (*/ A X1 1.0) (*/ B X2 1.0) (*/ C X3 1.0) (*/ D X4 1.0))
+                     X ) )
+               (setq DY
+                  (-
+                     (+ (*/ A Y1 1.0) (*/ B Y2 1.0) (*/ C Y3 1.0) (*/ D Y4 1.0))
+                     Y ) ) )
+            (inc 'X DX)
+            (inc 'Y DY) ) ) ) )
+
+\end{wideverbatim}
+
+\begin{wideverbatim}
+
+Test:
+
+(let Img (make (do 200 (link (need 300 0))))       # Create image 300 x 200
+   (cubicBezier Img 24 20 120 540 33 -225 33 285 100)
+   (out "img.pbm"                                  # Write to bitmap file
+      (prinl "P1")
+      (prinl 300 " " 200)
+      (mapc prinl Img) ) )
+
+(call 'display "img.pbm")
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Bitmap/B\'{e}zier curves/Quadratic}
+
+Using the data storage type defined in \emph{Basic bitmap storage}
+for raster images, and the \texttt{draw\_line} function defined in
+\emph{Bresenham's line algorithm}, draw a \textbf{quadratic bezier
+  curve} 
+(\href{http://en.wikipedia.org/wiki/Bezier\_curves\#Quadratic\_B.C3.A9zier\_curves}{definition
+on Wikipedia}).
+
+\begin{wideverbatim}
+
+This uses the 'brez' line drawing function from
+[[Bitmap/Bresenham's line algorithm#PicoLisp]].
+
+(scl 6)
+
+(de quadBezier (Img N X1 Y1 X2 Y2 X3 Y3)
+   (let (R (* N N)  X X1  Y Y1  DX 0  DY 0)
+      (for I N
+         (let (J (- N I)  A (*/ 1.0 J J R)  B (*/ 2.0 I J R)  C (*/ 1.0 I I R))
+            (brez Img X Y
+               (setq DX (- (+ (*/ A X1 1.0) (*/ B X2 1.0) (*/ C X3 1.0)) X))
+               (setq DY (- (+ (*/ A Y1 1.0) (*/ B Y2 1.0) (*/ C Y3 1.0)) Y)) )
+            (inc 'X DX)
+            (inc 'Y DY) ) ) ) )
+
+Test:
+
+(let Img (make (do 200 (link (need 300 0))))       # Create image 300 x 200
+   (quadBezier Img 12 20 100 300 -80 260 180)
+   (out "img.pbm"                                  # Write to bitmap file
+      (prinl "P1")
+      (prinl 300 " " 200)
+      (mapc prinl Img) ) )
+
+(call 'display "img.pbm")
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Bitmap/Bresenham's line algorithm}
+
+Using the data storage type defined in \emph{Basic bitmap storage}
+for raster images, draw a line given 2 points with the
+\href{http://en.wikipedia.org/wiki/Bresenham\%27s\_line\_algorithm}{Bresenham's
+algorithm}.
+
+\begin{wideverbatim}
+
+(de brez (Img X Y DX DY)
+   (let SX
+      (cond
+         ((=0 DX) 0)
+         ((gt0 DX) 1)
+         (T (setq DX (- DX)) -1) )
+      (let SY
+         (cond
+            ((=0 DY) 0)
+            ((gt0 DY) 1)
+            (T (setq DY (- DY)) -1) )
+         (if (>= DX DY)
+            (let E (- (* 2 DY) DX)
+               (do DX
+                  (set (nth Img Y X) 1)
+                  (when (ge0 E)
+                     (inc 'Y SY)
+                     (dec 'E (* 2 DX)) )
+                  (inc 'X SX)
+                  (inc 'E (* 2 DY)) ) )
+            (let E (- (* 2 DX) DY)
+               (do DY
+                  (set (nth Img Y X) 1)
+                  (when (ge0 E)
+                     (inc 'X SX)
+                     (dec 'E (* 2 DY)) )
+                  (inc 'Y SY)
+                  (inc 'E (* 2 DX)) ) ) ) ) ) )
+
+(let Img (make (do 90 (link (need 120 0))))        # Create image 120 x 90
+   (brez Img 10 10 100 30)                         # Draw five lines
+   (brez Img 10 10 100 50)
+   (brez Img 10 10 100 70)
+   (brez Img 10 10 60 70)
+   (brez Img 10 10 20 70)
+   (out "img.pbm"                                  # Write to bitmap file
+      (prinl "P1")
+      (prinl 120 " " 90)
+      (mapc prinl Img) ) )
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Bitmap/Flood fill}
+
+
+Implement a \href{http://en.wikipedia.org/wiki/flood\_fill}{flood fill}.
+
+A flood fill is a way of filling an area using \emph{color banks} to
+define the contained area or a \emph{target color} which ``determines''
+the area (the \emph{valley} that can be flooded; Wikipedia uses the term
+\emph{target color}). It works almost like a water flooding from a point
+towards the banks (or: inside the valley): if there's a hole in the
+banks, the flood is not contained and all the image (or all the
+``connected valleys'') get filled.
+
+To accomplish the task, you need implementing just one of the possible
+algorithms (examples are on
+\href{http://en.wikipedia.org/wiki/flood\_fill}{Wikipedia}). Variations
+on the \emph{theme} are allowed (e.g. adding a tolerance parameter or
+argument for color-matching of the \emph{banks} or \emph{target} color).
+
+{\includegraphics{graphics/128px-Unfilledcirc.png}}
+
+\textbf{Testing}: the basic algorithm is not suitable for
+\emph{truecolor} images; a possible test image is the one shown on the
+right box; you can try to fill the white area, or the black inner
+circle.
+
+\begin{wideverbatim}
+
+Using the format of [[Bitmap#PicoLisp|Bitmap]], a minimal recursive solution:
+
+(de ppmFloodFill (Ppm X Y Color)
+   (let Target (get Ppm Y X)
+      (recur (X Y)
+         (when (= Target (get Ppm Y X))
+            (set (nth Ppm Y X) Color)
+            (recurse (dec X) Y)
+            (recurse (inc X) Y)
+            (recurse X (dec Y))
+            (recurse X (inc Y)) ) ) )
+   Ppm )
+
+Test using 'ppmRead' from [[Bitmap/Read a PPM file#PicoLisp]] and
+'ppmWrite' from [[Bitmap/Write a PPM file#PicoLisp]], 
+filling the white area with red:
+
+(ppmWrite
+   (ppmFloodFill (ppmRead "Unfilledcirc.ppm") 192 128 (255 0 0))
+   "Filledcirc.ppm" )
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Bitmap/Histogram}
+
+
+Extend the basic bitmap storage defined \emph{on this page} to support
+dealing with image histograms. The image histogram contains for each
+luminance the count of image pixels having this luminance. Choosing a
+histogram representation take care about the data type used for the
+counts. It must have range of at least 0..NxM, where N is the image
+width and M is the image height.
+
+\textbf{Test task}
+
+Histogram is useful for many image processing operations. As an example,
+use it to convert an image into black and white art. The method works as
+follows:
+
+\begin{itemize}
+\item
+  Convert image to grayscale;
+\item
+  Compute the histogram
+\item
+  Find the median: defined as the luminance such that the image has an
+  approximately equal number of pixels with lesser and greater
+  luminance.
+\item
+  Replace each pixel of luminance lesser than the median to black, and
+  others to white.
+\end{itemize}
+
+Use \emph{read}/\emph{write ppm file}, and \emph{grayscale image}
+solutions.
+
+
+\begin{wideverbatim}
+
+
+
+(de histogram (Pgm)
+   (let H (need 256 0)
+      (for L Pgm
+         (for G L
+            (inc (nth H (inc G))) ) )
+      H ) )
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Bitmap/Midpoint circle algorithm}
+
+Using the data storage type defined \emph{Basic bitmap storage} for
+raster images, write an implementation of the \textbf{midpoint circle
+  algorithm} (also known as \textbf{Bresenham's circle algorithm}).
+(\href{http://en.wikipedia.org/wiki/Midpoint\_circle\_algorithm}{definition
+  on Wikipedia}).
+
+
+\begin{wideverbatim}
+
+(de midPtCircle (Img CX CY Rad)
+   (let (F (- 1 Rad)  DdFx 0  DdFy (* -2 Rad)  X 0  Y Rad)
+      (set (nth Img (+ CY Rad) CX) 1)
+      (set (nth Img (- CY Rad) CX) 1)
+      (set (nth Img CY (+ CX Rad)) 1)
+      (set (nth Img CY (- CX Rad)) 1)
+      (while (> Y X)
+         (when (ge0 F)
+            (dec 'Y)
+            (inc 'F (inc 'DdFy 2)) )
+         (inc 'X)
+         (inc 'F (inc (inc 'DdFx 2)))
+         (set (nth Img (+ CY Y) (+ CX X)) 1)
+         (set (nth Img (+ CY Y) (- CX X)) 1)
+         (set (nth Img (- CY Y) (+ CX X)) 1)
+         (set (nth Img (- CY Y) (- CX X)) 1)
+         (set (nth Img (+ CY X) (+ CX Y)) 1)
+         (set (nth Img (+ CY X) (- CX Y)) 1)
+         (set (nth Img (- CY X) (+ CX Y)) 1)
+         (set (nth Img (- CY X) (- CX Y)) 1) ) ) )
+
+(let Img (make (do 120 (link (need 120 0))))       # Create image 120 x 120
+   (midPtCircle Img 60 60 50)                      # Draw circle
+   (out "img.pbm"                                  # Write to bitmap file
+      (prinl "P1")
+      (prinl 120 " " 120)
+      (mapc prinl Img) ) )
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Bitmap/PPM conversion through a pipe}
+
+
+Using the data storage type defined \emph{Basic bitmap storage} for
+for raster images, delegate writing a JPEG file through a
+\textbf{pipe} using the \texttt{output\_ppm} function defined
+\emph{Write ppm file}.
+
+There are various utilities that can be used for this task, for example:
+\textbf{cjpeg} (package \emph{``jpeg-progs''} on Linux),
+\textbf{ppmtojpeg} (package \emph{``netpbm''} on Linux),
+\textbf{convert} (from \emph{ImageMagick}, multi-platform).
+
+
+\begin{wideverbatim}
+
+# Create an empty image of 120 x 90 pixels
+(setq *Ppm (make (do 90 (link (need 120)))))
+
+# Fill background with green color
+(ppmFill *Ppm 0 255 0)
+
+# Draw a diagonal line
+(for I 80 (ppmSetPixel *Ppm I I 0 0 0))
+
+# Write to "img.jpg" through a pipe
+(ppmWrite *Ppm '("convert" "-" "img.jpg"))
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Bitmap/Read a PPM file}
+
+Using the data storage type defined \emph{Basic bitmap storage} for
+raster images, read an image from a PPM file (binary P6 prefered).
+(Read \href{http://en.wikipedia.org/wiki/Netpbm\_format}{the
+  definition of PPM file} on Wikipedia.)
+
+\textbf{Task}: Use \emph{write ppm file} solution and \emph{grayscale
+  image} solution with this one in order to convert a color image to
+grayscale one.
+
+\begin{wideverbatim}
+
+(de ppmRead (File)
+   (in File
+      (unless (and `(hex "5036") (rd 2))  # P6
+         (quit "Wrong file format" File) )
+      (rd 1)
+      (let (DX 0  DY 0  Max 0  C)
+         (while (>= 9 (setq C (- (rd 1) `(char "0"))) 0)
+            (setq DX (+ (* 10 DX) C)) )
+         (while (>= 9 (setq C (- (rd 1) `(char "0"))) 0)
+            (setq DY (+ (* 10 DY) C)) )
+         (while (>= 9 (setq C (- (rd 1) `(char "0"))) 0)
+            (setq Max (+ (* 10 Max) C)) )
+         (prog1
+            (make (do DY (link (need DX))))
+            (for Y @
+               (map
+                  '((X) (set X (list (rd 1) (rd 1) (rd 1))))
+                  Y ) ) ) ) ) )
+
+Read a color image "img.ppm", convert and write to "img.pgm":
+
+(pgmWrite (ppm->pgm (ppmRead "img.ppm")) "img.pgm")
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Bitmap/Read an image through a pipe}
+
+
+This task is the \emph{opposite} of the \emph{PPM conversion through a
+  pipe}. In this task, using a delegate tool (like \textbf{cjpeg}, one
+of the netpbm package, or \textbf{convert} of the ImageMagick package)
+we read an image file and load it into the data storage type
+\emph{Basic bitmap storage}. We can also use the code from \emph{Read
+  ppm file}, so that we can use PPM format like a (natural) bridge
+between the foreign image format and our simple data storage.
+
+
+\begin{wideverbatim}
+
+(setq *Ppm (ppmRead '("convert" "img.jpg" "ppm:-")))
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Bitmap/Write a PPM file}
+
+Using the data storage type defined \emph{Basic bitmap storage} for
+raster images, write the image to a PPM file (binary P6 prefered).
+
+(Read \href{http://en.wikipedia.org/wiki/Netpbm\_format}{the
+  definition of PPM file} on Wikipedia.)
+
+
+\begin{wideverbatim}
+
+(de ppmWrite (Ppm File)
+   (out File
+      (prinl "P6")
+      (prinl (length (car Ppm)) " " (length Ppm))
+      (prinl 255)
+      (for Y Ppm (for X Y (apply wr X))) ) )
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Bitwise IO}
+
+The aim of this task is to write functions (or create a class if your
+language is Object Oriented and you prefer) for reading and writing
+sequences of bits. While the output of a \texttt{asciiprint "STRING"} is
+the ASCII byte sequence ``S'', ``T'', ``R'', ``I'', ``N'', ``G'', the
+output of a ``print'' of the bits sequence 0101011101010 (13 bits) must
+be 0101011101010; real I/O is performed always \emph{quantized} by byte
+(avoiding endianness issues and relying on underlying buffering for
+performance), therefore you must obtain as output the bytes 0101 0111
+0101 0\textbf{000} (bold bits are padding bits), i.e. in hexadecimal 57
+50.
+
+As test, you can implement a \textbf{rough} (e.g. don't care about error
+handling or other issues) compression/decompression program for ASCII
+sequences of bytes, i.e. bytes for which the most significant bit is
+always unused, so that you can write seven bits instead of eight (each 8
+bytes of input, we write 7 bytes of output).
+
+These bit oriented I/O functions can be used to implement compressors
+and decompressors; e.g. Dynamic and Static Huffman encodings use
+variable length bits sequences, while LZW (see \emph{LZW compression})
+use fixed or variable \emph{words} nine (or more) bits long.
+
+\begin{itemize}
+\item
+  Limits in the maximum number of bits that can be written/read in a
+  single read/write operation are allowed.
+\end{itemize}
+
+\begin{itemize}
+\item
+  Errors handling is not mandatory
+\end{itemize}
+
+\\
+
+
+
+\begin{wideverbatim}
+
+(de write7bitwise (Lst)
+   (let (Bits 0  Byte)
+      (for N Lst
+         (if (=0 Bits)
+            (setq Bits 7  Byte (* 2 N))
+            (wr (| Byte (>> (dec 'Bits) N)))
+            (setq Byte (>> (- Bits 8) N)) ) )
+      (unless (=0 Bits)
+         (wr Byte) ) ) )
+
+(de read7bitwise ()
+   (make
+      (let (Bits 0  Byte)
+         (while (rd 1)
+            (let N @
+               (link
+                  (if (=0 Bits)
+                     (>> (one Bits) N)
+                     (| Byte (>> (inc 'Bits) N)) ) )
+               (setq Byte (\& 127 (>> (- Bits 7) N))) ) )
+         (when (= 7 Bits)
+            (link Byte) ) ) ) )
+
+
+(out 'a (write7bitwise (127 0 127 0 127 0 127 0 127)))
+(hd 'a)
+(in 'a (println (read7bitwise)))
+
+(out 'a (write7bitwise (0 127 0 127 0 127 0 127 0)))
+(hd 'a)
+(in 'a (println (read7bitwise)))
+
+(out 'a (write7bitwise (mapcar char (chop "STRING"))))
+(hd 'a)
+(println (mapcar char (in 'a (read7bitwise))))
+
+Output:
+
+00000000  FE 03 F8 0F E0 3F 80 FE                          .....?..
+(127 0 127 0 127 0 127 0)
+00000000  01 FC 07 F0 1F C0 7F 00                          .......
+(0 127 0 127 0 127 0 127)
+00000000  A7 52 94 99 D1 C0                                .R....
+("S" "T" "R" "I" "N" "G")
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Bitwise operations}
+
+
+\textbf{Basic Data Operation}\\ This is a basic data operation. It
+represents a fundamental action on a basic data type.
+
+You may see other such operations in the \emph{Basic Data Operations}
+category, or:
+
+\textbf{Integer Operations} \\
+\emph{Arithmetic} \textbar{} \emph{Comparison}
+
+\textbf{Boolean Operations} \\ \textbf{Bitwise} \textbar{} \emph{Logical}
+
+\textbf{String Operations} \\
+\emph{Concatenation} \textbar{} 
+\emph{Interpolation} \textbar{}
+\emph{Matching}
+
+\textbf{Memory Operations} \\
+\emph{Pointers \& references}
+\textbar{} \emph{Addresses}
+
+Write a routine to perform a bitwise AND, OR, and XOR on two integers, a
+bitwise NOT on the first integer, a left shift, right shift, right
+arithmetic shift, left rotate, and right rotate. All shifts and rotates
+should be done on the first integer with a shift/rotate amount of the
+second integer. If any operation is not available in your language, note
+it.
+
+
+
+\begin{wideverbatim}
+
+PicoLisp has no specific word size. Numbers grow to arbitrary length. Therefore,
+bitwise NOT, logical (non-arithmetic) SHIFTs, and rotate operations do not make
+sense.
+
+Bitwise AND:
+
+: (\& 6 3)
+-> 2
+
+: (\& 7 3 1)
+-> 1
+
+Bitwise AND-Test (tests if all bits in the first argument are set in the
+following arguments):
+
+: (bit? 1 2)
+-> NIL
+
+: (bit? 6 3)
+-> NIL
+
+: (bit? 6 15 255)
+-> 6
+
+Bitwise OR:
+
+: (| 1 2)
+-> 3
+
+: (| 1 2 4 8)
+-> 15
+
+Bitwise XOR:
+
+: (x| 2 7)
+-> 5
+
+: (x| 2 7 1)
+-> 4
+
+Shift (right with a positive count, left with a negative count):
+
+: (>> 1 8)
+-> 4
+
+: (>> 3 16)
+-> 2
+
+: (>> -3 16)
+-> 128
+
+: (>> -1 -16)
+-> -32
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Boolean values}
+
+
+Show how to represent the boolean states ``true'' and ``false'' in a
+language. If other objects represent ``true'' or ``false'' in
+conditionals, note it.
+
+Cf.
+
+\begin{itemize}
+\item
+  \emph{Logical operations}
+\end{itemize}
+
+
+
+\begin{wideverbatim}
+
+Like in all Lisps, the symbol 'NIL' denotes "false", any other value "true".
+
+Some functions return the symbol 'T' for "true" if no other useful (non-NIL)
+value is available in the given context. Note that 'NIL' and 'T' are written in
+uppercase letters (PicoLisp is case-sensitive).
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Boxing the compass}
+
+Avast me hearties!
+
+There be many a \href{http://www.talklikeapirate.com/howto.html}{land
+lubber} that knows
+\href{http://oxforddictionaries.com/view/entry/m\_en\_gb0550020\#m\_en\_gb0550020}{naught}
+of the pirate ways and gives direction by degree! They know not how to
+\href{http://en.wikipedia.org/wiki/Boxing\_the\_compass}{box the
+compass}!
+
+\textbf{Task description}
+
+\begin{enumerate}
+\item
+  Create a function that takes a heading in degrees and returns the
+  correct 32-point compass heading.
+\item
+  Use the function to print and display a table of Index, Compass point,
+  and Degree; rather like the corresponding columns from, the first
+  table of the
+  \href{http://en.wikipedia.org/wiki/Boxing\_the\_compass}{wikipedia
+  article}, but use only the following 33 headings as input:
+\end{enumerate}
+
+\texttt{{[}0.0, 16.87, 16.88, 33.75, 50.62, 50.63, 67.5, 84.37, 84.38, 101.25, 118.12, 118.13, 135.0, 151.87, 151.88, 168.75, 185.62, 185.63, 202.5, 219.37, 219.38, 236.25, 253.12, 253.13, 270.0, 286.87, 286.88, 303.75, 320.62, 320.63, 337.5, 354.37, 354.38{]}}.
+(They should give the same order of points but are spread throughout the
+ranges of acceptance).
+
+Notes;
+
+\begin{itemize}
+\item
+  The headings and indices can be calculated from this pseudocode:
+\end{itemize}
+
+\begin{verbatim}
+for i in 0..32 inclusive:
+    heading = i * 11.25
+    case i %3:
+      if 1: heading += 5.62; break
+      if 2: heading -= 5.62; break
+    end
+    index = ( i mod 32) + 1
+\end{verbatim}
+
+\begin{itemize}
+\item The column of indices can be thought of as an enumeration of the
+  thirty two cardinal points (see \emph{talk page})..
+\end{itemize}
+
+
+\begin{wideverbatim}
+
+(scl 3)
+
+(setq *Compass                      # Build lookup table
+   (let H -16.875
+      (mapcar
+         '((Str)
+            (cons
+               (inc 'H 11.25)       # Heading in degrees
+               (pack                # Compass point
+                  (replace (chop Str)
+                     "N" "north"
+                     "E" "east"
+                     "S" "south"
+                     "W" "west"
+                     "b" " by " ) ) ) )
+         '("N" "NbE" "N-NE" "NEbN" "NE" "NEbE" "E-NE" "EbN"
+            "E" "EbS" "E-SE" "SEbE" "SE" "SEbS" "S-SE" "SbE"
+            "S" "SbW" "S-SW" "SWbS" "SW" "SWbW" "W-SW" "WbS"
+            "W" "WbN" "W-NW" "NWbW" "NW" "NWbN" "N-NW" "NbW"
+            "N" ) ) ) )
+
+(de heading (Deg)
+   (rank (\% Deg 360.00) *Compass) )
+
+(for I (range 0 32)
+   (let H (* I 11.25)
+      (case (\% I 3)
+         (1 (inc 'H 5.62))
+         (2 (dec 'H 5.62)) )
+      (tab (3 1 -18 8)
+         (inc (\% I 32))
+         NIL
+         (cdr (heading H))
+         (round H 2) ) ) )
+
+\end{wideverbatim}
+
+\begin{wideverbatim}
+
+Output:
+
+  1 north                 0.00
+  2 north by east        16.87
+  3 north-northeast      16.88
+  4 northeast by north   33.75
+  5 northeast            50.62
+  6 northeast by east    50.63
+  7 east-northeast       67.50
+  8 east by north        84.37
+  9 east                 84.38
+ 10 east by south       101.25
+ 11 east-southeast      118.12
+ 12 southeast by east   118.13
+ 13 southeast           135.00
+ 14 southeast by south  151.87
+ 15 south-southeast     151.88
+ 16 south by east       168.75
+ 17 south               185.62
+ 18 south by west       185.63
+ 19 south-southwest     202.50
+ 20 southwest by south  219.37
+ 21 southwest           219.38
+ 22 southwest by west   236.25
+ 23 west-southwest      253.12
+ 24 west by south       253.13
+ 25 west                270.00
+ 26 west by north       286.87
+ 27 west-northwest      286.88
+ 28 northwest by west   303.75
+ 29 northwest           320.62
+ 30 northwest by north  320.63
+ 31 north-northwest     337.50
+ 32 north by west       354.37
+  1 north               354.38
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Break OO privacy}
+
+Show how to access private or protected members of a class in an object
+oriented language from outside an instance of the class, without calling
+non-private or non-protected members of the class as a proxy.
+
+\emph{Note that this is almost universally regarded as unidiomatic at
+best, and poor programming practice at worst.}
+
+
+
+\begin{wideverbatim}
+
+PicoLisp uses [http://software-lab.de/doc/ref.html#transient "transient
+symbols"] for variables, functions, methods etc. inaccessible from other parts
+of the program. Lexically, a transient symbol is enclosed by double quotes.
+
+The only way to access a transient symbol outside its namespace is to search for
+its name in other (public) structures. This is done by the
+'[http://software-lab.de/doc/refL.html#loc loc]' function.
+
+(class +Example)
+# "_name"
+
+(dm T (Name)
+   (=: "_name" Name) )
+
+(dm string> ()
+   (pack "Hello, I am " (: "_name")) )
+
+(====)  # Close transient scope
+
+(setq Foo (new '(+Example) "Eric"))
+
+\end{wideverbatim}
+
+\begin{wideverbatim}
+Test:
+
+: (string> Foo)                        # Access via method call
+-> "Hello, I am Eric"
+
+: (get Foo '"_name")                   # Direct access doesn't work
+-> NIL
+
+: (get Foo (loc "_name" +Example))     # Locating the transient symbol works
+-> "Eric"
+
+: (put Foo (loc "_name" +Example) "Edith")
+-> "Edith"
+
+: (string> Foo)                        # Ditto
+-> "Hello, I am Edith"
+
+: (get Foo '"_name")
+-> NIL
+
+: (get Foo (loc "_name" +Example))
+-> "Edith"
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Brownian tree}
+
+
+Generate and draw a
+\href{http://en.wikipedia.org/wiki/Brownian\_tree}{Brownian Tree}.
+
+A Brownian Tree is generated as a result of an initial seed, followed by
+the interaction of two processes.
+
+\begin{enumerate}
+\item
+  The initial ``seed'' is placed somewhere within the field. Where is
+  not particularly important; it could be randomized, or it could be a
+  fixed point.
+\item
+  Particles are injected into the field, and are individually given a
+  (typically random) motion pattern.
+\item
+  When a particle collides with the seed or tree, its position is fixed,
+  and it's considered to be part of the tree.
+\end{enumerate}
+
+Because of the lax rules governing the random nature of the particle's
+placement and motion, no two resulting trees are really expected to be
+the same, or even necessarily have the same general shape.
+
+
+
+\begin{wideverbatim}
+
+(load "@lib/simul.l")
+
+(de brownianTree (File Size Cnt)
+   (let Img (grid Size Size)
+      (put Img (/ Size 2) (/ Size 2) 'pix T)
+      (use (P Q)
+         (do Cnt
+            (setq P (get Img (rand 1 Size) (rand 1 Size)))
+            (loop
+               (setq Q ((if2 (rand T) (rand T) north east south west) P))
+               (T (; Q pix) (put P 'pix T))
+               (setq P (or Q (get Img (rand 1 Size) (rand 1 Size)))) ) ) )
+      (out "img.pbm"
+         (prinl "P1")
+         (prinl Size " " Size)
+         (for L Img
+            (for This L
+               (prin (if (: pix) 1 0)) )
+            (prinl) ) ) ) )
+
+Use:
+
+(brownianTree "img.pbm" 300 9000)
+(call 'display "img.pbm")
+
+\end{wideverbatim}
+
+% \pagebreak{}
+% \section*{Bulls and cows}
+
+% \href{http://en.wikipedia.org/wiki/Bulls\_and\_Cows}{This} is an old
+% game played with pencil and paper that was later implemented on
+% computer.
+
+% The task is for the program to create a four digit random number from
+% the digits 1 to 9, without duplication. The program should ask for
+% guesses to this number, reject guesses that are malformed, then print
+% the score for the guess.
+
+% The score is computed as:
+
+% \begin{enumerate}
+% \item
+%   The player wins if the guess is the same as the randomly chosen
+%   number, and the program ends.
+% \item
+%   A score of one \textbf{bull} is accumulated for each digit in the
+%   guess that equals the corresponding digit in the randomly chosen
+%   initial number.
+% \item
+%   A score of one \textbf{cow} is accumulated for each digit in the guess
+%   that also appears in the randomly chosen number, but in the wrong
+%   position.
+% \end{enumerate}
+
+% Cf,
+
+% \begin{itemize}
+% \item
+%   \emph{Bulls and cows/Player}
+
+
+%   The task is to write a \emph{player} of the \emph{Bulls and Cows
+%     game}, rather than a scorer. The player should give intermediate
+%   answers that respect the scores to previous attempts.
+
+% One method is to generate a list of all possible numbers that could be
+% the answer, then to prune the list by keeping only those numbers that
+% would give an equivalent score to how your last guess was scored. Your
+% next guess can be any number from the pruned list.\\ Either you guess
+% correctly or run out of numbers to guess, which indicates a problem with
+% the scoring.
+
+% Cf,
+
+% \begin{itemize}
+% \item
+%   \emph{Bulls and cows}
+% \item
+%   \emph{Guess the number}
+% \item
+%   \emph{Guess the number/With Feedback (Player)}
+% \end{itemize}
+
+
+% \item
+%   \emph{Guess the number}
+% \item
+%   \emph{Guess the number/With Feedback}
+% \end{itemize}
+
+
+% \begin{wideverbatim}
+
+% (de ok? (N)
+%    (let D
+%       (mapcar 'format (chop N))
+%       (and
+%          (num? N)
+%          (not (member 0 D))
+%          (= 4 (length D))
+%          (= D (uniq D))
+%          D ) ) )
+
+% (de init-cows ()
+%    (until (setq *Hidden (ok? (rand 1234 9876)))) )
+
+% (de guess (N)
+%    (let D (ok? N)
+%       (if D
+%          (let Bulls (cnt '= D *Hidden)
+%             (if (= 4 Bulls)
+%                " You guessed it!"
+%                (let Cows (- (cnt '((N) (member N *Hidden)) D ) Bulls )
+%                   (pack Bulls " bulls, " Cows " cows") ) ) )
+%          " Bad guess! (4 unique digits, 1-9)" ) ) )
+
+% \end{wideverbatim}
+
+
+\pagebreak{}
+\section*{Bulls and cows/Player}
+
+
+The task is to write a \emph{player} of the
+\emph{Bulls and Cows game}, rather than a
+scorer. The player should give intermediate answers that respect the
+scores to previous attempts.
+
+One method is to generate a list of all possible numbers that could be
+the answer, then to prune the list by keeping only those numbers that
+would give an equivalent score to how your last guess was scored. Your
+next guess can be any number from the pruned list.\\ Either you guess
+correctly or run out of numbers to guess, which indicates a problem with
+the scoring.
+
+Cf,
+
+\begin{itemize}
+\item
+  \emph{Bulls and cows}
+\item
+  \emph{Guess the number}
+\item
+  \emph{Guess the number/With Feedback (Player)}
+\end{itemize}
+
+\begin{wideverbatim}
+
+(load "@lib/simul.l")
+
+(de bullsAndCows ()
+   (let Choices (shuffle (mapcan permute (subsets 4 (range 1 9))))
+      (use (Guess Bulls Cows)
+         (loop
+            (prinl "Guessing " (setq Guess (pop 'Choices)))
+            (prin "How many bulls and cows? ")
+            (setq Bulls (read)  Cows (read))
+            (setq Choices
+               (filter
+                  '((C)
+                     (let B (cnt = Guess C)
+                        (and
+                           (= Bulls B)
+                           (= Cows (- (length (sect Guess C)) B)) ) ) )
+                  Choices ) )
+            (NIL Choices "No matching solution")
+            (NIL (cdr Choices) (pack "The answer is " (car Choices))) ) ) ) )
+
+\end{wideverbatim}
+
+\begin{wideverbatim}
+
+Output:
+
+: (bullsAndCows)
+Guessing 4217
+How many bulls and cows? 0 2
+Guessing 5762
+How many bulls and cows? 1 1
+Guessing 9372
+How many bulls and cows? 0 1
+Guessing 7864
+How many bulls and cows? 1 2
+Guessing 8754
+How many bulls and cows? 0 2
+-> "The answer is 2468"
+
+\end{wideverbatim}
+
+
+
+% put{referenc}

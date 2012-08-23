@@ -1,0 +1,276 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with H}
+\label{cha:func-ref-H-functions-starting-with-H}
+
+ 
+\section*{\texttt{*Hup}}
+\label{sec:func-ref-H-*Hup}
+
+
+Global variable holding a (possibly empty) \texttt{prg} body, which will be
+executed when a SIGHUP signal is sent to the current process. See also
+\texttt{alarm}, \texttt{sigio} and \texttt{*Sig[12]}.
+
+
+\begin{wideverbatim}
+: (de *Hup (msg 'SIGHUP))
+-> *Hup
+\end{wideverbatim}
+
+ 
+\section*{\texttt{+Hook}}
+\label{sec:func-ref-H-+Hook}
+
+
+Prefix class for \texttt{+relation}s, typically \texttt{+Link} or
+\texttt{+Joint}. In essence, this maintains an local database in the
+referred object. See also \texttt{Database}.
+
+
+\begin{wideverbatim}
+(rel sup (+Hook +Link) (+Sup))   # Supplier
+(rel nr (+Key +Number) sup)      # Item number, unique per supplier
+(rel dsc (+Ref +String) sup)     # Item description, indexed per supplier
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(hash 'any) -> cnt}}
+\label{sec:func-ref-H-(hash 'any) -> cnt}
+
+
+Generates a 16-bit number (1--65536) from \texttt{any}, suitable as a hash
+value for various purposes, like randomly balanced \texttt{idx} structures. See
+also \texttt{cache} and \texttt{seed}.
+
+
+\begin{wideverbatim}
+: (hash 0)
+-> 1
+: (hash 1)
+-> 55682
+: (hash "abc")
+-> 45454
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(hax 'num) -> sym}}
+\label{sec:func-ref-H-(hax 'num) -> sym}
+
+
+\texttt{(hax 'sym) -> num}
+
+Converts a number \texttt{num} to a string in hexadecimal/alpha
+notation, or a hexadecimal/alpha formatted string to a number. The
+digits are represented with `\texttt{@}' (zero) and the letters
+`\texttt{A}' - `\texttt{O}' (from ``alpha'' to ``omega''). This format
+is used internally for the names of \texttt{external symbols} in the
+64-bit version. See also \texttt{fmt64}, \texttt{hex}, \texttt{bin}
+and \texttt{oct}.
+
+
+\begin{wideverbatim}
+: (hax 7)
+-> "G"
+: (hax 16)
+-> "A@"
+: (hax 255)
+-> "OO"
+: (hax "A")
+-> 1
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(hd 'sym ['cnt]) -> NIL}}
+\label{sec:func-ref-H-(hd 'sym ['cnt]) -> NIL}
+
+
+Displays a hexadecimal dump of the file given by \texttt{sym}, limited to \texttt{cnt}
+lines. See also \texttt{proc}.
+
+
+\begin{wideverbatim}
+:  (hd "lib.l" 4)
+00000000  23 20 32 33 64 65 63 30 39 61 62 75 0A 23 20 28  # 23dec09abu.# (
+00000010  63 29 20 53 6F 66 74 77 61 72 65 20 4C 61 62 2E  c) Software Lab.
+00000020  20 41 6C 65 78 61 6E 64 65 72 20 42 75 72 67 65   Alexander Burge
+00000030  72 0A 0A 28 64 65 20 74 61 73 6B 20 28 4B 65 79  r..(de task (Key
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(head 'cnt|lst 'lst) -> lst}}
+\label{sec:func-ref-H-(head 'cnt|lst 'lst) -> lst}
+
+
+Returns a new list made of the first \texttt{cnt} elements of \texttt{lst}. If \texttt{cnt}
+is negative, it is added to the length of \texttt{lst}. If the first argument
+is a \texttt{lst}, \texttt{head} is a predicate function returning that argument list
+if it is \texttt{equal} to the head of the second argument, and \texttt{NIL}
+otherwise. See also \texttt{tail}.
+
+
+\begin{wideverbatim}
+: (head 3 '(a b c d e f))
+-> (a b c)
+: (head 0 '(a b c d e f))
+-> NIL
+: (head 10 '(a b c d e f))
+-> (a b c d e f)
+: (head -2 '(a b c d e f))
+-> (a b c d)
+: (head '(a b c) '(a b c d e f))
+-> (a b c)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{head/3}}
+\label{sec:func-ref-H-head/3}
+
+
+\emph{Pilog} predicate that succeeds if the first (string)
+argument is a prefix of the string representation of the result of
+applying the \texttt{get} algorithm to the following arguments. Typically used
+as filter predicate in \texttt{select/3} database queries. See also \texttt{pre?},
+\texttt{isa/2}, \texttt{same/3}, \texttt{bool/3}, \texttt{range/3}, \texttt{fold/3}, \texttt{part/3} and \texttt{tolr/3}.
+
+
+\begin{wideverbatim}
+: (?
+   @Nm "Muller"
+   @Tel "37"
+   (select (@CuSu)
+      ((nm +CuSu @Nm) (tel +CuSu @Tel))
+      (tolr @Nm @CuSu nm)
+      (head @Tel @CuSu tel) )
+   (val @Name @CuSu nm)
+   (val @Phone @CuSu tel) )
+ @Nm="Muller" @Tel="37" @CuSu={2-3} @Name="Miller" @Phone="37 4773 82534"
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(heap 'flg) -> cnt}}
+\label{sec:func-ref-H-(heap 'flg) -> cnt}
+
+
+Returns the total size of the cell heap space in megabytes. If \texttt{flg} is
+non-\texttt{NIL}, the size of the currently free space is returned. See also
+\texttt{stack} and \texttt{gc}.
+
+
+\begin{wideverbatim}
+: (gc 4)
+-> 4
+: (heap)
+-> 5
+: (heap T)
+-> 4
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(hear 'cnt) -> cnt}}
+\label{sec:func-ref-H-(hear 'cnt) -> cnt}
+
+
+Uses the file descriptor \texttt{cnt} as an asynchronous command input channel.
+Any executable list received via this channel will be executed in the
+background. As this mechanism is also used for inter-family
+communication (see \texttt{tell}), \texttt{hear} is usually only called explicitly by
+a top level parent process.
+
+
+\begin{wideverbatim}
+: (call 'mkfifo "fifo/cmd")
+-> T
+: (hear (open "fifo/cmd"))
+-> 3
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(here ['sym]) -> sym}}
+\label{sec:func-ref-H-(here ['sym]) -> sym}
+
+
+Echoes the current input stream until \texttt{sym} is encountered, or until end
+of file. See also \texttt{echo}.
+
+
+\begin{wideverbatim}
+$ cat hello.l
+(html 0 "Hello" "lib.css" NIL
+   (<h2> NIL "Hello")
+   (here) )
+<p>Hello!</p>
+<p>This is a test.</p>
+
+$ pil @lib/http.l @lib/xhtml.l hello.l
+HTTP/1.0 200 OK
+Server: PicoLisp
+Date: Sun, 03 Jun 2007 11:41:27 GMT
+Cache-Control: max-age=0
+Cache-Control: no-cache
+Content-Type: text/html; charset=utf-8
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Hello</title>
+<link rel="stylesheet" href="http://:/lib.css" type="text/css"/>
+</head>
+<body><h2>Hello</h2>
+<p>Hello!</p>
+<p>This is a test.</p>
+</body>
+</html>
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(hex 'num ['num]) -> sym}}
+\label{sec:func-ref-H-(hex 'num ['num]) -> sym}
+
+
+\texttt{(hex 'sym) -> num}
+
+Converts a number \texttt{num} to a hexadecimal string, or a hexadecimal string
+\texttt{sym} to a number. In the first case, if the second argument is given,
+the result is separated by spaces into groups of such many digits. See
+also \texttt{bin}, \texttt{oct}, \texttt{fmt64}, \texttt{hax} and \texttt{format}.
+
+
+\begin{wideverbatim}
+: (hex 273)
+-> "111"
+: (hex "111")
+-> 273
+: (hex 1234567 4)
+-> "12 D687"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(host 'any) -> sym}}
+\label{sec:func-ref-H-(host 'any) -> sym}
+
+
+Returns the hostname corresponding to the given IP address. See also
+\texttt{*Adr}.
+
+
+\begin{wideverbatim}
+: (host "80.190.158.9")
+-> "www.leo.org"
+\end{wideverbatim}
+
+
+
+
+% \input{referenc}

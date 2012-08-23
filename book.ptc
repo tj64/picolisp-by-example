@@ -1,0 +1,1216 @@
+\ttl@starttoc {default@1}
+\contentsline {part}{Part\ I\hspace {\betweenumberspace }Ninety-Nine Lisp Problems}{1}{part.1}
+\contentsline {chapter}{\numberline {1}Ninety-Nine Lisp Problems}{3}{chapter.1}
+\contentsline {section}{Working with lists}{3}{chapter.1}
+\contentsline {section}{Arithmetic}{16}{chapter.1}
+\contentsline {section}{Logic and Codes}{23}{chapter.1}
+\contentsline {section}{Miscellaneous Problems}{24}{chapter.1}
+\contentsline {part}{Part\ II\hspace {\betweenumberspace }Rosetta Code}{45}{part.2}
+\contentsline {chapter}{\numberline {2}Rosetta Code Tasks starting with Numbers}{47}{chapter.2}
+\contentsline {section}{100 doors}{47}{chapter.2}
+\contentsline {section}{24 game}{48}{chapter.2}
+\contentsline {section}{24 game/Solve}{51}{Item.3}
+\contentsline {section}{99 Bottles of Beer}{52}{Item.3}
+\contentsline {chapter}{\numberline {3}Rosetta Code Tasks starting with A}{53}{chapter.3}
+\contentsline {section}{A+B}{53}{chapter.3}
+\contentsline {section}{Abstract type}{54}{table.caption.8}
+\contentsline {section}{Accumulator factory}{56}{table.caption.8}
+\contentsline {section}{Ackermann function}{58}{Item.8}
+\contentsline {section}{Active Directory/Connect}{59}{figure.caption.9}
+\contentsline {section}{Active Directory/Search for a user}{60}{figure.caption.9}
+\contentsline {section}{Active object}{61}{figure.caption.9}
+\contentsline {section}{Add a variable to a class instance at runtime}{63}{Item.12}
+\contentsline {section}{Address of a variable}{64}{Item.12}
+\contentsline {section}{Align columns}{65}{Item.12}
+\contentsline {section}{Amb}{67}{Item.18}
+\contentsline {section}{Anagrams}{69}{Item.18}
+\contentsline {section}{Anagrams/Deranged anagrams}{70}{Item.18}
+\contentsline {section}{Animate a pendulum}{71}{Item.18}
+\contentsline {section}{Animation}{72}{Item.18}
+\contentsline {section}{Anonymous recursion}{75}{Item.18}
+\contentsline {section}{Apply a callback to an array}{76}{Item.18}
+\contentsline {section}{Arbitrary-precision integers (included)}{77}{Item.18}
+\contentsline {section}{Arena storage pool}{78}{figure.caption.10}
+\contentsline {section}{Arithmetic evaluation}{79}{Item.20}
+\contentsline {section}{Arithmetic-geometric mean}{81}{Item.20}
+\contentsline {section}{Arithmetic/Complex}{82}{figure.caption.13}
+\contentsline {section}{Arithmetic/Rational}{84}{figure.caption.13}
+\contentsline {section}{Arithmetic/Integer}{86}{figure.caption.13}
+\contentsline {section}{Array concatenation}{87}{figure.caption.13}
+\contentsline {section}{Arrays}{88}{figure.caption.13}
+\contentsline {section}{Assertions}{90}{figure.caption.13}
+\contentsline {section}{Associative arrays/Creation}{91}{figure.caption.13}
+\contentsline {section}{Associative arrays/Iteration}{92}{figure.caption.13}
+\contentsline {section}{Atomic updates}{93}{figure.caption.13}
+\contentsline {section}{Averages/Arithmetic mean}{97}{Item.25}
+\contentsline {section}{Averages/Mean angle}{98}{Item.25}
+\contentsline {section}{Averages/Mean time of day}{100}{Item.30}
+\contentsline {section}{Averages/Median}{101}{Item.30}
+\contentsline {section}{Averages/Mode}{102}{Item.30}
+\contentsline {section}{Averages/Pythagorean means}{103}{Item.30}
+\contentsline {section}{Averages/Root mean square}{105}{figure.caption.17}
+\contentsline {section}{Averages/Simple moving average}{106}{figure.caption.18}
+\contentsline {chapter}{\numberline {4}Rosetta Code Tasks starting with B}{109}{chapter.4}
+\contentsline {section}{Balanced brackets}{109}{chapter.4}
+\contentsline {section}{Best shuffle}{111}{chapter.4}
+\contentsline {section}{Binary digits}{113}{chapter.4}
+\contentsline {section}{Binary search}{114}{chapter.4}
+\contentsline {section}{Binary strings}{120}{chapter.4}
+\contentsline {section}{Bitmap}{122}{chapter.4}
+\contentsline {section}{Bitmap/B\'{e}zier curves/Cubic}{123}{chapter.4}
+\contentsline {section}{Bitmap/B\'{e}zier curves/Quadratic}{125}{chapter.4}
+\contentsline {section}{Bitmap/Bresenham's line algorithm}{126}{chapter.4}
+\contentsline {section}{Bitmap/Flood fill}{127}{chapter.4}
+\contentsline {section}{Bitmap/Histogram}{129}{chapter.4}
+\contentsline {section}{Bitmap/Midpoint circle algorithm}{130}{chapter.4}
+\contentsline {section}{Bitmap/PPM conversion through a pipe}{131}{chapter.4}
+\contentsline {section}{Bitmap/Read a PPM file}{132}{chapter.4}
+\contentsline {section}{Bitmap/Read an image through a pipe}{133}{chapter.4}
+\contentsline {section}{Bitmap/Write a PPM file}{134}{chapter.4}
+\contentsline {section}{Bitwise IO}{135}{chapter.4}
+\contentsline {section}{Bitwise operations}{137}{chapter.4}
+\contentsline {section}{Boolean values}{139}{chapter.4}
+\contentsline {section}{Boxing the compass}{140}{chapter.4}
+\contentsline {section}{Break OO privacy}{143}{Item.32}
+\contentsline {section}{Brownian tree}{145}{Item.32}
+\contentsline {section}{Bulls and cows/Player}{146}{Item.35}
+\contentsline {chapter}{\numberline {5}Rosetta Code Tasks starting with C}{149}{chapter.5}
+\contentsline {section}{Caesar cipher}{149}{chapter.5}
+\contentsline {section}{Calendar}{151}{chapter.5}
+\contentsline {section}{Calendar - for "real" programmers}{153}{chapter.5}
+\contentsline {section}{Call a foreign-language function}{155}{chapter.5}
+\contentsline {section}{Call a function}{158}{chapter.5}
+\contentsline {section}{Call a function from a foreign language}{160}{chapter.5}
+\contentsline {section}{Call a function in a shared library}{162}{chapter.5}
+\contentsline {section}{Call an object method}{164}{chapter.5}
+\contentsline {section}{Case-sensitivity of identifiers}{165}{chapter.5}
+\contentsline {section}{Catalan numbers}{166}{chapter.5}
+\contentsline {section}{Character codes}{168}{figure.caption.21}
+\contentsline {section}{Character matching}{169}{figure.caption.22}
+\contentsline {section}{Chat server}{171}{Item.40}
+\contentsline {section}{Checkpoint synchronization}{173}{Item.40}
+\contentsline {section}{Chess player}{176}{Item.40}
+\contentsline {section}{Cholesky decomposition}{193}{Item.40}
+\contentsline {section}{Classes}{197}{figure.caption.31}
+\contentsline {section}{Closest-pair problem}{198}{figure.caption.31}
+\contentsline {section}{Closures/Variable capture}{201}{figure.caption.31}
+\contentsline {section}{Collections}{202}{figure.caption.31}
+\contentsline {section}{Color of a screen pixel}{203}{figure.caption.31}
+\contentsline {section}{Colour bars/Display}{204}{figure.caption.31}
+\contentsline {section}{Colour pinstripe/Display}{205}{figure.caption.31}
+\contentsline {section}{Colour pinstripe/Printer}{206}{figure.caption.31}
+\contentsline {section}{Combinations}{208}{figure.caption.31}
+\contentsline {section}{Combinations with repetitions}{209}{figure.caption.31}
+\contentsline {section}{Command-line arguments}{211}{figure.caption.31}
+\contentsline {section}{Comments}{213}{figure.caption.31}
+\contentsline {section}{Compile-time calculation}{214}{figure.caption.31}
+\contentsline {section}{Compound data type}{215}{figure.caption.31}
+\contentsline {section}{Concurrent computing}{216}{figure.caption.31}
+\contentsline {section}{Conditional structures}{217}{figure.caption.31}
+\contentsline {section}{Constrained Random Points on a Circle}{219}{figure.caption.31}
+\contentsline {section}{Constrained genericity}{221}{figure.caption.31}
+\contentsline {section}{Conway's Game of Life}{223}{figure.caption.31}
+\contentsline {section}{Copy a string}{226}{figure.caption.31}
+\contentsline {section}{Count occurrences of a substring}{227}{figure.caption.31}
+\contentsline {section}{Count the Coins}{228}{figure.caption.31}
+\contentsline {section}{Counting in Factors}{230}{figure.caption.31}
+\contentsline {section}{Counting in octal}{232}{figure.caption.31}
+\contentsline {section}{Create a file}{233}{figure.caption.31}
+\contentsline {section}{Create a two-dimensional array at runtime}{234}{figure.caption.31}
+\contentsline {section}{Create an HTML table}{235}{figure.caption.31}
+\contentsline {section}{Create an object at a given address}{236}{figure.caption.31}
+\contentsline {section}{CSV to HTML translation}{237}{figure.caption.31}
+\contentsline {chapter}{\numberline {6}Rosetta Code Tasks starting with D}{239}{chapter.6}
+\contentsline {section}{Date format}{239}{chapter.6}
+\contentsline {section}{Date manipulation}{240}{chapter.6}
+\contentsline {section}{Day of the week}{241}{chapter.6}
+\contentsline {section}{Deal cards for FreeCell}{242}{chapter.6}
+\contentsline {section}{Decision tables}{245}{Item.44}
+\contentsline {section}{Deconvolution/1D}{248}{Item.44}
+\contentsline {section}{Deepcopy}{251}{figure.caption.35}
+\contentsline {section}{Define a primitive data type}{254}{figure.caption.35}
+\contentsline {section}{Delegates}{256}{figure.caption.35}
+\contentsline {section}{Delete a file}{258}{figure.caption.35}
+\contentsline {section}{Detect division by zero}{259}{figure.caption.35}
+\contentsline {section}{Determine if a string is numeric}{260}{figure.caption.35}
+\contentsline {section}{Determine if only one instance is running}{261}{figure.caption.35}
+\contentsline {section}{Digital root}{262}{figure.caption.35}
+\contentsline {section}{Dijkstra's algorithm}{263}{figure.caption.35}
+\contentsline {section}{Dinesman's multiple-dwelling problem}{266}{table.caption.37}
+\contentsline {section}{Dining philosophers}{268}{table.caption.37}
+\contentsline {section}{Discordian date}{271}{table.caption.37}
+\contentsline {section}{Distributed programming}{272}{table.caption.37}
+\contentsline {section}{DNS query}{273}{table.caption.37}
+\contentsline {section}{Documentation}{274}{table.caption.37}
+\contentsline {section}{Dot product}{275}{table.caption.37}
+\contentsline {section}{Doubly-linked list/Definition}{276}{table.caption.37}
+\contentsline {section}{Doubly-linked list/Element definition}{277}{table.caption.37}
+\contentsline {section}{Doubly-linked list/Element insertion}{278}{table.caption.37}
+\contentsline {section}{Doubly-linked list/Traversal}{279}{table.caption.37}
+\contentsline {section}{Dragon curve}{280}{table.caption.37}
+\contentsline {section}{Draw a clock}{282}{table.caption.37}
+\contentsline {section}{Draw a cuboid}{285}{Item.51}
+\contentsline {section}{Draw a sphere}{289}{Item.51}
+\contentsline {section}{Dutch national flag problem}{290}{Item.51}
+\contentsline {section}{Dynamic variable names}{291}{Item.54}
+\contentsline {chapter}{\numberline {7}Rosetta Code Tasks starting with E}{293}{chapter.7}
+\contentsline {section}{EBNF parser}{293}{chapter.7}
+\contentsline {section}{Echo server}{295}{chapter.7}
+\contentsline {section}{Element-wise operations}{296}{chapter.7}
+\contentsline {section}{Empty program}{297}{chapter.7}
+\contentsline {section}{Empty string}{298}{chapter.7}
+\contentsline {section}{Ensure that a file exists}{299}{chapter.7}
+\contentsline {section}{Enumerations}{300}{chapter.7}
+\contentsline {section}{Environment variables}{301}{chapter.7}
+\contentsline {section}{Equilibrium index}{302}{chapter.7}
+\contentsline {section}{Ethiopian multiplication}{303}{chapter.7}
+\contentsline {section}{Euler Method}{305}{Item.62}
+\contentsline {section}{Evaluate binomial coefficients}{309}{figure.caption.46}
+\contentsline {section}{Even or odd}{310}{figure.caption.47}
+\contentsline {section}{Events}{311}{figure.caption.47}
+\contentsline {section}{Evolutionary algorithm}{312}{figure.caption.47}
+\contentsline {section}{Exceptions}{314}{figure.caption.47}
+\contentsline {section}{Exceptions/Catch an exception thrown in a nested call}{315}{figure.caption.47}
+\contentsline {section}{Executable library}{316}{Item.67}
+\contentsline {section}{Execute Brain****}{318}{Item.67}
+\contentsline {section}{Execute HQ9+}{321}{Item.67}
+\contentsline {section}{Execute a Markov algorithm}{322}{Item.67}
+\contentsline {section}{Execute a system command}{324}{Item.67}
+\contentsline {section}{Exponentiation operator}{325}{Item.67}
+\contentsline {section}{Extend your language}{326}{Item.67}
+\contentsline {section}{Extreme floating point values}{328}{Item.67}
+\contentsline {chapter}{\numberline {8}Rosetta Code Tasks starting with F}{329}{chapter.8}
+\contentsline {section}{Factorial}{329}{chapter.8}
+\contentsline {section}{Factors of a Mersenne number}{330}{chapter.8}
+\contentsline {section}{Factors of an integer}{333}{chapter.8}
+\contentsline {section}{Fast Fourier transform}{334}{chapter.8}
+\contentsline {section}{Fibonacci n-step number sequences}{336}{chapter.8}
+\contentsline {section}{Fibonacci sequence}{339}{Item.73}
+\contentsline {section}{File IO}{341}{Item.73}
+\contentsline {section}{File modification time}{342}{Item.73}
+\contentsline {section}{File size}{343}{Item.73}
+\contentsline {section}{Filter}{344}{Item.73}
+\contentsline {section}{Find Common Directory Path}{345}{Item.73}
+\contentsline {section}{Find first and last set bit of a long integer}{346}{Item.73}
+\contentsline {section}{Find limit of recursion}{348}{Item.78}
+\contentsline {section}{Find the missing permutation}{349}{Item.78}
+\contentsline {section}{First class environments}{351}{Item.78}
+\contentsline {section}{First-class functions}{353}{Item.78}
+\contentsline {section}{First-class functions/Use numbers analogously}{355}{Item.78}
+\contentsline {section}{Five weekends}{357}{Item.78}
+\contentsline {section}{FizzBuzz}{359}{Item.81}
+\contentsline {section}{Flatten a list}{360}{Item.81}
+\contentsline {section}{Flow-control structures}{361}{Item.81}
+\contentsline {section}{Floyd's triangle}{363}{Item.81}
+\contentsline {section}{Forest fire}{365}{Item.83}
+\contentsline {section}{Fork}{367}{Item.87}
+\contentsline {section}{Formal power series}{368}{Item.87}
+\contentsline {section}{Formatted numeric output}{371}{figure.caption.55}
+\contentsline {section}{Forward difference}{372}{figure.caption.55}
+\contentsline {section}{Four bit adder}{373}{figure.caption.56}
+\contentsline {section}{Fractal tree}{375}{table.caption.57}
+\contentsline {section}{Function composition}{376}{Item.90}
+\contentsline {section}{Function definition}{377}{Item.90}
+\contentsline {section}{Function frequency}{378}{Item.90}
+\contentsline {chapter}{\numberline {9}Rosetta Code Tasks starting with G}{381}{chapter.9}
+\contentsline {section}{GUI component interaction}{381}{chapter.9}
+\contentsline {section}{GUI enabling/disabling of controls}{383}{chapter.9}
+\contentsline {section}{Galton box animation}{384}{chapter.9}
+\contentsline {section}{Gamma function}{387}{figure.caption.58}
+\contentsline {section}{Generator}{389}{figure.caption.59}
+\contentsline {section}{Generic swap}{391}{Item.96}
+\contentsline {section}{Globally replace text in several files}{392}{Item.96}
+\contentsline {section}{Go Fish}{393}{Item.96}
+\contentsline {section}{Gray code}{397}{Item.96}
+\contentsline {section}{Grayscale image}{399}{Item.96}
+\contentsline {section}{Greatest common divisor}{401}{Item.96}
+\contentsline {section}{Greatest element of a list}{402}{Item.96}
+\contentsline {section}{Greatest subsequential sum}{403}{Item.96}
+\contentsline {section}{Greyscale bars/Display}{404}{Item.96}
+\contentsline {section}{Guess the number}{405}{Item.96}
+\contentsline {section}{Guess the number/With Feedback}{406}{Item.96}
+\contentsline {section}{Guess the number/With Feedback (Player)}{407}{Item.96}
+\contentsline {chapter}{\numberline {10}Rosetta Code Tasks starting with H}{409}{chapter.10}
+\contentsline {section}{HTTP}{409}{chapter.10}
+\contentsline {section}{HTTPS}{410}{chapter.10}
+\contentsline {section}{HTTPS/Authenticated}{411}{chapter.10}
+\contentsline {section}{HTTPS/Client-authenticated}{412}{chapter.10}
+\contentsline {section}{Hailstone sequence}{413}{chapter.10}
+\contentsline {section}{Hamming numbers}{414}{Item.99}
+\contentsline {section}{Handle a signal}{415}{Item.105}
+\contentsline {section}{Happy numbers}{416}{Item.105}
+\contentsline {section}{Hash from two arrays}{417}{Item.105}
+\contentsline {section}{Haversine formula}{418}{Item.105}
+\contentsline {section}{Hello world/Graphical}{419}{Item.105}
+\contentsline {section}{Hello world/Line printer}{420}{Item.105}
+\contentsline {section}{Hello world/Newline omission}{421}{Item.105}
+\contentsline {section}{Hello world/Standard error}{422}{Item.105}
+\contentsline {section}{Hello world/Text}{423}{Item.105}
+\contentsline {section}{Hello world/Web server}{424}{Item.105}
+\contentsline {section}{Here document}{425}{Item.105}
+\contentsline {section}{Higher-order functions}{426}{Item.105}
+\contentsline {section}{History variables}{427}{Item.105}
+\contentsline {section}{Hofstadter Figure-Figure sequences}{429}{Item.105}
+\contentsline {section}{Hofstadter Q sequence}{431}{Item.109}
+\contentsline {section}{Hofstadter-Conway \$10,000 sequence}{433}{figure.caption.61}
+\contentsline {section}{Holidays related to Easter}{436}{Item.112}
+\contentsline {section}{Horizontal sundial calculations}{438}{Item.112}
+\contentsline {section}{Horner's rule for polynomial evaluation}{440}{Item.112}
+\contentsline {section}{Host introspection}{441}{figure.caption.64}
+\contentsline {section}{Hostname}{442}{figure.caption.64}
+\contentsline {section}{Huffman coding}{443}{figure.caption.64}
+\contentsline {chapter}{\numberline {11}Rosetta Code Tasks starting with I}{447}{chapter.11}
+\contentsline {section}{IPC via named pipe}{447}{chapter.11}
+\contentsline {section}{Identity matrix}{449}{Item.120}
+\contentsline {section}{Image convolution}{450}{figure.caption.66}
+\contentsline {section}{Image Noise}{452}{figure.caption.67}
+\contentsline {section}{Include a file}{454}{figure.caption.68}
+\contentsline {section}{Increment a numerical string}{455}{figure.caption.68}
+\contentsline {section}{Infinity}{456}{figure.caption.68}
+\contentsline {section}{Inheritance/Multiple}{457}{figure.caption.68}
+\contentsline {section}{Inheritance/Single}{458}{figure.caption.68}
+\contentsline {section}{Input loop}{460}{figure.caption.68}
+\contentsline {section}{Integer comparison}{461}{figure.caption.68}
+\contentsline {section}{Integer sequence}{462}{figure.caption.68}
+\contentsline {section}{Interactive programming}{463}{figure.caption.68}
+\contentsline {section}{Introspection}{464}{figure.caption.68}
+\contentsline {section}{Inverted index}{465}{figure.caption.68}
+\contentsline {section}{Inverted syntax}{467}{figure.caption.68}
+\contentsline {chapter}{\numberline {12}Rosetta Code Tasks starting with J}{469}{chapter.12}
+\contentsline {section}{JSON}{469}{chapter.12}
+\contentsline {section}{Jensen's Device}{472}{chapter.12}
+\contentsline {section}{Joystick position}{474}{chapter.12}
+\contentsline {section}{Jump anywhere}{476}{chapter.12}
+\contentsline {chapter}{\numberline {13}Rosetta Code Tasks starting with K}{479}{chapter.13}
+\contentsline {section}{Kaprekar numbers}{479}{chapter.13}
+\contentsline {section}{Keyboard macros}{481}{chapter.13}
+\contentsline {section}{Knapsack problem/0-1}{482}{chapter.13}
+\contentsline {section}{Knapsack problem/Bounded}{485}{table.caption.69}
+\contentsline {section}{Knapsack problem/Continuous}{488}{table.caption.70}
+\contentsline {section}{Knapsack problem/Unbounded}{490}{table.caption.71}
+\contentsline {section}{Knight's tour}{492}{Item.121}
+\contentsline {section}{Knuth's algorithm S}{494}{Item.121}
+\contentsline {section}{Knuth shuffle}{496}{Item.129}
+\contentsline {chapter}{\numberline {14}Rosetta Code Tasks starting with L}{497}{chapter.14}
+\contentsline {section}{LZW compression}{497}{chapter.14}
+\contentsline {section}{Last Fridays of year}{499}{chapter.14}
+\contentsline {section}{Last letter-first letter}{501}{chapter.14}
+\contentsline {section}{Leap year}{503}{chapter.14}
+\contentsline {section}{Least common multiple}{504}{chapter.14}
+\contentsline {section}{Letter frequency}{505}{figure.caption.73}
+\contentsline {section}{Levenshtein distance}{506}{figure.caption.73}
+\contentsline {section}{Linear congruential generator}{508}{Item.132}
+\contentsline {section}{List comprehensions}{510}{Item.132}
+\contentsline {section}{Literals/Floating point}{513}{Item.135}
+\contentsline {section}{Literals/Integer}{514}{Item.135}
+\contentsline {section}{Literals/String}{515}{Item.135}
+\contentsline {section}{Logical operations}{516}{Item.135}
+\contentsline {section}{Long multiplication}{517}{Item.135}
+\contentsline {section}{Longest common subsequence}{518}{Item.135}
+\contentsline {section}{Longest string challenge}{519}{Item.135}
+\contentsline {section}{Look-and-say sequence}{523}{Item.135}
+\contentsline {section}{Loop over multiple arrays simultaneously}{525}{Item.135}
+\contentsline {section}{Loops/Break}{526}{Item.135}
+\contentsline {section}{Loops/Continue}{527}{Item.135}
+\contentsline {section}{Loops/Do-while}{528}{Item.135}
+\contentsline {section}{Loops/Downward for}{529}{Item.135}
+\contentsline {section}{Loops/For}{530}{Item.135}
+\contentsline {section}{Loops/For with a specified step}{531}{Item.135}
+\contentsline {section}{Loops/Foreach}{532}{Item.135}
+\contentsline {section}{Loops/Infinite}{533}{Item.135}
+\contentsline {section}{Loops/N plus one half}{534}{Item.135}
+\contentsline {section}{Loops/Nested}{535}{Item.135}
+\contentsline {section}{Loops/While}{536}{Item.135}
+\contentsline {section}{Lucas-Lehmer test}{537}{Item.135}
+\contentsline {section}{Luhn test of credit card numbers}{539}{Item.135}
+\contentsline {chapter}{\numberline {15}Rosetta Code Tasks starting with M}{541}{chapter.15}
+\contentsline {section}{MD5}{541}{chapter.15}
+\contentsline {section}{MD5/Implementation}{542}{chapter.15}
+\contentsline {section}{Make a backup file}{547}{chapter.15}
+\contentsline {section}{Man or boy test}{548}{chapter.15}
+\contentsline {section}{Mandelbrot set}{551}{table.caption.74}
+\contentsline {section}{Map range}{552}{table.caption.74}
+\contentsline {section}{Matrix multiplication}{553}{figure.caption.75}
+\contentsline {section}{Matrix transposition}{554}{figure.caption.75}
+\contentsline {section}{Matrix-exponentiation operator}{555}{figure.caption.75}
+\contentsline {section}{Maze generation}{556}{figure.caption.75}
+\contentsline {section}{Maze solving}{559}{Item.143}
+\contentsline {section}{Median filter}{561}{Item.143}
+\contentsline {section}{Memory allocation}{562}{Item.143}
+\contentsline {section}{Memory layout of a data structure}{563}{Item.143}
+\contentsline {section}{Menu}{565}{Item.143}
+\contentsline {section}{Metaprogramming}{566}{Item.143}
+\contentsline {section}{Metered concurrency}{567}{Item.143}
+\contentsline {section}{Metronome}{568}{Item.143}
+\contentsline {section}{Miller-Rabin primality test}{569}{Item.143}
+\contentsline {section}{Minesweeper game}{572}{Item.143}
+\contentsline {section}{Modular exponentiation}{575}{Item.143}
+\contentsline {section}{Monte Carlo methods}{576}{Item.143}
+\contentsline {section}{Monty Hall problem}{577}{Item.143}
+\contentsline {section}{Morse code}{579}{Item.143}
+\contentsline {section}{Mouse position}{581}{Item.143}
+\contentsline {section}{Multiline shebang}{582}{Item.143}
+\contentsline {section}{Multiple distinct objects}{583}{Item.143}
+\contentsline {section}{Multiple regression}{584}{Item.143}
+\contentsline {section}{Multiplication tables}{587}{figure.caption.78}
+\contentsline {section}{Multisplit}{588}{figure.caption.78}
+\contentsline {section}{Mutex}{590}{figure.caption.78}
+\contentsline {section}{Mutual recursion}{591}{figure.caption.78}
+\contentsline {chapter}{\numberline {16}Rosetta Code Tasks starting with N}{593}{chapter.16}
+\contentsline {section}{N-queens problem}{593}{chapter.16}
+\contentsline {section}{Named parameters}{595}{chapter.16}
+\contentsline {section}{Narcissist}{597}{chapter.16}
+\contentsline {section}{Natural sorting}{598}{chapter.16}
+\contentsline {section}{Non-continuous subsequences}{607}{Item.151}
+\contentsline {section}{Non-decimal radices/Convert}{608}{Item.151}
+\contentsline {section}{Non-decimal radices/Input}{610}{Item.151}
+\contentsline {section}{Non-decimal radices/Output}{611}{Item.151}
+\contentsline {section}{Nth root}{612}{Item.151}
+\contentsline {section}{Number names}{613}{Item.151}
+\contentsline {section}{Number reversal game}{614}{Item.151}
+\contentsline {section}{Numeric error propagation}{615}{Item.151}
+\contentsline {section}{Numerical integration}{620}{Item.154}
+\contentsline {chapter}{\numberline {17}Rosetta Code Tasks starting with O}{623}{chapter.17}
+\contentsline {section}{Object serialization}{623}{chapter.17}
+\contentsline {section}{Odd word problem}{625}{chapter.17}
+\contentsline {section}{Old lady swalllowed a fly}{627}{Item.157}
+\contentsline {section}{One of n lines in a file}{629}{Item.157}
+\contentsline {section}{One-dimensional cellular automata}{631}{Item.160}
+\contentsline {section}{OpenGL}{633}{Item.160}
+\contentsline {section}{Optional parameters}{635}{figure.caption.80}
+\contentsline {section}{Order two numerical lists}{637}{figure.caption.80}
+\contentsline {section}{Ordered Partitions}{638}{figure.caption.80}
+\contentsline {section}{Ordered words}{640}{figure.caption.81}
+\contentsline {chapter}{\numberline {18}Rosetta Code Tasks starting with P}{641}{chapter.18}
+\contentsline {section}{Palindrome detection}{641}{chapter.18}
+\contentsline {section}{Pangram checker}{643}{chapter.18}
+\contentsline {section}{Parallel calculations}{644}{chapter.18}
+\contentsline {section}{Parametric polymorphism}{646}{chapter.18}
+\contentsline {section}{Parametrized SQL statement}{649}{chapter.18}
+\contentsline {section}{Parse an IP Address}{650}{chapter.18}
+\contentsline {section}{Parsing command-line arguments}{653}{table.caption.82}
+\contentsline {section}{Parsing/RPN calculator algorithm}{654}{table.caption.82}
+\contentsline {section}{Parsing/RPN to infix conversion}{656}{table.caption.82}
+\contentsline {section}{Parsing/Shunting-yard algorithm}{659}{table.caption.84}
+\contentsline {section}{Partial function application}{662}{table.caption.85}
+\contentsline {section}{Pascal's triangle}{664}{table.caption.85}
+\contentsline {section}{Pascal's triangle/Puzzle}{665}{table.caption.85}
+\contentsline {section}{Pattern matching}{667}{table.caption.85}
+\contentsline {section}{Percentage difference between images}{669}{table.caption.85}
+\contentsline {section}{Perfect numbers}{671}{table.caption.86}
+\contentsline {section}{Permutation test}{672}{table.caption.86}
+\contentsline {section}{Permutations}{675}{table.caption.87}
+\contentsline {section}{Permutations/Derangements}{676}{table.caption.87}
+\contentsline {section}{Pi}{678}{Item.164}
+\contentsline {section}{Pick random element}{679}{Item.164}
+\contentsline {section}{Pinstripe/Display}{680}{Item.164}
+\contentsline {section}{Pinstripe/Printer}{681}{Item.164}
+\contentsline {section}{Play recorded sounds}{682}{Item.164}
+\contentsline {section}{Playing cards}{683}{Item.164}
+\contentsline {section}{Plot coordinate pairs}{684}{Item.164}
+\contentsline {section}{Pointers and references}{686}{Item.164}
+\contentsline {section}{Polynomial long division}{688}{Item.164}
+\contentsline {section}{Polymorphic copy}{692}{Item.164}
+\contentsline {section}{Polymorphism}{694}{Item.164}
+\contentsline {section}{Power set}{695}{Item.164}
+\contentsline {section}{Pragmatic directives}{696}{Item.164}
+\contentsline {section}{Price Fraction}{697}{Item.164}
+\contentsline {section}{Primality by trial division}{699}{Item.164}
+\contentsline {section}{Prime decomposition}{700}{Item.164}
+\contentsline {section}{Priority queue}{701}{Item.164}
+\contentsline {section}{Probabilistic choice}{703}{Item.166}
+\contentsline {section}{Program termination}{705}{Item.166}
+\contentsline {section}{Pythagorean triples}{706}{Item.166}
+\contentsline {chapter}{\numberline {19}Rosetta Code Tasks starting with Q}{709}{chapter.19}
+\contentsline {section}{Queue/Definition}{709}{chapter.19}
+\contentsline {section}{Queue/Usage}{711}{chapter.19}
+\contentsline {section}{Quine}{712}{chapter.19}
+\contentsline {chapter}{\numberline {20}Rosetta Code Tasks starting with R}{715}{chapter.20}
+\contentsline {section}{RSA code}{715}{chapter.20}
+\contentsline {section}{Random number generator (device)}{718}{figure.caption.90}
+\contentsline {section}{Random number generator (included)}{719}{figure.caption.90}
+\contentsline {section}{Random numbers}{720}{figure.caption.90}
+\contentsline {section}{Range expansion}{721}{figure.caption.90}
+\contentsline {section}{Range extraction}{722}{figure.caption.90}
+\contentsline {section}{Rate counter}{724}{figure.caption.90}
+\contentsline {section}{Ray-casting algorithm}{726}{figure.caption.90}
+\contentsline {section}{Read a configuration file}{732}{figure.caption.93}
+\contentsline {section}{Read a specific line from a file}{734}{figure.caption.93}
+\contentsline {section}{Read entire file}{735}{figure.caption.93}
+\contentsline {section}{Read a file line by line}{736}{figure.caption.93}
+\contentsline {section}{Real constants and functions}{737}{figure.caption.93}
+\contentsline {section}{Record sound}{739}{figure.caption.93}
+\contentsline {section}{Reduced row echelon form}{740}{figure.caption.93}
+\contentsline {section}{Regular expressions}{742}{figure.caption.93}
+\contentsline {section}{Remote agent/Agent interface}{743}{figure.caption.93}
+\contentsline {section}{Remote agent/Agent logic}{744}{figure.caption.93}
+\contentsline {section}{Remote agent/Simulation}{750}{figure.caption.93}
+\contentsline {section}{Remove duplicate elements}{754}{figure.caption.93}
+\contentsline {section}{Remove lines from a file}{755}{figure.caption.93}
+\contentsline {section}{Remove the first and last characters from a string/Top and tail}{756}{figure.caption.93}
+\contentsline {section}{Rename a file}{757}{figure.caption.93}
+\contentsline {section}{Rendezvous}{758}{figure.caption.93}
+\contentsline {section}{Repeat a string}{760}{figure.caption.93}
+\contentsline {section}{Respond to an unknown method call}{761}{figure.caption.93}
+\contentsline {section}{Return multiple values}{762}{figure.caption.93}
+\contentsline {section}{Reverse a string}{763}{figure.caption.93}
+\contentsline {section}{Rock-paper-scissors}{764}{figure.caption.93}
+\contentsline {section}{Roman numerals/Encode}{765}{figure.caption.93}
+\contentsline {section}{Roman numerals/Decode}{766}{figure.caption.93}
+\contentsline {section}{Roots of a function}{767}{figure.caption.93}
+\contentsline {section}{Roots of a quadratic function}{768}{figure.caption.93}
+\contentsline {section}{Roots of unity}{770}{figure.caption.93}
+\contentsline {section}{Rosetta Code/Count examples}{771}{figure.caption.93}
+\contentsline {section}{Rosetta Code/Find unimplemented tasks}{772}{figure.caption.93}
+\contentsline {section}{Rosetta Code/Fix code tags}{773}{figure.caption.93}
+\contentsline {section}{Rosetta Code/Rank languages by popularity}{774}{figure.caption.93}
+\contentsline {section}{Rot-13}{776}{figure.caption.93}
+\contentsline {section}{Run as a daemon or service}{777}{figure.caption.93}
+\contentsline {section}{Run-length encoding}{778}{figure.caption.93}
+\contentsline {section}{Runtime evaluation}{780}{figure.caption.93}
+\contentsline {section}{Runtime evaluation/In an environment}{781}{figure.caption.93}
+\contentsline {chapter}{\numberline {21}Rosetta Code Tasks starting with S}{783}{chapter.21}
+\contentsline {section}{S-Expressions}{783}{chapter.21}
+\contentsline {section}{SEDOLs}{786}{chapter.21}
+\contentsline {section}{SHA-1}{788}{chapter.21}
+\contentsline {section}{Safe addition}{789}{chapter.21}
+\contentsline {section}{Same Fringe}{790}{chapter.21}
+\contentsline {section}{Scope modifiers}{792}{chapter.21}
+\contentsline {section}{Script name}{794}{chapter.21}
+\contentsline {section}{Scripted Main}{795}{chapter.21}
+\contentsline {section}{Search a list}{796}{chapter.21}
+\contentsline {section}{Secure temporary file}{797}{chapter.21}
+\contentsline {section}{Self-describing numbers}{798}{chapter.21}
+\contentsline {section}{Self-referential sequence}{799}{Item.168}
+\contentsline {section}{Send an unknown method call}{802}{Item.168}
+\contentsline {section}{Send email}{803}{Item.168}
+\contentsline {section}{Sequence of non-squares}{804}{Item.168}
+\contentsline {section}{Set}{806}{Item.168}
+\contentsline {section}{Set consolidation}{810}{Item.168}
+\contentsline {section}{Seven-sided dice from five-sided dice}{812}{Item.168}
+\contentsline {section}{Shell one-liner}{813}{Item.168}
+\contentsline {section}{Short-circuit evaluation}{814}{Item.168}
+\contentsline {section}{Show the epoch}{816}{Item.168}
+\contentsline {section}{Sierpinski carpet}{817}{Item.168}
+\contentsline {section}{Sierpinski triangle}{819}{Item.168}
+\contentsline {section}{Sieve of Eratosthenes}{820}{Item.168}
+\contentsline {section}{Simple database}{821}{Item.168}
+\contentsline {section}{Simple quaternion type and operations}{824}{Item.168}
+\contentsline {section}{Simple windowed application}{828}{Item.176}
+\contentsline {section}{Simulate input/Keyboard}{829}{Item.176}
+\contentsline {section}{Simulate input/Mouse}{830}{Item.176}
+\contentsline {section}{Singleton}{831}{Item.176}
+\contentsline {section}{Singly-linked list/Element definition}{832}{Item.176}
+\contentsline {section}{Singly-linked list/Element insertion}{833}{Item.176}
+\contentsline {section}{Singly-linked list/Traversal}{834}{Item.176}
+\contentsline {section}{Sleep}{835}{Item.176}
+\contentsline {section}{Sockets}{836}{Item.176}
+\contentsline {section}{Sokoban}{837}{Item.176}
+\contentsline {section}{Solve a Hidato puzzle}{841}{Item.176}
+\contentsline {section}{Sort an array of composite structures}{845}{figure.caption.95}
+\contentsline {section}{Sort an integer array}{846}{figure.caption.95}
+\contentsline {section}{Sort disjoint sublist}{847}{figure.caption.95}
+\contentsline {section}{Sort stability}{848}{figure.caption.95}
+\contentsline {section}{Sort using a custom comparator}{849}{Item.179}
+\contentsline {section}{Sorting algorithms/Bead sort}{850}{Item.179}
+\contentsline {section}{Sorting algorithms/Bogosort}{851}{Item.179}
+\contentsline {section}{Sorting algorithms/Bubble sort}{852}{Item.179}
+\contentsline {section}{Sorting algorithms/Cocktail sort}{854}{Item.179}
+\contentsline {section}{Sorting algorithms/Comb sort}{856}{Item.179}
+\contentsline {section}{Sorting algorithms/Counting sort}{858}{Item.179}
+\contentsline {section}{Sorting algorithms/Gnome sort}{860}{Item.179}
+\contentsline {section}{Sorting algorithms/Heapsort}{861}{Item.179}
+\contentsline {section}{Sorting algorithms/Insertion sort}{864}{Item.179}
+\contentsline {section}{Sorting algorithms/Pancake sort}{865}{Item.179}
+\contentsline {section}{Sorting algorithms/Permutation sort}{867}{Item.179}
+\contentsline {section}{Sorting algorithms/Radix sort}{868}{Item.179}
+\contentsline {section}{Sorting algorithms/Selection sort}{869}{Item.179}
+\contentsline {section}{Sorting algorithms/Shell sort}{870}{Item.179}
+\contentsline {section}{Sorting algorithms/Sleep sort}{871}{Item.179}
+\contentsline {section}{Sorting algorithms/Stooge sort}{873}{Item.179}
+\contentsline {section}{Sorting algorithms/Strand sort}{874}{Item.179}
+\contentsline {section}{Soundex}{875}{Item.179}
+\contentsline {section}{Special variables}{876}{Item.179}
+\contentsline {section}{Speech synthesis}{877}{Item.179}
+\contentsline {section}{Special characters}{878}{Item.179}
+\contentsline {section}{Spiral matrix}{879}{Item.179}
+\contentsline {section}{Stable marriage problem}{880}{Item.179}
+\contentsline {section}{Stack}{884}{Item.184}
+\contentsline {section}{Stack traces}{886}{Item.184}
+\contentsline {section}{Stair-climbing puzzle}{889}{Item.184}
+\contentsline {section}{Standard deviation}{890}{Item.184}
+\contentsline {section}{State name puzzle}{891}{Item.184}
+\contentsline {section}{Statistics/Basic}{894}{Item.184}
+\contentsline {section}{Stem-and-leaf plot}{897}{figure.caption.96}
+\contentsline {section}{Straddling checkerboard}{899}{figure.caption.96}
+\contentsline {section}{String case}{901}{figure.caption.96}
+\contentsline {section}{String concatenation}{902}{figure.caption.96}
+\contentsline {section}{String interpolation (included)}{903}{figure.caption.96}
+\contentsline {section}{String length}{904}{Item.186}
+\contentsline {section}{Strip a set of characters from a string}{905}{Item.186}
+\contentsline {section}{Strip block comments}{906}{Item.186}
+\contentsline {section}{Strip comments from a string}{908}{Item.186}
+\contentsline {section}{Strip control codes and extended characters from a string}{909}{Item.186}
+\contentsline {section}{Strip whitespace from a string/Top and tail}{911}{Item.186}
+\contentsline {section}{Subset sum problem}{912}{Item.186}
+\contentsline {section}{Substring}{915}{table.caption.97}
+\contentsline {section}{Subtractive generator}{917}{table.caption.97}
+\contentsline {section}{Sudoku}{920}{Item.191}
+\contentsline {section}{Sum and product of an array}{923}{Item.191}
+\contentsline {section}{Sum digits of an integer}{924}{Item.191}
+\contentsline {section}{Sum of a series}{925}{Item.191}
+\contentsline {section}{Sum of squares}{926}{Item.191}
+\contentsline {section}{Symmetric difference}{927}{Item.191}
+\contentsline {section}{Synchronous concurrency}{929}{Item.193}
+\contentsline {section}{System time}{931}{Item.193}
+\contentsline {chapter}{\numberline {22}Rosetta Code Tasks starting with T}{933}{chapter.22}
+\contentsline {section}{Table creation}{933}{chapter.22}
+\contentsline {section}{Table creation/Postal addresses}{935}{chapter.22}
+\contentsline {section}{Take notes on the command line}{937}{chapter.22}
+\contentsline {section}{Terminal Control/Dimensions}{938}{chapter.22}
+\contentsline {section}{Terminal control/Coloured text}{939}{chapter.22}
+\contentsline {section}{Terminal control/Cursor movement}{940}{chapter.22}
+\contentsline {section}{Terminal control/Preserve screen}{941}{chapter.22}
+\contentsline {section}{Terminal Control/Unicode output}{942}{chapter.22}
+\contentsline {section}{Ternary logic}{943}{chapter.22}
+\contentsline {section}{Test a function}{949}{table.caption.99}
+\contentsline {section}{Text processing/1}{950}{table.caption.99}
+\contentsline {section}{Text processing/2}{953}{table.caption.99}
+\contentsline {section}{Text processing/3}{955}{Item.196}
+\contentsline {section}{Thiele's interpolation formula}{957}{Item.196}
+\contentsline {section}{Three Dogs}{960}{Item.199}
+\contentsline {section}{Tic-tac-toe}{961}{Item.199}
+\contentsline {section}{Time a function}{964}{Item.199}
+\contentsline {section}{Top rank per group}{965}{Item.199}
+\contentsline {section}{Topological sort}{967}{Item.199}
+\contentsline {section}{Towers of Hanoi}{969}{Item.199}
+\contentsline {section}{Trabb Pardo–Knuth algorithm}{970}{Item.199}
+\contentsline {section}{Tree traversal}{972}{Item.206}
+\contentsline {section}{Trigonometric functions}{974}{Item.206}
+\contentsline {section}{Truncatable primes}{976}{Item.206}
+\contentsline {section}{Truncate a file}{977}{Item.206}
+\contentsline {section}{Truth table}{978}{Item.206}
+\contentsline {chapter}{\numberline {23}Rosetta Code Tasks starting with U}{981}{chapter.23}
+\contentsline {section}{URL decoding}{981}{chapter.23}
+\contentsline {section}{URL encoding}{982}{chapter.23}
+\contentsline {section}{Unbias a random generator}{984}{chapter.23}
+\contentsline {section}{Undefined values}{986}{chapter.23}
+\contentsline {section}{Unicode strings}{987}{chapter.23}
+\contentsline {section}{Unicode variable names}{988}{chapter.23}
+\contentsline {section}{Update a configuration file}{989}{Item.211}
+\contentsline {section}{User input/Graphical}{993}{Item.211}
+\contentsline {section}{User input/Text}{994}{Item.211}
+\contentsline {chapter}{\numberline {24}Rosetta Code Tasks starting with V}{995}{chapter.24}
+\contentsline {section}{Van der Corput sequence}{995}{chapter.24}
+\contentsline {section}{Variable size/Get}{999}{figure.caption.108}
+\contentsline {section}{Variable size/Set}{1000}{figure.caption.108}
+\contentsline {section}{Variable-length quantity}{1001}{figure.caption.108}
+\contentsline {section}{Variables}{1002}{figure.caption.108}
+\contentsline {section}{Variadic function}{1003}{figure.caption.108}
+\contentsline {section}{Vector products}{1004}{figure.caption.108}
+\contentsline {section}{Verify distribution uniformity/Naive}{1006}{Item.219}
+\contentsline {section}{Vigenère Cipher}{1008}{Item.219}
+\contentsline {chapter}{\numberline {25}Rosetta Code Tasks starting with W}{1009}{chapter.25}
+\contentsline {section}{Walk a directory/Non-recursively}{1009}{chapter.25}
+\contentsline {section}{Walk a directory/Recursively}{1010}{chapter.25}
+\contentsline {section}{Web scraping}{1011}{chapter.25}
+\contentsline {section}{Window creation}{1012}{chapter.25}
+\contentsline {section}{Window creation/X11}{1013}{chapter.25}
+\contentsline {section}{Window management}{1015}{chapter.25}
+\contentsline {section}{Wireworld}{1017}{chapter.25}
+\contentsline {section}{Word wrap}{1020}{table.caption.109}
+\contentsline {section}{Write float arrays to a text file}{1021}{table.caption.109}
+\contentsline {section}{Write to Windows event log}{1023}{table.caption.109}
+\contentsline {chapter}{\numberline {26}Rosetta Code Tasks starting with X}{1025}{chapter.26}
+\contentsline {section}{XML/DOM serialization}{1025}{chapter.26}
+\contentsline {section}{XML/Input}{1026}{chapter.26}
+\contentsline {section}{XML/Output}{1027}{chapter.26}
+\contentsline {section}{XML/XPath}{1029}{chapter.26}
+\contentsline {section}{Xiaolin Wu's line algorithm}{1031}{chapter.26}
+\contentsline {chapter}{\numberline {27}Rosetta Code Tasks starting with Y}{1033}{chapter.27}
+\contentsline {section}{Y combinator}{1033}{chapter.27}
+\contentsline {section}{Yahoo! Search}{1035}{chapter.27}
+\contentsline {section}{Yin and yang}{1036}{chapter.27}
+\contentsline {chapter}{\numberline {28}Rosetta Code Tasks starting with Z}{1039}{chapter.28}
+\contentsline {section}{Zebra puzzle}{1039}{chapter.28}
+\contentsline {section}{Zig-zag matrix}{1042}{Item.235}
+\contentsline {part}{Part\ III\hspace {\betweenumberspace }Function Reference}{1045}{part.3}
+\contentsline {chapter}{\numberline {29}Symbols starting with A}{1047}{chapter.29}
+\contentsline {section}{\texttt {*Adr}}{1047}{chapter.29}
+\contentsline {section}{\texttt {(adr 'var) -> num}}{1047}{chapter.29}
+\contentsline {section}{\texttt {*Allow}}{1048}{chapter.29}
+\contentsline {section}{\texttt {+Alt}}{1048}{chapter.29}
+\contentsline {section}{\texttt {+Any}}{1048}{chapter.29}
+\contentsline {section}{\texttt {+Aux}}{1049}{chapter.29}
+\contentsline {section}{\texttt {(abort 'cnt . prg) -> any}}{1049}{chapter.29}
+\contentsline {section}{\texttt {(abs 'num) -> num}}{1049}{chapter.29}
+\contentsline {section}{\texttt {(accept 'cnt) -> cnt | NIL}}{1050}{chapter.29}
+\contentsline {section}{\texttt {(accu 'var 'any 'num)}}{1050}{chapter.29}
+\contentsline {section}{\texttt {(acquire 'sym) -> flg}}{1050}{chapter.29}
+\contentsline {section}{\texttt {(alarm 'cnt . prg) -> cnt}}{1051}{chapter.29}
+\contentsline {section}{\texttt {(align 'cnt 'any) -> sym}}{1051}{chapter.29}
+\contentsline {section}{\texttt {(all ['T | '0]) -> lst}}{1051}{chapter.29}
+\contentsline {section}{\texttt {(allow 'sym ['flg]) -> sym}}{1052}{chapter.29}
+\contentsline {section}{\texttt {(allowed lst [sym ..])}}{1052}{chapter.29}
+\contentsline {section}{\texttt {(and 'any ..) -> any}}{1053}{chapter.29}
+\contentsline {section}{\texttt {(any 'sym) -> any}}{1053}{chapter.29}
+\contentsline {section}{\texttt {(append 'lst ..) -> lst}}{1053}{chapter.29}
+\contentsline {section}{\texttt {append/3}}{1053}{chapter.29}
+\contentsline {section}{\texttt {(apply 'fun 'lst ['any ..]) -> any}}{1054}{chapter.29}
+\contentsline {section}{\texttt {(arg ['cnt]) -> any}}{1054}{chapter.29}
+\contentsline {section}{\texttt {(args) -> flg}}{1055}{chapter.29}
+\contentsline {section}{\texttt {(argv [var ..] [. sym]) -> lst|sym}}{1055}{chapter.29}
+\contentsline {section}{\texttt {(as 'any1 . any2) -> any2 | NIL}}{1056}{chapter.29}
+\contentsline {section}{\texttt {(asoq 'any 'lst) -> lst}}{1056}{chapter.29}
+\contentsline {section}{\texttt {(assert exe ..) -> prg | NIL}}{1057}{chapter.29}
+\contentsline {section}{\texttt {(asserta 'lst) -> lst}}{1057}{chapter.29}
+\contentsline {section}{\texttt {asserta/1}}{1058}{chapter.29}
+\contentsline {section}{\texttt {(assertz 'lst) -> lst}}{1058}{chapter.29}
+\contentsline {section}{\texttt {assertz/1}}{1059}{chapter.29}
+\contentsline {section}{\texttt {(assoc 'any 'lst) -> lst}}{1059}{chapter.29}
+\contentsline {section}{\texttt {(at '(cnt1 . cnt2|NIL) . prg) -> any}}{1060}{chapter.29}
+\contentsline {section}{\texttt {(atom 'any) -> flg}}{1060}{chapter.29}
+\contentsline {section}{\texttt {(aux 'var 'cls ['hook] 'any ..) -> sym}}{1060}{chapter.29}
+\contentsline {chapter}{\numberline {30}Symbols starting with B}{1063}{chapter.30}
+\contentsline {section}{\texttt {*Blob}}{1063}{chapter.30}
+\contentsline {section}{\texttt {*Bye}}{1063}{chapter.30}
+\contentsline {section}{\texttt {+Bag}}{1063}{chapter.30}
+\contentsline {section}{\texttt {+Blob}}{1064}{chapter.30}
+\contentsline {section}{\texttt {+Bool}}{1064}{chapter.30}
+\contentsline {section}{\texttt {(balance 'var 'lst ['flg])}}{1064}{chapter.30}
+\contentsline {section}{\texttt {(basename 'any) -> sym}}{1065}{chapter.30}
+\contentsline {section}{\texttt {(be sym . any) -> sym}}{1065}{chapter.30}
+\contentsline {section}{\texttt {(beep) -> any}}{1066}{chapter.30}
+\contentsline {section}{\texttt {(bench . prg) -> any}}{1066}{chapter.30}
+\contentsline {section}{\texttt {(bin 'num ['num]) -> sym}}{1066}{chapter.30}
+\contentsline {section}{\texttt {(bind 'sym|lst . prg) -> any}}{1067}{chapter.30}
+\contentsline {section}{\texttt {(bit? 'num ..) -> num | NIL}}{1067}{chapter.30}
+\contentsline {section}{\texttt {(blob 'obj 'sym) -> sym}}{1068}{chapter.30}
+\contentsline {section}{\texttt {(blob! 'obj 'sym 'file)}}{1068}{chapter.30}
+\contentsline {section}{\texttt {(bool 'any) -> flg}}{1068}{chapter.30}
+\contentsline {section}{\texttt {bool/3}}{1069}{chapter.30}
+\contentsline {section}{\texttt {(box 'any) -> sym}}{1069}{chapter.30}
+\contentsline {section}{\texttt {(box? 'any) -> sym | NIL}}{1069}{chapter.30}
+\contentsline {section}{\texttt {(by 'fun1 'fun2 'lst ..) -> lst}}{1070}{chapter.30}
+\contentsline {section}{(bye 'cnt|NIL)}{1070}{chapter.30}
+\contentsline {chapter}{\numberline {31}Symbols starting with C}{1071}{chapter.31}
+\contentsline {section}{\texttt {*Class}}{1071}{chapter.31}
+\contentsline {section}{\texttt {(cache 'var 'sym . prg) -> any}}{1071}{chapter.31}
+\contentsline {section}{\texttt {(call 'any ..) -> flg}}{1072}{chapter.31}
+\contentsline {section}{\texttt {call/1}}{1072}{chapter.31}
+\contentsline {section}{\texttt {(can 'msg) -> lst}}{1073}{chapter.31}
+\contentsline {section}{\texttt {(car 'var) -> any}}{1074}{chapter.31}
+\contentsline {section}{\texttt {(c[ad]*ar 'var) -> any}}{1074}{chapter.31}
+\contentsline {section}{\texttt {(case 'any (any1 . prg1) (any2 . prg2) ..) -> any}}{1074}{chapter.31}
+\contentsline {section}{\texttt {(catch 'any . prg) -> any}}{1074}{chapter.31}
+\contentsline {section}{\texttt {(cd 'any) -> sym}}{1075}{chapter.31}
+\contentsline {section}{\texttt {(cdr 'lst) -> any}}{1075}{chapter.31}
+\contentsline {section}{\texttt {(center 'cnt|lst 'any ..) -> sym}}{1075}{chapter.31}
+\contentsline {section}{\texttt {(chain 'lst ..) -> lst}}{1076}{chapter.31}
+\contentsline {section}{\texttt {(char) -> sym}}{1076}{chapter.31}
+\contentsline {section}{\texttt {(chdir 'any . prg) -> any}}{1077}{chapter.31}
+\contentsline {section}{\texttt {(chkTree 'sym ['fun]) -> num}}{1077}{chapter.31}
+\contentsline {section}{\texttt {(chop 'any) -> lst}}{1078}{chapter.31}
+\contentsline {section}{\texttt {(circ 'any ..) -> lst}}{1078}{chapter.31}
+\contentsline {section}{\texttt {(circ? 'any) -> any}}{1078}{chapter.31}
+\contentsline {section}{\texttt {(class sym . typ) -> obj}}{1079}{chapter.31}
+\contentsline {section}{\texttt {(clause '(sym . any)) -> sym}}{1079}{chapter.31}
+\contentsline {section}{\texttt {clause/2}}{1080}{chapter.31}
+\contentsline {section}{\texttt {(clip 'lst) -> lst}}{1080}{chapter.31}
+\contentsline {section}{\texttt {(close 'cnt) -> cnt | NIL}}{1080}{chapter.31}
+\contentsline {section}{\texttt {(cmd ['any]) -> sym}}{1081}{chapter.31}
+\contentsline {section}{\texttt {(cnt 'fun 'lst ..) -> cnt}}{1081}{chapter.31}
+\contentsline {section}{\texttt {(collect 'var 'cls ['hook] ['any|beg ['end [var ..]]])}}{1081}{chapter.31}
+\contentsline {section}{\texttt {(commit ['any] [exe1] [exe2]) -> T}}{1082}{chapter.31}
+\contentsline {section}{\texttt {(con 'lst 'any) -> any}}{1082}{chapter.31}
+\contentsline {section}{\texttt {(conc 'lst ..) -> lst}}{1083}{chapter.31}
+\contentsline {section}{\texttt {(cond ('any1 . prg1) ('any2 . prg2) ..) -> any}}{1083}{chapter.31}
+\contentsline {section}{\texttt {(connect 'any1 'any2) -> cnt | NIL}}{1083}{chapter.31}
+\contentsline {section}{\texttt {(cons 'any ['any ..]) -> lst}}{1084}{chapter.31}
+\contentsline {section}{\texttt {(copy 'any) -> any}}{1084}{chapter.31}
+\contentsline {section}{\texttt {(co 'sym [. prg]) -> any}}{1084}{chapter.31}
+\contentsline {section}{\texttt {(count 'tree) -> num}}{1085}{chapter.31}
+\contentsline {section}{\texttt {(ctl 'sym . prg) -> any}}{1085}{chapter.31}
+\contentsline {section}{\texttt {(ctty 'sym|pid) -> flg}}{1086}{chapter.31}
+\contentsline {section}{\texttt {(curry lst . fun) -> fun}}{1086}{chapter.31}
+\contentsline {section}{\texttt {(cut 'cnt 'var) -> lst}}{1087}{chapter.31}
+\contentsline {chapter}{\numberline {32}Symbols starting with D}{1089}{chapter.32}
+\contentsline {section}{\texttt {*DB}}{1089}{chapter.32}
+\contentsline {section}{\texttt {*Dbg}}{1090}{chapter.32}
+\contentsline {section}{\texttt {*Dbs}}{1090}{chapter.32}
+\contentsline {section}{\texttt {+Date}}{1090}{chapter.32}
+\contentsline {section}{\texttt {+Dep}}{1091}{chapter.32}
+\contentsline {section}{\texttt {(d) -> T}}{1091}{chapter.32}
+\contentsline {section}{\texttt {(daemon 'sym . prg) -> fun}}{1091}{chapter.32}
+\contentsline {section}{\texttt {(dat\$ 'dat ['sym]) -> sym}}{1092}{chapter.32}
+\contentsline {section}{\texttt {(datStr 'dat ['flg]) -> sym}}{1092}{chapter.32}
+\contentsline {section}{\texttt {(datSym 'dat) -> sym}}{1093}{chapter.32}
+\contentsline {section}{\texttt {(date ['T]) -> dat}}{1093}{chapter.32}
+\contentsline {section}{\texttt {(day 'dat ['lst]) -> sym}}{1094}{chapter.32}
+\contentsline {section}{\texttt {(db 'var 'cls ['hook] 'any ['var 'any ..]) -> sym | NIL}}{1094}{chapter.32}
+\contentsline {section}{\texttt {db/3}}{1094}{chapter.32}
+\contentsline {section}{\texttt {(db: cls ..) -> num}}{1095}{chapter.32}
+\contentsline {section}{\texttt {(dbSync) -> flg}}{1096}{chapter.32}
+\contentsline {section}{\texttt {(dbck ['cnt] 'flg) -> any}}{1096}{chapter.32}
+\contentsline {section}{\texttt {(dbs . lst)}}{1096}{chapter.32}
+\contentsline {section}{\texttt {(dbs+ 'num . lst)}}{1097}{chapter.32}
+\contentsline {section}{\texttt {(de sym . any) -> sym}}{1097}{chapter.32}
+\contentsline {section}{\texttt {(debug 'sym) -> T}}{1098}{chapter.32}
+\contentsline {section}{\texttt {(dec 'num) -> num}}{1099}{chapter.32}
+\contentsline {section}{\texttt {(def 'sym 'any) -> sym}}{1100}{chapter.32}
+\contentsline {section}{\texttt {(default var 'any ..) -> any}}{1100}{chapter.32}
+\contentsline {section}{\texttt {(del 'any 'var) -> lst}}{1101}{chapter.32}
+\contentsline {section}{\texttt {(delete 'any 'lst) -> lst}}{1101}{chapter.32}
+\contentsline {section}{\texttt {delete/3}}{1102}{chapter.32}
+\contentsline {section}{\texttt {(delq 'any 'lst) -> lst}}{1102}{chapter.32}
+\contentsline {section}{\texttt {(dep 'cls) -> cls}}{1102}{chapter.32}
+\contentsline {section}{\texttt {(depth 'lst) -> (cnt1 . cnt2)}}{1103}{chapter.32}
+\contentsline {section}{\texttt {(diff 'lst 'lst) -> lst}}{1103}{chapter.32}
+\contentsline {section}{\texttt {different/2}}{1103}{chapter.32}
+\contentsline {section}{\texttt {(dir ['any] ['flg]) -> lst}}{1104}{chapter.32}
+\contentsline {section}{\texttt {(dirname 'any) -> sym}}{1104}{chapter.32}
+\contentsline {section}{\texttt {(dm sym . fun|cls2) -> sym}}{1104}{chapter.32}
+\contentsline {section}{\texttt {(do 'flg|num ['any | (NIL 'any . prg) | (T 'any . prg) ..]) -> any}}{1105}{chapter.32}
+\contentsline {section}{\texttt {(doc ['sym1] ['sym2])}}{1105}{chapter.32}
+\contentsline {chapter}{\numberline {33}Symbols starting with E}{1107}{chapter.33}
+\contentsline {section}{\texttt {*Err}}{1107}{chapter.33}
+\contentsline {section}{\texttt {*Ext}}{1107}{chapter.33}
+\contentsline {section}{\texttt {+Entity}}{1108}{chapter.33}
+\contentsline {section}{\texttt {(e . prg) -> any}}{1109}{chapter.33}
+\contentsline {section}{\texttt {(echo ['cnt ['cnt]] | ['sym ..]) -> sym}}{1110}{chapter.33}
+\contentsline {section}{\texttt {(edit 'sym ..) -> NIL}}{1110}{chapter.33}
+\contentsline {section}{\texttt {(env ['lst] | ['sym 'val] ..) -> lst}}{1111}{chapter.33}
+\contentsline {section}{\texttt {(eof ['flg]) -> flg}}{1112}{chapter.33}
+\contentsline {section}{\texttt {(eol) -> flg}}{1112}{chapter.33}
+\contentsline {section}{\texttt {equal/2}}{1112}{chapter.33}
+\contentsline {section}{\texttt {(err 'sym . prg) -> any}}{1113}{chapter.33}
+\contentsline {section}{\texttt {(errno) -> cnt}}{1113}{chapter.33}
+\contentsline {section}{\texttt {(eval 'any ['cnt ['lst]]) -> any}}{1113}{chapter.33}
+\contentsline {section}{\texttt {(expDat 'sym) -> dat}}{1114}{chapter.33}
+\contentsline {section}{\texttt {(expTel 'sym) -> sym}}{1115}{chapter.33}
+\contentsline {section}{\texttt {(expr 'sym) -> fun}}{1116}{chapter.33}
+\contentsline {section}{\texttt {(ext 'cnt . prg) -> any}}{1116}{chapter.33}
+\contentsline {section}{\texttt {(ext? 'any) -> sym | NIL}}{1116}{chapter.33}
+\contentsline {section}{\texttt {(extend cls) -> cls}}{1117}{chapter.33}
+\contentsline {section}{\texttt {(extern 'sym) -> sym | NIL}}{1117}{chapter.33}
+\contentsline {section}{\texttt {(extra ['any ..]) -> any}}{1117}{chapter.33}
+\contentsline {section}{\texttt {(extract 'fun 'lst ..) -> lst}}{1118}{chapter.33}
+\contentsline {chapter}{\numberline {34}Symbols starting with F}{1119}{chapter.34}
+\contentsline {section}{\texttt {*Fork}}{1119}{chapter.34}
+\contentsline {section}{\texttt {+Fold}}{1119}{chapter.34}
+\contentsline {section}{\texttt {(fail) -> lst}}{1119}{chapter.34}
+\contentsline {section}{\texttt {fail/0}}{1120}{chapter.34}
+\contentsline {section}{\texttt {(fetch 'tree 'any) -> any}}{1120}{chapter.34}
+\contentsline {section}{\texttt {(fifo 'var ['any ..]) -> any}}{1120}{chapter.34}
+\contentsline {section}{\texttt {(file) -> (sym1 sym2 . num) | NIL}}{1121}{chapter.34}
+\contentsline {section}{\texttt {(fill 'any ['sym|lst]) -> any}}{1121}{chapter.34}
+\contentsline {section}{\texttt {(filter 'fun 'lst ..) -> lst}}{1122}{chapter.34}
+\contentsline {section}{\texttt {(fin 'any) -> num|sym}}{1122}{chapter.34}
+\contentsline {section}{\texttt {(finally exe . prg) -> any}}{1123}{chapter.34}
+\contentsline {section}{\texttt {(find 'fun 'lst ..) -> any}}{1123}{chapter.34}
+\contentsline {section}{\texttt {(fish 'fun 'any) -> lst}}{1124}{chapter.34}
+\contentsline {section}{\texttt {(flg? 'any) -> flg}}{1124}{chapter.34}
+\contentsline {section}{\texttt {(flip 'lst ['cnt]) -> lst}}{1124}{chapter.34}
+\contentsline {section}{\texttt {(flush) -> flg}}{1125}{chapter.34}
+\contentsline {section}{\texttt {(fmt64 'num) -> sym}}{1125}{chapter.34}
+\contentsline {section}{\texttt {(fold 'any ['cnt]) -> sym}}{1126}{chapter.34}
+\contentsline {section}{\texttt {fold/3}}{1126}{chapter.34}
+\contentsline {section}{\texttt {(for sym 'num ['any | (NIL 'any . prg) | (T 'any . prg) ..]) -> any}}{1126}{chapter.34}
+\contentsline {section}{\texttt {(fork) -> pid | NIL}}{1127}{chapter.34}
+\contentsline {section}{\texttt {(forked)}}{1128}{chapter.34}
+\contentsline {section}{\texttt {(format 'num ['cnt ['sym1 ['sym2]]]) -> sym}}{1128}{chapter.34}
+\contentsline {section}{\texttt {(free 'cnt) -> (sym . lst)}}{1129}{chapter.34}
+\contentsline {section}{\texttt {(from 'any ..) -> sym}}{1130}{chapter.34}
+\contentsline {section}{\texttt {(full 'any) -> bool}}{1130}{chapter.34}
+\contentsline {section}{\texttt {(fun? 'any) -> any}}{1131}{chapter.34}
+\contentsline {chapter}{\numberline {35}Symbols starting with G}{1133}{chapter.35}
+\contentsline {section}{\texttt {(gc ['cnt]) -> cnt | NIL}}{1133}{chapter.35}
+\contentsline {section}{\texttt {(ge0 'any) -> num | NIL}}{1133}{chapter.35}
+\contentsline {section}{\texttt {(genKey 'var 'cls ['hook ['num1 ['num2]]]) -> num}}{1134}{chapter.35}
+\contentsline {section}{\texttt {(genStrKey 'sym 'var 'cls ['hook]) -> sym}}{1134}{chapter.35}
+\contentsline {section}{\texttt {(get 'sym1|lst ['sym2|cnt ..]) -> any}}{1134}{chapter.35}
+\contentsline {section}{\texttt {(getd 'any) -> fun | NIL}}{1135}{chapter.35}
+\contentsline {section}{\texttt {(getl 'sym1|lst1 ['sym2|cnt ..]) -> lst}}{1135}{chapter.35}
+\contentsline {section}{\texttt {(glue 'any 'lst) -> sym}}{1136}{chapter.35}
+\contentsline {section}{\texttt {(goal '([pat 'any ..] . lst) ['sym 'any ..]) -> lst}}{1136}{chapter.35}
+\contentsline {section}{\texttt {(group 'lst) -> lst}}{1137}{chapter.35}
+\contentsline {section}{\texttt {(gt0 'any) -> num | NIL}}{1137}{chapter.35}
+\contentsline {chapter}{\numberline {36}Symbols starting with H}{1139}{chapter.36}
+\contentsline {section}{\texttt {*Hup}}{1139}{chapter.36}
+\contentsline {section}{\texttt {+Hook}}{1139}{chapter.36}
+\contentsline {section}{\texttt {(hash 'any) -> cnt}}{1139}{chapter.36}
+\contentsline {section}{\texttt {(hax 'num) -> sym}}{1140}{chapter.36}
+\contentsline {section}{\texttt {(hd 'sym ['cnt]) -> NIL}}{1140}{chapter.36}
+\contentsline {section}{\texttt {(head 'cnt|lst 'lst) -> lst}}{1141}{chapter.36}
+\contentsline {section}{\texttt {head/3}}{1141}{chapter.36}
+\contentsline {section}{\texttt {(heap 'flg) -> cnt}}{1142}{chapter.36}
+\contentsline {section}{\texttt {(hear 'cnt) -> cnt}}{1142}{chapter.36}
+\contentsline {section}{\texttt {(here ['sym]) -> sym}}{1142}{chapter.36}
+\contentsline {section}{\texttt {(hex 'num ['num]) -> sym}}{1143}{chapter.36}
+\contentsline {section}{\texttt {(host 'any) -> sym}}{1144}{chapter.36}
+\contentsline {chapter}{\numberline {37}Symbols starting with I}{1145}{chapter.37}
+\contentsline {section}{\texttt {+Idx}}{1145}{chapter.37}
+\contentsline {section}{\texttt {+index}}{1145}{chapter.37}
+\contentsline {section}{\texttt {(id 'num ['num]) -> sym}}{1145}{chapter.37}
+\contentsline {section}{\texttt {(idx 'var 'any 'flg) -> lst (idx 'var 'any) -> lst (idx 'var) -> lst}}{1146}{chapter.37}
+\contentsline {section}{\texttt {(if 'any1 'any2 . prg) -> any}}{1147}{chapter.37}
+\contentsline {section}{\texttt {(if2 'any1 'any2 'any3 'any4 'any5 . prg) -> any}}{1148}{chapter.37}
+\contentsline {section}{\texttt {(ifn 'any1 'any2 . prg) -> any}}{1148}{chapter.37}
+\contentsline {section}{\texttt {(import lst) -> NIL}}{1148}{chapter.37}
+\contentsline {section}{\texttt {(in 'any . prg) -> any}}{1149}{chapter.37}
+\contentsline {section}{\texttt {(inc 'num) -> num (inc 'var ['num]) -> num}}{1149}{chapter.37}
+\contentsline {section}{\texttt {(inc! 'obj 'sym ['num]) -> num}}{1150}{chapter.37}
+\contentsline {section}{\texttt {(index 'any 'lst) -> cnt | NIL}}{1150}{chapter.37}
+\contentsline {section}{\texttt {(info 'any) -> (cnt|T dat . tim)}}{1151}{chapter.37}
+\contentsline {section}{\texttt {(init 'tree ['any1] ['any2]) -> lst}}{1151}{chapter.37}
+\contentsline {section}{\texttt {(insert 'cnt 'lst 'any) -> lst}}{1151}{chapter.37}
+\contentsline {section}{\texttt {(intern 'sym) -> sym}}{1152}{chapter.37}
+\contentsline {section}{\texttt {(ipid) -> pid | NIL}}{1152}{chapter.37}
+\contentsline {section}{\texttt {(isa 'cls|typ 'obj) -> obj | NIL}}{1152}{chapter.37}
+\contentsline {section}{\texttt {isa/2}}{1153}{chapter.37}
+\contentsline {section}{\texttt {(iter 'tree ['fun] ['any1] ['any2] ['flg])}}{1153}{chapter.37}
+\contentsline {chapter}{\numberline {38}Symbols starting with J}{1155}{chapter.38}
+\contentsline {section}{\texttt {+Joint}}{1155}{chapter.38}
+\contentsline {section}{\texttt {(job 'lst . prg) -> any}}{1155}{chapter.38}
+\contentsline {section}{\texttt {(journal 'any ..) -> T}}{1156}{chapter.38}
+\contentsline {chapter}{\numberline {39}Symbols starting with K}{1157}{chapter.39}
+\contentsline {section}{\texttt {+Key}}{1157}{chapter.39}
+\contentsline {section}{\texttt {(key ['cnt]) -> sym}}{1157}{chapter.39}
+\contentsline {section}{\texttt {(kill 'pid ['cnt]) -> flg}}{1158}{chapter.39}
+\contentsline {chapter}{\numberline {40}Symbols starting with L}{1159}{chapter.40}
+\contentsline {section}{\texttt {*Led}}{1159}{chapter.40}
+\contentsline {section}{\texttt {+Link}}{1159}{chapter.40}
+\contentsline {section}{\texttt {+List}}{1160}{chapter.40}
+\contentsline {section}{\texttt {(last 'lst) -> any}}{1160}{chapter.40}
+\contentsline {section}{\texttt {(later 'var . prg) -> var}}{1160}{chapter.40}
+\contentsline {section}{\texttt {(ld) -> any}}{1160}{chapter.40}
+\contentsline {section}{\texttt {(le0 'any) -> num | NIL}}{1161}{chapter.40}
+\contentsline {section}{\texttt {(leaf 'tree) -> any}}{1161}{chapter.40}
+\contentsline {section}{\texttt {(length 'any) -> cnt | T}}{1161}{chapter.40}
+\contentsline {section}{\texttt {(let sym 'any . prg) -> any}}{1162}{chapter.40}
+\contentsline {section}{\texttt {(let? sym 'any . prg) -> any}}{1162}{chapter.40}
+\contentsline {section}{\texttt {(lieu 'any) -> sym | NIL}}{1163}{chapter.40}
+\contentsline {section}{\texttt {(line 'flg ['cnt ..]) -> lst|sym}}{1163}{chapter.40}
+\contentsline {section}{\texttt {(lines 'any ..) -> cnt}}{1164}{chapter.40}
+\contentsline {section}{\texttt {(link 'any ..) -> any}}{1164}{chapter.40}
+\contentsline {section}{\texttt {(lint 'sym) -> lst}}{1165}{chapter.40}
+\contentsline {section}{\texttt {(lintAll ['sym ..]) -> lst}}{1165}{chapter.40}
+\contentsline {section}{\texttt {(lisp 'sym ['fun]) -> num}}{1165}{chapter.40}
+\contentsline {section}{\texttt {(list 'any ['any ..]) -> lst}}{1166}{chapter.40}
+\contentsline {section}{\texttt {lst/3}}{1166}{chapter.40}
+\contentsline {section}{\texttt {(lst? 'any) -> flg}}{1167}{chapter.40}
+\contentsline {section}{\texttt {(listen 'cnt1 ['cnt2]) -> cnt | NIL}}{1167}{chapter.40}
+\contentsline {section}{\texttt {(lit 'any) -> any}}{1167}{chapter.40}
+\contentsline {section}{\texttt {(load 'any ..) -> any}}{1168}{chapter.40}
+\contentsline {section}{\texttt {(loc 'sym 'lst) -> sym}}{1168}{chapter.40}
+\contentsline {section}{\texttt {(local lst) -> sym}}{1169}{chapter.40}
+\contentsline {section}{\texttt {(locale 'sym1 'sym2 ['sym ..])}}{1169}{chapter.40}
+\contentsline {section}{\texttt {(lock ['sym]) -> cnt | NIL}}{1169}{chapter.40}
+\contentsline {section}{\texttt {(loop ['any | (NIL 'any . prg) | (T 'any . prg) ..]) -> any}}{1170}{chapter.40}
+\contentsline {section}{\texttt {(low? 'any) -> sym | NIL}}{1170}{chapter.40}
+\contentsline {section}{\texttt {(lowc 'any) -> any}}{1171}{chapter.40}
+\contentsline {section}{\texttt {(lt0 'any) -> num | NIL}}{1171}{chapter.40}
+\contentsline {section}{\texttt {(lup 'lst 'any) -> lst}}{1171}{chapter.40}
+\contentsline {chapter}{\numberline {41}Symbols starting with M}{1173}{chapter.41}
+\contentsline {section}{\texttt {*Msg}}{1173}{chapter.41}
+\contentsline {section}{\texttt {+Mis}}{1173}{chapter.41}
+\contentsline {section}{\texttt {(macro prg) -> any}}{1174}{chapter.41}
+\contentsline {section}{\texttt {(made ['lst1 ['lst2]]) -> lst}}{1174}{chapter.41}
+\contentsline {section}{\texttt {(mail `any `cnt `sym1 `sym2|lst1 `sym3 `lst2 . prg)'}}{1175}{chapter.41}
+\contentsline {section}{\texttt {(make .. [(made 'lst ..)] .. [(link 'any ..)] ..) -> any}}{1175}{chapter.41}
+\contentsline {section}{\texttt {(map 'fun 'lst ..) -> lst}}{1175}{chapter.41}
+\contentsline {section}{\texttt {map/3}}{1176}{chapter.41}
+\contentsline {section}{\texttt {(mapc 'fun 'lst ..) -> any}}{1176}{chapter.41}
+\contentsline {section}{\texttt {(mapcan 'fun 'lst ..) -> lst}}{1177}{chapter.41}
+\contentsline {section}{\texttt {(mapcar 'fun 'lst ..) -> lst}}{1177}{chapter.41}
+\contentsline {section}{\texttt {(mapcon 'fun 'lst ..) -> lst}}{1177}{chapter.41}
+\contentsline {section}{\texttt {(maplist 'fun 'lst ..) -> lst}}{1178}{chapter.41}
+\contentsline {section}{\texttt {(maps 'fun 'sym ['lst ..]) -> any}}{1178}{chapter.41}
+\contentsline {section}{\texttt {(mark 'sym|0 ['NIL | 'T | '0]) -> flg}}{1178}{chapter.41}
+\contentsline {section}{\texttt {(match 'lst1 'lst2) -> flg}}{1179}{chapter.41}
+\contentsline {section}{\texttt {(max 'any ..) -> any}}{1179}{chapter.41}
+\contentsline {section}{\texttt {(maxKey 'tree ['any1 ['any2]]) -> any}}{1180}{chapter.41}
+\contentsline {section}{\texttt {(maxi 'fun 'lst ..) -> any}}{1180}{chapter.41}
+\contentsline {section}{\texttt {(member 'any 'lst) -> any}}{1180}{chapter.41}
+\contentsline {section}{\texttt {member/2}}{1181}{chapter.41}
+\contentsline {section}{\texttt {(memq 'any 'lst) -> any}}{1181}{chapter.41}
+\contentsline {section}{\texttt {(meta 'obj|typ 'sym ['sym2|cnt ..]) -> any}}{1181}{chapter.41}
+\contentsline {section}{\texttt {(meth 'obj ['any ..]) -> any}}{1182}{chapter.41}
+\contentsline {section}{\texttt {(method 'msg 'obj) -> fun}}{1182}{chapter.41}
+\contentsline {section}{\texttt {(min 'any ..) -> any}}{1182}{chapter.41}
+\contentsline {section}{\texttt {(minKey 'tree ['any1 ['any2]]) -> any}}{1183}{chapter.41}
+\contentsline {section}{\texttt {(mini 'fun 'lst ..) -> any}}{1183}{chapter.41}
+\contentsline {section}{\texttt {(mix 'lst cnt|'any ..) -> lst}}{1183}{chapter.41}
+\contentsline {section}{\texttt {(mmeq 'lst 'lst) -> any}}{1184}{chapter.41}
+\contentsline {section}{\texttt {(money 'num ['sym]) -> sym}}{1184}{chapter.41}
+\contentsline {section}{\texttt {(more 'lst ['fun]) -> flg}}{1184}{chapter.41}
+\contentsline {section}{\texttt {(msg 'any ['any ..]) -> any}}{1186}{chapter.41}
+\contentsline {chapter}{\numberline {42}Symbols starting with N}{1187}{chapter.42}
+\contentsline {section}{\texttt {+Need}}{1187}{chapter.42}
+\contentsline {section}{\texttt {+Number}}{1187}{chapter.42}
+\contentsline {section}{\texttt {(n== `any ..) -> flg}}{1187}{chapter.42}
+\contentsline {section}{\texttt {(n0 'any) -> flg}}{1188}{chapter.42}
+\contentsline {section}{\texttt {(nT 'any) -> flg}}{1188}{chapter.42}
+\contentsline {section}{\texttt {(name 'sym ['sym2]) -> sym}}{1188}{chapter.42}
+\contentsline {section}{\texttt {(nand 'any ..) -> flg}}{1189}{chapter.42}
+\contentsline {section}{\texttt {(native 'cnt1|sym1 'cnt2|sym2 'sym|lst 'any ..) -> any}}{1190}{chapter.42}
+\contentsline {section}{\texttt {(need 'cnt ['lst ['any]]) -> lst}}{1192}{chapter.42}
+\contentsline {section}{\texttt {(new ['flg|num] ['typ ['any ..]]) -> obj}}{1192}{chapter.42}
+\contentsline {section}{\texttt {(new! 'typ ['any ..]) -> obj}}{1193}{chapter.42}
+\contentsline {section}{\texttt {(next) -> any}}{1193}{chapter.42}
+\contentsline {section}{\texttt {(nil . prg) -> NIL}}{1193}{chapter.42}
+\contentsline {section}{\texttt {nil/1}}{1194}{chapter.42}
+\contentsline {section}{\texttt {(noLint 'sym)}}{1194}{chapter.42}
+\contentsline {section}{\texttt {(nond ('any1 . prg1) ('any2 . prg2) ..) -> any}}{1195}{chapter.42}
+\contentsline {section}{\texttt {(nor 'any ..) -> flg}}{1195}{chapter.42}
+\contentsline {section}{\texttt {(not 'any) -> flg}}{1195}{chapter.42}
+\contentsline {section}{\texttt {not/1}}{1196}{chapter.42}
+\contentsline {section}{\texttt {(nth 'lst 'cnt ..) -> lst}}{1196}{chapter.42}
+\contentsline {section}{\texttt {(num? 'any) -> num | NIL}}{1196}{chapter.42}
+\contentsline {chapter}{\numberline {43}Symbols starting with O}{1197}{chapter.43}
+\contentsline {section}{\texttt {*Once}}{1197}{chapter.43}
+\contentsline {section}{\texttt {*OS}}{1197}{chapter.43}
+\contentsline {section}{\texttt {(obj (typ var [hook] val ..) var2 val2 ..) -> obj}}{1197}{chapter.43}
+\contentsline {section}{\texttt {(object 'sym 'any ['sym2 'any2 ..]) -> obj}}{1198}{chapter.43}
+\contentsline {section}{\texttt {(oct 'num ['num]) -> sym}}{1198}{chapter.43}
+\contentsline {section}{\texttt {(off var ..) -> NIL}}{1199}{chapter.43}
+\contentsline {section}{\texttt {(offset 'lst1 'lst2) -> cnt | NIL}}{1199}{chapter.43}
+\contentsline {section}{\texttt {(on var ..) -> T}}{1199}{chapter.43}
+\contentsline {section}{\texttt {(once . prg) -> any}}{1200}{chapter.43}
+\contentsline {section}{\texttt {(one var ..) -> 1}}{1200}{chapter.43}
+\contentsline {section}{\texttt {(onOff var ..) -> flg}}{1200}{chapter.43}
+\contentsline {section}{\texttt {(open 'any ['flg]) -> cnt | NIL}}{1201}{chapter.43}
+\contentsline {section}{\texttt {(opid) -> pid | NIL}}{1201}{chapter.43}
+\contentsline {section}{\texttt {(opt) -> sym}}{1201}{chapter.43}
+\contentsline {section}{\texttt {(or 'any ..) -> any}}{1202}{chapter.43}
+\contentsline {section}{\texttt {or/2}}{1202}{chapter.43}
+\contentsline {section}{\texttt {(out 'any . prg) -> any}}{1202}{chapter.43}
+\contentsline {chapter}{\numberline {44}Symbols starting with P}{1203}{chapter.44}
+\contentsline {section}{\texttt {*PPid}}{1203}{chapter.44}
+\contentsline {section}{\texttt {*Pid}}{1203}{chapter.44}
+\contentsline {section}{\texttt {*Prompt}}{1204}{chapter.44}
+\contentsline {section}{\texttt {(pack 'any ..) -> sym}}{1204}{chapter.44}
+\contentsline {section}{\texttt {(pad 'cnt 'any) -> sym}}{1204}{chapter.44}
+\contentsline {section}{\texttt {(pair 'any) -> any}}{1205}{chapter.44}
+\contentsline {section}{\texttt {part/3}}{1205}{chapter.44}
+\contentsline {section}{\texttt {(pass 'fun ['any ..]) -> any}}{1205}{chapter.44}
+\contentsline {section}{\texttt {(pat? 'any) -> pat | NIL}}{1206}{chapter.44}
+\contentsline {section}{\texttt {(patch 'lst 'any . prg) -> any}}{1206}{chapter.44}
+\contentsline {section}{\texttt {(path 'any) -> sym}}{1207}{chapter.44}
+\contentsline {section}{\texttt {(peek) -> sym}}{1207}{chapter.44}
+\contentsline {section}{\texttt {permute/2}}{1208}{chapter.44}
+\contentsline {section}{\texttt {(pick 'fun 'lst ..) -> any}}{1208}{chapter.44}
+\contentsline {section}{\texttt {pico}}{1209}{chapter.44}
+\contentsline {section}{\texttt {(pil ['any ..]) -> sym}}{1209}{chapter.44}
+\contentsline {section}{\texttt {(pilog 'lst . prg) -> any}}{1209}{chapter.44}
+\contentsline {section}{\texttt {(pipe exe) -> cnt}}{1210}{chapter.44}
+\contentsline {section}{\texttt {(place 'cnt 'lst 'any) -> lst}}{1210}{chapter.44}
+\contentsline {section}{\texttt {(poll 'cnt) -> cnt | NIL}}{1210}{chapter.44}
+\contentsline {section}{\texttt {(pool ['sym1 ['lst] ['sym2] ['sym3]]) -> T}}{1211}{chapter.44}
+\contentsline {section}{\texttt {(pop 'var) -> any}}{1211}{chapter.44}
+\contentsline {section}{\texttt {(port ['T] 'cnt|(cnt . cnt) ['var]) -> cnt}}{1212}{chapter.44}
+\contentsline {section}{\texttt {(pp 'sym) -> sym}}{1212}{chapter.44}
+\contentsline {section}{\texttt {(pr 'any ..) -> any}}{1214}{chapter.44}
+\contentsline {section}{\texttt {(prEval 'prg ['cnt]) -> any}}{1214}{chapter.44}
+\contentsline {section}{\texttt {(pre? 'any1 'any2) -> any2 | NIL}}{1214}{chapter.44}
+\contentsline {section}{\texttt {(pretty 'any 'cnt)}}{1215}{chapter.44}
+\contentsline {section}{\texttt {(prin 'any ..) -> any}}{1215}{chapter.44}
+\contentsline {section}{\texttt {(prinl 'any ..) -> any}}{1216}{chapter.44}
+\contentsline {section}{\texttt {(print 'any ..) -> any}}{1216}{chapter.44}
+\contentsline {section}{\texttt {(println 'any ..) -> any}}{1216}{chapter.44}
+\contentsline {section}{\texttt {(printsp 'any ..) -> any}}{1217}{chapter.44}
+\contentsline {section}{\texttt {(prior 'lst1 'lst2) -> lst | NIL}}{1217}{chapter.44}
+\contentsline {section}{\texttt {(proc 'sym ..) -> T}}{1217}{chapter.44}
+\contentsline {section}{\texttt {(prog . prg) -> any}}{1218}{chapter.44}
+\contentsline {section}{\texttt {(prog1 'any1 . prg) -> any1}}{1218}{chapter.44}
+\contentsline {section}{\texttt {(prog2 'any1 'any2 . prg) -> any2}}{1218}{chapter.44}
+\contentsline {section}{\texttt {(prop 'sym1|lst ['sym2|cnt ..] 'sym) -> var}}{1218}{chapter.44}
+\contentsline {section}{\texttt {(protect . prg) -> any}}{1219}{chapter.44}
+\contentsline {chapter}{\numberline {45}Symbols starting with Q}{1221}{chapter.45}
+\contentsline {section}{\texttt {(qsym . sym) -> lst}}{1221}{chapter.45}
+\contentsline {section}{\texttt {(quote . any) -> any}}{1221}{chapter.45}
+\contentsline {section}{\texttt {(query 'lst ['lst]) -> flg}}{1222}{chapter.45}
+\contentsline {section}{\texttt {(queue 'var 'any) -> any}}{1222}{chapter.45}
+\contentsline {section}{\texttt {(quit ['any ['any]])}}{1223}{chapter.45}
+\contentsline {chapter}{\numberline {46}Symbols starting with R}{1225}{chapter.46}
+\contentsline {section}{\texttt {*Run}}{1225}{chapter.46}
+\contentsline {section}{\texttt {+Ref}}{1225}{chapter.46}
+\contentsline {section}{\texttt {+Ref2}}{1226}{chapter.46}
+\contentsline {section}{\texttt {+relation}}{1226}{chapter.46}
+\contentsline {section}{\texttt {(rand ['cnt1 'cnt2] | ['T]) -> cnt | flg}}{1226}{chapter.46}
+\contentsline {section}{\texttt {(range 'num1 'num2 ['num3]) -> lst}}{1227}{chapter.46}
+\contentsline {section}{\texttt {range/3}}{1227}{chapter.46}
+\contentsline {section}{\texttt {(rank 'any 'lst ['flg]) -> lst}}{1228}{chapter.46}
+\contentsline {section}{\texttt {(raw ['flg]) -> flg}}{1228}{chapter.46}
+\contentsline {section}{\texttt {(rc 'sym 'any1 ['any2]) -> any}}{1228}{chapter.46}
+\contentsline {section}{\texttt {(rd ['sym]) -> any}}{1229}{chapter.46}
+\contentsline {section}{\texttt {(read ['sym1 ['sym2]]) -> any}}{1230}{chapter.46}
+\contentsline {section}{\texttt {(recur fun) -> any}}{1230}{chapter.46}
+\contentsline {section}{\texttt {(redef sym . fun) -> sym}}{1231}{chapter.46}
+\contentsline {section}{\texttt {(rel var lst [any ..]) -> any}}{1233}{chapter.46}
+\contentsline {section}{\texttt {(release 'sym) -> NIL}}{1233}{chapter.46}
+\contentsline {section}{\texttt {remote/2}}{1233}{chapter.46}
+\contentsline {section}{\texttt {(remove 'cnt 'lst) -> lst}}{1235}{chapter.46}
+\contentsline {section}{\texttt {(repeat) -> lst}}{1235}{chapter.46}
+\contentsline {section}{\texttt {repeat/0}}{1235}{chapter.46}
+\contentsline {section}{\texttt {(replace 'lst 'any1 'any2 ..) -> lst}}{1236}{chapter.46}
+\contentsline {section}{\texttt {(request 'typ 'var ['hook] 'val ..) -> obj}}{1236}{chapter.46}
+\contentsline {section}{\texttt {(rest) -> lst}}{1237}{chapter.46}
+\contentsline {section}{\texttt {(retract) -> lst}}{1237}{chapter.46}
+\contentsline {section}{\texttt {retract/1}}{1237}{chapter.46}
+\contentsline {section}{\texttt {(reverse 'lst) -> lst}}{1238}{chapter.46}
+\contentsline {section}{\texttt {(rewind) -> flg}}{1238}{chapter.46}
+\contentsline {section}{\texttt {(rollback) -> T}}{1239}{chapter.46}
+\contentsline {section}{\texttt {(root 'tree) -> (num . sym)}}{1239}{chapter.46}
+\contentsline {section}{\texttt {(rot 'lst ['cnt]) -> lst}}{1239}{chapter.46}
+\contentsline {section}{\texttt {(round 'num1 'num2) -> sym}}{1239}{chapter.46}
+\contentsline {section}{\texttt {(rules 'sym ..) -> sym}}{1240}{chapter.46}
+\contentsline {section}{\texttt {(run 'any ['cnt ['lst]]) -> any}}{1240}{chapter.46}
+\contentsline {chapter}{\numberline {47}Symbols starting with S}{1241}{chapter.47}
+\contentsline {section}{\texttt {*Scl}}{1241}{chapter.47}
+\contentsline {section}{\texttt {*Sig1}}{1241}{chapter.47}
+\contentsline {section}{\texttt {*Solo}}{1242}{chapter.47}
+\contentsline {section}{\texttt {+Sn}}{1242}{chapter.47}
+\contentsline {section}{\texttt {+String}}{1243}{chapter.47}
+\contentsline {section}{\texttt {+Symbol}}{1243}{chapter.47}
+\contentsline {section}{\texttt {same/3}}{1243}{chapter.47}
+\contentsline {section}{\texttt {(scan 'tree ['fun] ['any1] ['any2] ['flg])}}{1244}{chapter.47}
+\contentsline {section}{\texttt {(scl 'num) -> num}}{1244}{chapter.47}
+\contentsline {section}{\texttt {(script 'any ..) -> any}}{1245}{chapter.47}
+\contentsline {section}{\texttt {(sect 'lst 'lst) -> lst}}{1245}{chapter.47}
+\contentsline {section}{\texttt {(seed 'any) -> cnt}}{1246}{chapter.47}
+\contentsline {section}{\texttt {(seek 'fun 'lst ..) -> lst}}{1246}{chapter.47}
+\contentsline {section}{\texttt {(select [var ..] cls [hook|T] [var val ..]) -> obj | NIL}}{1246}{chapter.47}
+\contentsline {section}{\texttt {select/3}}{1247}{chapter.47}
+\contentsline {section}{\texttt {(send 'msg 'obj ['any ..]) -> any}}{1248}{chapter.47}
+\contentsline {section}{\texttt {(seq 'cnt|sym1) -> sym | NIL}}{1248}{chapter.47}
+\contentsline {section}{\texttt {(set 'var 'any ..) -> any}}{1249}{chapter.47}
+\contentsline {section}{\texttt {(set! 'obj 'any) -> any}}{1249}{chapter.47}
+\contentsline {section}{\texttt {(setq var 'any ..) -> any}}{1249}{chapter.47}
+\contentsline {section}{\texttt {(show 'any ['sym|cnt ..]) -> any}}{1249}{chapter.47}
+\contentsline {section}{\texttt {show/1}}{1250}{chapter.47}
+\contentsline {section}{\texttt {(sigio ['cnt [. prg]]) -> cnt | prg}}{1250}{chapter.47}
+\contentsline {section}{\texttt {(size 'any) -> cnt}}{1251}{chapter.47}
+\contentsline {section}{\texttt {(skip ['any]) -> sym}}{1252}{chapter.47}
+\contentsline {section}{\texttt {(solve 'lst [. prg]) -> lst}}{1252}{chapter.47}
+\contentsline {section}{\texttt {(sort 'lst ['fun]) -> lst}}{1252}{chapter.47}
+\contentsline {section}{\texttt {(space ['cnt]) -> cnt}}{1253}{chapter.47}
+\contentsline {section}{\texttt {(sp? 'any) -> flg}}{1253}{chapter.47}
+\contentsline {section}{\texttt {(split 'lst 'any ..) -> lst}}{1253}{chapter.47}
+\contentsline {section}{\texttt {(sqrt 'num ['flg]) -> num}}{1254}{chapter.47}
+\contentsline {section}{\texttt {(stack ['cnt]) -> cnt | (.. sym . cnt)}}{1254}{chapter.47}
+\contentsline {section}{\texttt {(stamp ['dat 'tim]|['T]) -> sym}}{1255}{chapter.47}
+\contentsline {section}{\texttt {(state 'var (sym|lst exe [. prg]) ..) -> any}}{1255}{chapter.47}
+\contentsline {section}{\texttt {(stem 'lst 'any ..) -> lst}}{1256}{chapter.47}
+\contentsline {section}{\texttt {(step 'lst ['flg]) -> any}}{1257}{chapter.47}
+\contentsline {section}{\texttt {(store 'tree 'any1 'any2 ['(num1 . num2)])}}{1257}{chapter.47}
+\contentsline {section}{\texttt {(str 'sym ['sym1]) -> lst}}{1257}{chapter.47}
+\contentsline {section}{\texttt {(strDat 'sym) -> dat}}{1258}{chapter.47}
+\contentsline {section}{\texttt {(strip 'any) -> any}}{1258}{chapter.47}
+\contentsline {section}{\texttt {(str? 'any) -> sym | NIL}}{1259}{chapter.47}
+\contentsline {section}{\texttt {(sub? 'any1 'any2) -> any2 | NIL}}{1259}{chapter.47}
+\contentsline {section}{\texttt {(subr 'sym) -> num}}{1259}{chapter.47}
+\contentsline {section}{\texttt {(sum 'fun 'lst ..) -> num}}{1260}{chapter.47}
+\contentsline {section}{\texttt {(super ['any ..]) -> any}}{1260}{chapter.47}
+\contentsline {section}{\texttt {(sym 'any) -> sym}}{1261}{chapter.47}
+\contentsline {section}{\texttt {(sym? 'any) -> flg}}{1261}{chapter.47}
+\contentsline {section}{\texttt {(symbols) -> sym}}{1261}{chapter.47}
+\contentsline {section}{\texttt {(sync) -> flg}}{1262}{chapter.47}
+\contentsline {section}{\texttt {(sys 'any ['any]) -> sym}}{1263}{chapter.47}
+\contentsline {chapter}{\numberline {48}Symbols starting with T}{1265}{chapter.48}
+\contentsline {section}{\texttt {*Tmp}}{1265}{chapter.48}
+\contentsline {section}{\texttt {*Tsm}}{1265}{chapter.48}
+\contentsline {section}{\texttt {+Time}}{1266}{chapter.48}
+\contentsline {section}{\texttt {T}}{1266}{chapter.48}
+\contentsline {section}{\texttt {This}}{1266}{chapter.48}
+\contentsline {section}{\texttt {(t . prg) -> T}}{1267}{chapter.48}
+\contentsline {section}{\texttt {(tab 'lst 'any ..) -> NIL}}{1267}{chapter.48}
+\contentsline {section}{\texttt {(tail 'cnt|lst 'lst) -> lst}}{1268}{chapter.48}
+\contentsline {section}{\texttt {(task 'num ['num] [sym 'any ..] [. prg]) -> lst}}{1268}{chapter.48}
+\contentsline {section}{\texttt {(telStr 'sym) -> sym}}{1269}{chapter.48}
+\contentsline {section}{\texttt {(tell ['cnt] 'sym ['any ..]) -> any}}{1269}{chapter.48}
+\contentsline {section}{\texttt {(test 'any . prg)}}{1270}{chapter.48}
+\contentsline {section}{\texttt {(text 'any1 'any ..) -> sym}}{1270}{chapter.48}
+\contentsline {section}{\texttt {(tim\$ 'tim ['flg]) -> sym}}{1271}{chapter.48}
+\contentsline {section}{\texttt {(timeout ['num])}}{1271}{chapter.48}
+\contentsline {section}{\texttt {(throw 'sym 'any)}}{1271}{chapter.48}
+\contentsline {section}{\texttt {(tick (cnt1 . cnt2) . prg) -> any}}{1272}{chapter.48}
+\contentsline {section}{\texttt {(till 'any ['flg]) -> lst|sym}}{1272}{chapter.48}
+\contentsline {section}{\texttt {(time ['T]) -> tim}}{1273}{chapter.48}
+\contentsline {section}{\texttt {(tmp ['any ..]) -> sym}}{1273}{chapter.48}
+\contentsline {section}{\texttt {tolr/3}}{1274}{chapter.48}
+\contentsline {section}{\texttt {(touch 'sym) -> sym}}{1274}{chapter.48}
+\contentsline {section}{\texttt {(trace 'sym) -> sym}}{1275}{chapter.48}
+\contentsline {section}{\texttt {(traceAll ['lst]) -> sym}}{1275}{chapter.48}
+\contentsline {section}{\texttt {(tree 'var 'cls ['hook]) -> tree}}{1276}{chapter.48}
+\contentsline {section}{\texttt {(trim 'lst) -> lst}}{1276}{chapter.48}
+\contentsline {section}{\texttt {true/0}}{1276}{chapter.48}
+\contentsline {section}{\texttt {(try 'msg 'obj ['any ..]) -> any}}{1276}{chapter.48}
+\contentsline {section}{\texttt {(type 'any) -> lst}}{1277}{chapter.48}
+\contentsline {chapter}{\numberline {49}Symbols starting with U}{1279}{chapter.49}
+\contentsline {section}{\texttt {*Uni}}{1279}{chapter.49}
+\contentsline {section}{\texttt {+UB}}{1279}{chapter.49}
+\contentsline {section}{\texttt {(u) -> T}}{1281}{chapter.49}
+\contentsline {section}{\texttt {(udp 'any1 'any2 'any3) -> any}}{1281}{chapter.49}
+\contentsline {section}{\texttt {(ultimo 'y 'm) -> cnt}}{1281}{chapter.49}
+\contentsline {section}{\texttt {(unbug 'sym) -> T}}{1282}{chapter.49}
+\contentsline {section}{\texttt {(undef 'sym) -> fun}}{1282}{chapter.49}
+\contentsline {section}{\texttt {(unify 'any) -> lst}}{1283}{chapter.49}
+\contentsline {section}{\texttt {(uniq 'lst) -> lst}}{1283}{chapter.49}
+\contentsline {section}{\texttt {uniq/2}}{1283}{chapter.49}
+\contentsline {section}{\texttt {(unless 'any . prg) -> any}}{1284}{chapter.49}
+\contentsline {section}{\texttt {(until 'any . prg) -> any}}{1284}{chapter.49}
+\contentsline {section}{\texttt {(untrace 'sym) -> sym}}{1285}{chapter.49}
+\contentsline {section}{\texttt {(up [cnt] sym ['val]) -> any}}{1285}{chapter.49}
+\contentsline {section}{\texttt {(upd sym ..) -> lst}}{1285}{chapter.49}
+\contentsline {section}{\texttt {(update 'obj ['var]) -> obj}}{1286}{chapter.49}
+\contentsline {section}{\texttt {(upp? 'any) -> sym | NIL}}{1286}{chapter.49}
+\contentsline {section}{\texttt {(uppc 'any) -> any}}{1287}{chapter.49}
+\contentsline {section}{\texttt {(use sym . prg) -> any}}{1287}{chapter.49}
+\contentsline {section}{\texttt {(useKey 'var 'cls ['hook]) -> num}}{1287}{chapter.49}
+\contentsline {section}{\texttt {(usec) -> num}}{1288}{chapter.49}
+\contentsline {chapter}{\numberline {50}Symbols starting with V}{1289}{chapter.50}
+\contentsline {section}{\texttt {(val 'var) -> any}}{1289}{chapter.50}
+\contentsline {section}{\texttt {val/3}}{1289}{chapter.50}
+\contentsline {section}{\texttt {(var sym . any) -> any}}{1290}{chapter.50}
+\contentsline {section}{\texttt {(var: sym) -> any}}{1290}{chapter.50}
+\contentsline {section}{\texttt {(version ['flg]) -> lst}}{1291}{chapter.50}
+\contentsline {section}{\texttt {(vi 'sym) -> sym}}{1291}{chapter.50}
+\contentsline {section}{\texttt {(view 'lst ['T]) -> any}}{1291}{chapter.50}
+\contentsline {chapter}{\numberline {51}Symbols starting with W}{1293}{chapter.51}
+\contentsline {section}{\texttt {(wait ['cnt] . prg) -> any}}{1293}{chapter.51}
+\contentsline {section}{\texttt {(week 'dat) -> num}}{1294}{chapter.51}
+\contentsline {section}{\texttt {(when 'any . prg) -> any}}{1294}{chapter.51}
+\contentsline {section}{\texttt {(while 'any . prg) -> any}}{1294}{chapter.51}
+\contentsline {section}{\texttt {(what 'sym) -> lst}}{1295}{chapter.51}
+\contentsline {section}{\texttt {(who 'any) -> lst}}{1295}{chapter.51}
+\contentsline {section}{\texttt {(wipe 'sym|lst) -> sym|lst}}{1295}{chapter.51}
+\contentsline {section}{\texttt {(with 'sym . prg) -> any}}{1296}{chapter.51}
+\contentsline {section}{\texttt {(wr 'cnt ..) -> cnt}}{1296}{chapter.51}
+\contentsline {section}{\texttt {(wrap 'cnt 'lst) -> sym}}{1297}{chapter.51}
+\contentsline {chapter}{\numberline {52}Symbols starting with X}{1299}{chapter.52}
+\contentsline {section}{\texttt {(xchg 'var 'var ..) -> any}}{1299}{chapter.52}
+\contentsline {section}{\texttt {(xor 'any 'any) -> flg}}{1299}{chapter.52}
+\contentsline {section}{\texttt {(x| 'num ..) -> num}}{1300}{chapter.52}
+\contentsline {chapter}{\numberline {53}Symbols starting with Y}{1301}{chapter.53}
+\contentsline {section}{\texttt {(yield 'any ['sym]) -> any}}{1301}{chapter.53}
+\contentsline {section}{\texttt {(yoke 'any ..) -> any}}{1301}{chapter.53}
+\contentsline {chapter}{\numberline {54}Symbols starting with Z}{1303}{chapter.54}
+\contentsline {section}{\texttt {*Zap}}{1303}{chapter.54}
+\contentsline {section}{\texttt {(zap 'sym) -> sym}}{1303}{chapter.54}
+\contentsline {section}{\texttt {(zapTree 'sym)}}{1304}{chapter.54}
+\contentsline {section}{\texttt {(zap\_)}}{1304}{chapter.54}
+\contentsline {section}{\texttt {(zero var ..) -> 0} }{1305}{chapter.54}
+\contentsline {chapter}{\numberline {A}GNU Free Documentation License}{1307}{appendix.A}
+\contentsline {section}{0. PREAMBLE}{1307}{appendix.A}
+\contentsline {section}{1. APPLICABILITY AND DEFINITIONS}{1308}{appendix.A}
+\contentsline {section}{2. VERBATIM COPYING}{1310}{appendix.A}
+\contentsline {section}{3. COPYING IN QUANTITY}{1310}{appendix.A}
+\contentsline {section}{4. MODIFICATIONS}{1311}{appendix.A}
+\contentsline {section}{5. COMBINING DOCUMENTS}{1313}{appendix.A}
+\contentsline {section}{6. COLLECTIONS OF DOCUMENTS}{1313}{appendix.A}
+\contentsline {section}{7. AGGREGATION WITH INDEPENDENT WORKS}{1314}{appendix.A}
+\contentsline {section}{8. TRANSLATION}{1314}{appendix.A}
+\contentsline {section}{9. TERMINATION}{1315}{appendix.A}
+\contentsline {section}{10. FUTURE REVISIONS OF THIS LICENSE}{1315}{appendix.A}
+\contentsfinish 

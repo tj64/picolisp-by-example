@@ -1,0 +1,341 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+\chapter{Rosetta Code Tasks starting with J}
+
+\section*{JSON}
+
+Load a \href{http://en.wikipedia.org/wiki/JSON}{JSON} string into a data
+structure. Also create a new data structure and serialize it into JSON.
+Use objects and arrays (as appropriate for your language) and make sure
+your JSON is valid
+(\href{http://www.jsonlint.com/}{http://www.jsonlint.com/}). However,
+beware that this web application accepts extra commas, so {[}1,2,3,{]}
+validates as correct, which is at odds with the grammar given at
+json.org \href{http://www.json.org/fatfree.html}{{[}1{]}}.
+
+\begin{wideverbatim}
+
+PicoLisp has no JSON library, but it is easy enough to write one. The following
+supports only fixpoint numbers (no floating point, as it doesn't exist in
+PicoLisp), no arrays (uses lists instead), and no unicode escapes (UTF-8 can be
+used directly):
+
+(de checkJson (X Item)
+   (unless (= X Item)
+      (quit "Bad JSON" Item) ) )
+
+(de readJson ()
+   (case (read "_")
+      ("{"
+         (make
+            (for (X (readJson) (not (= "}" X)) (readJson))
+               (checkJson ":" (readJson))
+               (link (cons X (readJson)))
+               (T (= "}" (setq X (readJson))))
+               (checkJson "," X) ) ) )
+      ("["
+         (make
+            (link T)  # Array marker
+            (for (X (readJson) (not (= "]" X)) (readJson))
+               (link X)
+               (T (= "]" (setq X (readJson))))
+               (checkJson "," X) ) ) )
+      (T
+         (let X @
+            (if (and (= "-" X) (format (peek)))
+               (- (read))
+               X ) ) ) ) )
+
+(de printJson (Item)  # For simplicity, without indentation
+   (cond
+      ((atom Item) (if Item (print @) (prin "{}")))
+      ((=T (car Item))
+         (prin "[")
+         (map
+            '((X)
+               (printJson (car X))
+               (and (cdr X) (prin ", ")) )
+            (cdr Item) )
+         (prin "]") )
+      (T
+         (prin "{")
+         (map
+            '((X)
+               (print (caar X))
+               (prin ": ")
+               (printJson (cdar X))
+               (and (cdr X) (prin ", ")) )
+            Item )
+         (prin "}") ) ) )
+
+\end{wideverbatim}
+
+\begin{wideverbatim}
+
+This reads/prints JSON from/to files, pipes, sockets etc. To read from a string,
+a pipe can be used:
+
+: (pipe (prinl "{ \"foo\": 1, \"bar\": [10, \"apples\"] }")
+   (readJson) )
+-> (("foo" . 1) ("bar" T 10 "apples"))
+
+: (printJson
+   (quote
+      ("name" . "Smith")
+      ("age" . 25)
+      ("address"
+         ("street" . "21 2nd Street")
+         ("city" . "New York")
+         ("state" . "NY")
+         ("zip" . "10021") )
+      ("phone" T "212 555-1234" "646 555-4567") ) )
+{"name": "Smith", "age": 25, ... {"street": ... "phone": ["212 555-1234", ...
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Jensen's Device}
+
+This task is an exercise in
+\href{http://en.wikipedia.org/wiki/Call-by-name\#Call\_by\_name}{call
+  by name}.
+
+\textbf{Jensen's Device} is a computer programming technique devised
+by Danish computer scientist
+\href{http://en.wikipedia.org/wiki/J\%C3\%B8rn\_Jensen}{Jørn Jensen}
+after studying the \emph{ALGOL 60} Report.
+
+The following program was proposed to illustrate the technique. It
+computes the 100th
+\href{http://en.wikipedia.org/wiki/Harmonic\_number}{harmonic number}:
+
+\begin{wideverbatim}
+begin
+   integer i;
+   real procedure sum (i, lo, hi, term);
+      value lo, hi;
+      integer i, lo, hi;
+      real term;
+      comment term is passed by-name, and so is i;
+   begin
+      real temp;
+      temp := 0;
+      for i := lo step 1 until hi do
+         temp := temp + term;
+      sum := temp
+   end;
+   comment note the correspondence between 
+           the mathematical notation and the call to sum;
+   print (sum (i, 1, 100, 1/i))
+end
+\end{wideverbatim}
+
+The above exploits
+\href{http://en.wikipedia.org/wiki/Call-by-name\#Call\_by\_name}{call
+  by name} to produce the correct answer (5.187\ldots{}). It depends
+on the assumption that an expression passed as an actual parameter to
+a procedure would be re-evaluated every time the corresponding formal
+parameter's value was required. If the last parameter to \emph{sum}
+had been passed by value, and assuming the initial value of \emph{i}
+were 1, the result would have been 100 × 1/1 = 100.
+
+Moreover, the \emph{first} parameter to \emph{sum}, representing the
+``bound'' variable of the summation, must also be passed by name,
+otherwise it would not be possible to compute the values to be added.
+(On the other hand, the global variable does not have to use the same
+identifier, in this case \emph{i}, as the formal parameter.)
+
+\href{http://en.wikipedia.org/wiki/Donald\_Knuth}{Donald Knuth} later
+proposed the \emph{Man or Boy Test} as a more
+rigorous exercise.
+
+
+\begin{wideverbatim}
+
+(scl 6)
+
+(de jensen (I Lo Hi Term)
+   (let Temp 0
+      (set I Lo)
+      (while (>= Hi (val I))
+         (inc 'Temp (Term))
+         (inc I) )
+      Temp ) )
+
+(let I (box)  # Create indirect reference
+   (format
+      (jensen I 1 100 '(() (*/ 1.0 (val I))))
+      *Scl ) )
+
+Output:
+
+-> "5.187383"
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Joystick position}
+
+The task is to determine the joystick position and represent this on
+the display via a crosshair. For a centred joystick, the crosshair
+should appear in the centre of the screen. If the joystick is pushed
+left or right, then the cross hair should move left or right according
+to the extent that the joystick is pushed. If the joystick is pushed
+forward or pulled back, then the crosshair should move up or down
+according to the extent that that joystick is pushed or pulled. The
+edges of the display represent maximum extents for joystick movement.
+For example, a joystick pushed fully forward would raise the crosshair
+to the top centre of the screen. A joystick pulled backwards and to
+the right would move the crosshair to the bottom right of the screen
+(except for a small area reserved to show joystick status).
+Implementations can use a graphical display method to produce the
+crosshair, or alternatively represent the crosshair using a plus
+symbol on a terminal, and move the plus symbol position according to
+the joystick. The bottom part of the display can hide or show an
+alphanumeric sequence to represent the buttons pressed. For example,
+if pushbuttons 1,4 and 10 are depressed, we could display ``1 4 A''.
+The implemented code should continue to redraw the crosshair according
+to the joystick position and show the current pushbutton statuses
+until the task is terminated. Digital joysticks that produce no extent
+data, should have their position indicated as full extent movement of
+the crosshair.
+
+For the purpose of this task, we assume that the joystick is calibrated
+and that the first joystick is being used. The task implementer could at
+their option provide a solution that includes a joystick selection
+facility, enabling the user to choose which joystick is to be used for
+this task.
+
+
+\begin{wideverbatim}
+
+This is for the 64-bit version.
+
+Note: The code is not yet tested with a real joystick (I don't have one), it was
+just simulated with dummy functions. Can somebody having a joystick please test
+it, and remove this message?
+
+(load "@lib/openGl.l")
+
+(setq *JoyX 0.0  *JoyY 0.0)
+
+(glutInit)
+(glutInitDisplayMode (| GLUT_RGBA GLUT_DOUBLE GLUT_ALPHA GLUT_DEPTH))
+(glutInitWindowSize 400 400)
+(glutCreateWindow "Joystick")
+
+(glClearColor 0.3 0.3 0.5 0)
+
+(displayPrg
+   (glClear GL_COLOR_BUFFER_BIT)
+   (glBegin GL_LINES)
+   (glVertex2f *JoyX (- *JoyY 0.1))  # Draw crosshair
+   (glVertex2f *JoyX (+ *JoyY 0.1))
+   (glVertex2f (- *JoyX 0.1) *JoyY)
+   (glVertex2f (+ *JoyX 0.1) *JoyY)
+   (glEnd)
+   (glFlush)
+   (glutSwapBuffers) )
+
+# Track joystick position
+(native `*GlutLib "glutJoystickFunc" NIL
+   (lisp 'joystickFunc
+      '((Btn X Y Z)
+         (msg                          # Display buttons
+            (make
+               (for (B 1 (n0 Btn) (inc B))
+                  (and (bit? 1 Btn) (link B))
+                  (setq Btn (>> 1 Btn)) ) ) )
+         (setq                         # Move crosshair
+            *JoyX (*/ X 1.0 1000)
+            *JoyY (*/ Y 1.0 1000) )
+         (glutPostRedisplay) ) )
+   100 )
+
+# Exit upon mouse click
+(mouseFunc '((Btn State X Y) (bye)))
+(glutMainLoop)
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Jump anywhere}
+
+\emph{Imperative programs} like to jump around, but some languages
+restrict these jumps. Many structured languages restrict their
+\emph{conditional structures} and \emph{loops} to \emph{local jumps}
+within a function. Some assembly languages limit certain jumps or
+branches to a small range.
+
+This task is demonstrate a local jump and a global jump and the
+various other types of jumps that the language supports. For the
+purpose of this task, the jumps need not be used for a single purpose
+and you have the freedom to use these jumps for different purposes.
+You may also defer to more specific tasks, like \emph{Exceptions} or
+\emph{Generator}. This task provides a ``grab bag'' for several types
+of jumps. There are \emph{non-local jumps} across function calls, or
+\emph{long jumps} to anywhere within a program. Anywhere means not
+only to the tops of functions!
+
+\begin{itemize}
+\item
+  Some languages can \emph{go to} any global label in a program.
+\item
+  Some languages can break multiple function calls, also known as
+  \emph{unwinding the call stack}.
+\item
+  Some languages can save a \emph{continuation}. The program can later
+  continue from the same place. So you can jump anywhere, but only if
+  you have a previous visit there (to save the continuation).
+\end{itemize}
+
+These jumps are not all alike. A simple \emph{goto} never touches the
+call stack. A continuation saves the call stack, so you can continue a
+function call after it ends.
+
+Use your language to demonstrate the various types of jumps that it
+supports. Because the possibilities vary by language, this task is not
+specific. You have the freedom to use these jumps for different
+purposes. You may also defer to more specific tasks, like
+\emph{Exceptions} or \emph{Generator}.
+
+\begin{wideverbatim}
+
+PicoLisp supports non-local jumps to a previously setup environment (see
+[[Exceptions#PicoLisp|exceptions]]) via
+'[http://software-lab.de/doc/refC.html#catch catch]' and
+'[http://software-lab.de/doc/refT.html#throw throw]', or to some location in
+another coroutine with '[http://software-lab.de/doc/refY.html#yield yield]' (see
+[[Generator#PicoLisp|generator]]).
+
+'[http://software-lab.de/doc/refQ.html#quit quit]' is similar to 'throw', but
+doesn't require a corresponding 'catch', as it directly jumps to the error
+handler (where the program may catch that error again).
+
+There is no 'go' or 'goto' function in PicoLisp, but it can be emulated with
+normal list processing functions. This allows "jumps" to arbitrary locations
+within (the same or other) functions. The following example implements a "loop":
+
+(de foo (N)
+   (prinl "This is 'foo'")
+   (printsp N)
+   (or (=0 (dec 'N)) (run (cddr foo))) )
+
+Test:
+
+: (foo 7)
+This is 'foo'
+7 6 5 4 3 2 1 -> 0
+
+\end{wideverbatim}
+
+
+
+% \input{referenc}

@@ -1,0 +1,860 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+
+
+\chapter{Symbols starting with C}
+\label{sec:functions-starting-with-C}
+
+ 
+\section*{\texttt{*Class}}
+\label{sec:funct-rec-C-*class}
+
+
+A global variable holding the current class. See also \texttt{OO Concepts},
+\texttt{class}, \texttt{extend}, \texttt{dm} and \texttt{var} and \texttt{rel}.
+
+
+\begin{wideverbatim}
+: (class +Test)
+-> +Test
+: *Class
+-> +Test
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(cache 'var 'sym . prg) -> any}}
+\label{sec:funct-rec-C-(cache-'var-'sym-.-prg)-->-any}
+
+
+Speeds up some calculations, by holding previously calculated results in
+an \texttt{idx} tree structure. Such an optimization is sometimes called
+``memoization''. \texttt{sym} must be a transient symbol representing a unique
+key for the argument(s) to the calculation. See also \texttt{hash}.
+
+
+\begin{wideverbatim}
+: (de fibonacci (N)
+   (cache '(NIL) (pack (char (hash N)) N)
+      (if (> 2 N)
+         1
+         (+
+            (fibonacci (dec N))
+            (fibonacci (- N 2)) ) ) ) )
+-> fibonacci
+: (fibonacci 22)
+-> 28657
+: (fibonacci 10000)
+-> 5443837311356528133873426099375038013538 ...  # (2090 digits)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(call 'any ..) -> flg}}
+\label{sec:funct-rec-C-(call-'any-..)-->-flg}
+
+
+Calls an external system command. The \texttt{any} arguments specify the
+command and its arguments. Returns \texttt{T} if the command was executed
+successfully.
+
+
+\begin{wideverbatim}
+: (when (call 'test "-r" "file.l")  # Test if file exists and is readable
+   (load "file.l")  # Load it
+   (call 'rm "file.l") )  # Remove it
+\end{wideverbatim}
+
+ 
+\section*{\texttt{call/1}}
+\label{sec:funct-rec-C-call/1}
+
+
+\emph{Pilog} predicate that succeeds if the argument term
+can be proven.
+
+
+\begin{wideverbatim}
+: (be mapcar (@ NIL NIL))
+-> mapcar
+: (be mapcar (@P (@X . @L) (@Y . @M))
+   (call @P @X @Y)                        # Call the given predicate
+   (mapcar @P @L @M) )
+-> mapcar
+:  (? (mapcar change (you are a computer) @Z))
+-> NIL
+:  (? (mapcar change (you are a computer) @Z) T)
+-> NIL
+:  (? (mapcar permute ((a b c) (d e f)) @X))
+ @X=((a b c) (d e f))
+ @X=((a b c) (d f e))
+ @X=((a b c) (e d f))
+ ...
+ @X=((a c b) (d e f))
+ @X=((a c b) (d f e))
+ @X=((a c b) (e d f))
+ ...
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(can 'msg) -> lst}}
+\label{sec:funct-rec-C-(can-'msg)-->-lst}
+
+
+Returns a list of all classes that accept the message \texttt{msg}. See also
+\texttt{OO Concepts}, \texttt{class}, \texttt{dep}, \texttt{what} and \texttt{who}.
+
+
+\begin{wideverbatim}
+: (can 'zap>)
+-> ((zap> . +relation) (zap> . +Blob) (zap> . +Entity))
+: (more @ pp)
+(dm (zap> . +relation) (Obj Val))
+
+(dm (zap> . +Blob) (Obj Val)
+   (and
+      Val
+      (call 'rm "-f" (blob Obj (: var))) ) )
+
+(dm (zap> . +Entity) NIL
+   (for X (getl This)
+      (let V (or (atom X) (pop 'X))
+         (and (meta This X) (zap> @ This V)) ) ) )
+
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(car 'var) -> any}}
+\label{sec:funct-rec-C-(car-'var)-->-any}
+
+
+List access: Returns the value of \texttt{var} if it is a symbol, or the first
+element if it is a list. See also \texttt{cdr} and \texttt{c..r}.
+
+
+\begin{wideverbatim}
+: (car (1 2 3 4 5 6))
+-> 1
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(c[ad]*ar 'var) -> any}}
+\label{sec:funct-rec-C-(c[ad]*ar-'var)-->-any}
+
+
+\texttt{(c[ad]*dr 'lst) -> any}
+
+List access shortcuts. Combinations of the \texttt{car} and \texttt{cdr} functions,
+with up to four letters `a' and `d'.
+
+
+\begin{wideverbatim}
+: (cdar '((1 . 2) . 3))
+-> 2
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(case 'any (any1 . prg1) (any2 . prg2) ..) -> any}}
+\label{sec:funct-rec-C-(case-'any-(any1-.-prg1)-(any2-.-prg2)-..)-->-any}
+
+
+Multi-way branch: \texttt{any} is evaluated and compared to the CAR elements
+\texttt{anyN} of each clause. If one of them is a list, \texttt{any} is in turn
+compared to all elements of that list. \texttt{T} is a catch-all for any value.
+If a comparison succeeds, \texttt{prgN} is executed, and the result returned.
+Otherwise \texttt{NIL} is returned. See also \texttt{state}.
+
+
+\begin{wideverbatim}
+: (case (char 66) ("A" (+ 1 2 3)) (("B" "C") "Bambi") ("D" (* 1 2 3)))
+-> "Bambi"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(catch 'any . prg) -> any}}
+\label{sec:funct-rec-C-(catch-'any-.-prg)-->-any}
+
+
+Sets up the environment for a non-local jump which may be caused by
+\texttt{throw} or by a runtime error. If \texttt{any} is an atom, it is used by
+\texttt{throw} as a jump label (with \texttt{T} being a catch-all for any label), and
+a \texttt{throw} called during the execution of \texttt{prg} will immediately return
+the thrown value. Otherwise, \texttt{any} should be a list of strings, to catch
+any error whose message contains one of these strings, and this will
+immediately return the matching string. If neither \texttt{throw} nor an error
+occurs, the result of \texttt{prg} is returned. See also \texttt{finally}, \texttt{quit} and
+\texttt{Error Handling}.
+
+
+\begin{wideverbatim}
+: (catch 'OK (println 1) (throw 'OK 999) (println 2))
+1
+-> 999
+: (catch '("No such file") (in "doesntExist" (foo)))
+-> "No such file"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(cd 'any) -> sym}}
+\label{sec:funct-rec-C-(cd-'any)-->-sym}
+
+
+Changes the current directory to \texttt{any}. The old directory is returned on
+success, otherwise \texttt{NIL}. See also \texttt{dir} and \texttt{pwd}.
+
+
+\begin{wideverbatim}
+: (when (cd "lib")
+   (println (sum lines (dir)))
+   (cd @) )
+10955
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(cdr 'lst) -> any}}
+\label{sec:funct-rec-C-(cdr-'lst)-->-any}
+
+
+List access: Returns all but the first element of \texttt{lst}. See also \texttt{car}
+and \texttt{c..r}.
+
+
+\begin{wideverbatim}
+: (cdr (1 2 3 4 5 6))
+-> (2 3 4 5 6)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(center 'cnt|lst 'any ..) -> sym}}
+\label{sec:funct-rec-C-(center-'cnt|lst-'any-..)-->-sym}
+
+
+Returns a transient symbol with all \texttt{any} arguments \texttt{packed in a centered format. Trailing blanks are omitted. See also align}, \texttt{tab}
+and \texttt{wrap}.
+
+
+\begin{wideverbatim}
+: (center 4 12)
+-> " 12"
+: (center 4 "a")
+-> " a"
+: (center 7 "a")
+-> "   a"
+: (center (3 3 3) "a" "b" "c")
+-> " a  b  c"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(chain 'lst ..) -> lst}}
+\label{sec:funct-rec-C-(chain-'lst-..)-->-lst}
+
+
+Concatenates (destructively) one or several new list elements \texttt{lst} to
+the end of the list in the current \texttt{make} environment. This operation is
+efficient also for long lists, because a pointer to the last element of
+the result list is maintained. \texttt{chain} returns the last linked argument.
+See also \texttt{link}, \texttt{yoke} and \texttt{made}.
+
+
+\begin{wideverbatim}
+: (make (chain (list 1 2 3) NIL (cons 4)) (chain (list 5 6)))
+-> (1 2 3 4 5 6)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(char) -> sym}}
+\label{sec:funct-rec-C-(char)-->-sym}
+
+
+\texttt{(char 'cnt) -> sym}
+
+\texttt{(char T) -> sym}
+
+\texttt{(char 'sym) -> cnt}
+
+When called without arguments, the next character from the current input
+stream is returned as a single-character transient symbol, or \texttt{NIL} upon
+end of file. When called with a number \texttt{cnt}, a character with the
+corresponding unicode value is returned. As a special case, \texttt{T} is
+accepted to produce a byte value greater than any first byte in a UTF--8
+character (used as a top value in comparisons). Otherwise, when called
+with a symbol \texttt{sym}, the numeric unicode value of the first character of
+the name of that symbol is returned. See also \texttt{peek}, \texttt{skip}, \texttt{key},
+\texttt{line}, \texttt{till} and \texttt{eof}.
+
+
+\begin{wideverbatim}
+: (char)                   # Read character from console
+A                          # (typed 'A' and a space/return)
+-> "A"
+: (char 100)               # Convert unicode to symbol
+-> "d"
+: (char "d")               # Convert symbol to unicode
+-> 100
+
+: (char T)                 # Special case
+-> # (not printable)
+
+: (char 0)
+-> NIL
+: (char NIL)
+-> 0
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(chdir 'any . prg) -> any}}
+\label{sec:funct-rec-C-(chdir-'any-.-prg)-->-any}
+
+
+Changes the current directory to \texttt{any} with \texttt{cd} during the execution of
+\texttt{prg}. Then the previous directory will be restored and the result of
+\texttt{prg} returned. See also \texttt{dir} and \texttt{pwd}.
+
+
+\begin{wideverbatim}
+: (pwd)
+-> "/usr/abu/pico"
+: (chdir "src" (pwd))
+-> "/usr/abu/pico/src"
+: (pwd)
+-> "/usr/abu/pico"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(chkTree 'sym ['fun]) -> num}}
+\label{sec:funct-rec-C-(chktree-'sym-['fun])-->-num}
+
+
+Checks a database tree node (and recursively all sub-nodes) for
+consistency. Returns the total number of nodes checked. Optionally,
+\texttt{fun} is called with the key and value of each node, and should return
+\texttt{NIL} for failure. See also \texttt{tree} and \texttt{root}.
+
+
+\begin{wideverbatim}
+: (show *DB '+Item)
+{C} NIL
+   sup (7 . {7-3})
+   nr (7 . {7-1})    # 7 nodes in the 'nr' tree, base node is {7-1}
+   pr (7 . {7-4})
+   nm (77 . {7-6})
+-> {C}
+: (chkTree '{7-1})   # Check that node
+-> 7
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(chop 'any) -> lst}}
+\label{sec:funct-rec-C-(chop-'any)-->-lst}
+
+
+Returns \texttt{any} as a list of single-character strings. If \texttt{any} is \texttt{NIL}
+or a symbol with no name, \texttt{NIL} is returned. A list argument is returned
+unchanged.
+
+
+\begin{wideverbatim}
+: (chop 'car)
+-> ("c" "a" "r")
+: (chop "Hello")
+-> ("H" "e" "l" "l" "o")
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(circ 'any ..) -> lst}}
+\label{sec:funct-rec-C-(circ-'any-..)-->-lst}
+
+
+Produces a circular list of all \texttt{any} arguments by \texttt{cons}ing them to a
+list and then connecting the CDR of the last cell to the first cell. See
+also \texttt{circ?} and \texttt{list}.
+
+
+\begin{wideverbatim}
+: (circ 'a 'b 'c)
+-> (a b c .)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(circ? 'any) -> any}}
+\label{sec:funct-rec-C-(circ?-'any)-->-any}
+
+
+Returs the circular (sub)list if \texttt{any} is a circular list, else \texttt{NIL}.
+See also \texttt{circ}.
+
+
+\begin{wideverbatim}
+: (circ? 'a)
+-> NIL
+: (circ? (1 2 3))
+-> NIL
+: (circ? (1 . (2 3 .)))
+-> (2 3 .)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(class sym . typ) -> obj}}
+\label{sec:funct-rec-C-(class-sym-.-typ)-->-obj}
+
+
+Defines \texttt{sym} as a class with the superclass(es) \texttt{typ}. As a side
+effect, the global variable \texttt{*Class} is set to \texttt{obj}. See also \texttt{extend},
+\texttt{dm}, \texttt{var}, \texttt{rel}, \texttt{type}, \texttt{isa} and \texttt{object}.
+
+
+\begin{wideverbatim}
+: (class +A +B +C +D)
+-> +A
+: +A
+-> (+B +C +D)
+: (dm foo> (X) (bar X))
+-> foo>
+: +A
+-> ((foo> (X) (bar X)) +B +C +D)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(clause '(sym . any)) -> sym}}
+\label{sec:funct-rec-C-(clause-'(sym-.-any))-->-sym}
+
+
+Declares a \emph{Pilog} fact or rule for the \texttt{sym}
+argument, by concatenating the \texttt{any} argument to the \texttt{T} property of
+\texttt{sym}. See also \texttt{be}.
+
+
+\begin{wideverbatim}
+: (clause '(likes (John Mary)))
+-> likes
+: (clause '(likes (John @X) (likes @X wine) (likes @X food)))
+-> likes
+: (? (likes @X @Y))
+ @X=John @Y=Mary
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{clause/2}}
+\label{sec:funct-rec-C-clause/2}
+
+
+\emph{Pilog} predicate that succeeds if the first argument
+is a predicate which has the second argument defined as a clause.
+
+
+\begin{wideverbatim}
+: (? (clause append ((NIL @X @X))))
+-> T
+
+: (? (clause append @C))
+ @C=((NIL @X @X))
+ @C=(((@A . @X) @Y (@A . @Z)) (append @X @Y @Z))
+-> NIL
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(clip 'lst) -> lst}}
+\label{sec:funct-rec-C-(clip-'lst)-->-lst}
+
+
+Returns a copy of \texttt{lst} with all whitespace characters or \texttt{NIL} elements
+removed from both sides. See also \texttt{trim}.
+
+
+\begin{wideverbatim}
+: (clip '(NIL 1 NIL 2 NIL))
+-> (1 NIL 2)
+: (clip '(" " a " " b " "))
+-> (a " " b)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(close 'cnt) -> cnt | NIL}}
+\label{sec:funct-rec-C-(close-'cnt)-->-cnt-|-nil}
+
+
+Closes a file descriptor \texttt{cnt}, and returns it when successful. Should
+not be called inside an \texttt{out} body for that descriptor. See also \texttt{open},
+\texttt{poll}, \texttt{listen} and \texttt{connect}.
+
+
+\begin{wideverbatim}
+: (close 2)                            # Close standard error
+-> 2
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(cmd ['any]) -> sym}}
+\label{sec:funct-rec-C-(cmd-['any])-->-sym}
+
+
+When called without an argument, the name of the command that invoked
+the picolisp interpreter is returned. Otherwise, the command name is set
+to \texttt{any}. Setting the name may not work on some operating systems. Note
+that the new name must not be longer than the original one. See also
+\texttt{argv}, \texttt{file} and \emph{Invocation}.
+
+
+\begin{wideverbatim}
+$ pil +
+: (cmd)
+-> "/usr/bin/picolisp"
+: (cmd "!/bin/picolust")
+-> "!/bin/picolust"
+: (cmd)
+-> "!/bin/picolust"
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(cnt 'fun 'lst ..) -> cnt}}
+\label{sec:funct-rec-C-(cnt-'fun-'lst-..)-->-cnt}
+
+
+Applies \texttt{fun} to each element of \texttt{lst}. When additional \texttt{lst} arguments
+are given, their elements are also passed to \texttt{fun}. Returns the count of
+non-\texttt{NIL} values returned from \texttt{fun}.
+
+
+\begin{wideverbatim}
+: (cnt cdr '((1 . T) (2) (3 4) (5)))
+-> 2
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(collect 'var 'cls ['hook] ['any|beg ['end [var ..]]])}}
+\label{sec:funct-rec-C-(collect-'var-'cls-['hook]-['any|beg-['end-[var-..]]])}
+
+
+Returns a list of all database objects of class \texttt{cls}, where the values
+for the \texttt{var} arguments correspond to the \texttt{any} arguments, or where the
+values for the \texttt{var} arguments are in the range \texttt{beg} .. \texttt{end}. \texttt{var},
+\texttt{cls} and \texttt{hook} should specify a \texttt{tree} for \texttt{cls} or one of its
+superclasses. If additional \texttt{var} arguments are given, the final values
+for the result list are obtained by applying the \texttt{get} algorithm. See
+also \texttt{db}, \texttt{aux}, \texttt{fetch}, \texttt{init} and \texttt{step}.
+
+
+\begin{wideverbatim}
+: (collect 'nr '+Item)
+-> ({3-1} {3-2} {3-3} {3-4} {3-5} {3-6} {3-8})
+: (collect 'nr '+Item 3 6 'nr)
+-> (3 4 5 6)
+: (collect 'nr '+Item 3 6 'nm)
+-> ("Auxiliary Construction" "Enhancement Additive" "Metal Fittings" "Gadget Appliance")
+: (collect 'nm '+Item "Main Part")
+-> ({3-1})
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(commit ['any] [exe1] [exe2]) -> T}}
+\label{sec:funct-rec-C-(commit-['any]-[exe1]-[exe2])-->-t}
+
+
+Closes a transaction, by writing all new or modified external symbols
+to, and removing all deleted external symbols from the database. When
+\texttt{any} is given, it is implicitly sent (with all modified objects) via
+the \texttt{tell} mechanism to all family members. If \texttt{exe1} or \texttt{exe2} are
+given, they are executed as pre- or post-expressions while the database
+is \texttt{lock}ed and \texttt{protect}ed. See also \texttt{rollback}.
+
+
+\begin{wideverbatim}
+: (pool "db")
+-> T
+: (put '{1} 'str "Hello")
+-> "Hello"
+: (commit)
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(con 'lst 'any) -> any}}
+\label{sec:funct-rec-C-(con-'lst-'any)-->-any}
+
+
+Connects \texttt{any} to the first cell of \texttt{lst}, by (destructively) storing
+\texttt{any} in the CDR of \texttt{lst}. See also \texttt{conc}.
+
+
+\begin{wideverbatim}
+: (setq C (1 . a))
+-> (1 . a)
+: (con C '(b c d))
+-> (b c d)
+: C
+-> (1 b c d)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(conc 'lst ..) -> lst}}
+\label{sec:funct-rec-C-(conc-'lst-..)-->-lst}
+
+
+Concatenates all argument lists (destructively). See also \texttt{append} and
+\texttt{con}.
+
+
+\begin{wideverbatim}
+: (setq  A (1 2 3)  B '(a b c))
+-> (a b c)
+: (conc A B)                        # Concatenate lists in 'A' and 'B'
+-> (1 2 3 a b c)
+: A
+-> (1 2 3 a b c)                    # Side effect: List in 'A' is modified!
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(cond ('any1 . prg1) ('any2 . prg2) ..) -> any}}
+\label{sec:funct-rec-C-(cond-('any1-.-prg1)-('any2-.-prg2)-..)-->-any}
+
+
+Multi-way conditional: If any of the \texttt{anyN} conditions evaluates to
+non-\texttt{NIL}, \texttt{prgN} is executed and the result returned. Otherwise (all
+conditions evaluate to \texttt{NIL}), \texttt{NIL} is returned. See also \texttt{nond}, \texttt{if},
+\texttt{if2} and \texttt{when}.
+
+
+\begin{wideverbatim}
+: (cond
+   ((= 3 4) (println 1))
+   ((= 3 3) (println 2))
+   (T (println 3)) )
+2
+-> 2
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(connect 'any1 'any2) -> cnt | NIL}}
+\label{sec:funct-rec-C-(connect-'any1-'any2)-->-cnt-|-nil}
+
+
+Tries to establish a TCP/IP connection to a server listening at host
+\texttt{any1}, port \texttt{any2}. \texttt{any1} may be either a hostname or a standard
+internet address in numbers-and-dots/colons notation (IPv4/IPv6). \texttt{any2}
+may be either a port number or a service name. Returns a socket
+descriptor \texttt{cnt}, or \texttt{NIL} if the connection cannot be established. See
+also \texttt{listen} and \texttt{udp}.
+
+
+\begin{wideverbatim}
+: (connect "localhost" 4444)
+-> 3
+: (connect "some.host.org" "http")
+-> 4
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(cons 'any ['any ..]) -> lst}}
+\label{sec:funct-rec-C-(cons-'any-['any-..])-->-lst}
+
+
+Constructs a new list cell with the first argument in the CAR and the
+second argument in the CDR. If more than two arguments are given, a
+corresponding chain of cells is built. \texttt{(cons 'a 'b 'c 'd)} is
+equivalent to \texttt{(cons 'a (cons 'b (cons 'c 'd)))}. See also \texttt{list}.
+
+
+\begin{wideverbatim}
+: (cons 1 2)
+-> (1 . 2)
+: (cons 'a '(b c d))
+-> (a b c d)
+: (cons '(a b) '(c d))
+-> ((a b) c d)
+: (cons 'a 'b 'c 'd)
+-> (a b c . d)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(copy 'any) -> any}}
+\label{sec:funct-rec-C-(copy-'any)-->-any}
+
+
+Copies the argument \texttt{any}. For lists, the top level cells are copied,
+while atoms are returned unchanged.
+
+
+\begin{wideverbatim}
+: (=T (copy T))               # Atoms are not copied
+-> T
+: (setq L (1 2 3))
+-> (1 2 3)
+: (== L L)
+-> T
+: (== L (copy L))             # The copy is not identical to the original
+-> NIL
+: (= L (copy L))              # But the copy is equal to the original
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(co 'sym [. prg]) -> any}}
+\label{sec:funct-rec-C-(co-'sym-[.-prg])-->-any}
+
+
+(64-bit version only) Starts, resumes or stops a
+\emph{coroutine} with the tag given by \texttt{sym}. If \texttt{prg}
+is not given, a coroutine with that tag will be stopped. Otherwise, if a
+coroutine running with that tag is found (pointer equality is used for
+comparison), its execution is resumed. Else a new coroutine with that
+tag is initialized and started. \texttt{prg} will be executed until it either
+terminates normally, or until \texttt{yield} is called. In the latter case \texttt{co}
+returns, or transfers control to some other, already running, coroutine.
+Trying to start more than 64 coroutines will result in a stack overflow
+error. Also, a coroutine cannot resume itself directly or indirectly.
+See also \texttt{stack}, \texttt{catch} and \texttt{throw}.
+
+
+\begin{wideverbatim}
+: (de pythag (N)   # A generator function
+   (if (=T N)
+      (co 'rt)  # Stop
+      (co 'rt
+         (for X N
+            (for Y (range X N)
+               (for Z (range Y N)
+                  (when (= (+ (* X X) (* Y Y)) (* Z Z))
+                     (yield (list X Y Z)) ) ) ) ) ) ) )
+
+: (pythag 20)
+-> (3 4 5)
+: (pythag 20)
+-> (5 12 13)
+: (pythag 20)
+-> (6 8 10)
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(count 'tree) -> num}}
+\label{sec:funct-rec-C-(count-'tree)-->-num}
+
+
+Returns the number of nodes in a database tree. See also \texttt{tree} and
+\texttt{root}.
+
+
+\begin{wideverbatim}
+: (count (tree 'nr '+Item))
+-> 7
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(ctl 'sym . prg) -> any}}
+\label{sec:funct-rec-C-(ctl-'sym-.-prg)-->-any}
+
+
+Waits until a write (exclusive) lock (or a read (shared) lock if the
+first character of \texttt{sym} is ``\texttt{+}'') can be set on the
+file \texttt{sym}, then executes \texttt{prg} and releases the lock.
+If the files does not exist, it will be created. When \texttt{sym} is
+\texttt{NIL}, a shared lock is tried on the current innermost I/O
+channel, and when it is \texttt{T}, an exclusive lock is tried
+instead. See also \texttt{in}, \texttt{out}, \texttt{err} and
+\texttt{pipe}.
+
+
+\begin{wideverbatim}
+$ echo 9 >count                           # Write '9' to file "count"
+$ pil +
+: (ctl ".ctl"                             # Exclusive control, using ".ctl"
+   (in "count"
+      (let Cnt (read)                     # Read '9'
+         (out "count"
+            (println (dec Cnt)) ) ) ) )   # Write '8'
+-> 8
+:
+$ cat count                               # Check "count"
+8
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(ctty 'sym|pid) -> flg}}
+\label{sec:funct-rec-C-(ctty-'sym|pid)-->-flg}
+
+
+When called with a symbolic argument, \texttt{ctty} changes the current TTY
+device to \texttt{sym}. Otherwise, the local console is prepared for serving
+the PicoLisp process with the process ID \texttt{pid}. See also \texttt{raw}.
+
+
+\begin{wideverbatim}
+: (ctty "/dev/tty")
+-> T
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(curry lst . fun) -> fun}}
+\label{sec:funct-rec-C-(curry-lst-.-fun)-->-fun}
+
+
+Builds a new function from the list of symbols or symbol-value pairs
+\texttt{lst} and the functional expression \texttt{fun}. Each member in \texttt{lst} that is
+a \texttt{pat?} symbol is substituted inside \texttt{fun} by its value. All other
+symbols in \texttt{lst} are collected into a \texttt{job} environment.
+
+
+\begin{wideverbatim}
+: (de multiplier (@X)
+   (curry (@X) (N) (* @X N)) )
+-> multiplier
+: (multiplier 7)
+-> ((N) (* 7 N))
+: ((multiplier 7) 3))
+-> 21
+
+: (def 'fiboCounter
+   (curry ((N1 . 0) (N2 . 1)) (Cnt)
+      (do Cnt
+         (println
+            (prog1
+               (+ N1 N2)
+               (setq N1 N2  N2 @) ) ) ) ) )
+-> fiboCounter
+: (pp 'fiboCounter)
+(de fiboCounter (Cnt)
+   (job '((N2 . 1) (N1 . 0))
+      (do Cnt
+         (println
+            (prog1 (+ N1 N2) (setq N1 N2 N2 @)) ) ) ) )
+-> fiboCounter
+: (fiboCounter 5)
+1
+2
+3
+5
+8
+-> 8
+: (fiboCounter 5)
+13
+21
+34
+55
+89
+-> 89
+\end{wideverbatim}
+
+ 
+\section*{\texttt{(cut 'cnt 'var) -> lst}}
+\label{sec:funct-rec-C-(cut-'cnt-'var)-->-lst}
+
+
+Pops the first \texttt{cnt} elements (CAR) from the stack in \texttt{var}. See also
+\texttt{pop} and \texttt{del}.
+
+
+\begin{wideverbatim}
+: (setq S '(1 2 3 4 5 6 7 8))
+-> (1 2 3 4 5 6 7 8)
+: (cut 3 'S)
+-> (1 2 3)
+: S
+-> (4 5 6 7 8)
+\end{wideverbatim}
+

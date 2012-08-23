@@ -1,0 +1,344 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+\chapter{Rosetta Code Tasks starting with X}
+
+\section*{XML/DOM serialization}
+
+Create a simple DOM and having it serialize to:
+
+\begin{verbatim}
+ <?xml version="1.0" ?>
+ <root>
+     <element>
+         Some text here
+     </element>
+ </root>
+\end{verbatim}
+
+
+\begin{wideverbatim}
+
+(load "@lib/xm.l")
+
+(xml? T)
+(xml '(root NIL (element NIL "Some text here")))
+
+Output:
+
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <element>Some text here</element>
+</root>
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{XML/Input}
+
+Given the following XML fragment, extract the list of \emph{student
+  names} using whatever means desired. If the only viable method is to
+use XPath, refer the reader to the task \emph{XML and XPath}.
+
+\begin{wideverbatim}
+<Students>
+  <Student Name="April" Gender="F" DateOfBirth="1989-01-02" />
+  <Student Name="Bob" Gender="M"  DateOfBirth="1990-03-04" />
+  <Student Name="Chad" Gender="M"  DateOfBirth="1991-05-06" />
+  <Student Name="Dave" Gender="M"  DateOfBirth="1992-07-08">
+    <Pet Type="dog" Name="Rover" />
+  </Student>
+  <Student DateOfBirth="1993-09-10" Gender="F" Name="&#x00C9;mily" />
+</Students>
+\end{wideverbatim}
+
+Expected Output
+
+\begin{verbatim}
+April
+Bob
+Chad
+Dave
+Émily
+\end{verbatim}
+
+
+\begin{wideverbatim}
+
+(load "@lib/xm.l")
+
+(mapcar
+   '((L) (attr L 'Name))
+   (body (in "file.xml" (xml))) )
+
+Output:
+
+-> ("April" "Bob" "Chad" "Dave" "Émily")
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{XML/Output}
+
+Create a function that takes a list of character names and a list of
+corresponding remarks and returns an XML document of
+\texttt{\textless{}Character\textgreater{}} elements each with a name
+attributes and each enclosing its remarks. All
+\texttt{\textless{}Character\textgreater{}} elements are to be enclosed
+in turn, in an outer \texttt{\textless{}CharacterRemarks\textgreater{}}
+element.
+
+As an example, calling the function with the three names of:
+
+\begin{verbatim}
+April
+Tam O'Shanter
+Emily
+\end{verbatim}
+
+And three remarks of:
+
+\begin{verbatim}
+Bubbly: I'm > Tam and <= Emily
+Burns: "When chapman billies leave the street ..."
+Short & shrift
+\end{verbatim}
+
+Should produce the XML (but not necessarily with the indentation):
+
+\begin{wideverbatim}
+
+<CharacterRemarks>
+    <Character name="April">
+      Bubbly: I'm &gt; Tam and &lt;= Emily
+    </Character>
+    <Character name="Tam O'Shanter">
+      Burns:"When chapman billies leave the street ..."
+    </Character>
+    <Character name="Emily">
+      Short &amp; shrift
+    </Character>
+</CharacterRemarks>
+
+\end{wideverbatim}
+
+The document may include an \texttt{\textless{}?xml?\textgreater{}}
+declaration and document type declaration, but these are optional. If
+attempting this task by direct string manipulation, the implementation
+\emph{must} include code to perform entity substitution for the
+characters that have entities defined in the XML 1.0 specification.
+
+Note: the example is chosen to show correct escaping of XML strings.
+Note too that although the task is written to take two lists of
+corresponding data, a single mapping/hash/dictionary of names to remarks
+is also acceptable.
+
+\pagebreak{}
+
+\textbf{Note to editors:} Program output with escaped characters will be
+viewed as the character on the page so you need to `escape-the-escapes'
+to make the RC entry display what would be shown in a plain text viewer
+(See \emph{this}).
+Alternately, output can be placed in \textless{}lang
+xml\textgreater{}\textless{}/lang\textgreater{} tags without any special
+treatment.
+
+
+
+\begin{wideverbatim}
+
+(load "@lib/xm.l")
+
+(de characterRemarks (Names Remarks)
+   (xml
+      (cons
+         'CharacterRemarks
+         NIL
+         (mapcar
+            '((Name Remark)
+               (list 'Character (list (cons 'name Name)) Remark) )
+            Names
+            Remarks ) ) ) )
+
+(characterRemarks
+   '("April" "Tam O'Shanter" "Emily")
+   (quote
+      "I'm > Tam and <= Emily"
+      "Burns: \"When chapman billies leave the street ..."
+      "Short \& shrift" ) )
+
+Output:
+
+<CharacterRemarks>
+   <Character name="April">I'm > Tam and \&#60;= Emily</Character>
+   <Character name="Tam O'Shanter">Burns: \&#34;
+   When chapman billies leave the street ...</Character>
+   <Character name="Emily">Short \&#38; shrift</Character>
+</CharacterRemarks>
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{XML/XPath}
+
+Perform the following three XPath queries on the XML Document below:
+
+\begin{itemize}
+\item
+  Retrieve the first ``item'' element
+\item
+  Perform an action on each ``price'' element (print it out)
+\item
+  Get an array of all the ``name'' elements
+\end{itemize}
+
+XML Document:
+
+\begin{wideverbatim}
+<inventory title="OmniCorp Store #45x10^3">
+  <section name="health">
+    <item upc="123456789" stock="12">
+      <name>Invisibility Cream</name>
+      <price>14.50</price>
+      <description>Makes you invisible</description>
+    </item>
+    <item upc="445322344" stock="18">
+      <name>Levitation Salve</name>
+      <price>23.99</price>
+      <description>Levitate yourself for up to 3 hours per application
+      </description>
+    </item>
+  </section>
+  <section name="food">
+    <item upc="485672034" stock="653">
+      <name>Blork and Freen Instameal</name>
+      <price>4.95</price>
+      <description>A tasty meal in a tablet; just add water</description>
+    </item>
+    <item upc="132957764" stock="44">
+      <name>Grob winglets</name>
+      <price>3.56</price>
+      <description>Tender winglets of Grob. Just add water</description>
+    </item>
+  </section>
+</inventory>
+\end{wideverbatim}
+
+\begin{wideverbatim}
+
+(load "@lib/xm.l")
+
+(let Sections (body (in "file.xml" (xml)))
+   (pretty (car (body (car Sections))))
+   (prinl)
+   (for S Sections
+      (for L (body S)
+         (prinl (car (body L 'price))) ) )
+   (make
+      (for S Sections
+         (for L (body S)
+            (link (car (body L 'name))) ) ) ) )
+
+Output:
+
+(item
+   ((upc . "123456789") (stock . "12"))
+   (name NIL "Invisibility Cream")
+   (price NIL "14.50")
+   (description NIL "Makes you invisible") )
+14.50
+23.99
+4.95
+3.56
+-> ("Invisibility Cream" "Levitation Salve"
+    "Blork and Freen Instameal" "Grob winglets")
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Xiaolin Wu's line algorithm}
+
+Implement the
+\href{http://en.wikipedia.org/wiki/Xiaolin\_Wu\%27s\_line\_algorithm}{Xiaolin
+  Wu's line algorithm} as described in Wikipedia. This algorithm draw
+antialiased lines. See \emph{Bresenham's line algorithm} for
+\emph{aliased} lines.
+
+
+\begin{wideverbatim}
+
+(scl 2)
+
+(de plot (Img X Y C)
+   (set (nth Img (*/ Y 1.0) (*/ X 1.0)) (- 100 C)) )
+
+(de ipart (X)
+   (* 1.0 (/ X 1.0)) )
+
+(de iround (X)
+   (ipart (+ X 0.5)) )
+
+(de fpart (X)
+   (\% X 1.0) )
+
+(de rfpart (X)
+   (- 1.0 (fpart X)) )
+
+
+\end{wideverbatim}
+
+\begin{wideverbatim}
+
+
+(de xiaolin (Img X1 Y1 X2 Y2)
+   (let (DX (- X2 X1)  DY (- Y2 Y1))
+      (use (Grad Xend Yend Xgap Xpxl1 Ypxl1 Xpxl2 Ypxl2 Intery)
+         (when (> (abs DY) (abs DX))
+            (xchg 'X1 'Y1  'X2 'Y2) )
+         (when (> X1 X2)
+            (xchg 'X1 'X2  'Y1 'Y2) )
+         (setq
+            Grad (*/ DY 1.0 DX)
+            Xend (iround X1)
+            Yend (+ Y1 (*/ Grad (- Xend X1) 1.0))
+            Xgap (rfpart (+ X1 0.5))
+            Xpxl1 Xend
+            Ypxl1 (ipart Yend) )
+         (plot Img Xpxl1 Ypxl1 (*/ (rfpart Yend) Xgap 1.0))
+         (plot Img Xpxl1 (+ 1.0 Ypxl1) (*/ (fpart Yend) Xgap 1.0))
+         (setq
+            Intery (+ Yend Grad)
+            Xend (iround X2)
+            Yend (+ Y2 (*/ Grad (- Xend X2) 1.0))
+            Xgap (fpart (+ X2 0.5))
+            Xpxl2 Xend
+            Ypxl2 (ipart Yend) )
+         (plot Img Xpxl2 Ypxl2 (*/ (rfpart Yend) Xgap 1.0))
+         (plot Img Xpxl2 (+ 1.0 Ypxl2) (*/ (fpart Yend) Xgap 1.0))
+         (for (X (+ Xpxl1 1.0)  (>= (- Xpxl2 1.0) X)  (+ X 1.0))
+            (plot Img X (ipart Intery) (rfpart Intery))
+            (plot Img X (+ 1.0 (ipart Intery)) (fpart Intery))
+            (inc 'Intery Grad) ) ) ) )
+
+(let Img (make (do 90 (link (need 120 99))))       # Create image 120 x 90
+   (xiaolin Img 10.0 10.0 110.0 80.0)              # Draw lines
+   (xiaolin Img 10.0 10.0 110.0 45.0)
+   (xiaolin Img 10.0 80.0 110.0 45.0)
+   (xiaolin Img 10.0 80.0 110.0 10.0)
+   (out "img.pgm"                                  # Write to bitmap file
+      (prinl "P2")
+      (prinl 120 " " 90)
+      (prinl 100)
+      (for Y Img (apply printsp Y)) ) )
+
+\end{wideverbatim}
+
+
+
+% \input{referenc}

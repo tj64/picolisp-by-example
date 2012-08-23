@@ -1,0 +1,184 @@
+%%%%%%%%%%%%%%%%%%%% book.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample root file for the chapters of your "monograph"
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% RE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[graybox,envcountchap,sectrefs]{svmono}
+
+% choose options for [] as required from the list
+% in the Reference Guide
+
+\usepackage{mathptmx}
+\usepackage{helvet}
+\usepackage{courier}
+%
+\usepackage{type1cm}         
+
+\usepackage{makeidx}         % allows index generation
+\usepackage{graphicx}        % standard LaTeX graphics tool
+                             % when including figure files
+\usepackage{multicol}        % used for the two-column index
+\usepackage[bottom]{footmisc}% places footnotes at page bottom
+\usepackage{parskip}
+\usepackage{hyperref}
+\usepackage{ctable}
+\usepackage{fixltx2e}
+\usepackage{here}
+\usepackage{caption}
+% \usepackage[T1]{fontenc}
+% \usepackage{CJKutf8}
+% \usepackage[english]{babel}
+
+% \usepackage[margin=4cm]{geometry}
+\usepackage{fancybox}
+
+% define detailled toc
+\usepackage[explicit]{titlesec}
+\usepackage{titletoc}
+
+\titleformat{name=\section,numberless}
+  {\normalfont\Large\bfseries}{}{0em}{#1\addcontentsline{ptc}{section}{#1}}
+
+% see the list of further useful packages
+% in the Reference Guide
+
+\makeindex             % used for the subject index
+                       % please use the style svind.ist with
+                       % your makeindex program
+
+
+% define a customized verbatim environment
+\newenvironment{wideverbatim}%
+{\vskip\baselineskip\VerbatimEnvironment
+\begin{Sbox}\begin{BVerbatim}}
+{\end{BVerbatim}%
+\end{Sbox}\noindent\centerline{\TheSbox}\vskip\baselineskip}
+
+% % define a new environment for japanese kanji characters
+% \newenvironment{Japanese}{%
+%   \CJKfamily{min}%
+%   \CJKtilde
+%   \CJKnospace}{}
+
+
+% Define new description environment (better option 2)
+\makeatletter
+% Instead of \newenvironment
+\renewenvironment{description}
+               {\list{}{\labelwidth\z@ \itemindent-\leftmargin
+                        \let\makelabel\descriptionlabel}}
+               {\endlist}
+% Instead of \newcommand*
+\let\descriptionlabel\relax
+\newcommand*\descriptionlabel[1]{\hspace\labelsep
+                                \normalfont\bfseries #1}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\author{Alexander Burger, Thorsten Jolitz}
+\title{PicoLisp by Example}
+\subtitle{-- 600+ Rosetta Code Tasks with Solutions  --}
+\maketitle
+
+% \parindent{0pt}
+
+\frontmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{frontmatter/dedic}
+% \include{frontmatter/foreword}
+\include{frontmatter/preface}
+\include{frontmatter/acknow}
+
+\renewcommand\contentsname{General Contents}
+\tableofcontents
+\startcontents
+\printcontents{}{-1}{\chapter*{Detailed Contents}}
+
+
+% \tableofcontents
+
+% \include{frontmatter/acronym}
+
+
+\mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{mainmatter/parts/part-99-lisp-problems}
+\include{mainmatter/99-lisp-problems}
+\include{mainmatter/parts/part-rosettacode}
+\include{mainmatter/rosettacode-numbers}
+\include{mainmatter/rosettacode-A}
+\include{mainmatter/rosettacode-B}
+\include{mainmatter/rosettacode-C}
+\include{mainmatter/rosettacode-D}
+\include{mainmatter/rosettacode-E}
+\include{mainmatter/rosettacode-F}
+\include{mainmatter/rosettacode-G}
+\include{mainmatter/rosettacode-H}
+\include{mainmatter/rosettacode-I}
+\include{mainmatter/rosettacode-J}
+\include{mainmatter/rosettacode-K}
+\include{mainmatter/rosettacode-L}
+\include{mainmatter/rosettacode-M}
+\include{mainmatter/rosettacode-N}
+\include{mainmatter/rosettacode-O}
+\include{mainmatter/rosettacode-P}
+\include{mainmatter/rosettacode-Q}
+\include{mainmatter/rosettacode-R}
+\include{mainmatter/rosettacode-S}
+\include{mainmatter/rosettacode-T}
+\include{mainmatter/rosettacode-U}
+\include{mainmatter/rosettacode-V}
+\include{mainmatter/rosettacode-W}
+\include{mainmatter/rosettacode-X}
+\include{mainmatter/rosettacode-Y}
+\include{mainmatter/rosettacode-Z}
+\include{mainmatter/parts/part-function-ref}
+\include{mainmatter/function-ref-A}
+\include{mainmatter/function-ref-B}
+\include{mainmatter/function-ref-C}
+\include{mainmatter/function-ref-D}
+\include{mainmatter/function-ref-E}
+\include{mainmatter/function-ref-F}
+\include{mainmatter/function-ref-G}
+\include{mainmatter/function-ref-H}
+\include{mainmatter/function-ref-I}
+\include{mainmatter/function-ref-J}
+\include{mainmatter/function-ref-K}
+\include{mainmatter/function-ref-L}
+\include{mainmatter/function-ref-M}
+\include{mainmatter/function-ref-N}
+\include{mainmatter/function-ref-O}
+\include{mainmatter/function-ref-P}
+\include{mainmatter/function-ref-Q}
+\include{mainmatter/function-ref-R}
+\include{mainmatter/function-ref-S}
+\include{mainmatter/function-ref-T}
+\include{mainmatter/function-ref-U}
+\include{mainmatter/function-ref-V}
+\include{mainmatter/function-ref-W}
+\include{mainmatter/function-ref-X}
+\include{mainmatter/function-ref-Y}
+\include{mainmatter/function-ref-Z}
+\include{mainmatter/appendix}
+
+\backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \include{backmatter/glossary}
+% \include{backmatter/solutions}
+\printindex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+
+
+
+

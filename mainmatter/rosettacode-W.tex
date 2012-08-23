@@ -1,0 +1,511 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+
+\chapter{Rosetta Code Tasks starting with W}
+
+\section*{Walk a directory/Non-recursively}
+
+Walk a given directory and print the \emph{names} of files matching a
+given pattern.
+
+\textbf{Note:} This task is for non-recursive methods. These tasks
+should read a \emph{single directory}, not an entire directory tree. For
+code examples that read entire directory trees, see
+\emph{Walk Directory Tree}
+
+
+\begin{wideverbatim}
+
+(for F (dir "@src/")                         # Iterate directory
+   (when (match '`(chop "s@.c") (chop F))    # Matches 's*.c'?
+      (println F) ) )                        # Yes: Print it
+
+Output:
+
+"start.c"
+"ssl.c"
+"subr.c"
+"sym.c"
+...
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Walk a directory/Recursively}
+
+Walk a given directory \emph{tree} and print files matching a given
+pattern.
+
+\textbf{Note:} This task is for recursive methods. These tasks should
+read an entire directory tree, not a \emph{single directory}. For code
+examples that read a \emph{single directory}, see \emph{Walk a
+  directory/Non-recursively}.
+
+
+\begin{wideverbatim}
+
+(let Dir "."
+   (recur (Dir)
+      (for F (dir Dir)
+         (let Path (pack Dir "/" F)
+            (cond
+               ((=T (car (info Path)))             # Is a subdirectory?
+                  (recurse Path) )                 # Yes: Recurse
+               ((match '`(chop "s@.l") (chop F))   # Matches 's*.l'?
+                  (println Path) ) ) ) ) ) )       # Yes: Print it
+
+Output:
+
+"./src64/sym.l"
+"./src64/subr.l"
+...
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Web scraping}
+
+Create a program that downloads the time from this URL:
+\href{http://tycho.usno.navy.mil/cgi-bin/timer.pl}{http://tycho.usno.navy.mil/cgi-bin/timer.pl}
+and then prints the current UTC time by extracting just the UTC time
+from the web page's \emph{HTML}.
+
+If possible, only use libraries that come at no \emph{extra} monetary
+cost with the programming language and that are widely available and
+popular such as \href{http://www.cpan.org/}{CPAN} for Perl or
+\emph{Boost} for C++.
+
+\begin{wideverbatim}
+
+(load "@lib/http.l")
+
+(client "tycho.usno.navy.mil" 80 "cgi-bin/timer.pl"
+   (when (from "<BR>")
+      (pack (trim (till "U"))) ) )
+
+Output:
+
+-> "Feb. 19, 18:11:37"
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Window creation}
+
+Display a \emph{GUI} window. The window need not have any
+contents, but should respond to requests to be closed.
+
+\begin{wideverbatim}
+
+(load "@lib/openGl.l")
+
+(glutInit)
+(glutCreateWindow "Goodbye, World!")
+(keyboardFunc '(() (bye)))
+(glutMainLoop)
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Window creation/X11}
+
+Create a simple X11 application, using an X11 protocol library such as
+Xlib or XCB, that draws a box and ``Hello World'' in a window.
+Implementations of this task should \emph{avoid using a toolkit} as much
+as possible.
+
+\begin{wideverbatim}
+
+The following script works in the 32-bit version, using inlined C code
+
+#!/usr/bin/picolisp /usr/lib/picolisp/lib.l
+
+(load "@lib/misc.l" "@lib/gcc.l")
+
+(gcc "x11" '("-lX11") 'simpleWin)
+
+#include <X11/Xlib.h>
+
+any simpleWin(any ex) {
+   any x = cdr(ex);
+   int dx, dy;
+   Display *disp;
+   int scrn;
+   Window win;
+   XEvent ev;
+
+   x = cdr(ex),  dx = (int)evCnt(ex,x);
+   x = cdr(x),  dy = (int)evCnt(ex,x);
+   x = evSym(cdr(x));
+   if (disp = XOpenDisplay(NULL)) {
+      char msg[bufSize(x)];
+
+      bufString(x, msg);
+      scrn = DefaultScreen(disp);
+      win = XCreateSimpleWindow(disp, RootWindow(disp,scrn), 0, 0, dx, dy,
+                           1, BlackPixel(disp,scrn), WhitePixel(disp,scrn) );
+      XSelectInput(disp, win, ExposureMask | KeyPressMask | ButtonPressMask);
+      XMapWindow(disp, win);
+      for (;;) {
+         XNextEvent(disp, \&ev);
+         switch (ev.type) {
+         case Expose:
+            XDrawRectangle(disp, win, DefaultGC(disp, scrn), 10, 10, dx-20, dy-20);
+            XDrawString(disp, win, DefaultGC(disp, scrn), 30, 40, msg, strlen(msg));
+            break;
+         case KeyPress:
+         case ButtonPress:
+            XCloseDisplay(disp);
+            return Nil;
+         }
+      }
+   }
+   return mkStr("Can't open Display");
+}
+/**/
+
+(simpleWin 300 200 "Hello World")
+(bye)
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Window management}
+
+Treat windows or at least window identities as
+\href{http://en.wikipedia.org/wiki/First-class\_object}{first class
+objects}.
+
+\begin{itemize}
+\item
+  Store window identities in variables, compare them for equality.
+\item
+  Provide examples of performing some of the following:
+
+  \begin{itemize}
+  \item
+    hide, show, close, minimize, maximize, move, and resize a window.
+  \end{itemize}
+\end{itemize}
+
+The window of interest may or may not have been created by your program.
+
+
+
+\begin{wideverbatim}
+
+The following works on ErsatzLisp, the Java version of PicoLisp.
+
+\$ ersatz/pil +
+: (setq
+   JFrame         "javax.swing.JFrame"
+   MAXIMIZED_BOTH (java (public JFrame 'MAXIMIZED_BOTH))
+   ICONIFIED      (java (public JFrame 'ICONIFIED))
+   Win            (java JFrame T "Window") )
+-> \$ JFrame
+
+# Compare for equality
+: (== Win Win)
+-> T
+
+# Set window visible
+(java Win 'setLocation 100 100)
+(java Win 'setSize 400 300)
+(java Win 'setVisible T)
+
+# Hide window
+(java Win 'hide)
+
+# Show again
+(java Win 'setVisible T)
+
+# Move window
+(java Win 'setLocation 200 200)
+
+# Iconify window
+(java Win 'setExtendedState
+   (| (java (java Win 'getExtendedState)) ICONIFIED) )
+
+# De-conify window
+(java Win 'setExtendedState
+   (\& (java (java Win 'getExtendedState)) (x| (hex "FFFFFFFF") ICONIFIED)) )
+
+# Maximize window
+(java Win 'setExtendedState
+   (| (java (java Win 'getExtendedState)) MAXIMIZED_BOTH) )
+
+# Close window
+(java Win 'dispose)
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Wireworld}
+
+
+\href{http://en.wikipedia.org/wiki/Wireworld}{Wireworld} is a cellular
+automaton with some similarities to
+\emph{Conway's Game of Life}. It is
+capable of doing sophisticated computations (e.g., calculating
+primeness!) with appropriate programs, and is much simpler to program
+for.
+
+A wireworld arena consists of a cartesian grid of cells, each of which
+can be in one of four states. All cell transitions happen
+simultaneously. The cell transition rules are this:
+
+\ctable[pos = H, center, botcap]{lll}
+{% notes
+}
+{% rows
+\FL
+Input State & Output State & Condition
+\ML
+\texttt{empty} & \texttt{empty} & 
+\\\noalign{\medskip}
+\texttt{electron~head~} & \texttt{electron~tail~} & 
+\\\noalign{\medskip}
+\texttt{electron~tail~} & \texttt{conductor} & 
+\\\noalign{\medskip}
+\texttt{conductor} & \texttt{electron~head~} & if 1 or 2 cells in the
+\href{http://en.wikipedia.org/wiki/Moore\_neighborhood}{neighborhood} of
+the cell 
+\\ & &  are in the state ``\texttt{electron head}''
+\\\noalign{\medskip}
+\texttt{conductor} & \texttt{conductor} & otherwise
+\LL
+}
+
+To implement this task, create a program that reads a wireworld program
+from a file and displays an animation of the processing. Here is a
+sample description file (using "\texttt{H}" for an electron head,
+"\texttt{t}" for a tail, "\texttt{.}" for a conductor and a space for
+empty) you may wish to test with, which demonstrates two cycle-3
+generators and an inhibit gate:
+
+\begin{verbatim}
+tH.........
+.   .
+   ...
+.   .
+Ht.. ......
+\end{verbatim}
+
+While text-only implementations of this task are possible, mapping cells
+to pixels is advisable if you wish to be able to display large designs.
+The logic is not significantly more complex.
+
+
+
+\begin{wideverbatim}
+
+This example uses 'grid' from "lib/simul.l", which maintains a two-dimensional
+structure.
+
+(load "@lib/simul.l")
+
+(let
+   (Data (in "wire.data" (make (while (line) (link @))))
+      Grid (grid (length (car Data)) (length Data)) )
+   (mapc
+      '((G D) (mapc put G '(val .) D))
+      Grid
+      (apply mapcar (flip Data) list) )
+   (loop
+      (disp Grid T
+         '((This) (pack " " (: val) " ")) )
+      (wait 1000)
+      (for Col Grid
+         (for This Col
+            (case (=: next (: val))
+               ("H" (=: next "t"))
+               ("t" (=: next "."))
+               ("."
+                  (when
+                     (>=
+                        2
+                        (cnt # Count neighbors
+                           '((Dir) (= "H" (get (Dir This) 'val)))
+                           (quote
+                              west east south north
+                              ((X) (south (west X)))
+                              ((X) (north (west X)))
+                              ((X) (south (east X)))
+                              ((X) (north (east X))) ) )
+                        1 )
+                     (=: next "H") ) ) ) ) )
+      (for Col Grid  # Update
+         (for This Col
+            (=: val (: next)) ) )
+      (prinl) ) )
+
+\end{wideverbatim}
+
+\begin{wideverbatim}
+
+Output:
+
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 5 | t | H | . | . | . | . | . | . | . | . | . |
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 4 | . |   |   |   | . |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 3 |   |   |   | . | . | . |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 2 | . |   |   |   | . |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 1 | H | t | . | . |   | . | . | . | . | . | . |
+   +---+---+---+---+---+---+---+---+---+---+---+
+     a   b   c   d   e   f   g   h   i   j   k
+
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 5 | . | t | H | . | . | . | . | . | . | . | . |
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 4 | H |   |   |   | . |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 3 |   |   |   | . | . | . |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 2 | H |   |   |   | . |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 1 | t | . | . | . |   | . | . | . | . | . | . |
+   +---+---+---+---+---+---+---+---+---+---+---+
+     a   b   c   d   e   f   g   h   i   j   k
+
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 5 | H | . | t | H | . | . | . | . | . | . | . |
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 4 | t |   |   |   | . |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 3 |   |   |   | . | . | . |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 2 | t |   |   |   | . |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+---+---+---+
+ 1 | . | H | . | . |   | . | . | . | . | . | . |
+   +---+---+---+---+---+---+---+---+---+---+---+
+     a   b   c   d   e   f   g   h   i   j   k
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Word wrap}
+
+Even today, with proportional fonts and complex layouts, there are
+still \emph{cases} where you need to wrap text at a specified column.
+The basic task is to wrap a paragraph of text in a simple way in your
+language. If there is a way to do this that is built-in, trivial, or
+provided in a standard library, show that. Otherwise implement the
+\href{http://en.wikipedia.org/wiki/Word\_wrap\#Minimum\_length}{minimum
+  length greedy algorithm from Wikipedia.}
+
+Show your routine working on a sample of text at two different wrap
+columns.
+
+\textbf{Extra credit!} Wrap text using a more sophisticated algorithm
+such as the Knuth and Plass TeX algorithm. If your language provides
+this, you get easy extra credit, but you \emph{must reference
+documentation} indicating that the algorithm is something better than a
+simple minimimum length algorithm.
+
+If you have both basic and extra credit solutions, show an example where
+the two algorithms give different results.
+
+\begin{wideverbatim}
+
+'[http://software-lab.de/doc/refW.html#wrap wrap]' is a built-in.
+
+: (prinl (wrap 12 (chop "The quick brown fox jumps over the lazy dog")))
+The quick
+brown fox
+jumps over
+the lazy dog
+-> "The quick^Jbrown fox^Jjumps over^Jthe lazy dog"
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Write float arrays to a text file}
+
+Write two equal-sized numerical arrays `x' and `y' to a two-column text
+file named `filename'.
+
+The first column of the file contains values from an `x'-array with a
+given `xprecision', the second -- values from `y'-array with
+`yprecision'.
+
+For example, considering:
+
+\begin{wideverbatim}
+   x = {1, 2, 3, 1e11};
+   y = {1, 1.4142135623730951, 1.7320508075688772, 316227.76601683791}; 
+                                                          /* sqrt(x) */
+   xprecision = 3;
+   yprecision = 5;
+\end{wideverbatim}
+
+The file is:
+
+\begin{wideverbatim}
+   1    1
+   2    1.4142
+   3    1.7321
+   1e+011   3.1623e+005
+\end{wideverbatim}
+
+This task is intended as a subtask for \emph{Measure relative
+  performance of sorting algorithms implementations}.
+
+
+
+\begin{wideverbatim}
+
+An exponential format like "1e11" is not supported
+
+(setq *Xprecision 3  *Yprecision 5)
+
+(scl 7)
+(mapc
+   '((X Y)
+      (prinl
+         (round X *Xprecision)
+         "  "
+         (round Y *Yprecision) ) )
+   (1.0 2.0 3.0)
+   (1.0 1.414213562 1.732050807) )
+
+Output:
+
+1.000  1.00000
+2.000  1.41421
+3.000  1.73205
+
+\end{wideverbatim}
+
+\pagebreak{}
+\section*{Write to Windows event log}
+
+Write script status to the Windows Event Log
+
+\begin{wideverbatim}
+
+PicoLisp doesn't run on Windows. In case of Linux, the equivalent of the event
+log is the syslog. It can be written with
+'[http://software-lab.de/doc/refN.html#native native]' C functions, or simply
+with the 'logger' utility:
+
+: (call 'logger "This is a test")
+-> T
+
+: (call 'logger "This" 'is "another" 'test)
+-> T
+
+\end{wideverbatim}
+
+
+
+% \input{referenc}

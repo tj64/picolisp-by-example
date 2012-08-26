@@ -1,0 +1,37 @@
+
+* TODO Version 1.02
+   [2012-08-26 So 01:11]
+
+
+** TODO change version number and date in svmult.cls
+   [2012-08-26 So 01:11]
+** TODO replace download on github
+   [2012-08-26 So 01:11]
+** TODO replace pdf on scribd
+   [2012-08-26 So 01:11]
+
+
+* NEXT Version 1.01
+  [2012-08-26 So 00:11]
+
+
+** DONE check function-ref-D p.1144
+   CLOSED: [2012-08-26 So 03:03]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-08-26 So 03:03]
+   :END:
+   [2012-08-26 So 01:30]
+** TODO change version number and date in svmult.cls
+  [2012-08-26 So 01:11]
+** TODO replace download on github
+  [2012-08-26 So 01:11]
+** TODO replace pdf on scribd
+  [2012-08-26 So 01:11]
+
+
+* DONE Version 1.0
+  CLOSED: [2012-08-26 So 00:19]
+  :LOGBOOK:
+  - State "DONE"       from ""           [2012-08-26 So 00:19]
+  :END:
+   [2012-08-23 Do 23:45]

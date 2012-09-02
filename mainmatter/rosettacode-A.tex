@@ -22,7 +22,7 @@ needs to find their sum.
 \textbf{Input data:} Two integer numbers are written in the input
 stream, separated by space.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=.6]{graphics/a344abb2a9a00cb2de6679a485115ce3.png}
 % \caption{(-1000 \textbackslash{}le A,B \textbackslash{}le +1000)}
@@ -209,7 +209,7 @@ function}} is a classic recursive example in computer science. It is a
 function that grows very quickly (in its value and in the size of its
 call tree). It is defined as follows:
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=.6]{graphics/0ae4053de098cc9554752b190a38bc56.png}
 % \caption{ A(m, n) = \textbackslash{}begin\{cases\} n+1 \&
@@ -925,7 +925,7 @@ function to each element.
 Using the in-built capabilities of your language, calculate the integer
 value of:
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=.9]{graphics/2869715b8204450d9946d9dd1966f50f.png}
 % \caption{5\^{}\{4\^{}\{3\^{}2\}\}}
@@ -980,11 +980,9 @@ The memory for an object is provided by an \textbf{allocator} which
 maintains the storage pool used for the \emph{heap}. Often a call to
 allocator is denoted as
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{P := }\KeywordTok{new} \NormalTok{T}
-\end{Highlighting}
-\end{Shaded}
+\begin{wideverbatim}
+   P := new T
+\end{wideverbatim}
 
 where T is the type of an allocated object and P is a \emph{reference}
 to the object.
@@ -1135,14 +1133,13 @@ Write a function to compute the
 can be (usefully) denoted as agm(\emph{a},\emph{g}), and is equal to
 the limit of the sequence:
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=.6]{graphics/da869c8260ae3107ca34619fd2642642.png}
 % \caption{a\_0 = a; \textbackslash{}qquad g\_0 = g}
 \end{figure}
-\usepackage{ctable}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=.6]{graphics/7416c556a1ecfe80d64f32dbc9c18ae6.png}
 % \caption{a\_\{n+1\} = \textbackslash{}tfrac\{1\}\{2\}(a\_n + g\_n);
@@ -1155,7 +1152,7 @@ iterations, this is an efficient method.
 
 Demonstrate the function by calculating:
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=.6]{graphics/953f4c8f564b5ed18e1b31d2716b5f8c.png}
 % \caption{\textbackslash{}mathrm\{agm\}(1,1/\textbackslash{}sqrt\{2\})}
@@ -2003,7 +2000,7 @@ for this set of positive integers.
   is the sum of the list divided by its length:
 \end{itemize}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=.6]{graphics/2b72903b5dd461c777da13fde57f3ebb.png}
 % \caption{ A(x\_1, \textbackslash{}ldots, x\_n) =
@@ -2016,7 +2013,7 @@ for this set of positive integers.
   mean} is the \emph{n}th root of the product of the list:
 \end{itemize}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=.6]{graphics/12595bb2b15b5d8b7263aba68c137db3.png}
 % \caption{ G(x\_1, \textbackslash{}ldots, x\_n) =
@@ -2030,7 +2027,7 @@ for this set of positive integers.
   list:
 \end{itemize}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=.6]{graphics/7f1c92a1977747914e9c5127764a9be4.png}
 % \caption{ H(x\_1, \textbackslash{}ldots, x\_n) =
@@ -2079,7 +2076,7 @@ the \textbf{quadratic mean}.
 The RMS is calculated as the mean of the squares of the numbers,
 square-rooted:
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=.6]{graphics/cf22c76e0c33c4fb96262638a28bd52b.png}
 % \caption{x\_\{\textbackslash{}mathrm\{rms\}\} = \textbackslash{}sqrt
@@ -2168,7 +2165,7 @@ function SMA(number: N):
     return average
 \end{wideverbatim}
 
-\\ See also: \emph{Standard Deviation}
+ See also: \emph{Standard Deviation}
 
 
 \begin{wideverbatim}

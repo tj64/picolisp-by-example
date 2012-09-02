@@ -155,7 +155,8 @@ database queries. See also \texttt{Comparing}, \texttt{isa/2}, \texttt{same/3}, 
       ((nr +Item @Nr) (nm +Item @Nm))
       (range @Nr @Item nr)
       (part @Nm @Item nm) ) )
- @Nr=(1 . 5) @Nm="part" @Item={3-1}                                              @Nr=(1 . 5) @Nm="part" @Item={3-2}
+      @Nr=(1 . 5) @Nm="part" @Item={3-1}
+      @Nr=(1 . 5) @Nm="part" @Item={3-2}
 -> NIL
 \end{wideverbatim}
 
@@ -474,7 +475,8 @@ these resources. Each resource must be a cons pair of two functions, an
    sup {K-2}
    nm Spare Part
    nr 2
- @Nr=(1 . 3) @Sup=2 @Rsrc=((((X) (ext 20 (out 16 (pr X)))) NIL (ext 20 (in 16 (rd))))) @Item={L-2}
+ @Nr=(1 . 3) @Sup=2 @Rsrc=((((X) (ext 20 (out 16 (pr X)))) 
+      NIL (ext 20 (in 16 (rd))))) @Item={L-2}
 -> NIL
 \end{wideverbatim}
 

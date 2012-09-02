@@ -124,11 +124,14 @@ Returns \texttt{any} when the argument a cons pair cell. See also \texttt{atom}.
 \label{sec:func-ref-P-part/3}
 
 
-\emph{Pilog} predicate that succeeds if the first argument,
-after \texttt{fold}ing it to a canonical form, is a /substring/ of the folded string representation of the result of applying the \texttt{get} algorithm to
-the following arguments. Typically used as filter predicate in
-\texttt{select/3} database queries. See also \texttt{sub?}, \texttt{isa/2}, \texttt{same/3},
-\texttt{bool/3}, \texttt{range/3}, \texttt{head/3}, \texttt{fold/3} and \texttt{tolr/3}.
+\emph{Pilog} predicate that succeeds if the first argument, after
+\texttt{fold}ing it to a canonical form, is a /substring/ of the
+folded string representation of the result of applying the
+\texttt{get} algorithm to the following arguments. Typically used as
+filter predicate in \texttt{select/3} database queries. See also
+\texttt{sub?}, \texttt{isa/2}, \texttt{same/3}, \texttt{bool/3},
+\texttt{range/3}, \texttt{head/3}, \texttt{fold/3} and
+\texttt{tolr/3}.
 
 
 \begin{wideverbatim}
@@ -139,7 +142,8 @@ the following arguments. Typically used as filter predicate in
       ((nr +Item @Nr) (nm +Item @Nm))
       (range @Nr @Item nr)
       (part @Nm @Item nm) ) )
- @Nr=(1 . 5) @Nm="part" @Item={3-1}                                              @Nr=(1 . 5) @Nm="part" @Item={3-2}
+      @Nr=(1 . 5) @Nm="part" @Item={3-1}
+      @Nr=(1 . 5) @Nm="part" @Item={3-2}
 -> NIL
 \end{wideverbatim}
 
@@ -748,10 +752,20 @@ arguments, using the system \texttt{ps} utility. See also \texttt{hd}.
 
 \begin{wideverbatim}
 : (proc 'pil)
-  PID  PPID  STARTED  SIZE %CPU WCHAN  CMD
-16993  3267 12:38:21  1516  0.5 -      /usr/bin/picolisp /usr/lib/picolisp/lib.l /usr/bin/pil +
-15731  1834 12:36:35  2544  0.1 -      /usr/bin/picolisp /usr/lib/picolisp/lib.l /usr/bin/pil app/main.l -main -go +
-15823 15731 12:36:44  2548  0.0 -        /usr/bin/picolisp /usr/lib/picolisp/lib.l /usr/bin/pil app/main.l -main -go +
+  PID    PPID  STARTED  SIZE %CPU WCHAN  
+  16993  3267 12:38:21  1516  0.5  -
+  CMD
+  /usr/bin/picolisp /usr/lib/picolisp/lib.l /usr/bin/pil +
+
+  PID    PPID  STARTED  SIZE %CPU WCHAN  
+  15731  1834 12:36:35  2544  0.1  -
+  CMD
+  /usr/bin/picolisp /usr/lib/picolisp/lib.l /usr/bin/pil app/main.l -main -go +
+
+  PID    PPID  STARTED  SIZE %CPU WCHAN  
+  15823 15731 12:36:44  2548  0.0  -
+  CMD
+  /usr/bin/picolisp /usr/lib/picolisp/lib.l /usr/bin/pil app/main.l -main -go +
 -> T
 \end{wideverbatim}
 

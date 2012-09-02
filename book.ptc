@@ -253,29 +253,29 @@
 \contentsline {section}{Hofstadter Figure-Figure sequences}{429}{Item.105}
 \contentsline {section}{Hofstadter Q sequence}{431}{Item.109}
 \contentsline {section}{Hofstadter-Conway \$10,000 sequence}{433}{figure.caption.61}
-\contentsline {section}{Holidays related to Easter}{436}{Item.112}
-\contentsline {section}{Horizontal sundial calculations}{438}{Item.112}
-\contentsline {section}{Horner's rule for polynomial evaluation}{440}{Item.112}
-\contentsline {section}{Host introspection}{441}{figure.caption.64}
-\contentsline {section}{Hostname}{442}{figure.caption.64}
-\contentsline {section}{Huffman coding}{443}{figure.caption.64}
+\contentsline {section}{Holidays related to Easter}{437}{Item.112}
+\contentsline {section}{Horizontal sundial calculations}{439}{Item.112}
+\contentsline {section}{Horner's rule for polynomial evaluation}{441}{Item.112}
+\contentsline {section}{Host introspection}{442}{figure.caption.65}
+\contentsline {section}{Hostname}{443}{figure.caption.65}
+\contentsline {section}{Huffman coding}{444}{figure.caption.65}
 \contentsline {chapter}{\numberline {11}Rosetta Code Tasks starting with I}{447}{chapter.11}
 \contentsline {section}{IPC via named pipe}{447}{chapter.11}
 \contentsline {section}{Identity matrix}{449}{Item.120}
-\contentsline {section}{Image convolution}{450}{figure.caption.66}
-\contentsline {section}{Image Noise}{452}{figure.caption.67}
-\contentsline {section}{Include a file}{454}{figure.caption.68}
-\contentsline {section}{Increment a numerical string}{455}{figure.caption.68}
-\contentsline {section}{Infinity}{456}{figure.caption.68}
-\contentsline {section}{Inheritance/Multiple}{457}{figure.caption.68}
-\contentsline {section}{Inheritance/Single}{458}{figure.caption.68}
-\contentsline {section}{Input loop}{460}{figure.caption.68}
-\contentsline {section}{Integer comparison}{461}{figure.caption.68}
-\contentsline {section}{Integer sequence}{462}{figure.caption.68}
-\contentsline {section}{Interactive programming}{463}{figure.caption.68}
-\contentsline {section}{Introspection}{464}{figure.caption.68}
-\contentsline {section}{Inverted index}{465}{figure.caption.68}
-\contentsline {section}{Inverted syntax}{467}{figure.caption.68}
+\contentsline {section}{Image convolution}{450}{figure.caption.67}
+\contentsline {section}{Image Noise}{452}{figure.caption.68}
+\contentsline {section}{Include a file}{454}{figure.caption.69}
+\contentsline {section}{Increment a numerical string}{455}{figure.caption.69}
+\contentsline {section}{Infinity}{456}{figure.caption.69}
+\contentsline {section}{Inheritance/Multiple}{457}{figure.caption.69}
+\contentsline {section}{Inheritance/Single}{458}{figure.caption.69}
+\contentsline {section}{Input loop}{460}{figure.caption.69}
+\contentsline {section}{Integer comparison}{461}{figure.caption.69}
+\contentsline {section}{Integer sequence}{462}{figure.caption.69}
+\contentsline {section}{Interactive programming}{463}{figure.caption.69}
+\contentsline {section}{Introspection}{464}{figure.caption.69}
+\contentsline {section}{Inverted index}{465}{figure.caption.69}
+\contentsline {section}{Inverted syntax}{467}{figure.caption.69}
 \contentsline {chapter}{\numberline {12}Rosetta Code Tasks starting with J}{469}{chapter.12}
 \contentsline {section}{JSON}{469}{chapter.12}
 \contentsline {section}{Jensen's Device}{472}{chapter.12}
@@ -285,9 +285,9 @@
 \contentsline {section}{Kaprekar numbers}{479}{chapter.13}
 \contentsline {section}{Keyboard macros}{481}{chapter.13}
 \contentsline {section}{Knapsack problem/0-1}{482}{chapter.13}
-\contentsline {section}{Knapsack problem/Bounded}{485}{table.caption.69}
-\contentsline {section}{Knapsack problem/Continuous}{488}{table.caption.70}
-\contentsline {section}{Knapsack problem/Unbounded}{490}{table.caption.71}
+\contentsline {section}{Knapsack problem/Bounded}{485}{table.caption.70}
+\contentsline {section}{Knapsack problem/Continuous}{488}{table.caption.71}
+\contentsline {section}{Knapsack problem/Unbounded}{490}{table.caption.72}
 \contentsline {section}{Knight's tour}{492}{Item.121}
 \contentsline {section}{Knuth's algorithm S}{494}{Item.121}
 \contentsline {section}{Knuth shuffle}{496}{Item.129}
@@ -297,8 +297,8 @@
 \contentsline {section}{Last letter-first letter}{501}{chapter.14}
 \contentsline {section}{Leap year}{503}{chapter.14}
 \contentsline {section}{Least common multiple}{504}{chapter.14}
-\contentsline {section}{Letter frequency}{505}{figure.caption.73}
-\contentsline {section}{Levenshtein distance}{506}{figure.caption.73}
+\contentsline {section}{Letter frequency}{505}{figure.caption.74}
+\contentsline {section}{Levenshtein distance}{506}{figure.caption.74}
 \contentsline {section}{Linear congruential generator}{508}{Item.132}
 \contentsline {section}{List comprehensions}{510}{Item.132}
 \contentsline {section}{Literals/Floating point}{513}{Item.135}
@@ -328,12 +328,12 @@
 \contentsline {section}{MD5/Implementation}{542}{chapter.15}
 \contentsline {section}{Make a backup file}{547}{chapter.15}
 \contentsline {section}{Man or boy test}{548}{chapter.15}
-\contentsline {section}{Mandelbrot set}{551}{table.caption.74}
-\contentsline {section}{Map range}{552}{table.caption.74}
-\contentsline {section}{Matrix multiplication}{553}{figure.caption.75}
-\contentsline {section}{Matrix transposition}{554}{figure.caption.75}
-\contentsline {section}{Matrix-exponentiation operator}{555}{figure.caption.75}
-\contentsline {section}{Maze generation}{556}{figure.caption.75}
+\contentsline {section}{Mandelbrot set}{551}{table.caption.75}
+\contentsline {section}{Map range}{552}{table.caption.75}
+\contentsline {section}{Matrix multiplication}{553}{figure.caption.76}
+\contentsline {section}{Matrix transposition}{554}{figure.caption.76}
+\contentsline {section}{Matrix-exponentiation operator}{555}{figure.caption.76}
+\contentsline {section}{Maze generation}{556}{figure.caption.76}
 \contentsline {section}{Maze solving}{559}{Item.143}
 \contentsline {section}{Median filter}{561}{Item.143}
 \contentsline {section}{Memory allocation}{562}{Item.143}
@@ -352,10 +352,10 @@
 \contentsline {section}{Multiline shebang}{582}{Item.143}
 \contentsline {section}{Multiple distinct objects}{583}{Item.143}
 \contentsline {section}{Multiple regression}{584}{Item.143}
-\contentsline {section}{Multiplication tables}{587}{figure.caption.78}
-\contentsline {section}{Multisplit}{588}{figure.caption.78}
-\contentsline {section}{Mutex}{590}{figure.caption.78}
-\contentsline {section}{Mutual recursion}{591}{figure.caption.78}
+\contentsline {section}{Multiplication tables}{587}{figure.caption.79}
+\contentsline {section}{Multisplit}{588}{figure.caption.79}
+\contentsline {section}{Mutex}{590}{figure.caption.79}
+\contentsline {section}{Mutual recursion}{591}{figure.caption.79}
 \contentsline {chapter}{\numberline {16}Rosetta Code Tasks starting with N}{593}{chapter.16}
 \contentsline {section}{N-queens problem}{593}{chapter.16}
 \contentsline {section}{Named parameters}{595}{chapter.16}
@@ -377,10 +377,10 @@
 \contentsline {section}{One of n lines in a file}{629}{Item.157}
 \contentsline {section}{One-dimensional cellular automata}{631}{Item.160}
 \contentsline {section}{OpenGL}{633}{Item.160}
-\contentsline {section}{Optional parameters}{635}{figure.caption.80}
-\contentsline {section}{Order two numerical lists}{637}{figure.caption.80}
-\contentsline {section}{Ordered Partitions}{638}{figure.caption.80}
-\contentsline {section}{Ordered words}{640}{figure.caption.81}
+\contentsline {section}{Optional parameters}{635}{figure.caption.81}
+\contentsline {section}{Order two numerical lists}{637}{figure.caption.81}
+\contentsline {section}{Ordered Partitions}{638}{figure.caption.81}
+\contentsline {section}{Ordered words}{640}{figure.caption.82}
 \contentsline {chapter}{\numberline {18}Rosetta Code Tasks starting with P}{641}{chapter.18}
 \contentsline {section}{Palindrome detection}{641}{chapter.18}
 \contentsline {section}{Pangram checker}{643}{chapter.18}
@@ -388,19 +388,19 @@
 \contentsline {section}{Parametric polymorphism}{646}{chapter.18}
 \contentsline {section}{Parametrized SQL statement}{649}{chapter.18}
 \contentsline {section}{Parse an IP Address}{650}{chapter.18}
-\contentsline {section}{Parsing command-line arguments}{653}{table.caption.82}
-\contentsline {section}{Parsing/RPN calculator algorithm}{654}{table.caption.82}
-\contentsline {section}{Parsing/RPN to infix conversion}{656}{table.caption.82}
-\contentsline {section}{Parsing/Shunting-yard algorithm}{659}{table.caption.84}
-\contentsline {section}{Partial function application}{662}{table.caption.85}
-\contentsline {section}{Pascal's triangle}{664}{table.caption.85}
-\contentsline {section}{Pascal's triangle/Puzzle}{665}{table.caption.85}
-\contentsline {section}{Pattern matching}{667}{table.caption.85}
-\contentsline {section}{Percentage difference between images}{669}{table.caption.85}
-\contentsline {section}{Perfect numbers}{671}{table.caption.86}
-\contentsline {section}{Permutation test}{672}{table.caption.86}
-\contentsline {section}{Permutations}{675}{table.caption.87}
-\contentsline {section}{Permutations/Derangements}{676}{table.caption.87}
+\contentsline {section}{Parsing command-line arguments}{653}{table.caption.83}
+\contentsline {section}{Parsing/RPN calculator algorithm}{654}{table.caption.83}
+\contentsline {section}{Parsing/RPN to infix conversion}{656}{table.caption.83}
+\contentsline {section}{Parsing/Shunting-yard algorithm}{659}{table.caption.85}
+\contentsline {section}{Partial function application}{662}{table.caption.86}
+\contentsline {section}{Pascal's triangle}{664}{table.caption.86}
+\contentsline {section}{Pascal's triangle/Puzzle}{665}{table.caption.86}
+\contentsline {section}{Pattern matching}{667}{table.caption.86}
+\contentsline {section}{Percentage difference between images}{669}{table.caption.86}
+\contentsline {section}{Perfect numbers}{671}{table.caption.87}
+\contentsline {section}{Permutation test}{672}{table.caption.87}
+\contentsline {section}{Permutations}{675}{table.caption.88}
+\contentsline {section}{Permutations/Derangements}{676}{table.caption.88}
 \contentsline {section}{Pi}{678}{Item.164}
 \contentsline {section}{Pick random element}{679}{Item.164}
 \contentsline {section}{Pinstripe/Display}{680}{Item.164}
@@ -427,48 +427,48 @@
 \contentsline {section}{Quine}{712}{chapter.19}
 \contentsline {chapter}{\numberline {20}Rosetta Code Tasks starting with R}{715}{chapter.20}
 \contentsline {section}{RSA code}{715}{chapter.20}
-\contentsline {section}{Random number generator (device)}{718}{figure.caption.90}
-\contentsline {section}{Random number generator (included)}{719}{figure.caption.90}
-\contentsline {section}{Random numbers}{720}{figure.caption.90}
-\contentsline {section}{Range expansion}{721}{figure.caption.90}
-\contentsline {section}{Range extraction}{722}{figure.caption.90}
-\contentsline {section}{Rate counter}{724}{figure.caption.90}
-\contentsline {section}{Ray-casting algorithm}{726}{figure.caption.90}
-\contentsline {section}{Read a configuration file}{732}{figure.caption.93}
-\contentsline {section}{Read a specific line from a file}{734}{figure.caption.93}
-\contentsline {section}{Read entire file}{735}{figure.caption.93}
-\contentsline {section}{Read a file line by line}{736}{figure.caption.93}
-\contentsline {section}{Real constants and functions}{737}{figure.caption.93}
-\contentsline {section}{Record sound}{739}{figure.caption.93}
-\contentsline {section}{Reduced row echelon form}{740}{figure.caption.93}
-\contentsline {section}{Regular expressions}{742}{figure.caption.93}
-\contentsline {section}{Remote agent/Agent interface}{743}{figure.caption.93}
-\contentsline {section}{Remote agent/Agent logic}{744}{figure.caption.93}
-\contentsline {section}{Remote agent/Simulation}{750}{figure.caption.93}
-\contentsline {section}{Remove duplicate elements}{754}{figure.caption.93}
-\contentsline {section}{Remove lines from a file}{755}{figure.caption.93}
-\contentsline {section}{Remove the first and last characters from a string/Top and tail}{756}{figure.caption.93}
-\contentsline {section}{Rename a file}{757}{figure.caption.93}
-\contentsline {section}{Rendezvous}{758}{figure.caption.93}
-\contentsline {section}{Repeat a string}{760}{figure.caption.93}
-\contentsline {section}{Respond to an unknown method call}{761}{figure.caption.93}
-\contentsline {section}{Return multiple values}{762}{figure.caption.93}
-\contentsline {section}{Reverse a string}{763}{figure.caption.93}
-\contentsline {section}{Rock-paper-scissors}{764}{figure.caption.93}
-\contentsline {section}{Roman numerals/Encode}{765}{figure.caption.93}
-\contentsline {section}{Roman numerals/Decode}{766}{figure.caption.93}
-\contentsline {section}{Roots of a function}{767}{figure.caption.93}
-\contentsline {section}{Roots of a quadratic function}{768}{figure.caption.93}
-\contentsline {section}{Roots of unity}{770}{figure.caption.93}
-\contentsline {section}{Rosetta Code/Count examples}{771}{figure.caption.93}
-\contentsline {section}{Rosetta Code/Find unimplemented tasks}{772}{figure.caption.93}
-\contentsline {section}{Rosetta Code/Fix code tags}{773}{figure.caption.93}
-\contentsline {section}{Rosetta Code/Rank languages by popularity}{774}{figure.caption.93}
-\contentsline {section}{Rot-13}{776}{figure.caption.93}
-\contentsline {section}{Run as a daemon or service}{777}{figure.caption.93}
-\contentsline {section}{Run-length encoding}{778}{figure.caption.93}
-\contentsline {section}{Runtime evaluation}{780}{figure.caption.93}
-\contentsline {section}{Runtime evaluation/In an environment}{781}{figure.caption.93}
+\contentsline {section}{Random number generator (device)}{718}{figure.caption.91}
+\contentsline {section}{Random number generator (included)}{719}{figure.caption.91}
+\contentsline {section}{Random numbers}{720}{figure.caption.91}
+\contentsline {section}{Range expansion}{721}{figure.caption.91}
+\contentsline {section}{Range extraction}{722}{figure.caption.91}
+\contentsline {section}{Rate counter}{724}{figure.caption.91}
+\contentsline {section}{Ray-casting algorithm}{726}{figure.caption.91}
+\contentsline {section}{Read a configuration file}{732}{figure.caption.94}
+\contentsline {section}{Read a specific line from a file}{734}{figure.caption.94}
+\contentsline {section}{Read entire file}{735}{figure.caption.94}
+\contentsline {section}{Read a file line by line}{736}{figure.caption.94}
+\contentsline {section}{Real constants and functions}{737}{figure.caption.94}
+\contentsline {section}{Record sound}{739}{figure.caption.94}
+\contentsline {section}{Reduced row echelon form}{740}{figure.caption.94}
+\contentsline {section}{Regular expressions}{742}{figure.caption.94}
+\contentsline {section}{Remote agent/Agent interface}{743}{figure.caption.94}
+\contentsline {section}{Remote agent/Agent logic}{744}{figure.caption.94}
+\contentsline {section}{Remote agent/Simulation}{750}{figure.caption.94}
+\contentsline {section}{Remove duplicate elements}{754}{figure.caption.94}
+\contentsline {section}{Remove lines from a file}{755}{figure.caption.94}
+\contentsline {section}{Remove the first and last characters from a string/Top and tail}{756}{figure.caption.94}
+\contentsline {section}{Rename a file}{757}{figure.caption.94}
+\contentsline {section}{Rendezvous}{758}{figure.caption.94}
+\contentsline {section}{Repeat a string}{760}{figure.caption.94}
+\contentsline {section}{Respond to an unknown method call}{761}{figure.caption.94}
+\contentsline {section}{Return multiple values}{762}{figure.caption.94}
+\contentsline {section}{Reverse a string}{763}{figure.caption.94}
+\contentsline {section}{Rock-paper-scissors}{764}{figure.caption.94}
+\contentsline {section}{Roman numerals/Encode}{765}{figure.caption.94}
+\contentsline {section}{Roman numerals/Decode}{766}{figure.caption.94}
+\contentsline {section}{Roots of a function}{767}{figure.caption.94}
+\contentsline {section}{Roots of a quadratic function}{768}{figure.caption.94}
+\contentsline {section}{Roots of unity}{770}{figure.caption.94}
+\contentsline {section}{Rosetta Code/Count examples}{771}{figure.caption.94}
+\contentsline {section}{Rosetta Code/Find unimplemented tasks}{772}{figure.caption.94}
+\contentsline {section}{Rosetta Code/Fix code tags}{773}{figure.caption.94}
+\contentsline {section}{Rosetta Code/Rank languages by popularity}{774}{figure.caption.94}
+\contentsline {section}{Rot-13}{776}{figure.caption.94}
+\contentsline {section}{Run as a daemon or service}{777}{figure.caption.94}
+\contentsline {section}{Run-length encoding}{778}{figure.caption.94}
+\contentsline {section}{Runtime evaluation}{780}{figure.caption.94}
+\contentsline {section}{Runtime evaluation/In an environment}{781}{figure.caption.94}
 \contentsline {chapter}{\numberline {21}Rosetta Code Tasks starting with S}{783}{chapter.21}
 \contentsline {section}{S-Expressions}{783}{chapter.21}
 \contentsline {section}{SEDOLs}{786}{chapter.21}
@@ -507,10 +507,10 @@
 \contentsline {section}{Sockets}{836}{Item.176}
 \contentsline {section}{Sokoban}{837}{Item.176}
 \contentsline {section}{Solve a Hidato puzzle}{841}{Item.176}
-\contentsline {section}{Sort an array of composite structures}{845}{figure.caption.95}
-\contentsline {section}{Sort an integer array}{846}{figure.caption.95}
-\contentsline {section}{Sort disjoint sublist}{847}{figure.caption.95}
-\contentsline {section}{Sort stability}{848}{figure.caption.95}
+\contentsline {section}{Sort an array of composite structures}{845}{figure.caption.96}
+\contentsline {section}{Sort an integer array}{846}{figure.caption.96}
+\contentsline {section}{Sort disjoint sublist}{847}{figure.caption.96}
+\contentsline {section}{Sort stability}{848}{figure.caption.96}
 \contentsline {section}{Sort using a custom comparator}{849}{Item.179}
 \contentsline {section}{Sorting algorithms/Bead sort}{850}{Item.179}
 \contentsline {section}{Sorting algorithms/Bogosort}{851}{Item.179}
@@ -541,11 +541,11 @@
 \contentsline {section}{Standard deviation}{890}{Item.184}
 \contentsline {section}{State name puzzle}{891}{Item.184}
 \contentsline {section}{Statistics/Basic}{894}{Item.184}
-\contentsline {section}{Stem-and-leaf plot}{897}{figure.caption.96}
-\contentsline {section}{Straddling checkerboard}{899}{figure.caption.96}
-\contentsline {section}{String case}{901}{figure.caption.96}
-\contentsline {section}{String concatenation}{902}{figure.caption.96}
-\contentsline {section}{String interpolation (included)}{903}{figure.caption.96}
+\contentsline {section}{Stem-and-leaf plot}{897}{figure.caption.97}
+\contentsline {section}{Straddling checkerboard}{899}{figure.caption.97}
+\contentsline {section}{String case}{901}{figure.caption.97}
+\contentsline {section}{String concatenation}{902}{figure.caption.97}
+\contentsline {section}{String interpolation (included)}{903}{figure.caption.97}
 \contentsline {section}{String length}{904}{Item.186}
 \contentsline {section}{Strip a set of characters from a string}{905}{Item.186}
 \contentsline {section}{Strip block comments}{906}{Item.186}
@@ -553,8 +553,8 @@
 \contentsline {section}{Strip control codes and extended characters from a string}{909}{Item.186}
 \contentsline {section}{Strip whitespace from a string/Top and tail}{911}{Item.186}
 \contentsline {section}{Subset sum problem}{912}{Item.186}
-\contentsline {section}{Substring}{915}{table.caption.97}
-\contentsline {section}{Subtractive generator}{917}{table.caption.97}
+\contentsline {section}{Substring}{915}{table.caption.98}
+\contentsline {section}{Subtractive generator}{917}{table.caption.98}
 \contentsline {section}{Sudoku}{920}{Item.191}
 \contentsline {section}{Sum and product of an array}{923}{Item.191}
 \contentsline {section}{Sum digits of an integer}{924}{Item.191}
@@ -573,9 +573,9 @@
 \contentsline {section}{Terminal control/Preserve screen}{941}{chapter.22}
 \contentsline {section}{Terminal Control/Unicode output}{942}{chapter.22}
 \contentsline {section}{Ternary logic}{943}{chapter.22}
-\contentsline {section}{Test a function}{949}{table.caption.99}
-\contentsline {section}{Text processing/1}{950}{table.caption.99}
-\contentsline {section}{Text processing/2}{953}{table.caption.99}
+\contentsline {section}{Test a function}{949}{table.caption.100}
+\contentsline {section}{Text processing/1}{950}{table.caption.100}
+\contentsline {section}{Text processing/2}{953}{table.caption.100}
 \contentsline {section}{Text processing/3}{955}{Item.196}
 \contentsline {section}{Thiele's interpolation formula}{957}{Item.196}
 \contentsline {section}{Three Dogs}{960}{Item.199}
@@ -602,12 +602,12 @@
 \contentsline {section}{User input/Text}{994}{Item.211}
 \contentsline {chapter}{\numberline {24}Rosetta Code Tasks starting with V}{995}{chapter.24}
 \contentsline {section}{Van der Corput sequence}{995}{chapter.24}
-\contentsline {section}{Variable size/Get}{999}{figure.caption.108}
-\contentsline {section}{Variable size/Set}{1000}{figure.caption.108}
-\contentsline {section}{Variable-length quantity}{1001}{figure.caption.108}
-\contentsline {section}{Variables}{1002}{figure.caption.108}
-\contentsline {section}{Variadic function}{1003}{figure.caption.108}
-\contentsline {section}{Vector products}{1004}{figure.caption.108}
+\contentsline {section}{Variable size/Get}{999}{figure.caption.109}
+\contentsline {section}{Variable size/Set}{1000}{figure.caption.109}
+\contentsline {section}{Variable-length quantity}{1001}{figure.caption.109}
+\contentsline {section}{Variables}{1002}{figure.caption.109}
+\contentsline {section}{Variadic function}{1003}{figure.caption.109}
+\contentsline {section}{Vector products}{1004}{figure.caption.109}
 \contentsline {section}{Verify distribution uniformity/Naive}{1006}{Item.219}
 \contentsline {section}{Vigenère Cipher}{1008}{Item.219}
 \contentsline {chapter}{\numberline {25}Rosetta Code Tasks starting with W}{1009}{chapter.25}
@@ -618,9 +618,9 @@
 \contentsline {section}{Window creation/X11}{1013}{chapter.25}
 \contentsline {section}{Window management}{1015}{chapter.25}
 \contentsline {section}{Wireworld}{1017}{chapter.25}
-\contentsline {section}{Word wrap}{1020}{table.caption.109}
-\contentsline {section}{Write float arrays to a text file}{1021}{table.caption.109}
-\contentsline {section}{Write to Windows event log}{1023}{table.caption.109}
+\contentsline {section}{Word wrap}{1020}{table.caption.110}
+\contentsline {section}{Write float arrays to a text file}{1021}{table.caption.110}
+\contentsline {section}{Write to Windows event log}{1023}{table.caption.110}
 \contentsline {chapter}{\numberline {26}Rosetta Code Tasks starting with X}{1025}{chapter.26}
 \contentsline {section}{XML/DOM serialization}{1025}{chapter.26}
 \contentsline {section}{XML/Input}{1026}{chapter.26}
@@ -748,13 +748,13 @@
 \contentsline {section}{\texttt {(date ['T]) -> dat}}{1093}{chapter.32}
 \contentsline {section}{\texttt {(day 'dat ['lst]) -> sym}}{1094}{chapter.32}
 \contentsline {section}{\texttt {(db 'var 'cls ['hook] 'any ['var 'any ..]) -> sym | NIL}}{1094}{chapter.32}
-\contentsline {section}{\texttt {db/3}}{1094}{chapter.32}
-\contentsline {section}{\texttt {(db: cls ..) -> num}}{1095}{chapter.32}
+\contentsline {section}{\texttt {db/3}}{1095}{chapter.32}
+\contentsline {section}{\texttt {(db: cls ..) -> num}}{1096}{chapter.32}
 \contentsline {section}{\texttt {(dbSync) -> flg}}{1096}{chapter.32}
 \contentsline {section}{\texttt {(dbck ['cnt] 'flg) -> any}}{1096}{chapter.32}
-\contentsline {section}{\texttt {(dbs . lst)}}{1096}{chapter.32}
+\contentsline {section}{\texttt {(dbs . lst)}}{1097}{chapter.32}
 \contentsline {section}{\texttt {(dbs+ 'num . lst)}}{1097}{chapter.32}
-\contentsline {section}{\texttt {(de sym . any) -> sym}}{1097}{chapter.32}
+\contentsline {section}{\texttt {(de sym . any) -> sym}}{1098}{chapter.32}
 \contentsline {section}{\texttt {(debug 'sym) -> T}}{1098}{chapter.32}
 \contentsline {section}{\texttt {(dec 'num) -> num}}{1099}{chapter.32}
 \contentsline {section}{\texttt {(def 'sym 'any) -> sym}}{1100}{chapter.32}
@@ -1023,8 +1023,8 @@
 \contentsline {section}{\texttt {(proc 'sym ..) -> T}}{1217}{chapter.44}
 \contentsline {section}{\texttt {(prog . prg) -> any}}{1218}{chapter.44}
 \contentsline {section}{\texttt {(prog1 'any1 . prg) -> any1}}{1218}{chapter.44}
-\contentsline {section}{\texttt {(prog2 'any1 'any2 . prg) -> any2}}{1218}{chapter.44}
-\contentsline {section}{\texttt {(prop 'sym1|lst ['sym2|cnt ..] 'sym) -> var}}{1218}{chapter.44}
+\contentsline {section}{\texttt {(prog2 'any1 'any2 . prg) -> any2}}{1219}{chapter.44}
+\contentsline {section}{\texttt {(prop 'sym1|lst ['sym2|cnt ..] 'sym) -> var}}{1219}{chapter.44}
 \contentsline {section}{\texttt {(protect . prg) -> any}}{1219}{chapter.44}
 \contentsline {chapter}{\numberline {45}Symbols starting with Q}{1221}{chapter.45}
 \contentsline {section}{\texttt {(qsym . sym) -> lst}}{1221}{chapter.45}
@@ -1201,16 +1201,17 @@
 \contentsline {section}{\texttt {(zapTree 'sym)}}{1304}{chapter.54}
 \contentsline {section}{\texttt {(zap\_)}}{1304}{chapter.54}
 \contentsline {section}{\texttt {(zero var ..) -> 0} }{1305}{chapter.54}
-\contentsline {chapter}{\numberline {A}GNU Free Documentation License}{1307}{appendix.A}
-\contentsline {section}{0. PREAMBLE}{1307}{appendix.A}
-\contentsline {section}{1. APPLICABILITY AND DEFINITIONS}{1308}{appendix.A}
-\contentsline {section}{2. VERBATIM COPYING}{1310}{appendix.A}
-\contentsline {section}{3. COPYING IN QUANTITY}{1310}{appendix.A}
-\contentsline {section}{4. MODIFICATIONS}{1311}{appendix.A}
-\contentsline {section}{5. COMBINING DOCUMENTS}{1313}{appendix.A}
-\contentsline {section}{6. COLLECTIONS OF DOCUMENTS}{1313}{appendix.A}
-\contentsline {section}{7. AGGREGATION WITH INDEPENDENT WORKS}{1314}{appendix.A}
-\contentsline {section}{8. TRANSLATION}{1314}{appendix.A}
-\contentsline {section}{9. TERMINATION}{1315}{appendix.A}
-\contentsline {section}{10. FUTURE REVISIONS OF THIS LICENSE}{1315}{appendix.A}
+\contentsline {part}{Part\ IV\hspace {\betweenumberspace }GNU Free Documentation Licence}{1307}{part.4}
+\contentsline {chapter}{\numberline {A}GNU Free Documentation License}{1309}{appendix.A}
+\contentsline {section}{0. PREAMBLE}{1309}{appendix.A}
+\contentsline {section}{1. APPLICABILITY AND DEFINITIONS}{1310}{appendix.A}
+\contentsline {section}{2. VERBATIM COPYING}{1312}{appendix.A}
+\contentsline {section}{3. COPYING IN QUANTITY}{1312}{appendix.A}
+\contentsline {section}{4. MODIFICATIONS}{1313}{appendix.A}
+\contentsline {section}{5. COMBINING DOCUMENTS}{1315}{appendix.A}
+\contentsline {section}{6. COLLECTIONS OF DOCUMENTS}{1315}{appendix.A}
+\contentsline {section}{7. AGGREGATION WITH INDEPENDENT WORKS}{1316}{appendix.A}
+\contentsline {section}{8. TRANSLATION}{1316}{appendix.A}
+\contentsline {section}{9. TERMINATION}{1317}{appendix.A}
+\contentsline {section}{10. FUTURE REVISIONS OF THIS LICENSE}{1317}{appendix.A}
 \contentsfinish 

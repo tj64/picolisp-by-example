@@ -653,8 +653,9 @@ accept.                                # Stop
 inc> 67292896
    *Dbg ((859 . "lib/db.l"))
 
-leaf ((Tree) (let (Node (cdr (root Tree)) X) (while (val Node) (setq X (cadr @) Node (car @))) (cddr X)))
-   *Dbg ((173 . "lib/btree.l"))
+leaf ((Tree) (let (Node (cdr (root Tree)) X)
+(while (val Node) (setq X (cadr @) Node (car @))) (cddr X)))
+*Dbg ((173 . "lib/btree.l"))
 
 nil 67284680
    T (((@X) (@ not (-> @X))))

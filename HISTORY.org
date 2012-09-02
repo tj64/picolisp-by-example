@@ -3,7 +3,10 @@
    [2012-08-26 So 01:11]
 
 
-** TODO change version number and date in svmult.cls
+** TODO announce new version in mailing-list
+   [2012-08-26 So 03:07]
+
+** TODO change version number and date in svmono.cls
    [2012-08-26 So 01:11]
 ** TODO replace download on github
    [2012-08-26 So 01:11]
@@ -15,13 +18,225 @@
   [2012-08-26 So 00:11]
 
 
-** DONE check function-ref-D p.1144
+** TODO find out about and credit task authors (somehow ... *sigh*)
+   [2012-09-02 So 23:21]
+** TODO fix task 'reverse a string' p. 818
+   [2012-08-30 Do 23:40]
+** TODO fix missing image picolisp solution p.740
+   [2012-08-30 Do 19:23]
+** TODO add foreword (if possible) from Micheal Mol
+   [2012-08-30 Do 19:11]
+** TODO fix sample image in task pinstripe/Display p.735
+   [2012-08-30 Do 19:10]
+** DONE replace .gif in task 'Hofstadter-Conway \$10,000 sequence' with .png
+   CLOSED: [2012-08-26 So 11:32]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-08-26 So 11:32]
+   :END:
+   [2012-08-26 So 11:23]
+** TODO delete redundant ’\\’ in rosetta tasks
+   [2012-08-26 So 11:22]
+** DONE rosettacode-A figures: replace [htbp] with [H]
+   CLOSED: [2012-08-26 So 11:20]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-08-26 So 11:20]
+   :END:
+   [2012-08-26 So 11:17]
+** DONE fix rosetta task 'Arithmetic-geometric mean
+   CLOSED: [2012-08-26 So 11:20]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-08-26 So 11:20]
+   :END:
+   [2012-08-26 So 11:19]
+** DONE fix rosetta task 'Arena storage pool'
+   CLOSED: [2012-08-26 So 11:20]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-08-26 So 11:20]
+   :END:
+   [2012-08-26 So 11:13]
+** DONE add part before appendix
+   CLOSED: [2012-09-02 So 23:20]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-09-02 So 23:20]
+   :END:
+   [2012-08-26 So 03:16]
+** DONE fix overly wide code-blocks in function-reference
+   CLOSED: [2012-09-02 So 23:15]
+   :LOGBOOK:
+   - State "DONE"       from "NEXT"       [2012-09-02 So 23:15]
+   :END:
+   [2012-08-26 So 03:06]
+*** DONE A
+    CLOSED: [2012-09-02 So 21:30]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 21:30]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE B
+    CLOSED: [2012-09-02 So 21:31]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 21:31]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE C
+    CLOSED: [2012-09-02 So 21:33]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 21:33]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE D
+    CLOSED: [2012-09-02 So 21:45]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 21:45]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE E
+    CLOSED: [2012-09-02 So 21:54]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 21:54]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE F
+    CLOSED: [2012-09-02 So 22:06]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 22:06]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE G
+    CLOSED: [2012-09-02 So 22:06]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 22:06]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE H
+    CLOSED: [2012-09-02 So 22:07]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 22:07]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE I
+    CLOSED: [2012-09-02 So 22:09]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 22:09]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE J
+    CLOSED: [2012-09-02 So 22:09]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 22:09]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE K
+    CLOSED: [2012-09-02 So 22:15]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 22:15]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE L
+    CLOSED: [2012-09-02 So 22:24]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 22:24]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE M
+    CLOSED: [2012-09-02 So 22:27]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 22:27]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE N
+    CLOSED: [2012-09-02 So 22:29]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 22:29]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE O
+    CLOSED: [2012-09-02 So 22:30]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 22:30]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE P
+    CLOSED: [2012-09-02 So 22:48]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 22:48]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE Q
+    CLOSED: [2012-09-02 So 22:52]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 22:52]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE R
+    CLOSED: [2012-09-02 So 22:59]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 22:59]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE S
+    CLOSED: [2012-09-02 So 23:06]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 23:06]
+    :END:
+    [2012-09-02 So 21:09]
+*** DONE T
+    CLOSED: [2012-09-02 So 23:08]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 23:08]
+    :END:
+    [2012-09-02 So 21:08]
+*** DONE U
+    CLOSED: [2012-09-02 So 23:09]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 23:09]
+    :END:
+    [2012-09-02 So 21:08]
+*** DONE V
+    CLOSED: [2012-09-02 So 23:12]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 23:12]
+    :END:
+    [2012-09-02 So 21:08]
+*** DONE W
+    CLOSED: [2012-09-02 So 23:13]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 23:13]
+    :END:
+    [2012-09-02 So 21:08]
+*** DONE X
+    CLOSED: [2012-09-02 So 23:14]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 23:14]
+    :END:
+    [2012-09-02 So 21:08]
+*** DONE Y
+    CLOSED: [2012-09-02 So 23:14]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 23:14]
+    :END:
+    [2012-09-02 So 21:08]
+*** DONE Z
+    CLOSED: [2012-09-02 So 23:14]
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2012-09-02 So 23:14]
+    :END:
+    [2012-09-02 So 21:08]
+** DONE fix function-ref-K chapter header
+   CLOSED: [2012-09-02 So 22:10]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-09-02 So 22:10]
+   :END:
+   [2012-08-26 So 03:12]
+** DONE fix function-ref-D p.1144
    CLOSED: [2012-08-26 So 03:03]
    :LOGBOOK:
    - State "DONE"       from "TODO"       [2012-08-26 So 03:03]
    :END:
    [2012-08-26 So 01:30]
-** TODO change version number and date in svmult.cls
+** TODO announce new version in mailing-list
+   [2012-08-26 So 03:07]
+** TODO change version number and date in svmono.cls
   [2012-08-26 So 01:11]
 ** TODO replace download on github
   [2012-08-26 So 01:11]

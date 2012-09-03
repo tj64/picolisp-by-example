@@ -18,6 +18,9 @@
   [2012-08-26 So 00:11]
 
 
+** TODO deal with utf-8 chars not printed by pdfLatex (try xetex or luatex?)
+   [2012-09-02 So 23:28]
+Use 'natural sorting' (aka 'natural desaster') task to figure out solution) 
 ** TODO find out about and credit task authors (somehow ... *sigh*)
    [2012-09-02 So 23:21]
 ** TODO fix task 'reverse a string' p. 818

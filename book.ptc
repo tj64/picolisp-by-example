@@ -1201,7 +1201,7 @@
 \contentsline {section}{\texttt {(zapTree 'sym)}}{1300}{chapter.54}
 \contentsline {section}{\texttt {(zap\_)}}{1300}{chapter.54}
 \contentsline {section}{\texttt {(zero var ..) -> 0} }{1301}{chapter.54}
-\contentsline {part}{Part\ IV\hspace {\betweenumberspace }GNU Free Documentation Licence}{1303}{part.4}
+\contentsline {part}{Part\ IV\hspace {\betweenumberspace }Appendix}{1303}{part.4}
 \contentsline {chapter}{\numberline {A}GNU Free Documentation License}{1305}{appendix.A}
 \contentsline {section}{0. PREAMBLE}{1305}{appendix.A}
 \contentsline {section}{1. APPLICABILITY AND DEFINITIONS}{1306}{appendix.A}
@@ -1215,5 +1215,4 @@
 \contentsline {section}{9. TERMINATION}{1312}{appendix.A}
 \contentsline {section}{10. FUTURE REVISIONS OF THIS LICENSE}{1313}{appendix.A}
 \contentsline {chapter}{\numberline {B}Links to original Rosetta Code Tasks}{1315}{appendix.B}
-\contentsline {section}{Tabular Depiction of Rosetta Code Task URI's }{1315}{appendix.B}
 \contentsfinish 

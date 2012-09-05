@@ -1,7 +1,25 @@
+* TODO Version 1.03
+   [2012-09-05 Mi 00:24]
+
+** TODO announce new version in mailing-list
+   [2012-09-05 Mi 00:24]
+** TODO change version number and date in svmono.cls
+   [2012-09-05 Mi 00:24]
+** TODO replace download on github
+   [2012-09-05 Mi 00:24]
+** TODO replace pdf on scribd
+   [2012-09-05 Mi 00:24]
 
 * TODO Version 1.02
    [2012-08-26 So 01:11]
 
+
+** TODO deal with utf-8 chars not printed by pdfLatex (try xetex or luatex?)
+   [2012-09-02 So 23:28]
+Use 'natural sorting' (aka 'natural desaster') task to figure out solution) 
+
+** TODO add foreword (if possible) from Micheal Mol
+   [2012-08-30 Do 19:11]
 
 ** TODO announce new version in mailing-list
    [2012-08-26 So 03:07]
@@ -18,18 +36,21 @@
   [2012-08-26 So 00:11]
 
 
-** TODO deal with utf-8 chars not printed by pdfLatex (try xetex or luatex?)
-   [2012-09-02 So 23:28]
-Use 'natural sorting' (aka 'natural desaster') task to figure out solution) 
 ** TODO find out about and credit task authors (somehow ... *sigh*)
    [2012-09-02 So 23:21]
 ** TODO fix task 'reverse a string' p. 818
    [2012-08-30 Do 23:40]
-** TODO fix missing image picolisp solution p.740
+** DONE fix missing image picolisp solution p.740
+   CLOSED: [2012-09-05 Mi 00:33]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-09-05 Mi 00:33]
+   :END:
    [2012-08-30 Do 19:23]
-** TODO add foreword (if possible) from Micheal Mol
-   [2012-08-30 Do 19:11]
-** TODO fix sample image in task pinstripe/Display p.735
+** DONE fix sample image in task pinstripe/Display p.735
+   CLOSED: [2012-09-05 Mi 00:23]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-09-05 Mi 00:23]
+   :END:
    [2012-08-30 Do 19:10]
 ** DONE replace .gif in task 'Hofstadter-Conway \$10,000 sequence' with .png
    CLOSED: [2012-08-26 So 11:32]

@@ -27,7 +27,7 @@
 \usepackage{multicol}        % used for the two-column index
 \usepackage[bottom]{footmisc}% places footnotes at page bottom
 \usepackage{parskip}
-\usepackage{hyperref}
+\usepackage[breaklinks]{hyperref}
 
 % \usepackage[utf8x]{inputenc}
 % \usepackage[T1]{fontenc}
@@ -44,10 +44,19 @@
 
 % \usepackage[margin=4cm]{geometry}
 \usepackage{fancybox}
+\usepackage{longtable}
 
 % define detailled toc
 \usepackage[explicit]{titlesec}
 \usepackage{titletoc}
+
+% longtable
+\usepackage{longtable,lscape}
+\usepackage{rotating}
+% \usepackage{multirow,multicol}
+
+
+
 
 \titleformat{name=\section,numberless}
   {\normalfont\Large\bfseries}{}{0em}{#1\addcontentsline{ptc}{section}{#1}}
@@ -177,6 +186,7 @@
 \include{mainmatter/function-ref-Z}
 \include{mainmatter/parts/part-gnu-licence}
 \include{mainmatter/appendix}
+\include{mainmatter/links-to-rosetta-tasks}
 
 \backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \include{backmatter/glossary}

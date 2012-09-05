@@ -1869,7 +1869,7 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
    \vskip 1cm                % Vertical space after subtitle.
   \fi
   \if!\@date!\else
-  {\large Version 1.0 \\ August 23, 2012}
+  {\large Version 1.01 \\ September 05, 2012}
     % \@date}%          % Date set in \large size.
     \par
     \vskip 1.5em               % Vertical space after date.

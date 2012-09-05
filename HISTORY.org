@@ -11,9 +11,15 @@
    [2012-09-05 Mi 00:24]
 
 
-* TODO Version 1.02
+* NEXT Version 1.02
    [2012-08-26 So 01:11]
 
+
+** TODO fix task 'reverse a string' p. 818
+   [2012-08-30 Do 23:40]
+
+** TODO delete redundant ’\\’ in rosetta tasks
+   [2012-08-26 So 11:22]
 
 ** TODO fix link to "Hofstadter-Conway \$10,000 Sequence" in appendix 
    [2012-09-05 Mi 13:45]
@@ -35,11 +41,19 @@ Use 'natural sorting' (aka 'natural desaster') task to figure out solution)
    [2012-08-26 So 01:11]
 
 
-* NEXT Version 1.01
+* DONE Version 1.01
+  CLOSED: [2012-09-05 Mi 20:30]
+  :LOGBOOK:
+  - State "DONE"       from "NEXT"       [2012-09-05 Mi 20:30]
+  :END:
   [2012-08-26 So 00:11]
 
 
-** TODO improve acknowledgement section, give more credit to task authors
+** DONE improve acknowledgement section, give more credit to task authors
+   CLOSED: [2012-09-05 Mi 19:43]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-09-05 Mi 19:43]
+   :END:
    [2012-09-05 Mi 13:48]
 ** DONE rename parts and chapters in appendix
    CLOSED: [2012-09-05 Mi 13:48]
@@ -59,8 +73,6 @@ Use 'natural sorting' (aka 'natural desaster') task to figure out solution)
    - State "DONE"       from "TODO"       [2012-09-05 Mi 13:47]
    :END:
    [2012-09-02 So 23:21]
-** TODO fix task 'reverse a string' p. 818
-   [2012-08-30 Do 23:40]
 ** DONE fix missing image picolisp solution p.740
    CLOSED: [2012-09-05 Mi 00:33]
    :LOGBOOK:
@@ -79,8 +91,6 @@ Use 'natural sorting' (aka 'natural desaster') task to figure out solution)
    - State "DONE"       from "TODO"       [2012-08-26 So 11:32]
    :END:
    [2012-08-26 So 11:23]
-** TODO delete redundant ’\\’ in rosetta tasks
-   [2012-08-26 So 11:22]
 ** DONE rosettacode-A figures: replace [htbp] with [H]
    CLOSED: [2012-08-26 So 11:20]
    :LOGBOOK:
@@ -279,13 +289,29 @@ Use 'natural sorting' (aka 'natural desaster') task to figure out solution)
    - State "DONE"       from "TODO"       [2012-08-26 So 03:03]
    :END:
    [2012-08-26 So 01:30]
-** TODO announce new version in mailing-list
+** DONE announce new version in mailing-list
+   CLOSED: [2012-09-05 Mi 20:30]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-09-05 Mi 20:30]
+   :END:
    [2012-08-26 So 03:07]
-** TODO change version number and date in svmono.cls
+** DONE change version number and date in svmono.cls
+   CLOSED: [2012-09-05 Mi 20:15]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-09-05 Mi 20:15]
+   :END:
   [2012-08-26 So 01:11]
-** TODO replace download on github
+** DONE replace download on github
+   CLOSED: [2012-09-05 Mi 20:20]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-09-05 Mi 20:20]
+   :END:
   [2012-08-26 So 01:11]
-** TODO replace pdf on scribd
+** DONE replace pdf on scribd
+   CLOSED: [2012-09-05 Mi 20:30]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-09-05 Mi 20:30]
+   :END:
   [2012-08-26 So 01:11]
 
 

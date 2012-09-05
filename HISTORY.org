@@ -10,10 +10,13 @@
 ** TODO replace pdf on scribd
    [2012-09-05 Mi 00:24]
 
+
 * TODO Version 1.02
    [2012-08-26 So 01:11]
 
 
+** TODO fix link to "Hofstadter-Conway \$10,000 Sequence" in appendix 
+   [2012-09-05 Mi 13:45]
 ** TODO deal with utf-8 chars not printed by pdfLatex (try xetex or luatex?)
    [2012-09-02 So 23:28]
 Use 'natural sorting' (aka 'natural desaster') task to figure out solution) 
@@ -36,7 +39,25 @@ Use 'natural sorting' (aka 'natural desaster') task to figure out solution)
   [2012-08-26 So 00:11]
 
 
-** TODO find out about and credit task authors (somehow ... *sigh*)
+** TODO improve acknowledgement section, give more credit to task authors
+   [2012-09-05 Mi 13:48]
+** DONE rename parts and chapters in appendix
+   CLOSED: [2012-09-05 Mi 13:48]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-09-05 Mi 13:48]
+   :END:
+   [2012-09-05 Mi 13:47]
+** DONE add table with links to all rosetta code tasks to appendix
+   CLOSED: [2012-09-05 Mi 13:47]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-09-05 Mi 13:47]
+   :END:
+   [2012-09-05 Mi 13:47]
+** DONE find out about and credit task authors (somehow ... *sigh*)
+   CLOSED: [2012-09-05 Mi 13:47]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2012-09-05 Mi 13:47]
+   :END:
    [2012-09-02 So 23:21]
 ** TODO fix task 'reverse a string' p. 818
    [2012-08-30 Do 23:40]
